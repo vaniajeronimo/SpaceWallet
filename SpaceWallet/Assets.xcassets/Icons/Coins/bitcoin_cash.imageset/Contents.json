@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "bitcoin_cash.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

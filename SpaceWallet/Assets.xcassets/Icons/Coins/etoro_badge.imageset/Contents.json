@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "etoro_badge.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
