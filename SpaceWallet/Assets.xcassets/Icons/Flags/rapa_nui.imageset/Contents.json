@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "rapa_nui.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
