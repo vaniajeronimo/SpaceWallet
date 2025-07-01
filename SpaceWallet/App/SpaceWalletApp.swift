@@ -11,7 +11,7 @@ import SwiftUI
 struct SpaceWalletApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+			RootNavigation()
         }
     }
 }

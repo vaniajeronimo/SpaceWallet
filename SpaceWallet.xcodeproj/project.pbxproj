@@ -29,20 +29,42 @@
 		D714CF4F2E14187800995E5F /* SpaceWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D714CF7D2E144BC800995E5F /* Exceptions for "SpaceWallet" folder in "SpaceWallet" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SpaceWalletTests/SpaceWalletTests/SpaceWalletTests.swift,
+				SpaceWalletTests/SpaceWalletUITests/SpaceWalletUITests.swift,
+				SpaceWalletTests/SpaceWalletUITests/SpaceWalletUITestsLaunchTests.swift,
+			);
+			target = D714CF362E14187600995E5F /* SpaceWallet */;
+		};
+		D714CF7E2E144BC800995E5F /* Exceptions for "SpaceWallet" folder in "SpaceWalletTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SpaceWalletTests/SpaceWalletTests/SpaceWalletTests.swift,
+			);
+			target = D714CF442E14187800995E5F /* SpaceWalletTests */;
+		};
+		D714CF7F2E144BC800995E5F /* Exceptions for "SpaceWallet" folder in "SpaceWalletUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SpaceWalletTests/SpaceWalletUITests/SpaceWalletUITests.swift,
+				SpaceWalletTests/SpaceWalletUITests/SpaceWalletUITestsLaunchTests.swift,
+			);
+			target = D714CF4E2E14187800995E5F /* SpaceWalletUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D714CF392E14187600995E5F /* SpaceWallet */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D714CF7D2E144BC800995E5F /* Exceptions for "SpaceWallet" folder in "SpaceWallet" target */,
+				D714CF7E2E144BC800995E5F /* Exceptions for "SpaceWallet" folder in "SpaceWalletTests" target */,
+				D714CF7F2E144BC800995E5F /* Exceptions for "SpaceWallet" folder in "SpaceWalletUITests" target */,
+			);
 			path = SpaceWallet;
-			sourceTree = "<group>";
-		};
-		D714CF482E14187800995E5F /* SpaceWalletTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SpaceWalletTests;
-			sourceTree = "<group>";
-		};
-		D714CF522E14187800995E5F /* SpaceWalletUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SpaceWalletUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -76,8 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				D714CF392E14187600995E5F /* SpaceWallet */,
-				D714CF482E14187800995E5F /* SpaceWalletTests */,
-				D714CF522E14187800995E5F /* SpaceWalletUITests */,
 				D714CF382E14187600995E5F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,9 +150,6 @@
 			dependencies = (
 				D714CF472E14187800995E5F /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				D714CF482E14187800995E5F /* SpaceWalletTests */,
-			);
 			name = SpaceWalletTests;
 			packageProductDependencies = (
 			);
@@ -152,9 +169,6 @@
 			);
 			dependencies = (
 				D714CF512E14187800995E5F /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				D714CF522E14187800995E5F /* SpaceWalletUITests */,
 			);
 			name = SpaceWalletUITests;
 			packageProductDependencies = (
@@ -397,6 +411,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -407,7 +422,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.4;
@@ -416,10 +431,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 1;
 				XROS_DEPLOYMENT_TARGET = 2.4;
 			};
 			name = Debug;
@@ -436,6 +452,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -446,7 +463,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.4;
@@ -455,10 +472,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 1;
 				XROS_DEPLOYMENT_TARGET = 2.4;
 			};
 			name = Release;
