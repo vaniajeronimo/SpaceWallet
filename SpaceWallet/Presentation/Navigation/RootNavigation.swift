@@ -12,7 +12,7 @@ struct RootNavigation: View, Navigation {
 	internal var navigation = NavigationController()
 
 	init() {
-		navigation.rootView(login)
+		navigation.rootView(splash)
 	}
 
 	var body: some View {
