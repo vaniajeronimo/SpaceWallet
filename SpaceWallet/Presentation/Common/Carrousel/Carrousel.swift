@@ -69,8 +69,8 @@ public extension Carrousel {
 		let deselectedColor: Color
 
 		public init(
-			title: CarrouselPage.Style = .init(font: .displayBlack, foreground: .blue),
-			description: CarrouselPage.Style = .init(font: .displayBlackItalic, foreground: .black),
+			title: CarrouselPage.Style = .init(font: .heading2Bold, foreground: .blue),
+			description: CarrouselPage.Style = .init(font: .heading2, foreground: .black),
 			selectedColor: Color = .violet,
 			deselectedColor: Color = .gray300
 		) {

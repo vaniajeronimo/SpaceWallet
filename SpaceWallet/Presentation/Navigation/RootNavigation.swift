@@ -27,7 +27,7 @@ struct RootNavigation: View, Navigation {
 				case .login:
 					navigation.rootView(login)
 				case .home:
-					break
+					navigation.rootView(home)
 			}
 		})
 	}
@@ -35,5 +35,17 @@ struct RootNavigation: View, Navigation {
 	@ViewBuilder
 	private var login: some View {
 		LoginScreenNavigation()
+	}
+
+	@ViewBuilder
+	private var home: some View {
+		HomeScreen { action in
+			switch action {
+				case .buy:
+					break
+				default:
+					break
+			}
+		}
 	}
 }

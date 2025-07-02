@@ -1,15 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "stars.pdf",
+      "filename" : "home_deselected.pdf",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "preserves-vector-representation" : true
   }
 }

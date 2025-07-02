@@ -11,8 +11,8 @@ public struct CarrouselPage: View {
 
 	private let model: CarrouselModel
 
-	var titleStyle = Style(font: .displayBlack, foreground: .black)
-	var descriptionStyle = Style(font: .displayBlackItalic, foreground: .black)
+	var titleStyle = Style(font: .heading2Bold, foreground: .black)
+	var descriptionStyle = Style(font: .heading2, foreground: .black)
 	var imageSize = ImageSize(width: .infinity, height: 300)
 
 	public init(model: CarrouselModel) {

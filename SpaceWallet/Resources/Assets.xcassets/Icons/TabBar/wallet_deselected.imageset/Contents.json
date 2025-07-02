@@ -1,15 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "wallet.pdf",
+      "filename" : "wallet_deselected.pdf",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "preserves-vector-representation" : true
   }
 }
