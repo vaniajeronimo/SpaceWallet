@@ -22,8 +22,18 @@ struct RootNavigation: View, Navigation {
 
 	@ViewBuilder
 	private var splash: some View {
-		SplashScreen(onCompletion: {
-			print("completed splash screen")
+		SplashScreen(onCompletion: { route in
+			switch route {
+				case .login:
+					navigation.rootView(login)
+				case .home:
+					break
+			}
 		})
+	}
+
+	@ViewBuilder
+	private var login: some View {
+		LoginScreenNavigation()
 	}
 }

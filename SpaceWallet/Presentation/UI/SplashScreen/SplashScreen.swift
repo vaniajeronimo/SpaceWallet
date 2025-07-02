@@ -9,9 +9,9 @@ import SwiftUI
 
 public struct SplashScreen: View {
 
-	private var onCompletion: () -> Void
+	private var onCompletion: (SplashScreenRoute) -> Void
 
-	public init(onCompletion: @escaping () -> Void) {
+	public init(onCompletion: @escaping (SplashScreenRoute) -> Void) {
 		self.onCompletion = onCompletion
 	}
 
@@ -33,5 +33,13 @@ public struct SplashScreen: View {
 			}
 		}
 		.ignoresSafeArea(edges: .all)
+	}
+}
+
+extension SplashScreen {
+
+	public enum SplashScreenRoute {
+		case login
+		case home
 	}
 }
