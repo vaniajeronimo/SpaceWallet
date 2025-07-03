@@ -19,7 +19,7 @@ public struct PageControl: View {
 		index: Binding<Int>,
 		size: Int,
 		selectedColor: Color = .violet,
-		deselectedColor: Color = .gray300
+		deselectedColor: Color = .gray400
 	) {
 		self._index = index
 		self.maxIndex = size - 1

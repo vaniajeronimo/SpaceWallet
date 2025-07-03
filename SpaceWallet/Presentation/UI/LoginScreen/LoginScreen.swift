@@ -16,17 +16,23 @@ public struct LoginScreen: View {
 	}
 
 	public var body: some View {
-		ZStack {
-			LinearGradient.violetGradient
+		GeometryReader { proxy in
+			ZStack {
+				LinearGradient.violetGradient
 
-			Image.noOrderFound
-				.frame(width: 300, height: 300)
-				.scaledToFit()
-				.padding(.top, 17)
+				VStack(alignment: .center, spacing: 16) {
+					Image.noOrderFound
+						.frame(width: 300, height: 300)
+						.scaledToFit()
 
-			Spacer()
+					Spacer()
+
+					AuthCard()
+				}
+				.padding(.top, proxy.safeAreaInsets.top + 16)
+			}
+			.ignoresSafeArea(edges: .all)
 		}
-		.ignoresSafeArea(edges: .all)
 	}
 }
 

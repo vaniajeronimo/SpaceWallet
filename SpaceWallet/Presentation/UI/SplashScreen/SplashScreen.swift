@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct SplashScreen: View {
 
-	@Bindable private var viewModel: ViewModel
+	private var viewModel: ViewModel
 
 	public init(onCompletion: @escaping (SplashScreenRoute) -> Void) {
 		self.viewModel = .init(onCompletion: onCompletion)

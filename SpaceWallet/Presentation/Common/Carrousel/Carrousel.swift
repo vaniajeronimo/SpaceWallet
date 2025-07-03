@@ -21,16 +21,15 @@ public struct Carrousel: View {
 	}
 
 	public var body: some View {
-		VStack {
+		VStack(alignment: .center, spacing: 12) {
 			walkthroughPage
 			pageControl
+			Spacer()
 		}
 	}
 
 	private var walkthroughPage: some View {
 		VStack {
-			Spacer()
-
 			TabView(selection: $currentIndex) {
 				ForEach(0..<data.count, id: \.self) { index in
 					if let model = data[safe: index] {
@@ -43,8 +42,6 @@ public struct Carrousel: View {
 				}
 			}
 			.tabViewStyle(.page(indexDisplayMode: .never))
-
-			Spacer()
 		}
 	}
 
