@@ -9,5 +9,5 @@ import Combine
 
 protocol IAuthRepository {
 
-	func checkAuthState() -> AnyPublisher<AuthDestinationModel, Never>
+	func checkAuthState() -> AnyPublisher<AuthDestinationModel, Error>
 }

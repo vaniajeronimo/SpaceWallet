@@ -11,8 +11,8 @@ import FirebaseAuth
 
 class AuthRepository: IAuthRepository {
 
-	func checkAuthState() -> AnyPublisher<AuthDestinationModel, Never> {
-		return Future<AuthDestinationModel, Never> { promise in
+	func checkAuthState() -> AnyPublisher<AuthDestinationModel, Error> {
+		return Future<AuthDestinationModel, Error> { promise in
 			var handle: AuthStateDidChangeListenerHandle?
 
 			handle = Auth.auth().addStateDidChangeListener { _, user in
