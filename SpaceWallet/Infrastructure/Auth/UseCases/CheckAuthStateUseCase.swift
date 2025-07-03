@@ -30,10 +30,4 @@ public final class CheckAuthStateUseCase {
 		.receive(on: DispatchQueue.main)
 		.eraseToAnyPublisher()
 	}
-
-	deinit {
-		if let listener = authStateListener {
-			Auth.auth().removeStateDidChangeListener(listener)
-		}
-	}
 }
