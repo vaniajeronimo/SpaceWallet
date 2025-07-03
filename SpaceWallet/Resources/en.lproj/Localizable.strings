@@ -10,3 +10,16 @@
 "auth_card_carrousel_1_title" = "Your all access pass to Web3";
 "auth_card_carrousel_2_title" = "Non-custodial & secure";
 "auth_card_carrousel_3_title" = "Invest Smarter with AI";
+"email_address" = "Email Address";
+"continue" = "Continue";
+"or_sign_in_with" = "Or sign in with";
+"terms_and_conditions" = "By continuing, you accept our Terms & Conditions and Privacy Policy.";
+"receive" = "Receive";
+"send" = "Send";
+"swap" = "Swap";
+"buy" = "Buy";
+"buy_crypto_with_card" = "Buy your first crypto with your card";
+"buy_crypto" = "Buy Crypto";
+"asset" = "Asset";
+"collectibles" = "Collectibles";
+"your_collectibles" = "Your collectibles will show up here"
