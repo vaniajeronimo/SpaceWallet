@@ -20,6 +20,14 @@ public struct AuthCard: View {
 	private var content: some View {
 		VStack {
 			Carrousel(data: viewModel.steps)
+
+			Button {
+				print("Action")
+			} label: {
+				Text("continue".localized)
+			}
+			.buttonStyle(PrimaryButton(.medium))
+			.padding(.horizontal, 24)
 		}
 		.cornerRadius(40)
 		.background(Color.white.blur(radius: 20))

@@ -12,8 +12,10 @@ public extension Color {
 	static let background_0 = Color("b0", bundle: Bundle.main)
 	static let blue = Color("blue_default", bundle: Bundle.main)
 	static let violet = Color("violet_default", bundle: Bundle.main)
+	static let violet_hover = Color("violet_hover", bundle: Bundle.main)
+	static let violet_stroke = Color("violet_stroke", bundle: Bundle.main)
 	static let gray300 = Color("gray_tertiary", bundle: Bundle.main)
-	static let gray400 = Color("gray_quarternary", bundle: Bundle.main)
+	static let gray400 = Color("gray_quaternary", bundle: Bundle.main)
 
 	enum Gradient {
 		static let violetStart = Color("violet_start", bundle: Bundle.main)

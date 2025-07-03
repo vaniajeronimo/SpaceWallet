@@ -11,8 +11,8 @@ public struct CarrouselPage: View {
 
 	private let model: CarrouselModel
 
-	var titleStyle = Style(font: .heading2Bold, foreground: .black)
-	var descriptionStyle = Style(font: .heading2, foreground: .black)
+	var titleStyle = Style(font: .heading2Bold, color: .black)
+	var descriptionStyle = Style(font: .heading2, color: .black)
 	var imageSize = ImageSize(width: .infinity, height: 300)
 
 	public init(model: CarrouselModel) {
@@ -40,12 +40,12 @@ public struct CarrouselPage: View {
 			if let title = model.title {
 				Text(title)
 					.fontStyle(titleStyle.font)
-					.foregroundStyle(titleStyle.foreground)
+					.foregroundStyle(titleStyle.color)
 			}
 			if let description = model.description {
 				Text(description)
 					.fontStyle(descriptionStyle.font)
-					.foregroundStyle(descriptionStyle.foreground)
+					.foregroundStyle(descriptionStyle.color)
 			}
 		}
 		.padding(.horizontal, 47)
@@ -57,11 +57,11 @@ public extension CarrouselPage {
 
 	struct Style {
 		let font: Font.Style
-		let foreground: Color
+		let color: Color
 
-		public init(font: Font.Style, foreground: Color) {
+		public init(font: Font.Style, color: Color = .black) {
 			self.font = font
-			self.foreground = foreground
+			self.color = color
 		}
 	}
 
