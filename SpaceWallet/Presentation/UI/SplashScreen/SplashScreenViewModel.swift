@@ -5,43 +5,49 @@
 //  Created by Vania Jeronimo on 03/07/2025.
 //
 
+import Combine
+import Factory
 import FirebaseAuth
-import Foundation
 
 extension SplashScreen {
 	@Observable
+	@MainActor
 	final class ViewModel {
 
+		@ObservationIgnored
+		@Injected(\.checkAuthStateUseCase)
+		private var checkAuthStateUseCase
+
+		private var cancellables = Set<AnyCancellable>()
 		private var onCompletion: (SplashScreenRoute) -> Void
-		private var authStateListener: AuthStateDidChangeListenerHandle?
 
 		init(onCompletion: @escaping (SplashScreenRoute) -> Void) {
 			self.onCompletion = onCompletion
-			self.setupAuthListener()
-		}
-
-		deinit {
-			if let listener = authStateListener {
-				Auth.auth().removeStateDidChangeListener(listener)
-			}
-		}
-
-		private func setupAuthListener() {
 			executeInMainThread({
-				self.authStateListener = Auth.auth().addStateDidChangeListener { [weak self] _, user in
-					if let listener = self?.authStateListener {
-						Auth.auth().removeStateDidChangeListener(listener)
-					}
+				self.checkSession()
+			}, after: 3.0)
+		}
 
-					Task { @MainActor in
-						if user != nil {
-							self?.onCompletion(.home)
-						} else {
-							self?.onCompletion(.login)
-						}
+		private func checkSession() {
+			checkAuthStateUseCase.execute()
+				.receive(on: DispatchQueue.main)
+				.sink(receiveCompletion: { completion in
+					switch completion {
+						case .failure(let error):
+							print(error.localizedDescription)
+						case .finished:
+							break
 					}
-				}
-			}, after: 3.5)
+				}, receiveValue: { [weak self] destination in
+					guard let self else { return }
+					switch destination {
+						case .home:
+							onCompletion(.home)
+						case .login:
+							onCompletion(.login)
+					}
+				})
+				.store(in: &cancellables)
 		}
 	}
 }
