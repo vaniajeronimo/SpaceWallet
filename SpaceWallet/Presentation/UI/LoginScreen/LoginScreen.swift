@@ -23,6 +23,8 @@ public struct LoginScreen: View {
 				.frame(width: 300, height: 300)
 				.scaledToFit()
 				.padding(.top, 17)
+
+			Spacer()
 		}
 		.ignoresSafeArea(edges: .all)
 	}
