@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D714D07E2E16845200995E5F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D714D07D2E16845200995E5F /* FirebaseAnalytics */; };
+		D714D0802E16845200995E5F /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = D714D07F2E16845200995E5F /* FirebaseAnalyticsCore */; };
+		D714D0822E16845200995E5F /* FirebaseAnalyticsIdentitySupport in Frameworks */ = {isa = PBXBuildFile; productRef = D714D0812E16845200995E5F /* FirebaseAnalyticsIdentitySupport */; };
+		D714D0842E16845200995E5F /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = D714D0832E16845200995E5F /* FirebaseAnalyticsOnDeviceConversion */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D714CF462E14187800995E5F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -74,6 +81,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D714D07E2E16845200995E5F /* FirebaseAnalytics in Frameworks */,
+				D714D0802E16845200995E5F /* FirebaseAnalyticsCore in Frameworks */,
+				D714D0822E16845200995E5F /* FirebaseAnalyticsIdentitySupport in Frameworks */,
+				D714D0842E16845200995E5F /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +144,10 @@
 			);
 			name = SpaceWallet;
 			packageProductDependencies = (
+				D714D07D2E16845200995E5F /* FirebaseAnalytics */,
+				D714D07F2E16845200995E5F /* FirebaseAnalyticsCore */,
+				D714D0812E16845200995E5F /* FirebaseAnalyticsIdentitySupport */,
+				D714D0832E16845200995E5F /* FirebaseAnalyticsOnDeviceConversion */,
 			);
 			productName = SpaceWallet;
 			productReference = D714CF372E14187600995E5F /* SpaceWallet.app */;
@@ -213,6 +228,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D714CFF82E145FFA00995E5F /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				D714D07C2E16845100995E5F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D714CF382E14187600995E5F /* Products */;
@@ -632,6 +648,14 @@
 				minimumVersion = 0.59.1;
 			};
 		};
+		D714D07C2E16845100995E5F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.15.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -639,6 +663,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D714CFF82E145FFA00995E5F /* XCRemoteSwiftPackageReference "SwiftLint" */;
 			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+		D714D07D2E16845200995E5F /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D714D07C2E16845100995E5F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		D714D07F2E16845200995E5F /* FirebaseAnalyticsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D714D07C2E16845100995E5F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsCore;
+		};
+		D714D0812E16845200995E5F /* FirebaseAnalyticsIdentitySupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D714D07C2E16845100995E5F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsIdentitySupport;
+		};
+		D714D0832E16845200995E5F /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D714D07C2E16845100995E5F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

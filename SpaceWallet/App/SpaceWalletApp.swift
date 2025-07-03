@@ -8,7 +8,14 @@
 import SwiftUI
 
 @main
-struct SpaceWalletApp: App {
+struct SpaceWalletApp: SwiftUI.App {
+
+	@UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
+	init() {
+		UIScrollView.appearance().keyboardDismissMode = .interactive
+	}
+
     var body: some Scene {
         WindowGroup {
 			RootNavigation()
