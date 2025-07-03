@@ -50,4 +50,3 @@ public extension LinearGradient {
 		endPoint: .bottom
 	)
 }
-

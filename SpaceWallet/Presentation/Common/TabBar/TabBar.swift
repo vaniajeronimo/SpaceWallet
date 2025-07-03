@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Foundation
 
 public struct TabBar: View {
 

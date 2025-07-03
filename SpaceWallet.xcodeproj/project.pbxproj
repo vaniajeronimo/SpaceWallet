@@ -126,6 +126,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D714D0762E167EBE00995E5F /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				D714CF392E14187600995E5F /* SpaceWallet */,
@@ -283,6 +284,10 @@
 			isa = PBXTargetDependency;
 			target = D714CF362E14187600995E5F /* SpaceWallet */;
 			targetProxy = D714CF502E14187800995E5F /* PBXContainerItemProxy */;
+		};
+		D714D0762E167EBE00995E5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = D714D0752E167EBE00995E5F /* SwiftLintBuildToolPlugin */;
 		};
 /* End PBXTargetDependency section */
 
@@ -628,6 +633,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D714D0752E167EBE00995E5F /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D714CFF82E145FFA00995E5F /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D714CF2F2E14187600995E5F /* Project object */;
 }

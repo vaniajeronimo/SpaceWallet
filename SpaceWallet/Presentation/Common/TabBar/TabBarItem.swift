@@ -28,7 +28,7 @@ public struct TabBarItem: Hashable {
 		self.title = title
 	}
 
-	public static func == (lhs: TabBarItem, rhs: TabBarItem) -> Bool {
+	public static func == (lhs: Self, rhs: Self) -> Bool {
 		return lhs.title == rhs.title
 	}
 
