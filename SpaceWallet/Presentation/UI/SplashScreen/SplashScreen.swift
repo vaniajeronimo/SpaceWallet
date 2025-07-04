@@ -17,7 +17,7 @@ public struct SplashScreen: View {
 
 	public var body: some View {
 		ZStack {
-			LinearGradient.violetGradient
+			LinearGradient.violetGradient1
 
 			VStack {
 				Spacer()

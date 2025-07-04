@@ -26,7 +26,7 @@ public extension Color {
 
 public extension LinearGradient {
 
-	static let violetGradient = LinearGradient(
+	static let violetGradient1 = LinearGradient(
 		gradient: Gradient(stops: [
 			.init(color: .violetStart, location: 0.0),
 			.init(color: .violetEnd, location: 0.5),
@@ -34,6 +34,17 @@ public extension LinearGradient {
 		]),
 		startPoint: .top,
 		endPoint: .bottom
+	)
+
+	static let violetGradient2 = LinearGradient(
+		gradient: Gradient(stops: [
+			.init(color: .violetStart, location: 0.0),
+			.init(color: .violetEnd, location: 0.4),
+			.init(color: .white, location: 0.75),
+			.init(color: .pinkStroke.opacity(0.7), location: 1.0)
+		]),
+		startPoint: .topLeading,
+		endPoint: .bottomTrailing
 	)
 
 	static let greenGradient = LinearGradient(

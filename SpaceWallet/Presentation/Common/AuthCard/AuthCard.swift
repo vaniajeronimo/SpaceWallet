@@ -22,14 +22,23 @@ public struct AuthCard: View {
 	}
 
 	private var content: some View {
-		VStack(alignment: .center) {
-			promotionalText
-			cta
-			signInText
+		VStack {
+			VStack(alignment: .center, spacing: 16) {
+				promotionalText
+				cta
+				signInText
+				socialLoginButtons
+				termsAndConditionsText
+			}
+			.padding(20)
 		}
-		.cornerRadius(40)
-		.background(Color.white.blur(radius: 20))
 		.frame(width: 343, height: 408)
+		.background(Color.white.blur(radius: 20))
+		.clipShape(RoundedRectangle(cornerRadius: 40))
+		.overlay(
+			RoundedRectangle(cornerRadius: 40)
+				.stroke(Color.white, lineWidth: 1)
+		)
 	}
 
 	private var promotionalText: some View {
@@ -60,7 +69,47 @@ public struct AuthCard: View {
 
 			Divider().custom()
 		}
-		.padding(.top, 16)
+	}
+
+	private var socialLoginButtons: some View {
+		HStack(spacing: 16) {
+			socialLoginButton(
+				image: .apple,
+				label: "Apple",
+				action: { onAction(.onAppleLogin) }
+			)
+			socialLoginButton(
+				image: .google,
+				label: "Google",
+				action: { onAction(.onGoogleLogin) }
+			)
+		}
+	}
+
+	@ViewBuilder
+	private func socialLoginButton(image: ImageResource, label: String, action: @escaping () -> Void) -> some View {
+		Button(action: action) {
+			HStack(spacing: 8) {
+				Image(image)
+					.resizable()
+					.frame(width: 24, height: 24)
+					.scaledToFit()
+				Text(label)
+					.font(.heading4SemiBold)
+					.foregroundStyle(.textPrimary)
+			}
+			.frame(maxWidth: .infinity, maxHeight: .infinity)
+		}
+		.frame(width: 143, height: 48)
+		.background(Color.fillTertiary)
+		.cornerRadius(12)
+	}
+
+	private var termsAndConditionsText: some View {
+		Text(viewModel.attributedText)
+			.font(.caption)
+			.foregroundStyle(.grayPrimary)
+			.multilineTextAlignment(.center)
 	}
 }
 
@@ -69,5 +118,7 @@ public extension AuthCard {
 	enum ActionType {
 		case onContinue
 		case onNewIndex(Int)
+		case onAppleLogin
+		case onGoogleLogin
 	}
 }

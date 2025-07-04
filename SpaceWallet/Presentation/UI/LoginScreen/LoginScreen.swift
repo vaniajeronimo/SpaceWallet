@@ -9,8 +9,7 @@ import SwiftUI
 
 public struct LoginScreen: View {
 
-	@State private var illustrationIndex: Illustration = .first
-
+	private var viewModel = ViewModel()
 	private var onAction: (ActionType) -> Void
 
 	public init(onAction: @escaping (ActionType) -> Void) {
@@ -20,34 +19,31 @@ public struct LoginScreen: View {
 	public var body: some View {
 		GeometryReader { proxy in
 			ZStack {
-				LinearGradient.violetGradient
+				LinearGradient.violetGradient2
 					.ignoresSafeArea()
 
-				VStack(alignment: .center, spacing: 16) {
-					currentIllustration
-					Spacer()
-					AuthCard { action in
-						if case let .onNewIndex(index) = action {
-							updateIllustration(for: index)
+				ScrollView(showsIndicators: false) {
+					VStack(alignment: .center, spacing: 16) {
+						currentIllustration
+						AuthCard { action in
+							if case let .onNewIndex(index) = action {
+								viewModel.updateIllustration(for: index)
+							}
 						}
 					}
+					.padding(.top, proxy.safeAreaInsets.top)
+					.padding(.bottom, proxy.safeAreaInsets.bottom + 16)
 				}
-				.padding(.top, proxy.safeAreaInsets.top + 16)
-				.padding(.horizontal, 20)
 			}
 		}
 	}
 
 	@ViewBuilder
 	private var currentIllustration: some View {
-		Image(illustrationIndex.image)
+		Image(viewModel.illustrationIndex.image)
 			.resizable()
 			.frame(width: 300, height: 300)
 			.scaledToFit()
-	}
-
-	private func updateIllustration(for index: Int) {
-		illustrationIndex = Illustration(rawValue: index) ?? .first
 	}
 }
 
