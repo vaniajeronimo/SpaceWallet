@@ -12,12 +12,14 @@ public struct Carrousel: View {
 	@State private var currentIndex = 0
 
 	private let data: [CarrouselModel]
+	private let onNewIndex: (Int) -> Void
 
 	var style = Style()
 	var imageSize = ImageSize()
 
-	public init(data: [CarrouselModel]) {
+	public init(data: [CarrouselModel], onNewIndex: @escaping (Int) -> Void) {
 		self.data = data
+		self.onNewIndex = onNewIndex
 	}
 
 	public var body: some View {
@@ -36,6 +38,9 @@ public struct Carrousel: View {
 						.tag(index)
 				}
 			}
+		}
+		.onChange(of: currentIndex) { _, newValue in
+			onNewIndex(newValue)
 		}
 		.frame(height: 80)
 		.tabViewStyle(.page(indexDisplayMode: .never))

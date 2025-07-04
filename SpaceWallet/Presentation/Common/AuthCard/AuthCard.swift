@@ -11,7 +11,11 @@ public struct AuthCard: View {
 
 	private var viewModel = ViewModel()
 
-	public init() {}
+	private let onNewIndex: (Int) -> Void
+
+	public init(onNewIndex: @escaping (Int) -> Void) {
+		self.onNewIndex = onNewIndex
+	}
 
 	public var body: some View {
 		content
@@ -19,8 +23,12 @@ public struct AuthCard: View {
 
 	private var content: some View {
 		VStack {
-			Carrousel(data: viewModel.steps)
-				.padding(.bottom, 32)
+			Carrousel(
+				data: viewModel.steps
+			) { index in
+				onNewIndex(index)
+			}
+			.padding(.bottom, 32)
 
 			Button {
 				print("Action")
