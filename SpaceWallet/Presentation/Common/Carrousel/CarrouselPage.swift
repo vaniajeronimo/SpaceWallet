@@ -33,7 +33,7 @@ public struct CarrouselPage: View {
 	}
 
 	private var textView: some View {
-		VStack(spacing: 4) {
+		VStack(spacing: UI.Spacing.level02) {
 			if let title = model.title {
 				Text(title)
 					.font(.heading2Bold)

@@ -23,7 +23,7 @@ public struct AuthCard: View {
 
 	private var content: some View {
 		VStack {
-			VStack(alignment: .center, spacing: 16) {
+			VStack(alignment: .center, spacing: UI.Spacing.level05) {
 				promotionalText
 				cta
 				signInText
@@ -47,7 +47,7 @@ public struct AuthCard: View {
 		) { index in
 			onAction(.onNewIndex(index))
 		}
-		.padding(.bottom, 32)
+		.padding(.bottom, UI.Spacing.level08)
 	}
 
 	private var cta: some View {
@@ -60,7 +60,7 @@ public struct AuthCard: View {
 	}
 
 	private var signInText: some View {
-		HStack(alignment: .center, spacing: 4) {
+		HStack(alignment: .center, spacing: UI.Spacing.level02) {
 			Divider().custom()
 
 			Text("or_sign_in_with".localized)
@@ -72,7 +72,7 @@ public struct AuthCard: View {
 	}
 
 	private var socialLoginButtons: some View {
-		HStack(spacing: 16) {
+		HStack(spacing: UI.Spacing.level05) {
 			socialLoginButton(
 				image: .apple,
 				label: "Apple",
@@ -89,7 +89,7 @@ public struct AuthCard: View {
 	@ViewBuilder
 	private func socialLoginButton(image: ImageResource, label: String, action: @escaping () -> Void) -> some View {
 		Button(action: action) {
-			HStack(spacing: 8) {
+			HStack(spacing: UI.Spacing.level03) {
 				Image(image)
 					.resizable()
 					.frame(width: 24, height: 24)

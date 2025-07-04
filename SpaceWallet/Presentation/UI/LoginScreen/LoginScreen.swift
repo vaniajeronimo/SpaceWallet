@@ -23,7 +23,7 @@ public struct LoginScreen: View {
 					.ignoresSafeArea()
 
 				ScrollView(showsIndicators: false) {
-					VStack(alignment: .center, spacing: 16) {
+					VStack(alignment: .center, spacing: UI.Spacing.level05) {
 						currentIllustration
 						AuthCard { action in
 							if case let .onNewIndex(index) = action {
