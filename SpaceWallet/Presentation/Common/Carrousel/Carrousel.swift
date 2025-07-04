@@ -35,8 +35,6 @@ public struct Carrousel: View {
 					if let model = data[safe: index] {
 						CarrouselPage(model: model)
 							.imageSize(imageSize.size)
-							.titleStyle(style.title)
-							.descriptionStyle(style.description)
 							.tag(index)
 					}
 				}
@@ -59,20 +57,13 @@ public struct Carrousel: View {
 public extension Carrousel {
 
 	struct Style {
-		let title: CarrouselPage.Style
-		let description: CarrouselPage.Style
-
 		let selectedColor: Color
 		let deselectedColor: Color
 
 		public init(
-			title: CarrouselPage.Style = .init(font: .heading2Bold, foreground: .blue),
-			description: CarrouselPage.Style = .init(font: .heading2, foreground: .black),
 			selectedColor: Color = .violet,
 			deselectedColor: Color = .gray300
 		) {
-			self.title = title
-			self.description = description
 			self.selectedColor = selectedColor
 			self.deselectedColor = deselectedColor
 		}

@@ -11,7 +11,15 @@ public struct AuthCard: View {
 
 	private var viewModel = ViewModel()
 
-	public init() {}
+	public init() {
+		for family in UIFont.familyNames.sorted() {
+			print("Family: \(family)")
+			for name in UIFont.fontNames(forFamilyName: family) {
+				print(" - \(name)")
+			}
+			print(UIFont.familyNames.joined(separator: "\n"))
+		}
+	}
 
 	public var body: some View {
 		content

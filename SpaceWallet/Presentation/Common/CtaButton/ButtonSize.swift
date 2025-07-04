@@ -12,11 +12,11 @@ public enum ButtonSize {
 	case large
 	case small
 
-	var font: Font.Style {
+	var font: Font {
 		switch self {
 			case .medium: return .heading4SemiBold
-			case .large: return .heading2
-			case .small: return .heading4
+			case .large: return .heading3Bold
+			case .small: return .heading5SemiBold
 		}
 	}
 

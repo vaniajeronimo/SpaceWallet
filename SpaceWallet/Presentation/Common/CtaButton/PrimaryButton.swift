@@ -40,7 +40,7 @@ public struct PrimaryButton: ButtonStyle {
 		configuration
 			.label
 			.foregroundStyle(titleColor)
-			.fontViewStyle(size.font)
+			.font(size.font)
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 			.background(background(configuration.isPressed))
 			.cornerRadius(size.radius)

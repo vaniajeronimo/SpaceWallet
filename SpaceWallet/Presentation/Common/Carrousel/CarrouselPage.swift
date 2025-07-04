@@ -10,9 +10,6 @@ import SwiftUI
 public struct CarrouselPage: View {
 
 	private let model: CarrouselModel
-
-	var titleStyle = Style(font: .heading2Bold, color: .black)
-	var descriptionStyle = Style(font: .heading2, color: .black)
 	var imageSize = ImageSize(width: .infinity, height: 300)
 
 	public init(model: CarrouselModel) {
@@ -39,13 +36,13 @@ public struct CarrouselPage: View {
 		VStack(spacing: 4) {
 			if let title = model.title {
 				Text(title)
-					.fontStyle(titleStyle.font)
-					.foregroundStyle(titleStyle.color)
+					.font(.heading2Bold)
+					.foregroundStyle(.textPrimary)
 			}
 			if let description = model.description {
 				Text(description)
-					.fontStyle(descriptionStyle.font)
-					.foregroundStyle(descriptionStyle.color)
+					.font(.heading2)
+					.foregroundStyle(.textPrimary)
 			}
 		}
 		.padding(.horizontal, 47)
@@ -54,16 +51,6 @@ public struct CarrouselPage: View {
 }
 
 public extension CarrouselPage {
-
-	struct Style {
-		let font: Font.Style
-		let color: Color
-
-		public init(font: Font.Style, color: Color = .black) {
-			self.font = font
-			self.color = color
-		}
-	}
 
 	struct ImageSize {
 		let width: CGFloat
@@ -78,18 +65,6 @@ public extension CarrouselPage {
 
 // MARK: - Modifiers
 public extension CarrouselPage {
-
-	func titleStyle(_ style: Style) -> Self {
-		var clone = self
-		clone.titleStyle = style
-		return clone
-	}
-
-	func descriptionStyle(_ style: Style) -> Self {
-		var clone = self
-		clone.descriptionStyle = style
-		return clone
-	}
 
 	func imageSize(_ size: ImageSize) -> Self {
 		var clone = self
