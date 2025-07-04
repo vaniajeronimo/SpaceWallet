@@ -11,10 +11,10 @@ public struct AuthCard: View {
 
 	private var viewModel = ViewModel()
 
-	private let onNewIndex: (Int) -> Void
+	private let onAction: (ActionType) -> Void
 
-	public init(onNewIndex: @escaping (Int) -> Void) {
-		self.onNewIndex = onNewIndex
+	public init(onAction: @escaping (ActionType) -> Void) {
+		self.onAction = onAction
 	}
 
 	public var body: some View {
@@ -22,24 +22,52 @@ public struct AuthCard: View {
 	}
 
 	private var content: some View {
-		VStack {
-			Carrousel(
-				data: viewModel.steps
-			) { index in
-				onNewIndex(index)
-			}
-			.padding(.bottom, 32)
-
-			Button {
-				print("Action")
-			} label: {
-				Text("continue".localized)
-			}
-			.buttonStyle(PrimaryButton(.medium))
-			.padding(.horizontal, 24)
+		VStack(alignment: .center) {
+			promotionalText
+			cta
+			signInText
 		}
 		.cornerRadius(40)
 		.background(Color.white.blur(radius: 20))
 		.frame(width: 343, height: 408)
+	}
+
+	private var promotionalText: some View {
+		Carrousel(
+			data: viewModel.steps
+		) { index in
+			onAction(.onNewIndex(index))
+		}
+		.padding(.bottom, 32)
+	}
+
+	private var cta: some View {
+		Button {
+			print("Action")
+		} label: {
+			Text("continue".localized)
+		}
+		.buttonStyle(PrimaryButton(.medium))
+	}
+
+	private var signInText: some View {
+		HStack(alignment: .center, spacing: 4) {
+			Divider().custom()
+
+			Text("Or sign in with".localized)
+				.font(.heading5)
+				.foregroundStyle(.textTertiary)
+
+			Divider().custom()
+		}
+		.padding(.top, 16)
+	}
+}
+
+public extension AuthCard {
+
+	enum ActionType {
+		case onContinue
+		case onNewIndex(Int)
 	}
 }

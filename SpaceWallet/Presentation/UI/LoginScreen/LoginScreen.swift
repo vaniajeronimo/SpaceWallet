@@ -23,11 +23,13 @@ public struct LoginScreen: View {
 				LinearGradient.violetGradient
 					.ignoresSafeArea()
 
-				VStack(spacing: 16) {
+				VStack(alignment: .center, spacing: 16) {
 					currentIllustration
 					Spacer()
-					AuthCard {
-						updateIllustration(for: $0)
+					AuthCard { action in
+						if case let .onNewIndex(index) = action {
+							updateIllustration(for: index)
+						}
 					}
 				}
 				.padding(.top, proxy.safeAreaInsets.top + 16)
