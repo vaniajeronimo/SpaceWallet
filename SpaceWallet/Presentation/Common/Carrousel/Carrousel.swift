@@ -21,26 +21,24 @@ public struct Carrousel: View {
 	}
 
 	public var body: some View {
-		VStack(alignment: .center, spacing: 12) {
-			walkthroughPage
+		VStack {
+			carrousel
 			pageControl
-			Spacer()
 		}
 	}
 
-	private var walkthroughPage: some View {
-		VStack {
-			TabView(selection: $currentIndex) {
-				ForEach(0..<data.count, id: \.self) { index in
-					if let model = data[safe: index] {
-						CarrouselPage(model: model)
-							.imageSize(imageSize.size)
-							.tag(index)
-					}
+	private var carrousel: some View {
+		TabView(selection: $currentIndex) {
+			ForEach(0..<data.count, id: \.self) { index in
+				if let model = data[safe: index] {
+					CarrouselPage(model: model)
+						.imageSize(imageSize.size)
+						.tag(index)
 				}
 			}
-			.tabViewStyle(.page(indexDisplayMode: .never))
 		}
+		.frame(height: 80)
+		.tabViewStyle(.page(indexDisplayMode: .never))
 	}
 
 	private var pageControl: some View {
@@ -50,7 +48,6 @@ public struct Carrousel: View {
 			selectedColor: style.selectedColor,
 			deselectedColor: style.deselectedColor
 		)
-		.padding(.bottom, 20)
 	}
 }
 
@@ -62,7 +59,7 @@ public extension Carrousel {
 
 		public init(
 			selectedColor: Color = .violet,
-			deselectedColor: Color = .gray300
+			deselectedColor: Color = .gray400
 		) {
 			self.selectedColor = selectedColor
 			self.deselectedColor = deselectedColor

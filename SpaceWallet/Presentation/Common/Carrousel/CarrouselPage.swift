@@ -17,7 +17,7 @@ public struct CarrouselPage: View {
 	}
 
 	public var body: some View {
-		VStack(alignment: .center, spacing: 12) {
+		VStack(alignment: .center) {
 			imageView
 			textView
 		}
