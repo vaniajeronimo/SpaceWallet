@@ -31,8 +31,7 @@ public struct LoginScreen: View {
 							}
 						}
 					}
-					.padding(.top, proxy.safeAreaInsets.top)
-					.padding(.bottom, proxy.safeAreaInsets.bottom + 16)
+					.padding(.top, proxy.safeAreaInsets.top - 50)
 				}
 			}
 		}

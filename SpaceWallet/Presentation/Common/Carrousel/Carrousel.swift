@@ -42,7 +42,7 @@ public struct Carrousel: View {
 		.onChange(of: currentIndex) { _, newValue in
 			onNewIndex(newValue)
 		}
-		.frame(height: 80)
+		.frame(maxWidth: .infinity, maxHeight: 80)
 		.tabViewStyle(.page(indexDisplayMode: .never))
 	}
 

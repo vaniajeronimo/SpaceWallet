@@ -45,7 +45,6 @@ public struct CarrouselPage: View {
 					.foregroundStyle(.textPrimary)
 			}
 		}
-		.padding(.horizontal, 47)
 		.multilineTextAlignment(.center)
 	}
 }

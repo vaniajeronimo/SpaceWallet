@@ -63,7 +63,7 @@ public struct AuthCard: View {
 		HStack(alignment: .center, spacing: 4) {
 			Divider().custom()
 
-			Text("Or sign in with".localized)
+			Text("or_sign_in_with".localized)
 				.font(.heading5)
 				.foregroundStyle(.textTertiary)
 
