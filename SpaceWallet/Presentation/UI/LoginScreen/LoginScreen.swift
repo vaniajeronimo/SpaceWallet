@@ -9,11 +9,10 @@ import SwiftUI
 
 public struct LoginScreen: View {
 
-	private var viewModel = ViewModel()
-	private var onAction: (ActionType) -> Void
+	private var viewModel: ViewModel
 
 	public init(onAction: @escaping (ActionType) -> Void) {
-		self.onAction = onAction
+		self.viewModel = .init(onAction: onAction)
 	}
 
 	public var body: some View {
@@ -26,9 +25,7 @@ public struct LoginScreen: View {
 					VStack(alignment: .center, spacing: UI.Spacing.level05) {
 						currentIllustration
 						AuthCard { action in
-							if case let .onNewIndex(index) = action {
-								viewModel.updateIllustration(for: index)
-							}
+							viewModel.handleAction(with: action)
 						}
 					}
 					.padding(.top, proxy.safeAreaInsets.top - 50)
@@ -63,6 +60,6 @@ public extension LoginScreen {
 	}
 
 	enum ActionType {
-		case next
+		case onContinue
 	}
 }

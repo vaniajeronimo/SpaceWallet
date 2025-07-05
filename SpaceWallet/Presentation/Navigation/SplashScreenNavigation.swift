@@ -24,9 +24,16 @@ struct LoginScreenNavigation: View, Navigation {
 	private var login: some View {
 		LoginScreen { action in
 			switch action {
-				case .next:
-					break
+				case .onContinue:
+					navigation.rootView(home)
 			}
+		}
+	}
+
+	@ViewBuilder
+	private var home: some View {
+		HomeScreen { action in
+			Debug.log("Home action: \(action)")
 		}
 	}
 }

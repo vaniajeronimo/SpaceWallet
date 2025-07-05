@@ -52,7 +52,7 @@ public struct AuthCard: View {
 
 	private var cta: some View {
 		Button {
-			print("Action")
+			onAction(.onContinue)
 		} label: {
 			Text("continue".localized)
 		}
