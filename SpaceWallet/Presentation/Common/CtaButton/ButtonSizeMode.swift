@@ -23,7 +23,7 @@ public enum ButtonSizeMode {
 	var horizontalPadding: CGFloat? {
 		switch self {
 			case .fill: return nil
-			case .fit: return 24
+			case .fit: return UI.Spacing.level08
 			case .custom(let padding): return padding
 		}
 	}

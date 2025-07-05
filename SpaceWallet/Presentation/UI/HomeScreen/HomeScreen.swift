@@ -10,8 +10,10 @@ import SwiftUI
 public struct HomeScreen: View {
 
 	@Environment(\.scenePhase) private var scenePhase
-
 	@State private var tabSelection: TabBarItem
+
+	private var viewModel = ViewModel()
+
 	private var onAction: (ActionType) -> Void
 
 	public init(
@@ -34,6 +36,16 @@ public struct HomeScreen: View {
 				.tabBarItem(selectedIcon: .tabSearchSelected, unselectedIcon: .tabSearchDeselected, title: TabBarId.search.id)
 			EmptyView()
 				.tabBarItem(selectedIcon: .tabStarsSelected, unselectedIcon: .tabStarsDeselected, title: TabBarId.stars.id)
+		}
+		.onChange(of: scenePhase) { _, newPhase in
+			if newPhase == .active {
+				viewModel.observeNetworkStatus()
+			}
+		}
+		.if(!viewModel.isConnected) { _ in
+			ErrorScreen {
+				viewModel.observeNetworkStatus()
+			}
 		}
 	}
 }

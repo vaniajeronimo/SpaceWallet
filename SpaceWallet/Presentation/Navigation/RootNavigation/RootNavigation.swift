@@ -28,6 +28,10 @@ struct RootNavigation: View, Navigation {
 					navigation.rootView(login)
 				case .home:
 					navigation.rootView(home)
+				case .internetConnectionError:
+					navigation.rootView(noInternetConnectionError)
+				case .genericError:
+					navigation.rootView(genericError)
 			}
 		})
 	}
@@ -47,5 +51,27 @@ struct RootNavigation: View, Navigation {
 					break
 			}
 		}
+	}
+
+	@ViewBuilder
+	private var noInternetConnectionError: some View {
+		ErrorScreen(
+			title: "no_internet_connection_error_title".localized,
+			subtitle: "no_internet_connection_error_description".localized,
+			buttonTitle: "restart_app".localized,
+			onAction: {
+				navigation.rootView(splash)
+			}
+		)
+	}
+
+	@ViewBuilder
+	private var genericError: some View {
+		ErrorScreen(
+			buttonTitle: "restart_app".localized,
+			onAction: {
+				navigation.rootView(splash)
+			}
+		)
 	}
 }

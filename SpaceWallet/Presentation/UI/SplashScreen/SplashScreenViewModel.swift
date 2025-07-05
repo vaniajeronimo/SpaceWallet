@@ -18,23 +18,49 @@ extension SplashScreen {
 		@Injected(\.checkAuthStateUseCase)
 		private var checkAuthStateUseCase
 
+		private var networkManager = NetworkManager()
+
 		private var cancellables = Set<AnyCancellable>()
 		private var onCompletion: (SplashScreenRoute) -> Void
 
+		var isConnected = false
+
 		init(onCompletion: @escaping (SplashScreenRoute) -> Void) {
 			self.onCompletion = onCompletion
-			executeInMainThread({
-				self.checkSession()
-			}, after: 3.0)
+			self.checkSession()
 		}
 
-		private func checkSession() {
+		func checkSession() {
+			executeInMainThread({
+				self.observeNetworkStatus()
+			}, after: 1.5)
+		}
+
+		private func observeNetworkStatus() {
+			networkManager.$isConnected
+				.receive(on: DispatchQueue.main)
+				.sink { [weak self] connected in
+					guard let self else { return }
+					isConnected = connected
+
+					if !isConnected {
+						onCompletion(.internetConnectionError)
+					} else {
+						checkAuthState()
+					}
+				}
+				.store(in: &cancellables)
+		}
+
+		private func checkAuthState() {
 			checkAuthStateUseCase.execute()
 				.receive(on: DispatchQueue.main)
-				.sink(receiveCompletion: { completion in
+				.sink(receiveCompletion: { [weak self] completion in
+					guard let self else { return }
 					switch completion {
 						case .failure(let error):
-							print(error.localizedDescription)
+							Debug.error(error)
+							onCompletion(.genericError)
 						case .finished:
 							break
 					}

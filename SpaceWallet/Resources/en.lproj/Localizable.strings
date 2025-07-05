@@ -26,3 +26,9 @@
 "collectibles" = "Collectibles";
 "your_collectibles" = "Your collectibles will show up here";
 "or_sign_in_with" = "Or sign in with";
+"no_internet_connection_error_title" = "Uh oh....!";
+"no_internet_connection_error_description" = "Looks like you're offline.";
+"retry" = "Retry";
+"restart_app" = "Restart app";
+"generic_error_title" = "Error ocurred";
+"generic_error_message" = "Please try again.";

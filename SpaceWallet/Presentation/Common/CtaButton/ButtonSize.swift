@@ -14,16 +14,14 @@ public enum ButtonSize {
 
 	var font: Font {
 		switch self {
-			case .medium: return .heading4SemiBold
-			case .large: return .heading3Bold
+			case .medium, .large: return .heading4SemiBold
 			case .small: return .heading5SemiBold
 		}
 	}
 
 	var radius: CGFloat {
 		switch self {
-			case .medium: return 12
-			case .large: return 16
+			case .medium, .large: return 12
 			case .small: return 8
 		}
 	}
@@ -31,7 +29,7 @@ public enum ButtonSize {
 	var padding: CGFloat {
 		switch self {
 			case .medium: return 14
-			case .large: return 18
+			case .large: return 16
 			case .small: return 10
 		}
 	}
@@ -46,8 +44,8 @@ public enum ButtonSize {
 
 	var height: CGFloat {
 		switch self {
-			case .medium: return 52
-			case .large: return 56
+			case .medium: return 48
+			case .large: return 53
 			case .small: return 44
 		}
 	}

@@ -41,5 +41,7 @@ extension SplashScreen {
 	public enum SplashScreenRoute {
 		case login
 		case home
+		case internetConnectionError
+		case genericError
 	}
 }

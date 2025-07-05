@@ -24,3 +24,9 @@
 "collectibles" = "Colecionáveis";
 "your_collectibles" = "Os teus colecionáveis aparecerão aqui";
 "or_sign_in_with" = "Ou entra com";
+"no_internet_connection_error_title" = "Uh oh....!";
+"no_internet_connection_error_description" = "Parece que não tens ligação à internet.";
+"retry" = "Tentar novamente";
+"restart_app" = "Reiniciar app";
+"generic_error_title" = "Ocorreu um erro";
+"generic_error_message" = "Por favor, tenta novamente.";
