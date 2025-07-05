@@ -17,6 +17,7 @@ public extension Image {
 	static let noSearchFound = Image("no_search_found", bundle: Bundle.main)
 	static let emptyCart = Image("empty_cart", bundle: Bundle.main)
 	static let errorImg = Image("error_img", bundle: Bundle.main)
+	static let close_icon = Image("close", bundle: Bundle.main)
 
 	// MARK: - TabBar Icons
 	static let tabHomeSelected = Image("home_selected", bundle: Bundle.main)

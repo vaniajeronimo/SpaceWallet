@@ -31,6 +31,7 @@ public struct LoginScreen: View {
 					.padding(.top, proxy.safeAreaInsets.top - 50)
 				}
 			}
+			.dismissKeyboard()
 		}
 	}
 

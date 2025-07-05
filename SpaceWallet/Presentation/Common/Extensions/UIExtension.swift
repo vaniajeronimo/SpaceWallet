@@ -36,4 +36,26 @@ public extension UI {
 		public static let level19: CGFloat = 176
 		public static let level20: CGFloat = 192
 	}
+
+	struct Corner {
+		private init() {}
+
+		public static let xxs: CGFloat = 2
+		public static let xs: CGFloat = 4
+		public static let s: CGFloat = 8
+		public static let m: CGFloat = 12
+		public static let l: CGFloat = 16
+		public static let xl: CGFloat = 24
+		public static let xxl: CGFloat = 32
+	}
+
+	struct Border {
+		private init() {}
+
+		public static let xxl: CGFloat = 3
+		public static let xl: CGFloat = 2.5
+		public static let l: CGFloat = 2
+		public static let m: CGFloat = 1.5
+		public static let s: CGFloat = 1
+	}
 }

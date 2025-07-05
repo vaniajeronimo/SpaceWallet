@@ -10,7 +10,7 @@
 "auth_card_carrousel_1_title" = "Your all access pass to Web3";
 "auth_card_carrousel_2_title" = "Non-custodial &\nsecure";
 "auth_card_carrousel_3_title" = "Invest Smarter\nwith AI";
-"email_address" = "Email Address";
+"email_address" = "Email address";
 "continue" = "Continue";
 "or_sign_in_with" = "Or sign in with";
 "terms_and_conditions_info_note" = "By continuing, you accept our Terms & Conditions and Privacy Policy.";
@@ -32,3 +32,4 @@
 "restart_app" = "Restart app";
 "generic_error_title" = "Error ocurred";
 "generic_error_message" = "Please try again.";
+"invalid_email" = "Invalid email";

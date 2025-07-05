@@ -30,3 +30,4 @@
 "restart_app" = "Reiniciar app";
 "generic_error_title" = "Ocorreu um erro";
 "generic_error_message" = "Por favor, tenta novamente.";
+"invalid_email" = "Email inválido";

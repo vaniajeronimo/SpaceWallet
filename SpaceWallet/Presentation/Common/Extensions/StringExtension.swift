@@ -9,6 +9,10 @@ import Foundation
 
 public extension String {
 
+	var isNotEmpty: Bool {
+		!self.isEmpty
+	}
+
 	var localized: String {
 		NSLocalizedString(self, bundle: Bundle.main, comment: "")
 	}
@@ -16,5 +20,40 @@ public extension String {
 	func localized(with arguments: CVarArg...) -> String {
 		let localizedString = NSLocalizedString(self, bundle: Bundle.main, comment: "")
 		return String(format: localizedString, arguments: arguments)
+	}
+
+	/** Returns a masked string */
+	func mask(with format: String) -> String {
+		guard !format.isEmpty else { return self }
+
+		let string = self.components(separatedBy: CharacterSet.alphanumerics.inverted).joined()
+		var index = string.startIndex
+		var maskedText = ""
+
+		for value in format where index < string.endIndex {
+			if value == "#" {
+				maskedText.append(string[index])
+				index = string.index(after: index)
+			} else {
+				maskedText.append(value)
+			}
+		}
+
+		return maskedText
+	}
+
+	/** Returns a bool indicating whether the string matches the regex */
+	func isMatch(with pattern: String) -> Bool {
+		let range = NSRange(location: 0, length: self.utf16.count)
+
+		guard let regex = try? NSRegularExpression(pattern: pattern) else {
+			return false
+		}
+
+		if regex.firstMatch(in: self, options: [], range: range) != nil {
+			return true
+		}
+
+		return false
 	}
 }

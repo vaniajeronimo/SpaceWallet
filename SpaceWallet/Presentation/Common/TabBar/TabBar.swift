@@ -34,6 +34,9 @@ public struct TabBar: View {
 			}
 			tabBarItems()
 		}
+		.background(Color.b0
+			.blur(radius: 32)
+		)
 		.onAppear {
 			UITabBar.appearance().isHidden = true
 		}

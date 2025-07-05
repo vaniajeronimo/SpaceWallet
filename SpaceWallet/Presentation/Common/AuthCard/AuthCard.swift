@@ -9,7 +9,8 @@ import SwiftUI
 
 public struct AuthCard: View {
 
-	private var viewModel = ViewModel()
+	@Bindable private var viewModel = ViewModel()
+	@FocusState private var hasFocus: Bool
 
 	private let onAction: (ActionType) -> Void
 
@@ -25,14 +26,19 @@ public struct AuthCard: View {
 		VStack {
 			VStack(alignment: .center, spacing: UI.Spacing.level05) {
 				promotionalText
+				textField
 				cta
 				signInText
 				socialLoginButtons
 				termsAndConditionsText
 			}
-			.padding(20)
+			.padding(.horizontal, 20)
+			.padding(.bottom, 20)
 		}
-		.frame(width: 343, height: 408)
+		.dismissKeyboard {
+			viewModel.validateEmail()
+		}
+		.frame(width: 343, height: 428)
 		.background(Color.white.blur(radius: 20))
 		.clipShape(RoundedRectangle(cornerRadius: 40))
 		.overlay(
@@ -47,15 +53,35 @@ public struct AuthCard: View {
 		) { index in
 			onAction(.onNewIndex(index))
 		}
-		.padding(.bottom, UI.Spacing.level08)
+	}
+
+	private var textField: some View {
+		CustomTextField(
+			title: "email_address".localized,
+			text: $viewModel.email
+		)
+		.state(viewModel.emailState)
+		.showClearButton(true)
+		.focused($hasFocus)
+		.submitLabel(.done)
+		.textInputAutocapitalization(.never)
+		.textContentType(.emailAddress)
+		.onSubmit {
+			viewModel.validateEmail()
+		}
 	}
 
 	private var cta: some View {
 		Button {
-			onAction(.onContinue)
+			viewModel.validateEmail()
+
+			if viewModel.isValidEmail {
+				onAction(.onContinue)
+			}
 		} label: {
 			Text("continue".localized)
 		}
+		.disabled(!viewModel.isValidEmail)
 		.buttonStyle(PrimaryButton(.medium))
 	}
 
@@ -101,8 +127,8 @@ public struct AuthCard: View {
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 		}
 		.frame(width: 143, height: 48)
-		.background(Color.fillTertiary)
-		.cornerRadius(12)
+		.background(.fillTertiary)
+		.cornerRadius(UI.Corner.m)
 	}
 
 	private var termsAndConditionsText: some View {
@@ -110,6 +136,7 @@ public struct AuthCard: View {
 			.font(.caption)
 			.foregroundStyle(.grayPrimary)
 			.multilineTextAlignment(.center)
+			.padding(.bottom, -UI.Spacing.level02)
 	}
 }
 

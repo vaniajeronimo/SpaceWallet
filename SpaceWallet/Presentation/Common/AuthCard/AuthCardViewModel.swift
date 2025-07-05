@@ -11,6 +11,11 @@ extension AuthCard {
 	@Observable
 	final class ViewModel {
 
+		var emailState: CustomTextFieldState = .default
+
+		var email: String = ""
+		var isValidEmail: Bool = false
+
 		var attributedText: AttributedString {
 			var text = AttributedString("terms_and_conditions_info_note".localized)
 
@@ -38,6 +43,19 @@ extension AuthCard {
 					title: "auth_card_carrousel_\($0)_title".localized
 				)
 			}
+		}
+
+		func validateEmail() {
+			isValidEmail = isEmailValid()
+		}
+
+		private func isEmailValid() -> Bool {
+			guard email.isNotEmpty && email.count > 1 && email.isMatch(with: RegexHelper.email) else {
+				emailState = .error("invalid_email".localized)
+				return false
+			}
+			emailState = .default
+			return true
 		}
 	}
 }

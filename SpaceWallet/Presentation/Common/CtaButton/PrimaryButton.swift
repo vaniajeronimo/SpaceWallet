@@ -57,6 +57,6 @@ public struct PrimaryButton: ButtonStyle {
 			}
 			return backgroundColor.eraseToAnyView()
 		}
-		return Color.gray400.eraseToAnyView()
+		return Color.violetHover.opacity(0.7).eraseToAnyView()
 	}
 }
