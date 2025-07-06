@@ -58,7 +58,10 @@ public struct AuthCard: View {
 	private var textField: some View {
 		CustomTextField(
 			title: "email_address".localized,
-			text: $viewModel.email
+			text: $viewModel.email,
+			onClearAction: {
+				viewModel.validateEmail()
+			}
 		)
 		.state(viewModel.emailState)
 		.showClearButton(true)

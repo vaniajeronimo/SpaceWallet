@@ -50,12 +50,17 @@ extension AuthCard {
 		}
 
 		private func isEmailValid() -> Bool {
-			guard email.isNotEmpty && email.count > 1 && email.isMatch(with: RegexHelper.email) else {
-				emailState = .error("invalid_email".localized)
+			if email.isEmpty {
+				emailState = .default
 				return false
 			}
-			emailState = .confirmed
-			return true
+
+			if email.isMatch(with: RegexHelper.email) {
+				emailState = .confirmed
+				return true
+			}
+			emailState = .error("invalid_email".localized)
+			return false
 		}
 	}
 }
