@@ -38,7 +38,7 @@ public struct AuthCard: View {
 		.dismissKeyboard {
 			viewModel.validateEmail()
 		}
-		.frame(width: 343, height: 428)
+		.frame(width: 343, height: 453)
 		.background(Color.white.blur(radius: 20))
 		.clipShape(RoundedRectangle(cornerRadius: 40))
 		.overlay(

@@ -54,7 +54,7 @@ extension AuthCard {
 				emailState = .error("invalid_email".localized)
 				return false
 			}
-			emailState = .default
+			emailState = .confirmed
 			return true
 		}
 	}

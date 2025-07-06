@@ -12,6 +12,7 @@ public enum CustomTextFieldState: Equatable {
 
 	case `default`
 	case disabled
+	case confirmed
 	case error(String)
 
 	var textColor: Color {
@@ -62,6 +63,17 @@ public enum CustomTextFieldState: Equatable {
 				return false
 			default:
 				return true
+		}
+	}
+
+	var backgroundColor: Color {
+		switch self {
+			case .confirmed:
+				return .fillQuaternary
+			case .error:
+				return .fillTransparentRed
+			default:
+				return .b0
 		}
 	}
 }

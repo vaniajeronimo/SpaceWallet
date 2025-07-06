@@ -127,10 +127,10 @@ public struct CustomTextField: View {
 				.foregroundStyle(state.strokeColor())
 				.background(
 					RoundedRectangle(cornerRadius: UI.Corner.l)
-						.fill(Color.white)
+						.fill(state.backgroundColor)
 				)
 
-			HStack(spacing: UI.Spacing.level02) {
+			HStack(alignment: .center, spacing: UI.Spacing.level02) {
 				Text(title)
 					.font(.caption)
 					.bold()
@@ -172,9 +172,9 @@ public struct CustomTextField: View {
 		} label: {
 			Image.close_icon
 		}
-		.frame(width: UI.Spacing.level06,
-			   height: UI.Spacing.level06)
-		.padding()
+		.frame(width: UI.Spacing.level06, height: UI.Spacing.level06)
+		.padding(.trailing, 13.5)
+		.padding(.top, UI.Spacing.level04)
 	}
 }
 
