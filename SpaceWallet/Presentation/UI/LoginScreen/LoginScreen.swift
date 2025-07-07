@@ -28,7 +28,7 @@ public struct LoginScreen: View {
 							viewModel.handleAction(with: action)
 						}
 					}
-					.padding(.top, proxy.safeAreaInsets.top - 50)
+					.padding(.horizontal, 16)
 				}
 			}
 			.dismissKeyboard()

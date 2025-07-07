@@ -51,7 +51,7 @@ public enum CustomTextFieldState: Equatable {
 			case .disabled:
 				return .fillPrimary
 			case .error:
-				return .redDefault
+				return .clear
 			default:
 				return .fillPrimary
 		}

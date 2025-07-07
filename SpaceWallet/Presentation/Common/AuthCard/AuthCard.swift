@@ -23,22 +23,24 @@ public struct AuthCard: View {
 	}
 
 	private var content: some View {
-		VStack {
-			VStack(alignment: .center, spacing: UI.Spacing.level05) {
-				promotionalText
+		VStack(alignment: .center, spacing: 16) {
+			VStack(spacing: 20) {
+				carrousel
 				textField
+			}
+			VStack(spacing: 16) {
 				cta
 				signInText
 				socialLoginButtons
 				termsAndConditionsText
 			}
-			.padding(.horizontal, 20)
-			.padding(.bottom, 20)
 		}
 		.dismissKeyboard {
 			viewModel.validateEmail()
 		}
-		.frame(width: 343, height: 453)
+		.padding(20)
+		.frame(minWidth: 343, maxWidth: .infinity)
+		.frame(height: 453)
 		.background(Color.white.blur(radius: 20))
 		.clipShape(RoundedRectangle(cornerRadius: 40))
 		.overlay(
@@ -47,7 +49,7 @@ public struct AuthCard: View {
 		)
 	}
 
-	private var promotionalText: some View {
+	private var carrousel: some View {
 		Carrousel(
 			data: viewModel.steps
 		) { index in
@@ -129,7 +131,7 @@ public struct AuthCard: View {
 			}
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 		}
-		.frame(width: 143, height: 48)
+		.frame(width: 143.5, height: 56)
 		.background(.fillTertiary)
 		.cornerRadius(UI.Corner.m)
 	}
@@ -139,7 +141,6 @@ public struct AuthCard: View {
 			.font(.caption)
 			.foregroundStyle(.grayPrimary)
 			.multilineTextAlignment(.center)
-			.padding(.bottom, -UI.Spacing.level02)
 	}
 }
 

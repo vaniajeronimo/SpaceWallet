@@ -53,7 +53,6 @@ public struct Carrousel: View {
 			selectedColor: style.selectedColor,
 			deselectedColor: style.deselectedColor
 		)
-		.padding(.top, -UI.Spacing.level02)
 	}
 }
 

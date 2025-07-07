@@ -28,7 +28,7 @@ public enum ButtonSize {
 
 	var padding: CGFloat {
 		switch self {
-			case .medium: return 14
+			case .medium: return 13.5
 			case .large: return 16
 			case .small: return 10
 		}
