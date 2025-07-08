@@ -10,7 +10,6 @@ import SwiftUI
 public struct VerificationCodeScreen: View {
 
 	private var viewModel = ViewModel()
-
 	private let onAction: (ActionType) -> Void
 
 	public init(onAction: @escaping (ActionType) -> Void) {
@@ -23,12 +22,18 @@ public struct VerificationCodeScreen: View {
 
 			VStack {
 				navBar
-				image
+				verification
 			}
 			.setCardView()
 			.padding(.horizontal, UI.Spacing.level06)
 		}
 		.ignoresSafeArea(edges: .all)
+		.onAppear {
+			viewModel.startTimer()
+		}
+		.onDisappear {
+			viewModel.timer?.invalidate()
+		}
 	}
 
 	private var navBar: some View {
@@ -59,16 +64,20 @@ public struct VerificationCodeScreen: View {
 		}
 	}
 
-	private var image: some View {
+	@ViewBuilder
+	private var verification: some View {
 		VStack(alignment: .center, spacing: 24) {
 			Image.onboarding_dialog
 				.resizable()
 				.scaledToFit()
 				.frame(width: 64, height: 64)
 
-			if let userEmail = UserDefaults.userEmail {
-				Text("verification_code_subtitle".localized(with: userEmail))
-					.font(.heading5SemiBold)
+			VStack(alignment: .center, spacing: 16) {
+				Text(viewModel.attributedString)
+					.multilineTextAlignment(.center)
+
+				Text("verification_code_counter".localized(with: viewModel.remainingSeconds))
+					.font(.heading5)
 					.multilineTextAlignment(.center)
 			}
 		}

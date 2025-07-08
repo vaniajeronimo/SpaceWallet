@@ -32,5 +32,7 @@
 "generic_error_message" = "Por favor, tenta novamente.";
 "invalid_email" = "Email inválido";
 "verification_code_title" = "Código de Verificação";
+"verification_code_subtitle" = "Introduz o código de 6 digítos que foi enviado para %@";
+"verification_code_counter" = "Podes obter um novo código dentro de %ds";
 "generic_alert_title" = "Funcionalidade não disponível";
 "ok" = "OK";
