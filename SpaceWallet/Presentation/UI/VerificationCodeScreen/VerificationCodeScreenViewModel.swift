@@ -38,6 +38,8 @@ extension VerificationCodeScreen {
 						self.remainingSeconds -= 1
 					} else {
 						self.timer?.invalidate()
+						self.remainingSeconds = 60
+						self.startTimer()
 					}
 				}
 			}
