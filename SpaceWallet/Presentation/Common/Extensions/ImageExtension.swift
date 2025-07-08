@@ -18,6 +18,7 @@ public extension Image {
 	static let emptyCart = Image("empty_cart", bundle: Bundle.main)
 	static let errorImg = Image("error_img", bundle: Bundle.main)
 	static let close_icon = Image("close", bundle: Bundle.main)
+	static let chevronLeft = Image("chevron_left", bundle: Bundle.main)
 
 	// MARK: - TabBar Icons
 	static let tabHomeSelected = Image("home_selected", bundle: Bundle.main)
@@ -30,4 +31,7 @@ public extension Image {
 	static let tabSearchDeselected = Image("search_deselected", bundle: Bundle.main)
 	static let tabStarsSelected = Image("stars_selected", bundle: Bundle.main)
 	static let tabStarsDeselected = Image("stars_deselected", bundle: Bundle.main)
+
+	// MARK: - Onboarding
+	static let onboarding_dialog = Image("dialog", bundle: Bundle.main)
 }

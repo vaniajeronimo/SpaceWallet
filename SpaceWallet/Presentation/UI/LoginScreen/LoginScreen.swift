@@ -90,7 +90,7 @@ public struct LoginScreen: View {
 			viewModel.validateEmail()
 
 			if viewModel.isValidEmail {
-				viewModel.onAction(.onContinue)
+				viewModel.handleAction(with: .onContinue)
 			}
 		} label: {
 			Text("continue".localized)
@@ -172,6 +172,7 @@ public extension LoginScreen {
 
 	enum ActionType {
 		case onContinue
+		case onAuthenticate
 		case onNewIndex(Int)
 		case onAppleLogin
 		case onGoogleLogin

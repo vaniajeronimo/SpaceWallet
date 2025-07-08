@@ -72,7 +72,13 @@ extension LoginScreen {
 		func handleAction(with action: ActionType) {
 			switch action {
 				case .onContinue:
-					onAction(.onContinue)
+					UserDefaults.userEmail = email
+
+					guard UserDefaults.isFirstLaunch else {
+						onAction(.onContinue)
+						return
+					}
+					return onAction(.onAuthenticate)
 				default:
 					break
 			}

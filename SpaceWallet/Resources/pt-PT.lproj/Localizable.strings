@@ -31,3 +31,4 @@
 "generic_error_title" = "Ocorreu um erro";
 "generic_error_message" = "Por favor, tenta novamente.";
 "invalid_email" = "Email inválido";
+"verification_code_title" = "Código de Verificação";
