@@ -37,15 +37,14 @@ public enum ButtonSize {
 	var width: CGFloat {
 		switch self {
 			case .medium: return 303
-			case .large: return 343
+			case .large: return .infinity
 			case .small: return 200
 		}
 	}
 
 	var height: CGFloat {
 		switch self {
-			case .medium: return 48
-			case .large: return 53
+			case .medium, .large: return 48
 			case .small: return 44
 		}
 	}

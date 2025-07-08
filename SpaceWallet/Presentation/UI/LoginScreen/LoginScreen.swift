@@ -22,11 +22,11 @@ public struct LoginScreen: View {
 				.ignoresSafeArea()
 			
 			ScrollView(showsIndicators: false) {
-				VStack(alignment: .center) {
+				VStack(alignment: .center, spacing: UI.Spacing.level06) {
 					currentIllustration
 					content
 				}
-				.padding(.horizontal, 24)
+				.padding(.horizontal, UI.Spacing.level06)
 			}
 		}
 		.dismissKeyboard {
@@ -43,8 +43,8 @@ public struct LoginScreen: View {
 	}
 
 	private var content: some View {
-		VStack(alignment: .center, spacing: 16) {
-			VStack(spacing: 20) {
+		VStack(alignment: .center, spacing: UI.Spacing.level05) {
+			VStack(spacing: UI.Spacing.level06) {
 				carrousel
 				textField
 			}
@@ -96,7 +96,7 @@ public struct LoginScreen: View {
 			Text("continue".localized)
 		}
 		.disabled(!viewModel.isValidEmail)
-		.buttonStyle(PrimaryButton(.medium))
+		.buttonStyle(PrimaryButton(.large))
 	}
 
 	private var signInText: some View {

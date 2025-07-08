@@ -44,7 +44,8 @@ public struct PrimaryButton: ButtonStyle {
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 			.background(background(configuration.isPressed))
 			.cornerRadius(size.radius)
-			.frame(width: size.width, height: size.height)
+			.frame(maxWidth: size.width)
+			.frame(height: size.height)
 	}
 
 	private func background(_ isPressed: Bool) -> some View {
