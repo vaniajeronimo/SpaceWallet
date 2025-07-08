@@ -32,3 +32,5 @@
 "generic_error_message" = "Por favor, tenta novamente.";
 "invalid_email" = "Email inválido";
 "verification_code_title" = "Código de Verificação";
+"generic_alert_title" = "Funcionalidade não disponível";
+"ok" = "OK";

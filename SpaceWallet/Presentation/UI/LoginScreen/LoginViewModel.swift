@@ -78,7 +78,7 @@ extension LoginScreen {
 						onAction(.onContinue)
 						return
 					}
-					return onAction(.onAuthenticate)
+					onAction(.onAuthenticate)
 				default:
 					break
 			}

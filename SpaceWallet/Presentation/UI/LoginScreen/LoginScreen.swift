@@ -11,6 +11,7 @@ public struct LoginScreen: View {
 
 	@Bindable private var viewModel: ViewModel
 	@FocusState private var hasFocus: Bool
+	@State private var isToShowAlert: Bool = false
 
 	public init(onAction: @escaping (ActionType) -> Void) {
 		self.viewModel = .init(onAction: onAction)
@@ -20,7 +21,7 @@ public struct LoginScreen: View {
 		ZStack {
 			LinearGradient.violetGradient2
 				.ignoresSafeArea()
-			
+
 			ScrollView(showsIndicators: false) {
 				VStack(alignment: .center, spacing: UI.Spacing.level06) {
 					currentIllustration
@@ -31,6 +32,11 @@ public struct LoginScreen: View {
 		}
 		.dismissKeyboard {
 			viewModel.validateEmail()
+		}
+		.alert("generic_alert_title".localized, isPresented: $isToShowAlert) {
+			Button("ok".localized, role: .cancel) {
+				isToShowAlert = false
+			}
 		}
 	}
 
@@ -116,12 +122,16 @@ public struct LoginScreen: View {
 			socialLoginButton(
 				image: .apple,
 				label: "Apple",
-				action: { viewModel.onAction(.onAppleLogin) }
+				action: {
+					isToShowAlert = true
+				}
 			)
 			socialLoginButton(
 				image: .google,
 				label: "Google",
-				action: { viewModel.onAction(.onGoogleLogin) }
+				action: {
+					isToShowAlert = true
+				}
 			)
 		}
 	}
@@ -174,7 +184,5 @@ public extension LoginScreen {
 		case onContinue
 		case onAuthenticate
 		case onNewIndex(Int)
-		case onAppleLogin
-		case onGoogleLogin
 	}
 }
