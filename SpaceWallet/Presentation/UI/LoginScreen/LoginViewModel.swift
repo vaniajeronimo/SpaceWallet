@@ -71,8 +71,6 @@ extension LoginScreen {
 
 		func handleAction(with action: ActionType) {
 			switch action {
-				case .onNewIndex(let index):
-					updateIllustration(for: index)
 				case .onContinue:
 					onAction(.onContinue)
 				default:

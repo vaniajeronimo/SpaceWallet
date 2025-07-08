@@ -9,18 +9,15 @@ import SwiftUI
 
 public struct CardView: ViewModifier {
 	public func body(content: Content) -> some View {
-		GeometryReader { proxy in
 			content
-				.padding(20)
-				.frame(maxWidth: proxy.size.width - 8)
-				.frame(minHeight: 438)
-				.background(Color.white.blur(radius: 20))
-				.clipShape(RoundedRectangle(cornerRadius: 40))
-				.overlay(
-					RoundedRectangle(cornerRadius: 40)
-						.stroke(Color.white, lineWidth: 1)
-				)
-		}
+			.padding(20)
+			.frame(maxWidth: .infinity)
+			.background(Color.white.blur(radius: 20))
+			.clipShape(RoundedRectangle(cornerRadius: 40))
+			.overlay(
+				RoundedRectangle(cornerRadius: 40)
+					.stroke(Color.white, lineWidth: 1)
+			)
 	}
 }
 

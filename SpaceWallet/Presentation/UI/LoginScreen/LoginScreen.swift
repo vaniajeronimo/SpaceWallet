@@ -20,9 +20,9 @@ public struct LoginScreen: View {
 		ZStack {
 			LinearGradient.violetGradient2
 				.ignoresSafeArea()
-
+			
 			ScrollView(showsIndicators: false) {
-				VStack(alignment: .center, spacing: UI.Spacing.level06) {
+				VStack(alignment: .center) {
 					currentIllustration
 					content
 				}
@@ -54,13 +54,14 @@ public struct LoginScreen: View {
 			termsAndConditionsText
 		}
 		.setCardView()
+		.frame(height: 450)
 	}
 
 	private var carrousel: some View {
 		Carrousel(
 			data: viewModel.steps
 		) { index in
-			viewModel.onAction(.onNewIndex(index))
+			viewModel.updateIllustration(for: index)
 		}
 		.frame(height: 80)
 	}
@@ -149,6 +150,7 @@ public struct LoginScreen: View {
 			.font(.caption)
 			.foregroundStyle(.grayPrimary)
 			.multilineTextAlignment(.center)
+			.frame(height: 50)
 	}
 }
 

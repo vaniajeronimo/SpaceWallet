@@ -35,7 +35,9 @@ public struct CustomTextField: View {
 	private var state: CustomTextFieldState = .default {
 		didSet {
 			if case .error(let text) = state {
-				self.helperText = text
+				withAnimation(.smooth) {
+					helperText = text
+				}
 			}
 		}
 	}
