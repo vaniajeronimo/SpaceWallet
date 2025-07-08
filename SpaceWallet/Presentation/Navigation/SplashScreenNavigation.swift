@@ -26,6 +26,8 @@ struct LoginScreenNavigation: View, Navigation {
 			switch action {
 				case .onContinue:
 					navigation.rootView(home)
+				default:
+					break
 			}
 		}
 	}
