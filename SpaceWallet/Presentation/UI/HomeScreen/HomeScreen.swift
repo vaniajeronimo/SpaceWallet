@@ -26,7 +26,7 @@ public struct HomeScreen: View {
 
 	public var body: some View {
 		TabBar(selection: $tabSelection) {
-			LinearGradient.violetGradient2
+			LinearGradient.violetSecondary
 				.ignoresSafeArea(edges: .top)
 				.tabBarItem(selectedIcon: .tabHomeSelected, unselectedIcon: .tabHomeDeselected, title: TabBarId.home.id)
 			EmptyView()

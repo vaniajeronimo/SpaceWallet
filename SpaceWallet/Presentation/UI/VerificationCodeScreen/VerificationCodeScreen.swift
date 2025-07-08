@@ -12,19 +12,26 @@ public struct VerificationCodeScreen: View {
 	private var viewModel = ViewModel()
 	private let onAction: (ActionType) -> Void
 
+	@State private var text: String = ""
+
 	public init(onAction: @escaping (ActionType) -> Void) {
 		self.onAction = onAction
 	}
 
 	public var body: some View {
 		ZStack {
-			LinearGradient.violetGradient2
+			LinearGradient.violetSecondary
 
 			VStack {
 				navBar
 				verification
+
+				// TODO: Improve this
+				Color.clear
+					.frame(height: 60)
 			}
 			.setCardView()
+			.keyboardAware()
 			.padding(.horizontal, UI.Spacing.level06)
 		}
 		.ignoresSafeArea(edges: .all)
@@ -34,6 +41,7 @@ public struct VerificationCodeScreen: View {
 		.onDisappear {
 			viewModel.timer?.invalidate()
 		}
+		.dismissKeyboard()
 	}
 
 	private var navBar: some View {
@@ -76,12 +84,26 @@ public struct VerificationCodeScreen: View {
 				Text(viewModel.attributedString)
 					.multilineTextAlignment(.center)
 
+				DigitFields {
+					onAction(.onContinue)
+				}
+
 				Text("verification_code_counter".localized(with: viewModel.remainingSeconds))
 					.font(.heading5)
 					.multilineTextAlignment(.center)
 			}
 		}
 		.padding(.top, UI.Spacing.level10)
+	}
+
+	private var background: some View {
+		RoundedRectangle(cornerRadius: UI.Corner.s)
+			.stroke(lineWidth: UI.Border.m)
+			.foregroundStyle(.fillSecondary)
+			.background(
+				RoundedRectangle(cornerRadius: UI.Corner.s)
+					.fill(.b1)
+			)
 	}
 }
 

@@ -19,7 +19,7 @@ public struct LoginScreen: View {
 
 	public var body: some View {
 		ZStack {
-			LinearGradient.violetGradient2
+			LinearGradient.violetTertiary
 				.ignoresSafeArea()
 
 			ScrollView(showsIndicators: false) {

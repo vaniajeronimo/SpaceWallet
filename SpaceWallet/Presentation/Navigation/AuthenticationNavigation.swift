@@ -31,16 +31,23 @@ struct AuthenticationNavigation: View, Navigation {
 					case .onBack:
 						onDismiss()
 					case .onContinue:
-						break
+						navigation.rootView(home)
 				}
 			}
 		}
 	}
 
 	@ViewBuilder
+	private var home: some View {
+		HomeScreen { action in
+			Debug.log("Home action: \(action)")
+		}
+	}
+
+	@ViewBuilder
 	private var createPassword: some View {
 		VStack {
-			LinearGradient.violetGradient1
+			LinearGradient.violetPrimary
 		}
 	}
 }

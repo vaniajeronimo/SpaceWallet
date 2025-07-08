@@ -17,7 +17,7 @@ public struct ErrorScreen: View {
 	private let onAction: (() -> Void)?
 
 	public init(
-		gradient: LinearGradient = .violetGradient1,
+		gradient: LinearGradient = .violetPrimary,
 		title: String? = "generic_error_title".localized,
 		subtitle: String? = "generic_error_message".localized,
 		buttonTitle: String = "retry".localized,

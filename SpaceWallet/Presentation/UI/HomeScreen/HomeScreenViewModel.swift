@@ -24,13 +24,15 @@ extension HomeScreen {
 		}
 
 		func observeNetworkStatus() {
-			networkManager.$isConnected
-				.receive(on: DispatchQueue.main)
-				.sink { [weak self] connected in
-					guard let self else { return }
-					isConnected = connected
-				}
-				.store(in: &cancellables)
+			executeInBackgroundThread({
+				self.networkManager.$isConnected
+					.receive(on: DispatchQueue.main)
+					.sink { [weak self] connected in
+						guard let self else { return }
+						isConnected = connected
+					}
+					.store(in: &self.cancellables)
+			}, after: 0.5)
 		}
 	}
 }
