@@ -94,6 +94,7 @@ public struct CustomTextField: View {
 		}
 		.font(.heading4SemiBold)
 		.foregroundStyle(state.textColor)
+		.tint(state.textColor)
 		.frame(height: 64)
 		.padding(.init(
 			top: UI.Spacing.level04,
