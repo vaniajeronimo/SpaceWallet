@@ -10,4 +10,5 @@ import Combine
 protocol IAuthRepository {
 
 	func checkAuthState() -> AnyPublisher<AuthDestinationModel, Error>
+	func checkIfEmailIsRegisteredUseCase(email: String) -> AnyPublisher<Bool, Error>
 }

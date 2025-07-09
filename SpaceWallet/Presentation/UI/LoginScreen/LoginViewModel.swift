@@ -5,12 +5,18 @@
 //  Created by Vania Jeronimo on 04/07/2025.
 //
 
+import Combine
+import Factory
 import SwiftUI
 
 extension LoginScreen {
 	@Observable
 	@MainActor
 	final class ViewModel {
+
+		@ObservationIgnored
+		@Injected(\.checkIfEmailIsRegisteredUseCase)
+		private var checkIfEmailIsRegisteredUseCase
 
 		var illustrationIndex: Illustration = .first
 		var emailState: CustomTextFieldState = .default
@@ -38,6 +44,8 @@ extension LoginScreen {
 		let steps: [CarrouselModel]
 		var onAction: (ActionType) -> Void
 
+		private var cancellables = Set<AnyCancellable>()
+
 		init(onAction: @escaping (ActionType) -> Void) {
 			self.onAction = onAction
 			self.steps = Array(1...3).map {
@@ -45,6 +53,22 @@ extension LoginScreen {
 					title: "auth_card_carrousel_\($0)_title".localized
 				)
 			}
+		}
+
+		func checkEmail(email: String, onCompletion: @escaping (Bool) -> Void) {
+			checkIfEmailIsRegisteredUseCase.execute(email: email)
+				.sink { completion in
+					switch completion {
+						case .finished:
+							break
+						case .failure(let error):
+							Debug.error(error)
+							onCompletion(false)
+					}
+				} receiveValue: { exists in
+					onCompletion(exists)
+				}
+				.store(in: &cancellables)
 		}
 
 		func updateIllustration(for index: Int) {
@@ -73,12 +97,14 @@ extension LoginScreen {
 			switch action {
 				case .onContinue:
 					UserDefaults.userEmail = email
-
-					guard UserDefaults.isFirstLaunch else {
-						onAction(.onContinue)
-						return
+					checkEmail(email: email) { [weak self] emailExists in
+						guard let self else { return }
+						if emailExists {
+							onAction(.authenticate)
+						} else {
+							onAction(.onboarding)
+						}
 					}
-					onAction(.onAuthenticate)
 				default:
 					break
 			}

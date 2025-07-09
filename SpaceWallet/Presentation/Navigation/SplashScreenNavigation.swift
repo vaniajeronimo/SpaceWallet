@@ -24,10 +24,8 @@ struct LoginScreenNavigation: View, Navigation {
 	private var login: some View {
 		LoginScreen { action in
 			switch action {
-				case .onAuthenticate:
+				case .authenticate:
 					navigation.rootView(authentication)
-				case .onContinue:
-					navigation.rootView(home)
 				default:
 					break
 			}

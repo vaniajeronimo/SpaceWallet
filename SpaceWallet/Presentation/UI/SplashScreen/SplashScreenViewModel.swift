@@ -6,17 +6,12 @@
 //
 
 import Combine
-import Factory
-import FirebaseAuth
+import SwiftUI
 
 extension SplashScreen {
 	@Observable
 	@MainActor
 	final class ViewModel {
-
-		@ObservationIgnored
-		@Injected(\.checkAuthStateUseCase)
-		private var checkAuthStateUseCase
 
 		private var networkManager = NetworkManager()
 
@@ -46,33 +41,9 @@ extension SplashScreen {
 					if !isConnected {
 						onCompletion(.internetConnectionError)
 					} else {
-						checkAuthState()
+						onCompletion(.login)
 					}
 				}
-				.store(in: &cancellables)
-		}
-
-		private func checkAuthState() {
-			checkAuthStateUseCase.execute()
-				.receive(on: DispatchQueue.main)
-				.sink(receiveCompletion: { [weak self] completion in
-					guard let self else { return }
-					switch completion {
-						case .failure(let error):
-							Debug.error(error)
-							onCompletion(.genericError)
-						case .finished:
-							break
-					}
-				}, receiveValue: { [weak self] destination in
-					guard let self else { return }
-					switch destination {
-						case .home:
-							onCompletion(.home)
-						case .login:
-							onCompletion(.login)
-					}
-				})
 				.store(in: &cancellables)
 		}
 	}

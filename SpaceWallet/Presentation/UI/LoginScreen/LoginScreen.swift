@@ -182,7 +182,8 @@ public extension LoginScreen {
 
 	enum ActionType {
 		case onContinue
-		case onAuthenticate
-		case onNewIndex(Int)
+		case authenticate
+		case onboarding
+		case newIndex(Int)
 	}
 }

@@ -26,8 +26,6 @@ struct RootNavigation: View, Navigation {
 			switch route {
 				case .login:
 					navigation.rootView(login)
-				case .home:
-					navigation.rootView(home)
 				case .internetConnectionError:
 					navigation.rootView(noInternetConnectionError)
 				case .genericError:

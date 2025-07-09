@@ -9,6 +9,10 @@ import Factory
 
 extension Container {
 
+	var checkIfEmailIsRegisteredUseCase: Factory<CheckIfEmailIsRegisteredUseCase> {
+		self { CheckIfEmailIsRegisteredUseCase() }
+	}
+
 	var checkAuthStateUseCase: Factory<CheckAuthStateUseCase> {
 		self { CheckAuthStateUseCase() }
 	}
