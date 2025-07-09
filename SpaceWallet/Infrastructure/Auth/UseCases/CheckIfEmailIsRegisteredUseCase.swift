@@ -14,7 +14,7 @@ final class CheckIfEmailIsRegisteredUseCase {
 	@Injected(\.authRepository)
 	private var repository
 
-	func execute(email: String) -> AnyPublisher<Bool, Error> {
-		return repository.checkIfEmailIsRegisteredUseCase(email: email)
+	func execute(email: String, password: String) -> AnyPublisher<AuthDestinationModel, Error> {
+		return repository.checkIfEmailIsRegisteredUseCase(email: email, password: password)
 	}
 }

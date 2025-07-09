@@ -93,11 +93,7 @@ public struct LoginScreen: View {
 
 	private var cta: some View {
 		Button {
-			viewModel.validateEmail()
-
-			if viewModel.isValidEmail {
-				viewModel.handleAction(with: .onContinue)
-			}
+			viewModel.validateEmail(isToCheckEmail: true)
 		} label: {
 			Text("continue".localized)
 		}
@@ -181,7 +177,6 @@ public extension LoginScreen {
 	}
 
 	enum ActionType {
-		case onContinue
 		case authenticate
 		case onboarding
 		case newIndex(Int)

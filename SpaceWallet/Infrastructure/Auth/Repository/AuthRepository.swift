@@ -14,38 +14,16 @@ class AuthRepository: IAuthRepository {
 
 	private lazy var functions = Functions.functions()
 
-	func checkIfEmailIsRegisteredUseCase(email: String) -> AnyPublisher<Bool, Error> {
-		return Future<Bool, Error> { [weak self] promise in
-			let data: [String: Any] = ["email": email]
-
-			self?.functions.httpsCallable("checkIfEmailExists").call(data) { result, error in
-				if let error {
-					promise(.failure(error))
-					return
-				}
-
-				if let data = result?.data as? [String: Any],
-				   let exists = data["exists"] as? Bool {
-					promise(.success(exists))
-				} else {
-					promise(.success(false))
-				}
-			}
-		}
-		.receive(on: DispatchQueue.main)
-		.eraseToAnyPublisher()
-	}
-
-	func checkAuthState() -> AnyPublisher<AuthDestinationModel, Error> {
+	func checkIfEmailIsRegisteredUseCase(email: String, password: String) -> AnyPublisher<AuthDestinationModel, Error> {
 		return Future<AuthDestinationModel, Error> { promise in
-			var handle: AuthStateDidChangeListenerHandle?
 
-			handle = Auth.auth().addStateDidChangeListener { _, user in
-				if let listener = handle {
-					Auth.auth().removeStateDidChangeListener(listener)
+			Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+				if let error = error as NSError? {
+					if AuthErrorCode(rawValue: error.code) == .userNotFound {
+						return promise(.success(.onboarding))
+					}
 				}
-				let destination: AuthDestinationModel = (user != nil) ? .home : .login
-				promise(.success(destination))
+				return promise(.success(.login))
 			}
 		}
 		.receive(on: DispatchQueue.main)

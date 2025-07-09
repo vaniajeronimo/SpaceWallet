@@ -55,8 +55,8 @@ extension LoginScreen {
 			}
 		}
 
-		func checkEmail(email: String, onCompletion: @escaping (Bool) -> Void) {
-			checkIfEmailIsRegisteredUseCase.execute(email: email)
+		private func checkEmail(email: String, onCompletion: @escaping (Bool) -> Void) {
+			checkIfEmailIsRegisteredUseCase.execute(email: email, password: "123456")
 				.sink { completion in
 					switch completion {
 						case .finished:
@@ -65,8 +65,14 @@ extension LoginScreen {
 							Debug.error(error)
 							onCompletion(false)
 					}
-				} receiveValue: { exists in
-					onCompletion(exists)
+				} receiveValue: { [weak self] destination in
+					guard let self else { return }
+					switch destination {
+						case .login:
+							onAction(.authenticate)
+						case .onboarding:
+							onAction(.onboarding)
+					}
 				}
 				.store(in: &cancellables)
 		}
@@ -75,8 +81,19 @@ extension LoginScreen {
 			illustrationIndex = Illustration(rawValue: index) ?? .first
 		}
 
-		func validateEmail() {
+		func validateEmail(isToCheckEmail: Bool = false) {
 			isValidEmail = isEmailValid()
+
+			if isValidEmail && isToCheckEmail {
+				checkEmail(email: email) { [weak self] emailExists in
+					guard let self else { return }
+					if emailExists {
+						onAction(.authenticate)
+					} else {
+						onAction(.onboarding)
+					}
+				}
+			}
 		}
 
 		private func isEmailValid() -> Bool {
@@ -91,23 +108,6 @@ extension LoginScreen {
 			}
 			emailState = .error("invalid_email".localized)
 			return false
-		}
-
-		func handleAction(with action: ActionType) {
-			switch action {
-				case .onContinue:
-					UserDefaults.userEmail = email
-					checkEmail(email: email) { [weak self] emailExists in
-						guard let self else { return }
-						if emailExists {
-							onAction(.authenticate)
-						} else {
-							onAction(.onboarding)
-						}
-					}
-				default:
-					break
-			}
 		}
 	}
 }
