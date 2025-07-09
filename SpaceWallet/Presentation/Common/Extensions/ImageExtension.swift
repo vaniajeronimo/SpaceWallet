@@ -34,4 +34,5 @@ public extension Image {
 
 	// MARK: - Onboarding
 	static let onboarding_dialog = Image("dialog", bundle: Bundle.main)
+	static let onboarding_locker = Image("locker", bundle: Bundle.main)
 }

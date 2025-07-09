@@ -17,13 +17,13 @@ class AuthRepository: IAuthRepository {
 	func checkIfEmailIsRegisteredUseCase(email: String, password: String) -> AnyPublisher<AuthDestinationModel, Error> {
 		return Future<AuthDestinationModel, Error> { promise in
 
-			Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+			Auth.auth().signIn(withEmail: email, password: password) { _, error in
 				if let error = error as NSError? {
 					if AuthErrorCode(rawValue: error.code) == .userNotFound {
 						return promise(.success(.onboarding))
 					}
 				}
-				return promise(.success(.login))
+				return promise(.success(.verificationCode))
 			}
 		}
 		.receive(on: DispatchQueue.main)

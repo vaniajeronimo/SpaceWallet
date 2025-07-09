@@ -38,3 +38,6 @@
 "verification_code_counter" = "You can get a new code in %ds";
 "generic_alert_title" = "Feature not available yet";
 "ok" = "OK";
+"create_password_title" = "Create a password";
+"create_password_subtitle" = "Create a password to protect your account";
+"password" = "Password";

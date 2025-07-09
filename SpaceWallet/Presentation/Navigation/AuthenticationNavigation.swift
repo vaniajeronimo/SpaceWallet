@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AuthenticationNavigation: View, Navigation {
+struct VerificationCodeNavigation: View, Navigation {
 
 	internal var navigation = NavigationController()
 
@@ -41,13 +41,6 @@ struct AuthenticationNavigation: View, Navigation {
 	private var home: some View {
 		HomeScreen { action in
 			Debug.log("Home action: \(action)")
-		}
-	}
-
-	@ViewBuilder
-	private var createPassword: some View {
-		VStack {
-			LinearGradient.violetPrimary
 		}
 	}
 }

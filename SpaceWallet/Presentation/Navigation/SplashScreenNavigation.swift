@@ -12,7 +12,7 @@ struct LoginScreenNavigation: View, Navigation {
 	internal var navigation: NavigationController = NavigationController()
 
 	init() {
-		navigation.rootView(login)
+		navigation.rootView(onboarding)
 	}
 
 	var body: some View {
@@ -24,8 +24,10 @@ struct LoginScreenNavigation: View, Navigation {
 	private var login: some View {
 		LoginScreen { action in
 			switch action {
-				case .authenticate:
-					navigation.rootView(authentication)
+				case .verificationCode:
+					navigation.rootView(verificationCode)
+				case .onboarding:
+					navigation.rootView(onboarding)
 				default:
 					break
 			}
@@ -40,9 +42,19 @@ struct LoginScreenNavigation: View, Navigation {
 	}
 
 	@ViewBuilder
-	private var authentication: some View {
-		AuthenticationNavigation {
-			navigation.rootView(login)
+	private var verificationCode: some View {
+		VerificationCodeScreen { action in
+			switch action {
+				case .onBack:
+					navigation.rootView(login)
+				case .onContinue:
+					navigation.rootView(home)
+			}
 		}
+	}
+
+	@ViewBuilder
+	private var onboarding: some View {
+		OnboardingNavigation()
 	}
 }

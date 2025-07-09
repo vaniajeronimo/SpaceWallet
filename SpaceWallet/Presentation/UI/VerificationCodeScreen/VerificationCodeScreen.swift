@@ -32,7 +32,7 @@ public struct VerificationCodeScreen: View {
 			}
 			.setCardView()
 			.keyboardAware()
-			.padding(.horizontal, UI.Spacing.level06)
+			.padding(.horizontal, UI.Spacing.level07)
 		}
 		.ignoresSafeArea(edges: .all)
 		.onAppear {

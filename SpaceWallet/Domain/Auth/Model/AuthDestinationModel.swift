@@ -8,6 +8,6 @@
 import Foundation
 
 enum AuthDestinationModel {
-	case login
+	case verificationCode
 	case onboarding
 }

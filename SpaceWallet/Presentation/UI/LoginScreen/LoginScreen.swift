@@ -27,7 +27,7 @@ public struct LoginScreen: View {
 					currentIllustration
 					content
 				}
-				.padding(.horizontal, UI.Spacing.level06)
+				.padding(.horizontal, UI.Spacing.level07)
 			}
 		}
 		.dismissKeyboard {
@@ -177,7 +177,7 @@ public extension LoginScreen {
 	}
 
 	enum ActionType {
-		case authenticate
+		case verificationCode
 		case onboarding
 		case newIndex(Int)
 	}

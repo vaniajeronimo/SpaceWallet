@@ -68,8 +68,8 @@ extension LoginScreen {
 				} receiveValue: { [weak self] destination in
 					guard let self else { return }
 					switch destination {
-						case .login:
-							onAction(.authenticate)
+						case .verificationCode:
+							onAction(.verificationCode)
 						case .onboarding:
 							onAction(.onboarding)
 					}
@@ -88,7 +88,7 @@ extension LoginScreen {
 				checkEmail(email: email) { [weak self] emailExists in
 					guard let self else { return }
 					if emailExists {
-						onAction(.authenticate)
+						onAction(.verificationCode)
 					} else {
 						onAction(.onboarding)
 					}

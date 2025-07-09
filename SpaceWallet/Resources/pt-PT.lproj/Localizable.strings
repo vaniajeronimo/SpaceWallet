@@ -36,3 +36,6 @@
 "verification_code_counter" = "Podes obter um novo código dentro de %ds";
 "generic_alert_title" = "Funcionalidade não disponível";
 "ok" = "OK";
+"create_password_title" = "Cria uma palavra-passe";
+"create_password_subtitle" = "Cria uma palavra-passe para proteger a tua conta";
+"password" = "Palavra-passe";
