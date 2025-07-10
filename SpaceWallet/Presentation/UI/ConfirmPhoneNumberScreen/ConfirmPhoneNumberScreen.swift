@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct ConfirmPhoneNumberScreen: View {
 
-	@Bindable private var viewModel: ViewModel
+	@Bindable var viewModel: ViewModel
 	@FocusState private var hasFocus: Bool
 
 	private let onAction: () -> Void
@@ -30,6 +30,8 @@ public struct ConfirmPhoneNumberScreen: View {
 			.setCardView()
 			.keyboardAware(offset: 190)
 			.padding(.horizontal, UI.Spacing.level07)
+
+			countriesBottomSheet
 		}
 		.ignoresSafeArea(edges: .all)
 		.dismissKeyboard()
@@ -69,12 +71,12 @@ public struct ConfirmPhoneNumberScreen: View {
 				viewModel.clearPhoneNumber()
 			},
 			onPrefixTap: {
-				print("open countries bottom sheet")
+				viewModel.isToShowBottomSheet = true
 			}
 		)
 		.state(.default)
 		.showClearButton(true)
-		.isPhoneNumberField(true)
+		.isPhoneNumberField(true, prefix: viewModel.prefix)
 		.focused($hasFocus)
 		.submitLabel(.done)
 		.textInputAutocapitalization(.never)
@@ -88,7 +90,8 @@ public struct ConfirmPhoneNumberScreen: View {
 			Text("continue".localized)
 		}
 		.buttonStyle(PrimaryButton(.large))
-		.disabled(viewModel.phoneNumber.isEmpty)
-		.padding(.top, 24)
+		.disabled(viewModel.disableCta)
+		.padding(.top, UI.Spacing.level07)
+		.padding(.bottom, 18)
 	}
 }

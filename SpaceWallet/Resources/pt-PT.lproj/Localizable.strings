@@ -46,3 +46,5 @@
 "phone_number" = "Número de telemóvel";
 "confirm_phone_number_title" = "Introduz o teu número de telefone";
 "confirm_phone_number_subtitle" = "Protege a tua conta com o teu número de telefone.\nEnviaremos um código de verificação de 6 dígitos.";
+"country_prefix_code" = "Lista de países";
+"done" = "Concluído";

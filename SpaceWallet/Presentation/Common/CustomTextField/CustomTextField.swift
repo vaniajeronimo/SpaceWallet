@@ -232,7 +232,7 @@ extension CustomTextField {
 		return result
 	}
 
-	public func isPhoneNumberField(_ enabled: Bool, prefix: String = "+000") -> Self {
+	public func isPhoneNumberField(_ enabled: Bool, prefix: String = "+351") -> Self {
 		var result = self
 		result.isPhoneNumberField = enabled
 		result.prefixText = prefix

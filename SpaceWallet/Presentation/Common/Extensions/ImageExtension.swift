@@ -19,6 +19,7 @@ public extension Image {
 	static let errorImg = Image("error_img", bundle: Bundle.main)
 	static let close_icon = Image("close", bundle: Bundle.main)
 	static let chevronLeft = Image("chevron_left", bundle: Bundle.main)
+	static let checkmark = Image("check", bundle: Bundle.main)
 
 	// MARK: - TabBar Icons
 	static let tabHomeSelected = Image("home_selected", bundle: Bundle.main)
@@ -37,4 +38,9 @@ public extension Image {
 	static let onboarding_locker = Image("locker", bundle: Bundle.main)
 	static let onboarding_mobile = Image("mobile", bundle: Bundle.main)
 	static let onboarding_arrow = Image("arrow", bundle: Bundle.main)
+
+	// MARK: - Flags
+	static let usa = Image("united_states", bundle: Bundle.main)
+	static let spain = Image("spain", bundle: Bundle.main)
+	static let portugal = Image("portugal", bundle: Bundle.main)
 }
