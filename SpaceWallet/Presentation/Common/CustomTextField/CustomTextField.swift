@@ -13,6 +13,7 @@ public struct CustomTextField: View {
 	@Binding private var text: String
 	@FocusState private var isFocused: Bool
 
+	private var prefixText: String = "+351"
 	private var helperText: String = " "
 	private var maskFormat: String = ""
 	private var uppercased = false
@@ -20,10 +21,12 @@ public struct CustomTextField: View {
 	private var isSecuredField: Bool = false
 	private var showClearButton: Bool = false
 	private var isCurrencyFied: Bool = false
+	private var isPhoneNumberField: Bool = false
 	private var onCommit: (() -> Void)?
 	private var onChange: ((String) -> Void)?
 	private var onClearAction: (() -> Void)?
 	private var onIconTap: (() -> Void)?
+	private var onPrefixTap: (() -> Void)?
 	private let placeholder: String
 	private let title: String
 	private let titleIcon: Image?
@@ -50,7 +53,8 @@ public struct CustomTextField: View {
 		onCommit: (() -> Void)? = nil,
 		onChange: ((String) -> Void)? = nil,
 		onClearAction: (() -> Void)? = nil,
-		onIconTap: (() -> Void)? = nil
+		onIconTap: (() -> Void)? = nil,
+		onPrefixTap: (() -> Void)? = nil
 	) {
 		self.title = title
 		self.titleIcon = titleIcon
@@ -61,6 +65,7 @@ public struct CustomTextField: View {
 		self.onChange = onChange
 		self.onClearAction = onClearAction
 		self.onIconTap = onIconTap
+		self.onPrefixTap = onPrefixTap
 	}
 
 	public var body: some View {
@@ -85,12 +90,33 @@ public struct CustomTextField: View {
 	}
 
 	private var textField: some View {
-		Group {
-			if isSecuredField && isTextHidden {
-				secureTextField
-			} else {
-				regularTextField
+		HStack(spacing: .zero) {
+			if isPhoneNumberField {
+				Button {
+					onPrefixTap?()
+				} label: {
+					HStack(spacing: UI.Spacing.level04) {
+						Text(prefixText)
+							.font(.heading4SemiBold)
+							.foregroundColor(.primary)
+						Image.onboarding_arrow
+							.resizable()
+							.frame(width: 8, height: 4)
+					}
+				}
+				.padding(.trailing, UI.Spacing.level04)
 			}
+
+			Group {
+				if isSecuredField && isTextHidden {
+					secureTextField
+				} else {
+					regularTextField
+				}
+			}
+			.focused($isFocused)
+			.padding(.vertical, UI.Spacing.level04)
+			.padding(.trailing, UI.Spacing.level05)
 		}
 		.font(.heading4SemiBold)
 		.foregroundStyle(state.textColor)
@@ -107,6 +133,9 @@ public struct CustomTextField: View {
 			var newText = uppercased ? txt.uppercased() : txt
 			if disallowSpaces {
 				newText = newText.replacingOccurrences(of: " ", with: "")
+			}
+			if isPhoneNumberField {
+				newText = newText.filter(\.isNumber)
 			}
 			text = newText.mask(with: maskFormat)
 			onChange?(txt)
@@ -133,20 +162,22 @@ public struct CustomTextField: View {
 						.fill(state.backgroundColor)
 				)
 
-			HStack(alignment: .center, spacing: UI.Spacing.level02) {
-				Text(title)
-					.font(.caption)
-					.bold()
-					.foregroundStyle(state.placeholderColor)
-				if let titleIcon {
-					titleIcon
-						.renderingMode(.template)
-						.foregroundStyle(Color.gray300)
-						.onTapGesture { onIconTap?() }
+			VStack(spacing: UI.Spacing.level01) {
+				HStack(alignment: .center, spacing: UI.Spacing.level02) {
+					Text(title)
+						.font(.caption)
+						.bold()
+						.foregroundStyle(state.placeholderColor)
+					if let titleIcon {
+						titleIcon
+							.renderingMode(.template)
+							.foregroundStyle(Color.gray300)
+							.onTapGesture { onIconTap?() }
+					}
 				}
+				.padding(.top, UI.Spacing.level04)
+				.padding(.leading, UI.Spacing.level05)
 			}
-			.padding(.top, UI.Spacing.level04)
-			.padding(.leading, UI.Spacing.level05)
 		}
 	}
 
@@ -198,6 +229,13 @@ extension CustomTextField {
 	public func isFocused(_ isFocused: Bool) -> Self {
 		let result = self
 		result.isFocused = isFocused
+		return result
+	}
+
+	public func isPhoneNumberField(_ enabled: Bool, prefix: String = "+000") -> Self {
+		var result = self
+		result.isPhoneNumberField = enabled
+		result.prefixText = prefix
 		return result
 	}
 

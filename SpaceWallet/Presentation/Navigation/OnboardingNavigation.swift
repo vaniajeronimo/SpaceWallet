@@ -24,6 +24,13 @@ struct OnboardingNavigation: View, Navigation {
 	@ViewBuilder
 	private var createPassword: some View {
 		CreatePasswordScreen {
+			navigation.push(confirmPhoneNumber)
+		}
+	}
+
+	@ViewBuilder
+	private var confirmPhoneNumber: some View {
+		ConfirmPhoneNumberScreen {
 			print("continue")
 		}
 	}

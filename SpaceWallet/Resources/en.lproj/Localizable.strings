@@ -45,3 +45,6 @@
 "average" = "Average";
 "strong" = "Strong";
 "password_hint" = "Your're good to go!";
+"phone_number" = "Phone number";
+"confirm_phone_number_title" = "Enter your phone number";
+"confirm_phone_number_subtitle" = "Secure your account with your phone number.\nWe'll send you a 6-digit verification code.";

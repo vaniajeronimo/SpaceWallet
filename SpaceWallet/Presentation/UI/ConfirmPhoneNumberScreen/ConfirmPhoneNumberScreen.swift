@@ -1,13 +1,13 @@
 //
-//  CreatePasswordScreen.swift
+//  ConfirmPhoneNumberScreen.swift
 //  SpaceWallet
 //
-//  Created by Vania Jeronimo on 09/07/2025.
+//  Created by Vania Jeronimo on 10/07/2025.
 //
 
 import SwiftUI
 
-public struct CreatePasswordScreen: View {
+public struct ConfirmPhoneNumberScreen: View {
 
 	@Bindable private var viewModel: ViewModel
 	@FocusState private var hasFocus: Bool
@@ -25,7 +25,7 @@ public struct CreatePasswordScreen: View {
 
 			VStack {
 				title
-				createPassword
+				confirmPhoneNumber
 			}
 			.setCardView()
 			.keyboardAware(offset: 190)
@@ -36,21 +36,20 @@ public struct CreatePasswordScreen: View {
 	}
 
 	private var title: some View {
-		Text("create_password_title".localized)
+		Text("confirm_phone_number_title".localized)
 			.font(.heading2Bold)
 	}
 
 	@ViewBuilder
-	private var createPassword: some View {
+	private var confirmPhoneNumber: some View {
 		VStack(alignment: .center, spacing: UI.Spacing.level07) {
-			Image.onboarding_locker
+			Image.onboarding_mobile
 				.resizable()
 				.scaledToFit()
 				.frame(width: 64, height: 64)
 
 			VStack(alignment: .leading, spacing: UI.Spacing.level03) {
 				textField
-				passwordStrenght
 			}
 			cta
 		}
@@ -59,49 +58,37 @@ public struct CreatePasswordScreen: View {
 
 	@ViewBuilder
 	private var textField: some View {
-		Text("create_password_subtitle".localized)
+		Text("confirm_phone_number_subtitle".localized)
 			.font(.heading5)
 			.multilineTextAlignment(.leading)
 
 		CustomTextField(
-			title: "password".localized,
-			text: $viewModel.password,
-			onChange: { _ in
-				viewModel.validatePassword()
-			},
+			title: "phone_number".localized,
+			text: $viewModel.phoneNumber,
 			onClearAction: {
-				viewModel.clearPassword()
+				viewModel.clearPhoneNumber()
+			},
+			onPrefixTap: {
+				print("open countries bottom sheet")
 			}
 		)
 		.state(.default)
 		.showClearButton(true)
-		.isSecure(true)
+		.isPhoneNumberField(true)
 		.focused($hasFocus)
 		.submitLabel(.done)
 		.textInputAutocapitalization(.never)
-		.textContentType(.password)
-	}
-
-	private var passwordStrenght: some View {
-		PasswordStrengthView(
-			stepperColors: [
-				viewModel.firstStepper.color,
-				viewModel.secondStepper.color,
-				viewModel.thirdStepper.color
-			],
-			hintText: viewModel.hintText,
-			isStrong: viewModel.passwordStrength == .strong
-		)
+		.textContentType(.telephoneNumber)
 	}
 
 	private var cta: some View {
 		Button {
 			onAction()
 		} label: {
-			Text("create_password_title".localized)
+			Text("continue".localized)
 		}
 		.buttonStyle(PrimaryButton(.large))
-		.disabled(viewModel.passwordStrength == .weak || viewModel.passwordStrength == .notSet)
-		.padding(.bottom, 18)
+		.disabled(viewModel.phoneNumber.isEmpty)
+		.padding(.top, 24)
 	}
 }

@@ -5,8 +5,6 @@
 //  Created by Vania Jeronimo on 09/07/2025.
 //
 
-import Combine
-import Factory
 import SwiftUI
 
 extension CreatePasswordScreen {
@@ -14,9 +12,7 @@ extension CreatePasswordScreen {
 	@MainActor
 	final class ViewModel {
 
-		var passwordState: CustomTextFieldState = .default
 		var password: String = ""
-
 		var firstStepper: StepperColor = .notSet
 		var secondStepper: StepperColor = .notSet
 		var thirdStepper: StepperColor = .notSet
