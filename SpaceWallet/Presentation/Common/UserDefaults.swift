@@ -13,6 +13,7 @@ public extension UserDefaults {
 	enum Key: String {
 		case isFirstLaunch = "isFirstLaunch"
 		case userEmail = "userEmail"
+		case userPhoneNumber = "userPhoneNumber"
 	}
 
 	func register(value: Any, forKey key: Key) {
@@ -49,6 +50,15 @@ public extension UserDefaults {
 		}
 		set {
 			UserDefaults.standard.set(newValue, forKey: Key.userEmail.rawValue)
+		}
+	}
+
+	class var userPhoneNumber: String? {
+		get {
+			return UserDefaults.standard.object(forKey: Key.userPhoneNumber.rawValue) as? String
+		}
+		set {
+			UserDefaults.standard.set(newValue, forKey: Key.userPhoneNumber.rawValue)
 		}
 	}
 }

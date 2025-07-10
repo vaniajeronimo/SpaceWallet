@@ -95,7 +95,7 @@ public struct CustomTextField: View {
 				Button {
 					onPrefixTap?()
 				} label: {
-					HStack(spacing: UI.Spacing.level04) {
+					HStack(spacing: UI.Spacing.level02) {
 						Text(prefixText)
 							.font(.heading4SemiBold)
 							.foregroundColor(.primary)

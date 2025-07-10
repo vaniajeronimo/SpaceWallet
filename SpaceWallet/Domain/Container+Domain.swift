@@ -9,7 +9,7 @@ import Factory
 
 extension Container {
 
-	var checkIfEmailIsRegisteredUseCase: Factory<CheckIfEmailIsRegisteredUseCase> {
-		self { CheckIfEmailIsRegisteredUseCase() }
+	var checkFirstLaunchUseCase: Factory<CheckFirstLaunchUseCase> {
+		self { CheckFirstLaunchUseCase() }
 	}
 }

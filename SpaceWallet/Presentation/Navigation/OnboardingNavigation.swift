@@ -31,7 +31,41 @@ struct OnboardingNavigation: View, Navigation {
 	@ViewBuilder
 	private var confirmPhoneNumber: some View {
 		ConfirmPhoneNumberScreen {
-			print("continue")
+			navigation.push(verificationCode)
 		}
 	}
+
+	@ViewBuilder
+	private var verificationCode: some View {
+		VStack {
+			VerificationCodeScreen(isOnboardingFlow: true) { action in
+				switch action {
+					case .onContinue:
+						navigation.push(biometricData)
+					default:
+						break
+				}
+			}
+		}
+	}
+
+	@ViewBuilder
+	private var biometricData: some View {
+		VStack {
+			BiometricDataScreen { action in
+				switch action {
+					case .next:
+						break
+					case .back:
+						navigation.rootView(login)
+				}
+			}
+		}
+	}
+
+	@ViewBuilder
+	private var login: some View {
+		LoginScreenNavigation()
+	}
+
 }

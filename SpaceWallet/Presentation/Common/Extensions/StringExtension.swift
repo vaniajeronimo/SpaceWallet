@@ -26,16 +26,24 @@ public extension String {
 	func mask(with format: String) -> String {
 		guard !format.isEmpty else { return self }
 
-		let string = self.components(separatedBy: CharacterSet.alphanumerics.inverted).joined()
+		let string = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
 		var index = string.startIndex
 		var maskedText = ""
 
-		for value in format where index < string.endIndex {
-			if value == "#" {
-				maskedText.append(string[index])
-				index = string.index(after: index)
-			} else {
-				maskedText.append(value)
+		for char in format {
+			if index == string.endIndex {
+				break
+			}
+
+			switch char {
+				case "#":
+					maskedText.append(string[index])
+					index = string.index(after: index)
+				case "X":
+					maskedText.append("X")
+					index = string.index(after: index)
+				default:
+					maskedText.append(char)
 			}
 		}
 
@@ -55,5 +63,9 @@ public extension String {
 		}
 
 		return false
+	}
+
+	var removeWhiteSpaces: String {
+		return self.replacingOccurrences(of: "\\s", with: "", options: .regularExpression)
 	}
 }

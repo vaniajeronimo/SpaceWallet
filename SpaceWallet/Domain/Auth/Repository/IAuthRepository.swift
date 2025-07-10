@@ -9,5 +9,5 @@ import Combine
 
 protocol IAuthRepository {
 
-	func checkIfEmailIsRegisteredUseCase(email: String, password: String) -> AnyPublisher<AuthDestinationModel, Error>
+	func checkFirstLaunchUseCase() -> AnyPublisher<AuthDestinationModel, Error>
 }

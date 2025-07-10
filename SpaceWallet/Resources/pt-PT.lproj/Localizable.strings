@@ -48,3 +48,10 @@
 "confirm_phone_number_subtitle" = "Protege a tua conta com o teu número de telefone.\nEnviaremos um código de verificação de 6 dígitos.";
 "country_prefix_code" = "Lista de países";
 "done" = "Concluído";
+"verification_code_onboarding_subtitle" = "Introduz o código de 6 dígitos que foi enviado para\n %@";
+"get_a_new_code" = "Obter um novo código";
+"protect_your_wallet_title" = "Protege a tua carteira";
+"protect_your_wallet_subtitle" = "Adiciona uma camada extra de segurança à tua carteira com a autenticação biométrica";
+"next" = "Seguinte";
+"face_id_title" = "Face ID";
+"face_id_subtitle" = "Usa a autenticação Face ID";

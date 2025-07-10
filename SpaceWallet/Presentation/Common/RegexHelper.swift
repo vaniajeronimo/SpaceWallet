@@ -9,7 +9,7 @@ import Foundation
 
 public enum RegexHelper {
 
-	public static let phoneNumberMask = "### ### ### ### ### ### ### ###"
+	public static let phoneNumberMask = "+XXXXXX####"
 	public static let phoneNumber = "^[\\d#]+$"
 	public static let taxNumber = #"^\d+$"#
 	public static let email = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"

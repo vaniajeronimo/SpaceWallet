@@ -15,8 +15,8 @@ extension LoginScreen {
 	final class ViewModel {
 
 		@ObservationIgnored
-		@Injected(\.checkIfEmailIsRegisteredUseCase)
-		private var checkIfEmailIsRegisteredUseCase
+		@Injected(\.checkFirstLaunchUseCase)
+		private var checkFirstLaunchUseCase
 
 		var illustrationIndex: Illustration = .first
 		var emailState: CustomTextFieldState = .default
@@ -55,8 +55,8 @@ extension LoginScreen {
 			}
 		}
 
-		private func checkEmail(email: String, onCompletion: @escaping (Bool) -> Void) {
-			checkIfEmailIsRegisteredUseCase.execute(email: email, password: "123456")
+		private func checkFirstLaunch(onCompletion: @escaping (Bool) -> Void) {
+			checkFirstLaunchUseCase.execute()
 				.sink { completion in
 					switch completion {
 						case .finished:
@@ -67,6 +67,8 @@ extension LoginScreen {
 					}
 				} receiveValue: { [weak self] destination in
 					guard let self else { return }
+					UserDefaults.userEmail = email
+
 					switch destination {
 						case .verificationCode:
 							onAction(.verificationCode)
@@ -85,12 +87,12 @@ extension LoginScreen {
 			isValidEmail = isEmailValid()
 
 			if isValidEmail && isToCheckEmail {
-				checkEmail(email: email) { [weak self] emailExists in
+				checkFirstLaunch() { [weak self] isFirstLaunch in
 					guard let self else { return }
-					if emailExists {
-						onAction(.verificationCode)
-					} else {
+					if isFirstLaunch {
 						onAction(.onboarding)
+					} else {
+						onAction(.verificationCode)
 					}
 				}
 			}

@@ -50,3 +50,10 @@
 "confirm_phone_number_subtitle" = "Secure your account with your phone number.\nWe'll send you a 6-digit verification code.";
 "country_prefix_code" = "Country list";
 "done" = "Done";
+"verification_code_onboarding_subtitle" = "Enter the 6-digit code that was sent to\n %@";
+"get_a_new_code" = "Get a new code";
+"protect_your_wallet_title" = "Protect your wallet";
+"protect_your_wallet_subtitle" = "Adding biometric security will ensure that you are the only one that can access your wallet";
+"next" = "Next";
+"face_id_title" = "Face ID";
+"face_id_subtitle" = "Use Face ID Authentication";

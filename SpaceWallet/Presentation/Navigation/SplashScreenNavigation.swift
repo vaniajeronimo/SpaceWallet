@@ -12,7 +12,7 @@ struct LoginScreenNavigation: View, Navigation {
 	internal var navigation: NavigationController = NavigationController()
 
 	init() {
-		navigation.rootView(onboarding)
+		navigation.rootView(login)
 	}
 
 	var body: some View {

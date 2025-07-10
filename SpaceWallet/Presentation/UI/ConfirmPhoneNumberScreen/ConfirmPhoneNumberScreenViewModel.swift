@@ -20,6 +20,10 @@ extension ConfirmPhoneNumberScreen {
 			selectedCountry?.prefix ?? "+351"
 		}
 
+		var userPhoneNumber: String {
+			"\(prefix) \(phoneNumber)"
+		}
+
 		var disableCta: Bool {
 			phoneNumber.isEmpty || phoneNumber.count < 8
 		}

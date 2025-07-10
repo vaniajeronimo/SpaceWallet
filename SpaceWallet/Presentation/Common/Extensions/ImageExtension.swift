@@ -20,6 +20,10 @@ public extension Image {
 	static let close_icon = Image("close", bundle: Bundle.main)
 	static let chevronLeft = Image("chevron_left", bundle: Bundle.main)
 	static let checkmark = Image("check", bundle: Bundle.main)
+	static let close_dark = Image("close_dark", bundle: Bundle.main)
+	static let info = Image("info", bundle: Bundle.main)
+	static let face_id = Image("face_id", bundle: Bundle.main)
+	static let secure_shield = Image("secure_shield", bundle: Bundle.main)
 
 	// MARK: - TabBar Icons
 	static let tabHomeSelected = Image("home_selected", bundle: Bundle.main)

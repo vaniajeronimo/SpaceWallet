@@ -9,13 +9,19 @@ import SwiftUI
 
 public struct VerificationCodeScreen: View {
 
-	private var viewModel = ViewModel()
+	private var viewModel: ViewModel
 	private let onAction: (ActionType) -> Void
 
 	@State private var text: String = ""
+	@State private var isOnboardingFlow: Bool
 
-	public init(onAction: @escaping (ActionType) -> Void) {
+	public init(
+		isOnboardingFlow: Bool = false,
+		onAction: @escaping (ActionType) -> Void
+	) {
+		self.isOnboardingFlow = isOnboardingFlow
 		self.onAction = onAction
+		self.viewModel = .init(isOnboardingFlow: isOnboardingFlow)
 	}
 
 	public var body: some View {
@@ -46,23 +52,9 @@ public struct VerificationCodeScreen: View {
 
 	private var navBar: some View {
 		HStack(alignment: .center) {
-			Button {
-				onAction(.onBack)
-			} label: {
-				ZStack {
-					Circle()
-						.fill(.fillTertiary)
-
-					Image.chevronLeft
-						.resizable()
-						.scaledToFit()
-						.frame(width: 24, height: 24)
-						.foregroundColor(.textPrimary)
-				}
-				.frame(width: 40, height: 40)
+			if !isOnboardingFlow {
+				backButton
 			}
-			.contentShape(Circle())
-
 			Spacer()
 
 			Text("verification_code_title".localized)
@@ -70,6 +62,25 @@ public struct VerificationCodeScreen: View {
 
 			Spacer()
 		}
+	}
+
+	private var backButton: some View {
+		Button {
+			onAction(.onBack)
+		} label: {
+			ZStack {
+				Circle()
+					.fill(.fillTertiary)
+
+				Image.chevronLeft
+					.resizable()
+					.scaledToFit()
+					.frame(width: 24, height: 24)
+					.foregroundColor(.textPrimary)
+			}
+			.frame(width: 40, height: 40)
+		}
+		.contentShape(Circle())
 	}
 
 	@ViewBuilder
@@ -81,16 +92,27 @@ public struct VerificationCodeScreen: View {
 				.frame(width: 64, height: 64)
 
 			VStack(alignment: .center, spacing: 16) {
-				Text(viewModel.attributedString)
+				Text(viewModel.attributedTextString)
 					.multilineTextAlignment(.center)
 
 				DigitFields {
 					onAction(.onContinue)
 				}
 
-				Text("verification_code_counter".localized(with: viewModel.remainingSeconds))
-					.font(.heading5)
-					.multilineTextAlignment(.center)
+				if isOnboardingFlow {
+					Button {
+						viewModel.getNewCode()
+					} label: {
+						Text("get_a_new_code".localized)
+							.font(.heading5SemiBold)
+							.foregroundStyle(.violetHover)
+							.multilineTextAlignment(.center)
+					}
+				} else {
+					Text("verification_code_counter".localized(with: viewModel.remainingSeconds))
+						.font(.heading5)
+						.multilineTextAlignment(.center)
+				}
 			}
 		}
 		.padding(.top, UI.Spacing.level10)

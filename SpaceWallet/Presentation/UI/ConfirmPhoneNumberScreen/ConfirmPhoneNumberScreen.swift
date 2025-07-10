@@ -85,6 +85,7 @@ public struct ConfirmPhoneNumberScreen: View {
 
 	private var cta: some View {
 		Button {
+			UserDefaults.userPhoneNumber = viewModel.userPhoneNumber
 			onAction()
 		} label: {
 			Text("continue".localized)

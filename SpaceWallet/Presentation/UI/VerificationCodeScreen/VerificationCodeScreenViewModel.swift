@@ -12,24 +12,55 @@ extension VerificationCodeScreen {
 	@MainActor
 	final class ViewModel {
 
+		private var isOnboardingFlow: Bool
+
 		private var userEmail: String {
 			UserDefaults.userEmail ?? ""
+		}
+
+		private var userPhoneNumber: String {
+			UserDefaults.userPhoneNumber?.removeWhiteSpaces.mask(with: RegexHelper.phoneNumberMask) ?? ""
 		}
 
 		var attributedString: AttributedString {
 			var string = AttributedString("verification_code_subtitle".localized(with: userEmail))
 			string.font = .heading5
+			string.foregroundColor = .textTertiary
 
 			if let range = string.range(of: userEmail) {
 				string[range].font = .heading5SemiBold
+				string[range].foregroundColor = .textPrimary
+			}
+
+			return string
+		}
+
+		var onboardingAttributedString: AttributedString {
+			var string = AttributedString("verification_code_onboarding_subtitle".localized(with: userPhoneNumber))
+			string.font = .heading5
+			string.foregroundColor = .textTertiary
+
+			if let range = string.range(of: userPhoneNumber) {
+				string[range].font = .heading5SemiBold
+				string[range].foregroundColor = .textPrimary
 			}
 			return string
+		}
+
+		var attributedTextString: AttributedString {
+			isOnboardingFlow ? onboardingAttributedString : attributedString
 		}
 
 		var remainingSeconds = 60
 		var timer: Timer?
 
-		init() {}
+		init(isOnboardingFlow: Bool = false) {
+			self.isOnboardingFlow = isOnboardingFlow
+		}
+
+		func getNewCode() {
+			print("get new code called")
+		}
 
 		func startTimer() {
 			timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
