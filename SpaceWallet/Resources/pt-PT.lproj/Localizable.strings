@@ -37,5 +37,9 @@
 "generic_alert_title" = "Funcionalidade não disponível";
 "ok" = "OK";
 "create_password_title" = "Cria uma palavra-passe";
-"create_password_subtitle" = "Cria uma palavra-passe para proteger a tua conta";
+"create_password_subtitle" = "Escolhe uma palavra-passe para proteger a tua conta";
 "password" = "Palavra-passe";
+"weak" = "Fraca";
+"average" = "Normal";
+"strong" = "Forte";
+"password_hint" = "Tudo pronto!";

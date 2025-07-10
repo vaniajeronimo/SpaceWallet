@@ -36,12 +36,8 @@ public struct CreatePasswordScreen: View {
 	}
 
 	private var title: some View {
-		HStack(alignment: .center) {
-			Spacer()
-			Text("create_password_title".localized)
-				.font(.heading2Bold)
-			Spacer()
-		}
+		Text("create_password_title".localized)
+			.font(.heading2Bold)
 	}
 
 	@ViewBuilder
@@ -53,37 +49,59 @@ public struct CreatePasswordScreen: View {
 				.frame(width: 64, height: 64)
 
 			VStack(alignment: .leading, spacing: UI.Spacing.level03) {
-				Text("create_password_subtitle".localized)
-					.font(.heading5)
-					.multilineTextAlignment(.leading)
-
-				CustomTextField(
-					title: "password".localized,
-					text: $viewModel.password,
-					onChange: { _ in
-						viewModel.validatePassword()
-					},
-					onClearAction: {
-						viewModel.validatePassword()
-					}
-				)
-				.state(viewModel.passwordState)
-				.showClearButton(true)
-				.isSecure(true)
-				.focused($hasFocus)
-				.submitLabel(.done)
-				.textInputAutocapitalization(.never)
-				.textContentType(.password)
+				textField
+				passwordStrenght
 			}
-
-			Button {
-				print("action")
-			} label: {
-				Text("create_password_title".localized)
-			}
-			.buttonStyle(PrimaryButton(.large))
-			.disabled(true)
+			cta
 		}
 		.padding(.top, UI.Spacing.level10)
+	}
+
+	@ViewBuilder
+	private var textField: some View {
+		Text("create_password_subtitle".localized)
+			.font(.heading5)
+			.multilineTextAlignment(.leading)
+
+		CustomTextField(
+			title: "password".localized,
+			text: $viewModel.password,
+			onChange: { _ in
+				viewModel.validatePassword()
+			},
+			onClearAction: {
+				viewModel.clearPassword()
+			}
+		)
+		.state(viewModel.passwordState)
+		.showClearButton(true)
+		.isSecure(true)
+		.focused($hasFocus)
+		.submitLabel(.done)
+		.textInputAutocapitalization(.never)
+		.textContentType(.password)
+	}
+
+	private var passwordStrenght: some View {
+		PasswordStrengthView(
+			stepperColors: [
+				viewModel.firstStepper.color,
+				viewModel.secondStepper.color,
+				viewModel.thirdStepper.color
+			],
+			hintText: viewModel.hintText,
+			isStrong: viewModel.passwordStrength == .strong
+		)
+	}
+
+	private var cta: some View {
+		Button {
+			onAction()
+		} label: {
+			Text("create_password_title".localized)
+		}
+		.buttonStyle(PrimaryButton(.large))
+		.disabled(viewModel.passwordStrength == .weak)
+		.padding(.bottom, 18)
 	}
 }

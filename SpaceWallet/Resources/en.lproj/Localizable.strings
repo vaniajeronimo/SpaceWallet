@@ -39,5 +39,9 @@
 "generic_alert_title" = "Feature not available yet";
 "ok" = "OK";
 "create_password_title" = "Create a password";
-"create_password_subtitle" = "Create a password to protect your account";
+"create_password_subtitle" = "Choose a password to protect your account";
 "password" = "Password";
+"weak" = "Weak";
+"average" = "Average";
+"strong" = "Strong";
+"password_hint" = "Your're good to go!";
