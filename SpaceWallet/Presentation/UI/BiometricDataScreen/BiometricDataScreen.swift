@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct BiometricDataScreen: View {
 
-	//@Bindable private var viewModel: ViewModel
+	@Bindable private var viewModel = ViewModel()
 
 	@State private var isOn: Bool = false
 
@@ -17,7 +17,6 @@ public struct BiometricDataScreen: View {
 
 	public init(onAction: @escaping (ActionType) -> Void) {
 		self.onAction = onAction
-		//self.viewModel = .init()
 	}
 
 	public var body: some View {
@@ -34,6 +33,11 @@ public struct BiometricDataScreen: View {
 				cta
 			}
 			.padding(.horizontal, UI.Spacing.level07)
+		}
+		.alert("generic_alert_title".localized, isPresented: $viewModel.isToShowAlert) {
+			Button("ok".localized, role: .cancel) {
+				viewModel.isToShowAlert = false
+			}
 		}
 	}
 
@@ -104,6 +108,11 @@ public struct BiometricDataScreen: View {
 					.labelsHidden()
 					.scaleEffect(0.8)
 					.tint(.violetHover)
+					.onChange(of: isOn) { _, newValue in
+						if newValue {
+							viewModel.authenticate()
+						}
+					}
 			}
 		}
 		.frame(height: 77)
