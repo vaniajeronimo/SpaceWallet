@@ -84,7 +84,6 @@ public struct SelectableBottomSheet<T: SelectableItemProtocol>: View {
 							isSelected: item == selectedItem
 						) {
 							selectedItem = item
-							selectedItem = item
 						}
 					}
 				}
