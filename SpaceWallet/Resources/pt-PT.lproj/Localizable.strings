@@ -55,3 +55,6 @@
 "next" = "Seguinte";
 "face_id_title" = "Face ID";
 "face_id_subtitle" = "Usa a autenticação Face ID";
+"wallet_customization_title" = "Escolhe uma cor";
+"wallet_customization_subtitle" = "Personaliza a tua carteira com uma cor única";
+"wallet_customization_footer" = "Podes alterar a cor da tua carteira a qualquer momento nas definições";

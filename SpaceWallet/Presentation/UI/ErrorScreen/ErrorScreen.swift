@@ -63,6 +63,7 @@ public struct ErrorScreen: View {
 						onAction()
 					}
 					.buttonStyle(PrimaryButton(.large))
+					.padding(.horizontal, UI.Spacing.level07)
 					.frame(height: 100)
 				}
 			}

@@ -55,7 +55,7 @@ struct OnboardingNavigation: View, Navigation {
 			BiometricDataScreen { action in
 				switch action {
 					case .next:
-						break
+						navigation.push(walletCustomization)
 					case .back:
 						navigation.rootView(login)
 				}
@@ -64,8 +64,19 @@ struct OnboardingNavigation: View, Navigation {
 	}
 
 	@ViewBuilder
+	private var walletCustomization: some View {
+		WalletCustomizationScreen { action in
+			switch action {
+				case .next:
+					break
+				case .back:
+					navigation.popOrDismiss()
+			}
+		}
+	}
+
+	@ViewBuilder
 	private var login: some View {
 		LoginScreenNavigation()
 	}
-
 }

@@ -57,3 +57,6 @@
 "next" = "Next";
 "face_id_title" = "Face ID";
 "face_id_subtitle" = "Use Face ID Authentication";
+"wallet_customization_title" = "Choose a color";
+"wallet_customization_subtitle" = "Now choose a color for your wallet";
+"wallet_customization_footer" = "You can always change it later in settings";
