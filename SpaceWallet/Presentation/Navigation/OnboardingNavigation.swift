@@ -5,7 +5,6 @@
 //  Created by Vania Jeronimo on 09/07/2025.
 //
 
-import Foundation
 import SwiftUI
 
 struct OnboardingNavigation: View, Navigation {
@@ -13,7 +12,7 @@ struct OnboardingNavigation: View, Navigation {
 	internal var navigation = NavigationController()
 
 	init() {
-		navigation.rootView(createPassword)
+		navigation.rootView(walletSetupCompleted)
 	}
 
 	var body: some View {
@@ -78,8 +77,20 @@ struct OnboardingNavigation: View, Navigation {
 	@ViewBuilder
 	private var loadingWallet: some View {
 		WalletSetupLoadingScreen {
-			print("loading...")
+			navigation.push(walletSetupCompleted)
 		}
+	}
+
+	@ViewBuilder
+	private var walletSetupCompleted: some View {
+		WalletSetupCompletedScreen {
+			navigation.push(home)
+		}
+	}
+
+	@ViewBuilder
+	private var home: some View {
+		HomeScreenNavigation()
 	}
 
 	@ViewBuilder

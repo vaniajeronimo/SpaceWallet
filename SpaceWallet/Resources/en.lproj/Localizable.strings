@@ -62,3 +62,8 @@
 "wallet_customization_footer" = "You can always change it later in settings";
 "creating_wallet_title" = "Creating wallet...";
 "creating_wallet_subtitle" = "Please wait a moment while\nwe set up your wallet securely.";
+"wallet_ready_title" = "Sweet!";
+"wallet_ready_subtitle" = "Your new wallet is ready!";
+"view_wallet" = "View wallet";
+"wallet_card_title" = "Buy crypto";
+"wallet_card_subtitle" = "Buy your first crypto with your card";

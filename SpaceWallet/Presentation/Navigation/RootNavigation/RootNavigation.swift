@@ -40,18 +40,6 @@ struct RootNavigation: View, Navigation {
 	}
 
 	@ViewBuilder
-	private var home: some View {
-		HomeScreen { action in
-			switch action {
-				case .buy:
-					break
-				default:
-					break
-			}
-		}
-	}
-
-	@ViewBuilder
 	private var noInternetConnectionError: some View {
 		ErrorScreen(
 			title: "no_internet_connection_error_title".localized,

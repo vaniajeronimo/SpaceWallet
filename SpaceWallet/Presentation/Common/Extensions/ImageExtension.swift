@@ -25,6 +25,8 @@ public extension Image {
 	static let face_id = Image("face_id", bundle: Bundle.main)
 	static let secure_shield = Image("secure_shield", bundle: Bundle.main)
 	static let hourglass = Image("time_hourglass", bundle: Bundle.main)
+	static let wallet = Image("wallet", bundle: Bundle.main)
+	static let wallet_icon = Image("wallet_icon", bundle: Bundle.main)
 
 	// MARK: - TabBar Icons
 	static let tabHomeSelected = Image("home_selected", bundle: Bundle.main)

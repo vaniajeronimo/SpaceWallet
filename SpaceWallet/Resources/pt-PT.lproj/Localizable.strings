@@ -60,3 +60,8 @@
 "wallet_customization_footer" = "Podes alterar a cor da tua carteira a qualquer momento nas definições";
 "creating_wallet_title" = "A criar a carteira...";
 "creating_wallet_subtitle" = "Estamos a criar a tua carteira. Por favor, aguarda alguns segundos enquanto preparamos tudo em segurança.";
+"wallet_ready_title" = "Carteira pronta!";
+"wallet_ready_subtitle" = "A tua carteira foi criada com sucesso!";
+"view_wallet" = "Ver carteira";
+"wallet_ready_title" = "Compra cripto";
+"wallet_ready_subtitle" = "Compra a tua primeira criptomoeda com o teu cartão";

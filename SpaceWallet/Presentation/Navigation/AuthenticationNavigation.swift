@@ -39,8 +39,6 @@ struct VerificationCodeNavigation: View, Navigation {
 
 	@ViewBuilder
 	private var home: some View {
-		HomeScreen { action in
-			Debug.log("Home action: \(action)")
-		}
+		HomeScreenNavigation()
 	}
 }
