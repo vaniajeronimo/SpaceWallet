@@ -38,8 +38,7 @@ public struct WalletSetupCompletedScreen: View {
 
 			Spacer(minLength: 40)
 
-			Image.wallet
-				.renderingMode(.original)
+			Image.wallet_violet_stroke
 				.resizable()
 				.scaledToFit()
 				.frame(width: 335, height: 244)

@@ -25,7 +25,6 @@ public extension Image {
 	static let face_id = Image("face_id", bundle: Bundle.main)
 	static let secure_shield = Image("secure_shield", bundle: Bundle.main)
 	static let hourglass = Image("time_hourglass", bundle: Bundle.main)
-	static let wallet = Image("wallet", bundle: Bundle.main)
 	static let wallet_icon = Image("wallet_icon", bundle: Bundle.main)
 
 	// MARK: - TabBar Icons
@@ -50,4 +49,15 @@ public extension Image {
 	static let usa = Image("united_states", bundle: Bundle.main)
 	static let spain = Image("spain", bundle: Bundle.main)
 	static let portugal = Image("portugal", bundle: Bundle.main)
+
+	// MARK: - Wallet
+	static let wallet_violet_stroke = Image("wallet_violet_stroke", bundle: Bundle.main)
+	static let wallet_green_stroke = Image("wallet_green_stroke", bundle: Bundle.main)
+	static let wallet_green_hover = Image("wallet_green_hover", bundle: Bundle.main)
+	static let wallet_orange_hover = Image("wallet_orange_hover", bundle: Bundle.main)
+	static let wallet_yellow_hover = Image("wallet_yellow_hover", bundle: Bundle.main)
+	static let wallet_violet_hover = Image("wallet_violet_hover", bundle: Bundle.main)
+	static let wallet_pink_hover = Image("wallet_pink_hover", bundle: Bundle.main)
+	static let wallet_blue_hover = Image("wallet_blue_hover", bundle: Bundle.main)
+	static let wallet_cyan_hover = Image("wallet_cyan_hover", bundle: Bundle.main)
 }
