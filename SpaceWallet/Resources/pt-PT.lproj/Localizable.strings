@@ -63,5 +63,5 @@
 "wallet_ready_title" = "Carteira pronta!";
 "wallet_ready_subtitle" = "A tua carteira foi criada com sucesso!";
 "view_wallet" = "Ver carteira";
-"wallet_ready_title" = "Compra cripto";
-"wallet_ready_subtitle" = "Compra a tua primeira criptomoeda com o teu cartão";
+"wallet_card_title" = "Compra cripto";
+"wallet_card_subtitle" = "Compra a tua primeira criptomoeda com o teu cartão";

@@ -31,14 +31,14 @@ struct VerificationCodeNavigation: View, Navigation {
 					case .onBack:
 						onDismiss()
 					case .onContinue:
-						navigation.rootView(home)
+						navigation.rootView(landingPage)
 				}
 			}
 		}
 	}
 
 	@ViewBuilder
-	private var home: some View {
-		HomeScreenNavigation()
+	private var landingPage: some View {
+		LandingPageScreen()
 	}
 }

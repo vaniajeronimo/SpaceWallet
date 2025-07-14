@@ -5,6 +5,7 @@
 //  Created by Vania Jeronimo on 14/07/2025.
 //
 
+import Foundation
 import SwiftUI
 
 struct HomeScreenNavigation: View, Navigation {
@@ -20,10 +21,13 @@ struct HomeScreenNavigation: View, Navigation {
 			.ignoresSafeArea()
 	}
 
+	@ViewBuilder
 	private var home: some View {
 		HomeScreen { action in
 			switch action {
-				case .buy:
+				case .receive:
+					break
+				case .send:
 					break
 				default:
 					break

@@ -77,20 +77,20 @@ struct OnboardingNavigation: View, Navigation {
 	@ViewBuilder
 	private func loadingWallet(with wallet: WalletModel) -> some View {
 		WalletSetupLoadingScreen(wallet: wallet) {
-			navigation.push(walletSetupCompleted)
+			navigation.push(walletSetupCompleted(with: wallet))
 		}
 	}
 
 	@ViewBuilder
-	private var walletSetupCompleted: some View {
-		WalletSetupCompletedScreen {
-			navigation.push(home)
+	private func walletSetupCompleted(with wallet: WalletModel) -> some View {
+		WalletSetupCompletedScreen(wallet: wallet) {
+			navigation.push(landingPage)
 		}
 	}
 
 	@ViewBuilder
-	private var home: some View {
-		HomeScreenNavigation()
+	private var landingPage: some View {
+		LandingPageScreen()
 	}
 
 	@ViewBuilder

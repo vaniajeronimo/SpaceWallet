@@ -10,9 +10,12 @@ import SwiftUI
 
 public struct WalletSetupCompletedScreen: View {
 
+	private var viewModel: ViewModel
+
 	private let onAction: () -> Void
 
-	public init(onAction: @escaping () -> Void) {
+	public init(wallet: WalletModel, onAction: @escaping () -> Void) {
+		self.viewModel = .init(wallet: wallet)
 		self.onAction = onAction
 	}
 
@@ -39,7 +42,7 @@ public struct WalletSetupCompletedScreen: View {
 
 			Spacer(minLength: 40)
 
-			Image.wallet_violet_stroke
+			viewModel.customizedWallet
 				.resizable()
 				.scaledToFit()
 				.frame(width: 335, height: 244)

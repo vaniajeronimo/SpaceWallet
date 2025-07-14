@@ -58,6 +58,7 @@ public struct TabBar: View {
 		}
 		.ignoresSafeArea(edges: .bottom)
 		.frame(maxWidth: .infinity)
+		.padding(.horizontal, UI.Spacing.level06)
 	}
 
 	private func tabButton(tab: TabBarItem) -> some View {

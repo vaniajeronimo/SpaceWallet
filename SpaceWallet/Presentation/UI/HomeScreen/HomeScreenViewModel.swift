@@ -2,7 +2,7 @@
 //  HomeScreenViewModel.swift
 //  SpaceWallet
 //
-//  Created by Vania Jeronimo on 05/07/2025.
+//  Created by Vania Jeronimo on 14/07/2025.
 //
 
 import Combine
@@ -13,26 +13,45 @@ extension HomeScreen {
 	@MainActor
 	final class ViewModel {
 
-		private let networkManager = NetworkManager()
+		let onAction: (ActionType) -> Void
 
-		var isConnected: Bool = true
+		var actions: [ActionCardModel] = []
+		var balanceValue: Double = 86.0
+		var balanceColor: BalanceColor = .neutral
 
-		private var cancellables = Set<AnyCancellable>()
+		var profitValue: String = String(format: "%.2f", 2.60)
 
-		init() {
-			observeNetworkStatus()
+		var formattedBalance: String {
+			let value = String(format: "%.2f", balanceValue)
+				.replacingOccurrences(of: "-", with: "")
+				.replacingOccurrences(of: "+", with: "")
+			return value
 		}
 
-		func observeNetworkStatus() {
-			executeInBackgroundThread({
-				self.networkManager.$isConnected
-					.receive(on: DispatchQueue.main)
-					.sink { [weak self] connected in
-						guard let self else { return }
-						isConnected = connected
-					}
-					.store(in: &self.cancellables)
-			}, after: 0.5)
+		init(onAction: @escaping (ActionType) -> Void) {
+			self.onAction = onAction
+			setupActions()
+			updateBalanceColor()
+		}
+
+		private func setupActions() {
+			actions = [
+				.init(icon: .receive, title: "receive".localized(), action: { self.onAction(.receive) }),
+				.init(icon: .send, title: "send".localized(), action: { self.onAction(.send) }),
+				.init(icon: .swap, title: "swap".localized(), action: { self.onAction(.swap) }),
+				.init(icon: .buy, title: "buy".localized(), action: { self.onAction(.buy) })
+			]
+		}
+
+		private func updateBalanceColor() {
+			switch balanceValue {
+				case ..<0:
+					balanceColor = .negative
+				case 0:
+					balanceColor = .neutral
+				default:
+					balanceColor = .positive
+			}
 		}
 	}
 }

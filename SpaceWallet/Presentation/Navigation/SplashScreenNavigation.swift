@@ -35,20 +35,13 @@ struct LoginScreenNavigation: View, Navigation {
 	}
 
 	@ViewBuilder
-	private var home: some View {
-		HomeScreen { action in
-			Debug.log("Home action: \(action)")
-		}
-	}
-
-	@ViewBuilder
 	private var verificationCode: some View {
 		VerificationCodeScreen { action in
 			switch action {
 				case .onBack:
 					navigation.rootView(login)
 				case .onContinue:
-					navigation.rootView(home)
+					navigation.rootView(landingPage)
 			}
 		}
 	}
@@ -56,5 +49,10 @@ struct LoginScreenNavigation: View, Navigation {
 	@ViewBuilder
 	private var onboarding: some View {
 		OnboardingNavigation()
+	}
+
+	@ViewBuilder
+	private var landingPage: some View {
+		LandingPageScreen()
 	}
 }

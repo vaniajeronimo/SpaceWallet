@@ -18,6 +18,7 @@ public extension Image {
 	static let emptyCart = Image("empty_cart", bundle: Bundle.main)
 	static let errorImg = Image("error_img", bundle: Bundle.main)
 	static let close_icon = Image("close", bundle: Bundle.main)
+	static let chevronDown = Image("chevron_down", bundle: Bundle.main)
 	static let chevronLeft = Image("chevron_left", bundle: Bundle.main)
 	static let checkmark = Image("check", bundle: Bundle.main)
 	static let close_dark = Image("close_dark", bundle: Bundle.main)
@@ -26,6 +27,9 @@ public extension Image {
 	static let secure_shield = Image("secure_shield", bundle: Bundle.main)
 	static let hourglass = Image("time_hourglass", bundle: Bundle.main)
 	static let wallet_icon = Image("wallet_icon", bundle: Bundle.main)
+	static let profile = Image("profile_pic", bundle: Bundle.main)
+	static let qrCode = Image("qrCode_icon", bundle: Bundle.main)
+	static let search = Image("search_icon", bundle: Bundle.main)
 
 	// MARK: - TabBar Icons
 	static let tabHomeSelected = Image("home_selected", bundle: Bundle.main)
@@ -60,4 +64,10 @@ public extension Image {
 	static let wallet_pink_hover = Image("wallet_pink_hover", bundle: Bundle.main)
 	static let wallet_blue_hover = Image("wallet_blue_hover", bundle: Bundle.main)
 	static let wallet_cyan_hover = Image("wallet_cyan_hover", bundle: Bundle.main)
+
+	// MARK: - Actions
+	static let receive = Image("receive", bundle: Bundle.main)
+	static let send = Image("send", bundle: Bundle.main)
+	static let swap = Image("swap", bundle: Bundle.main)
+	static let buy = Image("buy", bundle: Bundle.main)
 }
