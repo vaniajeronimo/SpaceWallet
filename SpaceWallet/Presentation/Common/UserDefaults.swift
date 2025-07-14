@@ -13,6 +13,7 @@ public extension UserDefaults {
 	enum Key: String {
 		case isFirstLaunch = "isFirstLaunch"
 		case userEmail = "userEmail"
+		case userPassword = "userPassword"
 		case userPhoneNumber = "userPhoneNumber"
 	}
 
@@ -50,6 +51,15 @@ public extension UserDefaults {
 		}
 		set {
 			UserDefaults.standard.set(newValue, forKey: Key.userEmail.rawValue)
+		}
+	}
+
+	class var userPassword: String? {
+		get {
+			return UserDefaults.standard.object(forKey: Key.userPassword.rawValue) as? String
+		}
+		set {
+			UserDefaults.standard.set(newValue, forKey: Key.userPassword.rawValue)
 		}
 	}
 

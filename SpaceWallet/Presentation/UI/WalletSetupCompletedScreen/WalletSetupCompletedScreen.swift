@@ -10,11 +10,6 @@ import SwiftUI
 
 public struct WalletSetupCompletedScreen: View {
 
-	@Environment(\.modelContext)
-	private var modelContext
-
-	private var viewModel = ViewModel()
-
 	private let onAction: () -> Void
 
 	public init(onAction: @escaping () -> Void) {
@@ -34,9 +29,6 @@ public struct WalletSetupCompletedScreen: View {
 				cta
 			}
 			.padding(.horizontal, UI.Spacing.level07)
-		}
-		.onAppear {
-			viewModel.setContext(modelContext)
 		}
 	}
 
@@ -85,7 +77,7 @@ public struct WalletSetupCompletedScreen: View {
 
 	private var cta: some View {
 		Button {
-			viewModel.saveAccount()
+			onAction()
 		} label: {
 			Text("view_wallet".localized)
 		}

@@ -12,18 +12,18 @@ extension WalletSetupScreen {
 	@MainActor
 	final class ViewModel {
 
-		var colorList: [WalletColorModel] = [
-			.init(id: "1", name: "blue", color: Color.blueHover),
-			.init(id: "2", name: "cyan", color: Color.cyanHover),
-			.init(id: "3", name: "violet", color: Color.violetHover),
-			.init(id: "4", name: "green", color: Color.greenHover),
-			.init(id: "5", name: "pink", color: Color.pinkHover),
-			.init(id: "6", name: "orange", color: Color.orangeHover),
-			.init(id: "7", name: "yellow", color: Color.yellowHover),
-			.init(id: "8", name: "green_stroke", color: Color.greenStroke),
-			.init(id: "9", name: "purple_stroke", color: Color.violetStroke)
+		var colorList: [WalletModel] = [
+			.init(id: 1, name: "blue", color: "blue_hover"),
+			.init(id: 2, name: "cyan", color: "cyan_hover"),
+			.init(id: 3, name: "violet", color: "violet_hover"),
+			.init(id: 4, name: "green", color: "green_hover"),
+			.init(id: 5, name: "pink", color: "pink_hover"),
+			.init(id: 6, name: "orange", color: "orange_hover"),
+			.init(id: 7, name: "yellow", color: "yellow_hover"),
+			.init(id: 8, name: "green_stroke", color: "green_stroke"),
+			.init(id: 9, name: "purple_stroke", color: "violet_stroke")
 		]
 
-		var selectedColor: WalletColorModel?
+		var selectedColor: WalletModel?
 	}
 }

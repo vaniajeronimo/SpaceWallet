@@ -96,6 +96,7 @@ public struct CreatePasswordScreen: View {
 
 	private var cta: some View {
 		Button {
+			viewModel.savePassword()
 			onAction()
 		} label: {
 			Text("create_password_title".localized)

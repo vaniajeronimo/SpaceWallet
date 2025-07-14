@@ -9,10 +9,13 @@ import SwiftUI
 
 public struct WalletSetupLoadingScreen: View {
 
-	private let onAction: () -> Void
+	@Environment(\.modelContext)
+	private var modelContext
 
-	public init(onAction: @escaping () -> Void) {
-		self.onAction = onAction
+	private var viewModel: ViewModel
+
+	public init(wallet: WalletModel, onAction: @escaping () -> Void) {
+		self.viewModel = .init(wallet: wallet, onAction: onAction)
 	}
 
 	public var body: some View {
@@ -24,6 +27,9 @@ public struct WalletSetupLoadingScreen: View {
 				content
 			}
 			.padding(.horizontal, UI.Spacing.level07)
+		}
+		.onAppear {
+			viewModel.setContext(modelContext)
 		}
 	}
 

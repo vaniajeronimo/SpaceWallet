@@ -73,6 +73,7 @@ extension LoginScreen {
 			isValidEmail = isEmailValid()
 
 			if isValidEmail && isToCheckEmail {
+				UserDefaults.userEmail = email
 				checkIfAccountExists()
 			}
 		}

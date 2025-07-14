@@ -10,7 +10,7 @@ import SwiftUI
 struct AccountModelResponse {
 	var id: UUID
 	var userName: String?
-	var email: String?
+	var email: String
 	var password: String?
 	var phoneNumber: String?
 	var wallet: WalletModelResponse?

@@ -66,10 +66,8 @@ struct OnboardingNavigation: View, Navigation {
 	private var walletSetup: some View {
 		WalletSetupScreen { action in
 			switch action {
-				case .next:
-					// TODO: Uncomment when WalletSetupLoadingScreen is implemented
-					// navigation.push(loadingWallet)
-					navigation.push(walletSetupCompleted)
+				case .next(let wallet):
+					navigation.push(loadingWallet(with: wallet))
 				case .back:
 					navigation.popOrDismiss()
 			}
@@ -77,8 +75,8 @@ struct OnboardingNavigation: View, Navigation {
 	}
 
 	@ViewBuilder
-	private var loadingWallet: some View {
-		WalletSetupLoadingScreen {
+	private func loadingWallet(with wallet: WalletModel) -> some View {
+		WalletSetupLoadingScreen(wallet: wallet) {
 			navigation.push(walletSetupCompleted)
 		}
 	}

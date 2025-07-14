@@ -8,7 +8,7 @@
 import Foundation
 
 public struct WalletEntity: Codable {
-	var id: UUID
+	var id: Int
 	var name: String
 	var color: String
 }

@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct WalletModel {
-	var id: UUID
+public struct WalletModel {
+	var id: Int
 	var name: String
 	var color: String
 }

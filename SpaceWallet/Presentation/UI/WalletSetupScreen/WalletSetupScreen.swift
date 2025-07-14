@@ -77,11 +77,11 @@ public struct WalletSetupScreen: View {
 	private var colorPicker: some View {
 		VStack {
 			LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 28), count: 3), spacing: 28) {
-				ForEach(viewModel.colorList) { palette in
+				ForEach(viewModel.colorList, id: \.id) { palette in
 					let isSelected = palette.id == viewModel.selectedColor?.id
 
 					Circle()
-						.fill(palette.color)
+						.fill(Color(palette.color))
 						.frame(width: 64, height: 64)
 						.overlay {
 							if isSelected {
@@ -116,8 +116,8 @@ public struct WalletSetupScreen: View {
 
 	private var cta: some View {
 		Button {
-			if let walletColor = viewModel.selectedColor {
-				onAction(.next(walletColor))
+			if let wallet = viewModel.selectedColor {
+				onAction(.next(wallet))
 			}
 		} label: {
 			Text("next".localized)
@@ -131,7 +131,7 @@ public struct WalletSetupScreen: View {
 public extension WalletSetupScreen {
 
 	enum ActionType {
-		case next(WalletColorModel)
+		case next(WalletModel)
 		case back
 	}
 }

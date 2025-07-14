@@ -76,6 +76,10 @@ extension CreatePasswordScreen {
 			updateSteppers(for: .notSet)
 		}
 
+		func savePassword() {
+			UserDefaults.userPassword = password
+		}
+
 		private func passwordContainsNumberOrSymbol(_ password: String) -> Bool {
 			let regex = try? NSRegularExpression(pattern: RegexHelper.password)
 			let range = NSRange(password.startIndex..., in: password)

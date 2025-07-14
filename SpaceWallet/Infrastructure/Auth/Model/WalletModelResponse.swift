@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WalletModelResponse {
-	var id: UUID
+	var id: Int
 	var name: String
 	var color: String
 }

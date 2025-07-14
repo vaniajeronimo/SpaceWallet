@@ -1,5 +1,5 @@
 //
-//  WalletSetupCompletedScreenViewModel.swift
+//  WalletSetupLoadingScreenViewModel.swift
 //  SpaceWallet
 //
 //  Created by Vania Jeronimo on 14/07/2025.
@@ -10,7 +10,7 @@ import Factory
 import SwiftData
 import SwiftUI
 
-extension WalletSetupCompletedScreen {
+extension WalletSetupLoadingScreen {
 	@Observable
 	@MainActor
 	final class ViewModel {
@@ -19,20 +19,27 @@ extension WalletSetupCompletedScreen {
 		@Injected(\.saveAccountUseCase)
 		private var saveAccountUseCase
 
+		private let wallet: WalletModel
+		private let onAction: () -> Void
 		private var modelContext: ModelContext?
 		private var cancellables = Set<AnyCancellable>()
 
-		init() { }
+		init(wallet: WalletModel, onAction: @escaping () -> Void) {
+			self.wallet = wallet
+			self.onAction = onAction
+		}
 
 		func saveAccount() {
-			guard let modelContext else { return }
+			guard let modelContext,
+				  let userEmail = UserDefaults.userEmail
+			else { return }
 
 			let account = AccountModel(
 				id: .init(),
-				userName: "Vânia Jerónimo",
-				email: UserDefaults.userEmail,
+				email: userEmail,
+				password: UserDefaults.userPassword,
 				phoneNumber: UserDefaults.userPhoneNumber,
-				wallet: .init(id: .init(), name: "My Wallet", color: "violet_hover")
+				wallet: wallet
 			)
 			saveAccountUseCase.execute(account: account, context: modelContext)
 				.sink { completion in
@@ -42,14 +49,20 @@ extension WalletSetupCompletedScreen {
 						case .failure(let error):
 							Debug.error(error)
 					}
-				} receiveValue: { account in
+				} receiveValue: { [weak self] account in
+					guard let self else { return }
 					print("Account model saved successfully. \(account)")
+					onAction()
 				}
 				.store(in: &cancellables)
 		}
 
 		func setContext(_ context: ModelContext) {
 			self.modelContext = context
+
+			executeInMainThread({
+				self.saveAccount()
+			}, after: 1.5)
 		}
 	}
 }

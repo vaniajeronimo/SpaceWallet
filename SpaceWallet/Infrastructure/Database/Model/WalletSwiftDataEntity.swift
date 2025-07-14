@@ -10,11 +10,11 @@ import SwiftData
 
 @Model
 class WalletSwiftDataEntity {
-	var id: UUID
+	var id: Int
 	var name: String
 	var color: String
 
-	init(id: UUID = UUID(), name: String, color: String) {
+	init(id: Int, name: String, color: String) {
 		self.id = id
 		self.name = name
 		self.color = color

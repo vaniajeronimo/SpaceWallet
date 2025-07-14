@@ -12,7 +12,7 @@ import SwiftData
 class AccountSwiftDataEntity {
 	var id: UUID
 	var userName: String?
-	var email: String?
+	var email: String
 	var password: String?
 	var phoneNumber: String?
 	var wallet: WalletSwiftDataEntity?
@@ -20,7 +20,7 @@ class AccountSwiftDataEntity {
 	init(
 		id: UUID = UUID(),
 		userName: String? = nil,
-		email: String? = nil,
+		email: String = "",
 		password: String? = nil,
 		phoneNumber: String? = nil,
 		wallet: WalletSwiftDataEntity? = nil
