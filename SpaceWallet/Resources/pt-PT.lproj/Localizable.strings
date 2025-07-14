@@ -58,3 +58,5 @@
 "wallet_customization_title" = "Escolhe uma cor";
 "wallet_customization_subtitle" = "Personaliza a tua carteira com uma cor única";
 "wallet_customization_footer" = "Podes alterar a cor da tua carteira a qualquer momento nas definições";
+"creating_wallet_title" = "A criar a carteira...";
+"creating_wallet_subtitle" = "Estamos a criar a tua carteira. Por favor, aguarda alguns segundos enquanto preparamos tudo em segurança.";

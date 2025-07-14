@@ -60,3 +60,5 @@
 "wallet_customization_title" = "Choose a color";
 "wallet_customization_subtitle" = "Now choose a color for your wallet";
 "wallet_customization_footer" = "You can always change it later in settings";
+"creating_wallet_title" = "Creating wallet...";
+"creating_wallet_subtitle" = "Please wait a moment while\nwe set up your wallet securely.";

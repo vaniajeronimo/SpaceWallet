@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct WalletColorModel: Identifiable {
 
-	var id: String
+	public var id: String
 	var name: String
 	var color: Color
 }

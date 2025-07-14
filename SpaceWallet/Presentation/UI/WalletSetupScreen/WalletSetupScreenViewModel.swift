@@ -1,5 +1,5 @@
 //
-//  WalletCustomizationScreenViewModel.swift
+//  WalletSetupScreenViewModel.swift
 //  SpaceWallet
 //
 //  Created by Vania Jeronimo on 11/07/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension WalletCustomizationScreen {
+extension WalletSetupScreen {
 	@Observable
 	@MainActor
 	final class ViewModel {

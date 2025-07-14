@@ -1,5 +1,5 @@
 //
-//  WalletCustomizationScreen.swift
+//  WalletSetupScreen.swift
 //  SpaceWallet
 //
 //  Created by Vania Jeronimo on 11/07/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct WalletCustomizationScreen: View {
+public struct WalletSetupScreen: View {
 
 	private var viewModel = ViewModel()
 	private let onAction: (ActionType) -> Void
@@ -128,7 +128,7 @@ public struct WalletCustomizationScreen: View {
 	}
 }
 
-public extension WalletCustomizationScreen {
+public extension WalletSetupScreen {
 
 	enum ActionType {
 		case next(WalletColorModel)
