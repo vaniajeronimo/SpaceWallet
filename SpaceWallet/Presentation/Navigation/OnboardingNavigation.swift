@@ -12,7 +12,7 @@ struct OnboardingNavigation: View, Navigation {
 	internal var navigation = NavigationController()
 
 	init() {
-		navigation.rootView(walletSetupCompleted)
+		navigation.rootView(createPassword)
 	}
 
 	var body: some View {
@@ -67,7 +67,9 @@ struct OnboardingNavigation: View, Navigation {
 		WalletSetupScreen { action in
 			switch action {
 				case .next:
-					navigation.push(loadingWallet)
+					// TODO: Uncomment when WalletSetupLoadingScreen is implemented
+					// navigation.push(loadingWallet)
+					navigation.push(walletSetupCompleted)
 				case .back:
 					navigation.popOrDismiss()
 			}

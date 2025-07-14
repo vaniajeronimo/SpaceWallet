@@ -7,14 +7,13 @@
 
 import Combine
 import Factory
-import FirebaseAuth
 
 final class CheckFirstLaunchUseCase {
 
 	@Injected(\.authRepository)
 	private var repository
 
-	func execute() -> AnyPublisher<AuthDestinationModel, Error> {
+	func execute() -> AnyPublisher<Bool, Error> {
 		return repository.checkFirstLaunchUseCase()
 	}
 }

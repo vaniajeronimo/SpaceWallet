@@ -12,4 +12,12 @@ extension Container {
 	var checkFirstLaunchUseCase: Factory<CheckFirstLaunchUseCase> {
 		self { CheckFirstLaunchUseCase() }
 	}
+
+	var saveAccountUseCase: Factory<SaveAccountUseCase> {
+		self { SaveAccountUseCase() }
+	}
+
+	var getAccountUseCase: Factory<GetAccountUseCase> {
+		self { GetAccountUseCase() }
+	}
 }

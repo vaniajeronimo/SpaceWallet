@@ -6,8 +6,11 @@
 //
 
 import Combine
+import SwiftData
 
 protocol IAuthRepository {
 
-	func checkFirstLaunchUseCase() -> AnyPublisher<AuthDestinationModel, Error>
+	func checkFirstLaunchUseCase() -> AnyPublisher<Bool, Error>
+	func getAccountUseCase(email: String, context: ModelContext) -> AnyPublisher<AccountModel, Error>
+	func saveAccountUseCase(account: AccountEntity, context: ModelContext) -> AnyPublisher<Void, Error>
 }

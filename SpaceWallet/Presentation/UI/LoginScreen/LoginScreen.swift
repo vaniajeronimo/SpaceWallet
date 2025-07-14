@@ -9,12 +9,15 @@ import SwiftUI
 
 public struct LoginScreen: View {
 
+	@Environment(\.modelContext)
+	private var modelContext
+
 	@Bindable private var viewModel: ViewModel
 	@FocusState private var hasFocus: Bool
 	@State private var isToShowAlert: Bool = false
 
 	public init(onAction: @escaping (ActionType) -> Void) {
-		self.viewModel = .init(onAction: onAction)
+		viewModel = .init(onAction: onAction)
 	}
 
 	public var body: some View {
@@ -37,6 +40,9 @@ public struct LoginScreen: View {
 			Button("ok".localized, role: .cancel) {
 				isToShowAlert = false
 			}
+		}
+		.onAppear {
+			viewModel.setContext(modelContext)
 		}
 	}
 

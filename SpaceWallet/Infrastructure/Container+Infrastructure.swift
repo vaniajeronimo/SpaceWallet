@@ -14,3 +14,14 @@ extension Container {
 		self { AuthRepository() }
 	}
 }
+
+extension Container {
+
+	var accountDao: Factory<AccountDao> {
+		self { AccountDao() }
+	}
+
+	var accountDatabaseProvider: Factory<IAccountDatabaseProvider> {
+		self { AccountDatabaseProvider() }
+	}
+}

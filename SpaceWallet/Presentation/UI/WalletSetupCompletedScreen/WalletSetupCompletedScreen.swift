@@ -5,9 +5,15 @@
 //  Created by Vania Jeronimo on 14/07/2025.
 //
 
+import SwiftData
 import SwiftUI
 
 public struct WalletSetupCompletedScreen: View {
+
+	@Environment(\.modelContext)
+	private var modelContext
+
+	private var viewModel = ViewModel()
 
 	private let onAction: () -> Void
 
@@ -28,6 +34,9 @@ public struct WalletSetupCompletedScreen: View {
 				cta
 			}
 			.padding(.horizontal, UI.Spacing.level07)
+		}
+		.onAppear {
+			viewModel.setContext(modelContext)
 		}
 	}
 
@@ -76,7 +85,7 @@ public struct WalletSetupCompletedScreen: View {
 
 	private var cta: some View {
 		Button {
-			onAction()
+			viewModel.saveAccount()
 		} label: {
 			Text("view_wallet".localized)
 		}

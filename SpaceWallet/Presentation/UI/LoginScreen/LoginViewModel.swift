@@ -7,6 +7,7 @@
 
 import Combine
 import Factory
+import SwiftData
 import SwiftUI
 
 extension LoginScreen {
@@ -17,6 +18,10 @@ extension LoginScreen {
 		@ObservationIgnored
 		@Injected(\.checkFirstLaunchUseCase)
 		private var checkFirstLaunchUseCase
+
+		@ObservationIgnored
+		@Injected(\.getAccountUseCase)
+		private var getAccountUseCase
 
 		var illustrationIndex: Illustration = .first
 		var emailState: CustomTextFieldState = .default
@@ -44,6 +49,7 @@ extension LoginScreen {
 		let steps: [CarrouselModel]
 		var onAction: (ActionType) -> Void
 
+		private var modelContext: ModelContext?
 		private var cancellables = Set<AnyCancellable>()
 
 		init(onAction: @escaping (ActionType) -> Void) {
@@ -55,28 +61,8 @@ extension LoginScreen {
 			}
 		}
 
-		private func checkFirstLaunch(onCompletion: @escaping (Bool) -> Void) {
-			checkFirstLaunchUseCase.execute()
-				.sink { completion in
-					switch completion {
-						case .finished:
-							break
-						case .failure(let error):
-							Debug.error(error)
-							onCompletion(false)
-					}
-				} receiveValue: { [weak self] destination in
-					guard let self else { return }
-					UserDefaults.userEmail = email
-
-					switch destination {
-						case .verificationCode:
-							onAction(.verificationCode)
-						case .onboarding:
-							onAction(.onboarding)
-					}
-				}
-				.store(in: &cancellables)
+		func setContext(_ context: ModelContext) {
+			self.modelContext = context
 		}
 
 		func updateIllustration(for index: Int) {
@@ -87,15 +73,38 @@ extension LoginScreen {
 			isValidEmail = isEmailValid()
 
 			if isValidEmail && isToCheckEmail {
-				checkFirstLaunch() { [weak self] isFirstLaunch in
+				checkIfAccountExists()
+			}
+		}
+
+		private func checkIfAccountExists() {
+			guard let modelContext else { return }
+
+			let firstLaunchPublisher = checkFirstLaunchUseCase.execute()
+				.replaceError(with: false)
+			let accountPublisher = getAccountUseCase.execute(email: email, context: modelContext)
+				.map { _ in true }
+				.catch { _ in Just(false) }
+
+			Publishers.Zip(firstLaunchPublisher, accountPublisher)
+				.receive(on: DispatchQueue.main)
+				.sink { completion in
+					switch completion {
+						case .failure(let error):
+							Debug.error(error)
+						case .finished:
+							break
+					}
+				} receiveValue: { [weak self] isFirstLaunch, accountExists in
 					guard let self else { return }
-					if isFirstLaunch {
+
+					if isFirstLaunch && !accountExists {
 						onAction(.onboarding)
 					} else {
 						onAction(.verificationCode)
 					}
 				}
-			}
+				.store(in: &cancellables)
 		}
 
 		private func isEmailValid() -> Bool {
