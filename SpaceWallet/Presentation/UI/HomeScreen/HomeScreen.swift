@@ -22,13 +22,16 @@ public struct HomeScreen: View {
 
 			VStack {
 				ScrollView(showsIndicators: false) {
-					navBar
-					balance
-					actions
-					Spacer()
+					VStack {
+						navBar
+						balance
+						actions
+					}
+					.padding(.horizontal, UI.Spacing.level06)
+
+					container
 				}
 			}
-			.padding(.horizontal, UI.Spacing.level06)
 		}
 	}
 
@@ -50,7 +53,7 @@ public struct HomeScreen: View {
 			.contentShape(Circle())
 
 		VStack(alignment: .leading) {
-			Text("vaniajeronimo")
+			Text(viewModel.userName)
 				.font(.heading5SemiBold)
 				.foregroundStyle(.textSecondary)
 			HStack(alignment: .center, spacing: UI.Spacing.level02) {
@@ -118,6 +121,55 @@ public struct HomeScreen: View {
 		.padding(.top, UI.Spacing.level07)
 		.padding(.horizontal, UI.Spacing.level06)
 	}
+
+	private var container: some View {
+		GeometryReader { proxy in
+			VStack(alignment: .center, spacing: 16) {
+				HStack(alignment: .center, spacing: 24) {
+					Button {
+						print("Asset")
+					} label: {
+						Text("Asset")
+							.font(.heading4)
+							.fontWeight(.medium)
+							.foregroundStyle(.textPrimary)
+					}
+
+					Button {
+						print("Collectibles")
+					} label: {
+						Text("Collectibles")
+							.font(.heading4)
+							.fontWeight(.medium)
+							.foregroundStyle(.textTertiary)
+					}
+				}
+				.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+				.padding(.top, 5)
+
+				Image.space_monkey
+					.resizable()
+					.scaledToFit()
+					.frame(width: 335.23, height: 364)
+					.padding(.top, 16)
+					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+			}
+			.padding(20)
+			.frame(width: proxy.size.width)
+			.background(
+				Color.white.opacity(0.6)
+					.blur(radius: 20)
+			)
+			.clipShape(RoundedRectangle(cornerRadius: 40))
+			.overlay(
+				RoundedRectangle(cornerRadius: 40)
+					.stroke(Color.white, lineWidth: 1)
+			)
+			.padding(.horizontal, 4)
+			.padding(.top, 32)
+			.ignoresSafeArea()
+		}
+	}
 }
 
 public extension HomeScreen {
@@ -140,7 +192,7 @@ public extension HomeScreen {
 		var gradient: LinearGradient {
 			switch self {
 				case .positive:
-					return .greenPrimary
+					return .greenSecondary
 				case .negative:
 					return .redPrimary
 				case .neutral:

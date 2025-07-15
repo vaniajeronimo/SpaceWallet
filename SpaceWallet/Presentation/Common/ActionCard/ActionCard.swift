@@ -13,7 +13,7 @@ struct ActionCard: View {
 
 	var body: some View {
 		Button(action: model.action) {
-			VStack(spacing: UI.Spacing.level04) {
+			VStack(spacing: UI.Spacing.level03) {
 				model.icon
 					.resizable()
 					.frame(width: 24, height: 24)

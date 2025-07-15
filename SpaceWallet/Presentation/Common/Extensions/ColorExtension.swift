@@ -59,7 +59,20 @@ public extension LinearGradient {
 	static let greenPrimary = LinearGradient(
 		gradient: Gradient(stops: [
 			.init(color: .greenStroke, location: 0.0),
-			.init(color: .white, location: 0.5)
+			.init(color: .greenFill, location: 0.4),
+			.init(color: .violetFill, location: 0.75),
+			.init(color: .white, location: 1.0)
+		]),
+		startPoint: .top,
+		endPoint: .bottom
+	)
+
+	static let greenSecondary = LinearGradient(
+		gradient: Gradient(stops: [
+			.init(color: .greenStroke, location: 0.0),
+			.init(color: .violetFill, location: 0.3),
+			.init(color: .violetFill, location: 0.75),
+			.init(color: .white, location: 1.0)
 		]),
 		startPoint: .top,
 		endPoint: .bottom

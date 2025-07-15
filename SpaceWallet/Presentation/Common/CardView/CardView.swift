@@ -8,6 +8,7 @@
 import SwiftUI
 
 public struct CardView: ViewModifier {
+
 	public func body(content: Content) -> some View {
 			content
 			.padding(20)

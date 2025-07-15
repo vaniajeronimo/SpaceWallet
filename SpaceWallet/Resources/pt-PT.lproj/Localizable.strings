@@ -8,16 +8,17 @@
 
 "space_wallet" = "Carteira Espacial";
 "auth_card_carrousel_1_title" = "O teu passe de acesso completo à Web3";
-"auth_card_carrousel_2_title" = "Sem custódia e seguro";
+"auth_card_carrousel_2_title" = "Sem custódia e segura";
 "auth_card_carrousel_3_title" = "Investe de forma mais inteligente com a IA";
 "email_address" = "Email";
 "continue" = "Continuar";
-"or_sign_in_with" = "ou entrar com";
-"terms_and_conditions" = "Ao continuar, estás a aceitar os nossos Termos e Condições\ne a nossa Política de Privacidade";
+"terms_and_conditions_info_note" = "Ao continuar, estás a aceitar os nossos\nTermos e Condições e a nossa\nPolítica de Privacidade";
+"terms_and_conditions" = "Termos e Condições";
+"privacy_policy" = "Política de Privacidade";
 "receive" = "Receber";
 "send" = "Enviar";
 "swap" = "Trocar";
-"Buy" = "Comprar";
+"buy" = "Comprar";
 "buy_crypto_with_card" = "Compra a tua primeira criptomoeda com o teu cartão";
 "buy_crypto" = "Comprar Cripto";
 "asset" = "Ativo";

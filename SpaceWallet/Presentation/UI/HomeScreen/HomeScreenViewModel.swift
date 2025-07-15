@@ -28,6 +28,14 @@ extension HomeScreen {
 			return value
 		}
 
+		var userName: String {
+			guard let email = UserDefaults.userEmail,
+				  let name = email.split(separator: "@").first else {
+				return ""
+			}
+			return String(name)
+		}
+
 		init(onAction: @escaping (ActionType) -> Void) {
 			self.onAction = onAction
 			setupActions()
@@ -36,10 +44,10 @@ extension HomeScreen {
 
 		private func setupActions() {
 			actions = [
-				.init(icon: .receive, title: "receive".localized(), action: { self.onAction(.receive) }),
-				.init(icon: .send, title: "send".localized(), action: { self.onAction(.send) }),
-				.init(icon: .swap, title: "swap".localized(), action: { self.onAction(.swap) }),
-				.init(icon: .buy, title: "buy".localized(), action: { self.onAction(.buy) })
+				.init(icon: .receive, title: "receive".localized, action: { self.onAction(.receive) }),
+				.init(icon: .send, title: "send".localized, action: { self.onAction(.send) }),
+				.init(icon: .swap, title: "swap".localized, action: { self.onAction(.swap) }),
+				.init(icon: .buy, title: "buy".localized, action: { self.onAction(.buy) })
 			]
 		}
 

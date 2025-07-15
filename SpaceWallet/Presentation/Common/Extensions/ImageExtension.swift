@@ -70,4 +70,7 @@ public extension Image {
 	static let send = Image("send", bundle: Bundle.main)
 	static let swap = Image("swap", bundle: Bundle.main)
 	static let buy = Image("buy", bundle: Bundle.main)
+
+	// MARK: - NFTs
+	static let space_monkey = Image("space_monkey_nft", bundle: Bundle.main)
 }
