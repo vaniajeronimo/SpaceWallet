@@ -23,9 +23,12 @@ struct ActionCard: View {
 					.foregroundStyle(.textPrimary)
 			}
 			.frame(width: 74, height: 74)
-			.background(.b0)
-			.contentShape(Rectangle())
-			.cornerRadius(UI.Corner.l)
+			.background(Color.b0.blur(radius: 16))
+			.clipShape(RoundedRectangle(cornerRadius: UI.Corner.l))
+			.overlay(
+				RoundedRectangle(cornerRadius: UI.Corner.l)
+					.stroke(Color.white, lineWidth: UI.Border.s)
+			)
 		}
 	}
 }
