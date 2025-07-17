@@ -48,7 +48,7 @@ public struct TabBar: View {
 
 	private func tabBarItems() -> some View {
 		VStack(spacing: .zero) {
-			HStack(alignment: .bottom, spacing: 10) {
+			HStack(alignment: .bottom, spacing: .zero) {
 				ForEach(Array(tabs.enumerated()), id: \.offset) { index, tab in
 					Button {
 						if selection == tab, let navigation = content[safe: index]?.content as? Navigation {
@@ -61,9 +61,9 @@ public struct TabBar: View {
 					.buttonStyle(PlainButtonStyle())
 				}
 			}
-			.padding(.horizontal, UI.Spacing.level06)
 		}
 		.frame(maxWidth: .infinity, maxHeight: 30)
+		.padding(.horizontal, UI.Spacing.level06)
 		.padding(.bottom, safeAreaBottomInset)
 		.background(tabBarBackground)
 		.edgesIgnoringSafeArea(.bottom)

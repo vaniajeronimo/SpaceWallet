@@ -9,6 +9,9 @@ import SwiftUI
 
 public struct HomeScreen: View {
 
+	@State private var isAssetsSelected: Bool = false
+	@State private var isCollectiblesSelected: Bool = false
+
 	private let viewModel: ViewModel
 
 	public init(onAction: @escaping (ActionType) -> Void) {
@@ -124,35 +127,34 @@ public struct HomeScreen: View {
 
 	private var container: some View {
 		GeometryReader { proxy in
-			VStack(alignment: .center, spacing: 16) {
+			VStack(alignment: .leading, spacing: 16) {
 				HStack(alignment: .center, spacing: 24) {
 					Button {
-						print("Asset")
+						isAssetsSelected = true
+						isCollectiblesSelected = false
 					} label: {
 						Text("Asset")
 							.font(.heading4)
 							.fontWeight(.medium)
-							.foregroundStyle(.textPrimary)
+							.foregroundStyle(isAssetsSelected ? .textPrimary : .textTertiary)
 					}
 
 					Button {
-						print("Collectibles")
+						isAssetsSelected = false
+						isCollectiblesSelected = true
 					} label: {
 						Text("Collectibles")
 							.font(.heading4)
 							.fontWeight(.medium)
-							.foregroundStyle(.textTertiary)
+							.foregroundStyle(isCollectiblesSelected ? .textPrimary : .textTertiary)
 					}
 				}
-				.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-				.padding(.top, 5)
 
 				Image.space_monkey
 					.resizable()
 					.scaledToFit()
-					.frame(width: 335.23, height: 364)
-					.padding(.top, 16)
-					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+					.frame(height: 364)
+					.padding(.bottom, 20)
 			}
 			.padding(20)
 			.frame(width: proxy.size.width)
@@ -165,9 +167,7 @@ public struct HomeScreen: View {
 				RoundedRectangle(cornerRadius: 40)
 					.stroke(Color.white, lineWidth: 1)
 			)
-			.padding(.horizontal, 4)
 			.padding(.top, 32)
-			.ignoresSafeArea()
 		}
 	}
 }
