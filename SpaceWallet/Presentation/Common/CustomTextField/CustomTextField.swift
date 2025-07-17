@@ -213,64 +213,65 @@ public struct CustomTextField: View {
 }
 
 // MARK: - CustomTextField modifiers
-extension CustomTextField {
-	public func state(_ state: CustomTextFieldState) -> Self {
+public extension CustomTextField {
+
+	func state(_ state: CustomTextFieldState) -> Self {
 		var result = self
 		result.state = state
 		return result
 	}
 
-	public func helperText(_ text: String) -> Self {
+	func helperText(_ text: String) -> Self {
 		var result = self
 		result.helperText = text.isEmpty ? " " : text
 		return result
 	}
 
-	public func isFocused(_ isFocused: Bool) -> Self {
+	func isFocused(_ isFocused: Bool) -> Self {
 		let result = self
 		result.isFocused = isFocused
 		return result
 	}
 
-	public func isPhoneNumberField(_ enabled: Bool, prefix: String = "+351") -> Self {
+	func isPhoneNumberField(_ enabled: Bool, prefix: String = "+351") -> Self {
 		var result = self
 		result.isPhoneNumberField = enabled
 		result.prefixText = prefix
 		return result
 	}
 
-	public func isSecure(_ isSecure: Bool) -> Self {
+	func isSecure(_ isSecure: Bool) -> Self {
 		var result = self
 		result.isSecuredField = isSecure
 		result._isTextHidden = .init(initialValue: isSecure)
 		return result
 	}
 
-	public func showClearButton(_ isToShow: Bool) -> Self {
+	func showClearButton(_ isToShow: Bool) -> Self {
 		var result = self
 		result.showClearButton = isToShow
 		return result
 	}
 
-	public func isCurrencyField(_ isCurrency: Bool) -> Self {
+	func isCurrencyField(_ isCurrency: Bool) -> Self {
 		var result = self
 		result.isCurrencyFied = isCurrency
 		return result
 	}
 
-	public func mask(_ mask: String) -> Self {
+	func mask(_ mask: String) -> Self {
 		var result = self
 		result.maskFormat = mask
 		return result
 	}
 
-	public func uppercased(_ isUppercased: Bool) -> Self {
+	func uppercased(_ isUppercased: Bool) -> Self {
 		var result = self
 		result.uppercased = isUppercased
 		return result
 	}
 
-	public func disallowSpaces(_ disallow: Bool) -> Self {
+	func disallowSpaces(_ disallow: Bool) -> Self {
 		var result = self
 		result.disallowSpaces = disallow
 		return result

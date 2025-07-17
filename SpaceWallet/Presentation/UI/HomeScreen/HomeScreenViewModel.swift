@@ -14,18 +14,26 @@ extension HomeScreen {
 	final class ViewModel {
 
 		let onAction: (ActionType) -> Void
-
 		var actions: [ActionCardModel] = []
-		var balanceValue: Double = 86.0
-		var balanceColor: BalanceColor = .neutral
 
-		var profitValue: String = String(format: "%.2f", 2.60)
+		var currentBalance: BalanceModel = .init(balance: 0.00, currency: .usd, margin: 0.00, profit: 0.00)
 
 		var formattedBalance: String {
-			let value = String(format: "%.2f", balanceValue)
+			let value = String(format: "%.2f", currentBalance.balance)
 				.replacingOccurrences(of: "-", with: "")
 				.replacingOccurrences(of: "+", with: "")
 			return value
+		}
+
+		var balanceColor: BalanceColor {
+			switch currentBalance.status {
+				case .profit:
+					return .positive
+				case .loss:
+					return .negative
+				case .breakEven:
+					return .neutral
+			}
 		}
 
 		var userName: String {
@@ -47,7 +55,6 @@ extension HomeScreen {
 		init(onAction: @escaping (ActionType) -> Void) {
 			self.onAction = onAction
 			setupActions()
-			updateBalanceColor()
 		}
 
 		private func setupActions() {
@@ -57,17 +64,6 @@ extension HomeScreen {
 				.init(icon: .swap, title: "swap".localized, action: { self.onAction(.swap) }),
 				.init(icon: .buy, title: "buy".localized, action: { self.onAction(.buy) })
 			]
-		}
-
-		private func updateBalanceColor() {
-			switch balanceValue {
-				case ..<0:
-					balanceColor = .negative
-				case 0:
-					balanceColor = .neutral
-				default:
-					balanceColor = .positive
-			}
 		}
 	}
 }

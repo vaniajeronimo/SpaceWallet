@@ -39,12 +39,13 @@ public struct HomeScreen: View {
 	}
 
 	private var navBar: some View {
-		HStack(alignment: .center) {
+		HStack {
 			profileSettings
 			Spacer()
 			navBarActions
 		}
 		.padding(.top, UI.Spacing.level05)
+		.padding(.horizontal, UI.Spacing.level06)
 	}
 
 	@ViewBuilder
@@ -103,13 +104,16 @@ public struct HomeScreen: View {
 				.foregroundStyle(.textPrimary)
 
 			HStack(spacing: UI.Spacing.level02) {
-				Text(viewModel.profitValue)
-					.font(.heading5SemiBold)
-					.foregroundStyle(.textTertiary)
-				Text("+0.00%")
-					.font(.caption)
-					.fontWeight(.semibold)
-					.foregroundStyle(.textTertiary)
+				ProfitLabel(balanceModel: viewModel.currentBalance)
+					.source(.margin)
+					.showsPlusMinus(true)
+					.showsCurrencySymbol(true)
+					.showsBackground(false)
+
+				ProfitLabel(balanceModel: viewModel.currentBalance)
+					.source(.profit)
+					.showsPlusMinus(true)
+					.showsPercentage(true)
 			}
 		}
 		.padding(.top, UI.Spacing.level05)
