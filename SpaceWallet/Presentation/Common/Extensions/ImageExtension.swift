@@ -30,6 +30,8 @@ public extension Image {
 	static let profile = Image("profile_pic", bundle: Bundle.main)
 	static let qrCode = Image("qrCode_icon", bundle: Bundle.main)
 	static let search = Image("search_icon", bundle: Bundle.main)
+	static let container_view = Image("container_view", bundle: Bundle.main)
+	static let coin_container = Image("coin_container", bundle: Bundle.main)
 
 	// MARK: - TabBar Icons
 	static let tabHomeSelected = Image("home_selected", bundle: Bundle.main)

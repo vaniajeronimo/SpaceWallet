@@ -32,7 +32,7 @@ public struct HomeScreen: View {
 					}
 					.padding(.horizontal, UI.Spacing.level06)
 
-					container
+					assets
 				}
 			}
 		}
@@ -125,50 +125,8 @@ public struct HomeScreen: View {
 		.padding(.horizontal, UI.Spacing.level06)
 	}
 
-	private var container: some View {
-		GeometryReader { proxy in
-			VStack(alignment: .leading, spacing: 16) {
-				HStack(alignment: .center, spacing: 24) {
-					Button {
-						isAssetsSelected = true
-						isCollectiblesSelected = false
-					} label: {
-						Text("Asset")
-							.font(.heading4)
-							.fontWeight(.medium)
-							.foregroundStyle(isAssetsSelected ? .textPrimary : .textTertiary)
-					}
-
-					Button {
-						isAssetsSelected = false
-						isCollectiblesSelected = true
-					} label: {
-						Text("Collectibles")
-							.font(.heading4)
-							.fontWeight(.medium)
-							.foregroundStyle(isCollectiblesSelected ? .textPrimary : .textTertiary)
-					}
-				}
-
-				Image.space_monkey
-					.resizable()
-					.scaledToFit()
-					.frame(height: 364)
-					.padding(.bottom, 20)
-			}
-			.padding(20)
-			.frame(width: proxy.size.width)
-			.background(
-				Color.white.opacity(0.6)
-					.blur(radius: 20)
-			)
-			.clipShape(RoundedRectangle(cornerRadius: 40))
-			.overlay(
-				RoundedRectangle(cornerRadius: 40)
-					.stroke(Color.white, lineWidth: 1)
-			)
-			.padding(.top, 32)
-		}
+	private var assets: some View {
+		AssetCollectiblesContainer()
 	}
 }
 
