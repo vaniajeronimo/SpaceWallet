@@ -69,7 +69,7 @@ public struct HomeScreen: View {
 				} label: {
 					Image.chevronDown
 						.resizable()
-						.frame(width: 16, height: 16)
+						.frame(width: 8, height: 4.8)
 						.scaledToFit()
 				}
 			}
@@ -99,9 +99,10 @@ public struct HomeScreen: View {
 
 	private var balance: some View {
 		VStack(alignment: .center, spacing: UI.Spacing.level02) {
-			Text("$\(viewModel.formattedBalance)")
-				.font(.displayBigBold)
-				.foregroundStyle(.textPrimary)
+			ProfitLabel(balanceModel: viewModel.currentBalance)
+				.source(.balance)
+				.showsCurrencySymbol(true)
+				.showsBackground(false)
 
 			HStack(spacing: UI.Spacing.level02) {
 				ProfitLabel(balanceModel: viewModel.currentBalance)

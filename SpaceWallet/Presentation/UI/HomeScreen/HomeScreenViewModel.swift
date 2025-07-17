@@ -16,7 +16,14 @@ extension HomeScreen {
 		let onAction: (ActionType) -> Void
 		var actions: [ActionCardModel] = []
 
-		var currentBalance: BalanceModel = .init(balance: 0.00, currency: .usd, margin: 0.00, profit: 0.00)
+		var currentBalance: BalanceModel {
+			.init(
+				balance: 0.00,
+				currency: .usd,
+				margin: 0.00,
+				profit: 0.00
+			)
+		}
 
 		var formattedBalance: String {
 			let value = String(format: "%.2f", currentBalance.balance)

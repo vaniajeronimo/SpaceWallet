@@ -9,129 +9,107 @@ import SwiftUI
 
 public struct ProfitLabel: View {
 
-	let value: Double
-	let currencySymbol: String?
+	let balanceModel: BalanceModel
+	var source: Source
+
 	var showsPlusMinus: Bool
 	var showsCurrencySymbol: Bool
 	var showsPercentage: Bool
 	var showsBackground: Bool
-	var source: Source
+
+	private var value: Double {
+		switch source {
+			case .profit: return balanceModel.profit ?? 0
+			case .margin: return balanceModel.margin ?? 0
+			case .balance: return balanceModel.balance
+		}
+	}
+
+	private var currencySymbol: String? {
+		balanceModel.currency.symbol
+	}
 
 	public init(
-		value: Double,
-		source: Source = .profit,
-		currencySymbol: String? = nil,
+		balanceModel: BalanceModel,
+		source: Source = .balance,
 		showsPlusMinus: Bool = false,
 		showsCurrencySymbol: Bool = false,
 		showsPercentage: Bool = false,
 		showsBackground: Bool = true
 	) {
-		self.value = value
+		self.balanceModel = balanceModel
 		self.source = source
-		self.currencySymbol = currencySymbol
 		self.showsPlusMinus = showsPlusMinus
 		self.showsCurrencySymbol = showsCurrencySymbol
 		self.showsPercentage = showsPercentage
 		self.showsBackground = showsBackground
 	}
 
-	init(
-		balanceModel: BalanceModel,
-		source: Source = .profit,
-		showsPlusMinus: Bool = false,
-		showsCurrencySymbol: Bool = false,
-		showsPercentage: Bool = false,
-		showsBackground: Bool = true
-	) {
-		let value: Double
-		switch source {
-			case .profit:
-				value = balanceModel.profit ?? 0
-			case .margin:
-				value = balanceModel.margin ?? 0
-			case .balance:
-				value = balanceModel.balance
-		}
-
-		self.init(
-			value: value,
-			source: source,
-			currencySymbol: balanceModel.currency.symbol,
-			showsPlusMinus: showsPlusMinus,
-			showsCurrencySymbol: showsCurrencySymbol,
-			showsPercentage: showsPercentage,
-			showsBackground: showsBackground
-		)
-	}
-
 	public var body: some View {
 		let formattedValue = formatValue()
 		let backgroundColor = background(for: value)
 		let textColor = textColor(for: value)
+		let font = fontStyle()
 
 		Text(formattedValue)
-			.font(showsBackground ? .caption : .heading5)
+			.font(font)
 			.fontWeight(.semibold)
 			.foregroundStyle(textColor)
 			.padding(UI.Spacing.level02)
 			.if(showsBackground) { view in
-				view
-					.background(
-						RoundedRectangle(cornerRadius: UI.Corner.s)
-							.fill(backgroundColor)
-					)
+				view.background(
+					RoundedRectangle(cornerRadius: UI.Corner.s)
+						.fill(backgroundColor)
+				)
 			}
 	}
 
 	private func formatValue() -> String {
-		let sign: String
-
-		if value == 0 {
-			sign = showsPlusMinus ? "+" : ""
-		} else if value > 0 {
-			sign = showsPlusMinus ? "+" : ""
-		} else {
-			sign = showsPlusMinus ? "−" : ""
-		}
+		let sign: String = {
+			if value == 0 { return showsPlusMinus ? "+" : "" }
+			if value > 0 { return showsPlusMinus ? "+" : "" }
+			return showsPlusMinus ? "−" : ""
+		}()
 
 		let absValue = abs(value)
-		let formattedValue = String(format: "%.2f", absValue)
-		var result = "\(sign)"
+		let formatted = String(format: "%.2f", absValue)
 
+		var result = "\(sign)"
 		if showsCurrencySymbol {
 			result += currencySymbol ?? ""
 		}
-
-		result += formattedValue
+		result += formatted
 
 		if showsPercentage {
 			result += "%"
 		}
-
 		return result
 	}
 
 	private func background(for value: Double) -> Color {
-		if value == 0 {
-			return .violetHover
+		switch value {
+			case 0: return .violetHover
+			case let v where v > 0: return .greenActive
+			default: return .redActive
 		}
-		if value > 0 {
-			return .greenActive
-		}
-		return .redActive
 	}
 
 	private func textColor(for value: Double) -> Color {
-		if value == 0 {
-			return showsBackground ? .b0 : .violetHover
+		guard source != .balance else { return .textPrimary }
+
+		switch value {
+			case 0: return showsBackground ? .b0 : .violetHover
+			case let v where v > 0: return showsBackground ? .b0 : .greenActive
+			default: return showsBackground ? .b0 : .redActive
 		}
-		if value > 0 {
-			return showsBackground ? .b0 : .greenActive
-		}
-		return showsBackground ? .b0 : .redActive
+	}
+
+	private func fontStyle() -> Font {
+		source == .balance ? .displayBigBold : (showsBackground ? .caption : .heading5)
 	}
 }
 
+// MARK: - Modifiers
 public extension ProfitLabel {
 
 	enum Source {
@@ -139,10 +117,6 @@ public extension ProfitLabel {
 		case margin
 		case balance
 	}
-}
-
-// MARK: - Modifiers
-public extension ProfitLabel {
 
 	func source(_ source: Source) -> Self {
 		var result = self
@@ -150,27 +124,27 @@ public extension ProfitLabel {
 		return result
 	}
 
-	func showsPlusMinus(_ showsPlusMinus: Bool) -> Self {
+	func showsPlusMinus(_ value: Bool) -> Self {
 		var result = self
-		result.showsPlusMinus = showsPlusMinus
+		result.showsPlusMinus = value
 		return result
 	}
 
-	func showsCurrencySymbol(_ showsCurrencySymbol: Bool) -> Self {
+	func showsCurrencySymbol(_ value: Bool) -> Self {
 		var result = self
-		result.showsCurrencySymbol = showsCurrencySymbol
+		result.showsCurrencySymbol = value
 		return result
 	}
 
-	func showsPercentage(_ showsPercentage: Bool) -> Self {
+	func showsPercentage(_ value: Bool) -> Self {
 		var result = self
-		result.showsPercentage = showsPercentage
+		result.showsPercentage = value
 		return result
 	}
 
-	func showsBackground(_ showsBackground: Bool) -> Self {
+	func showsBackground(_ value: Bool) -> Self {
 		var result = self
-		result.showsBackground = showsBackground
+		result.showsBackground = value
 		return result
 	}
 }
