@@ -36,6 +36,14 @@ extension HomeScreen {
 			return String(name)
 		}
 
+		var nfts: [CollectibleModel] = [
+			.init(name: "Space Monkey", imageName: "space_monkey_nft", description: "A cool space monkey collectible"),
+			.init(name: "Orange Monkey", imageName: "orange_monkey_nft", description: "A rare orange monkey collectible"),
+			.init(name: "Banana Monkey", imageName: "banana_monkey_nft", description: "A unique banana monkey collectible"),
+			.init(name: "Light Spectrum", imageName: "color_spectrum_nft", description: "A special spectrum collectible"),
+			.init(name: "Dark Spectrum", imageName: "color_spectrum2_nft", description: "A special spectrum collectible")
+		]
+
 		init(onAction: @escaping (ActionType) -> Void) {
 			self.onAction = onAction
 			setupActions()

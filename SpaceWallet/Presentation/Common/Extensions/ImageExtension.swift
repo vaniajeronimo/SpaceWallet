@@ -75,4 +75,8 @@ public extension Image {
 
 	// MARK: - NFTs
 	static let space_monkey = Image("space_monkey_nft", bundle: Bundle.main)
+	static let orange_monkey = Image("orange_monkey_nft", bundle: Bundle.main)
+	static let banana_monkey = Image("banana_monkey_nft", bundle: Bundle.main)
+	static let spectrum_1 = Image("color_spectrum_nft", bundle: Bundle.main)
+	static let spectrum_2 = Image("color_spectrum2_nft", bundle: Bundle.main)
 }

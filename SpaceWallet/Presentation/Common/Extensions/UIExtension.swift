@@ -47,6 +47,7 @@ public extension UI {
 		public static let l: CGFloat = 16
 		public static let xl: CGFloat = 24
 		public static let xxl: CGFloat = 32
+		public static let xxxl: CGFloat = 40
 	}
 
 	struct Border {

@@ -126,7 +126,7 @@ public struct HomeScreen: View {
 	}
 
 	private var assets: some View {
-		AssetCollectiblesContainer()
+		AssetCollectiblesContainer(nfts: viewModel.nfts)
 	}
 }
 
