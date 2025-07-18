@@ -21,6 +21,8 @@ public struct CustomBottomSheet<Content: View>: View {
 	@State private var offset: CGFloat = 0
 	@State private var dragOffset: CGFloat = 0
 
+	private var title: String?
+	private var bottomPadding: CGFloat
 	private var alertType: AlertType
 	private let maxHeight: CGFloat
 	private let minHeight: CGFloat
@@ -30,7 +32,9 @@ public struct CustomBottomSheet<Content: View>: View {
 	private var onConfirm: (() -> Void)?
 
 	public init(
-		isShowing: Binding<Bool>,
+		title: String? = nil,
+		bottomPadding: CGFloat = 0.0,
+		isShowing: Binding<Bool> = .constant(false),
 		isToShowAlert: Binding<Bool> = .constant(false),
 		height: CGFloat,
 		alertType: AlertType = .init(),
@@ -40,6 +44,8 @@ public struct CustomBottomSheet<Content: View>: View {
 		@ViewBuilder content: () -> Content
 	) {
 		self.init(
+			title: title,
+			bottomPadding: bottomPadding,
 			isShowing: isShowing,
 			isToShowAlert: isToShowAlert,
 			alertType: alertType,
@@ -52,7 +58,9 @@ public struct CustomBottomSheet<Content: View>: View {
 	}
 
 	public init(
-		isShowing: Binding<Bool>,
+		title: String? = nil,
+		bottomPadding: CGFloat = 0.0,
+		isShowing: Binding<Bool> = .constant(false),
 		isToShowAlert: Binding<Bool> = .constant(false),
 		alertType: AlertType = .init(),
 		type: Dimension,
@@ -61,6 +69,8 @@ public struct CustomBottomSheet<Content: View>: View {
 		onConfirm: (() -> Void)? = nil,
 		@ViewBuilder content: () -> Content
 	) {
+		self.title = title
+		self.bottomPadding = bottomPadding
 		self._isShowing = isShowing
 		self._isToShowAlert = isToShowAlert
 		self.alertType = alertType
@@ -105,7 +115,7 @@ public struct CustomBottomSheet<Content: View>: View {
 
 	private func bodyContent(geometry: GeometryProxy) -> some View {
 		VStack(spacing: .zero) {
-			indicator
+			header
 			content
 				.transaction {
 					$0.disablesAnimations = true
@@ -130,21 +140,37 @@ public struct CustomBottomSheet<Content: View>: View {
 				.depth(configuration.depth)
 		)
 		.padding(.horizontal, 16)
-		.padding(.bottom, 24 + geometry.safeAreaInsets.bottom)
+		.padding(.bottom, bottomPadding + geometry.safeAreaInsets.bottom)
 		.offset(y: isShowing ? dragOffset : geometry.size.height)
 		.animation(.easeInOut(duration: 0.35), value: isShowing)
 		.transition(.move(edge: .bottom))
 		.gesture(dragGesture)
 	}
+	private var header: some View {
+		VStack(spacing: UI.Spacing.level04) {
+			notchView
+			HStack {
+				if let title {
+					Text(title)
+						.font(.heading3Bold)
+						.foregroundStyle(Color.background_0)
+				}
+				Spacer()
 
-	@ViewBuilder
-	private var indicator: some View {
-		switch configuration.handle {
-			case .notch:
-				notchView
-			case .close:
-				closeButton
+				Button {
+					isShowing = false
+					onDismiss?()
+				} label: {
+					Image.close_icon
+						.resizable()
+						.scaledToFit()
+						.frame(width: 24, height: 24)
+				}
+			}
+			.frame(height: 26)
+			.padding(.top, UI.Spacing.level07)
 		}
+		.padding(.horizontal, UI.Spacing.level07)
 	}
 
 	private var closeButton: some View {
@@ -173,7 +199,8 @@ public struct CustomBottomSheet<Content: View>: View {
 			.onTapGesture {
 				isShowing.toggle()
 			}
-			.padding()
+			.padding(.top, UI.Spacing.level04)
+			.frame(maxWidth: .infinity, alignment: .center)
 	}
 
 	private var dragGesture: some Gesture {
@@ -278,6 +305,12 @@ public extension CustomBottomSheet {
 			self.buttonTitle = buttonTitle
 		}
 	}
+
+	enum ActionType {
+		case close
+		case dragDown
+		case confirm
+	}
 }
 
 public extension CustomBottomSheet {
@@ -287,16 +320,32 @@ public extension CustomBottomSheet {
 		case expandable(min: CGFloat, max: CGFloat)
 	}
 
-	enum HandleType {
-		case notch
-		case close
-	}
-
 	class Configuration {
-		var handle: CustomBottomSheet.HandleType = .notch
 		var dismissOnTap: Bool = true
 		var dismissOnDrag: Bool = true
 		var overlayColor: Color = .black.opacity(0.4)
 		var depth: UI.Depth = .noDepth
+	}
+}
+
+// MARK: - Modifiers
+public extension CustomBottomSheet {
+
+	func mainTitle(_ value: String?) -> Self {
+		var clone = self
+		clone.title = value
+		return clone
+	}
+
+	func isShowing(_ value: Binding<Bool>) -> Self {
+		var clone = self
+		clone._isShowing = value
+		return clone
+	}
+
+	func bottomPadding(_ value: CGFloat) -> Self {
+		var clone = self
+		clone.bottomPadding = value
+		return clone
 	}
 }

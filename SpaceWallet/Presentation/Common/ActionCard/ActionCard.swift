@@ -10,6 +10,7 @@ import SwiftUI
 struct ActionCard: View {
 
 	let model: ActionCardModel
+	let onAction: ((ActionCardModel.ID) -> Void)?
 
 	var body: some View {
 		Button(action: model.action) {
@@ -21,6 +22,9 @@ struct ActionCard: View {
 				Text(model.title)
 					.font(.heading5SemiBold)
 					.foregroundStyle(.textPrimary)
+			}
+			.onTapGesture {
+				onAction?(model.id)
 			}
 			.frame(width: 74, height: 74)
 			.background(Color.b0.blur(radius: 16))

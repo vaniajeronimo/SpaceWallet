@@ -10,9 +10,11 @@ import SwiftUI
 
 struct HomeScreenNavigation: View, Navigation {
 
+	private let onAction: (ActionType) -> Void
 	internal var navigation = NavigationController()
 
-	init() {
+	init(onAction: @escaping (ActionType) -> Void) {
+		self.onAction = onAction
 		navigation.rootView(home)
 	}
 
@@ -26,12 +28,19 @@ struct HomeScreenNavigation: View, Navigation {
 		HomeScreen { action in
 			switch action {
 				case .receive:
-					break
+					onAction(.receive)
 				case .send:
 					break
 				default:
 					break
 			}
 		}
+	}
+}
+
+extension HomeScreenNavigation {
+
+	enum ActionType {
+		case receive
 	}
 }

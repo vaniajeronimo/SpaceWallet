@@ -52,15 +52,22 @@ public struct SelectableBottomSheet<T: SelectableItemProtocol>: View {
 
 	public var body: some View {
 		GeometryReader { geometry in
-			CustomBottomSheet(isShowing: $isShowing, height: height ?? geometry.size.height) {
-				content
-			}
+			CustomBottomSheet(
+				height: height ?? geometry.size.height,
+				onDismiss: {
+					onClose()
+				}, content: {
+					content
+				},
+			)
+			.mainTitle(title)
+			.isShowing($isShowing)
+			.bottomPadding(UI.Spacing.level07)
 		}
 	}
 
 	private var content: some View {
 		VStack {
-			header
 			/*
 			if hasSearchView {
 				Search(placeholder: "search".localized,
@@ -92,30 +99,6 @@ public struct SelectableBottomSheet<T: SelectableItemProtocol>: View {
 			cta
 		}
 		.frame(maxWidth: .infinity, alignment: .leading)
-	}
-
-	private var header: some View {
-		VStack(alignment: .leading, spacing: UI.Spacing.level05) {
-			HStack(alignment: .center) {
-				if let title {
-					Text(title)
-						.font(.heading3Bold)
-						.foregroundStyle(Color.background_0)
-				}
-				Spacer()
-
-				Button {
-					onClose()
-				} label: {
-					Image.close_icon
-						.resizable()
-						.scaledToFit()
-						.frame(width: 24, height: 24)
-				}
-			}
-		}
-		.padding(.top, UI.Spacing.level07)
-		.padding(.horizontal, UI.Spacing.level07)
 	}
 
 	private var cta: some View {

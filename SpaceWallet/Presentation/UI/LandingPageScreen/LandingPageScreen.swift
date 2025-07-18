@@ -10,7 +10,9 @@ import SwiftUI
 public struct LandingPageScreen: View {
 
 	@Environment(\.scenePhase) private var scenePhase
+
 	@State private var tabSelection: TabBarItem
+	@State var isToShowReceiveBottomSheet: Bool = false
 
 	private var viewModel = ViewModel()
 
@@ -21,27 +23,34 @@ public struct LandingPageScreen: View {
 	}
 
 	public var body: some View {
-		TabBar(selection: $tabSelection) {
-			HomeScreenNavigation()
+		ZStack {
+			TabBar(selection: $tabSelection) {
+				HomeScreenNavigation(onAction: { action in
+					if action == .receive {
+						isToShowReceiveBottomSheet = true
+					}
+				})
 				.tabBarItem(selectedIcon: .tabHomeSelected, unselectedIcon: .tabHomeDeselected, title: TabBarId.home.id)
-			EmptyView()
-				.tabBarItem(selectedIcon: .tabWalletSelected, unselectedIcon: .tabWalletDeselected, title: TabBarId.wallet.id)
-			EmptyView()
-				.tabBarItem(selectedIcon: .tabCreditCardSelected, unselectedIcon: .tabCreditCardDeselected, title: TabBarId.credit.id)
-			ActivityNavigation()
-				.tabBarItem(selectedIcon: .tabSearchSelected, unselectedIcon: .tabSearchDeselected, title: TabBarId.search.id)
-			EmptyView()
-				.tabBarItem(selectedIcon: .tabStarsSelected, unselectedIcon: .tabStarsDeselected, title: TabBarId.stars.id)
-		}
-		.onChange(of: scenePhase) { _, newPhase in
-			if newPhase == .active {
-				viewModel.observeNetworkStatus()
+				EmptyView()
+					.tabBarItem(selectedIcon: .tabWalletSelected, unselectedIcon: .tabWalletDeselected, title: TabBarId.wallet.id)
+				EmptyView()
+					.tabBarItem(selectedIcon: .tabCreditCardSelected, unselectedIcon: .tabCreditCardDeselected, title: TabBarId.credit.id)
+				ActivityNavigation()
+					.tabBarItem(selectedIcon: .tabSearchSelected, unselectedIcon: .tabSearchDeselected, title: TabBarId.search.id)
+				EmptyView()
+					.tabBarItem(selectedIcon: .tabStarsSelected, unselectedIcon: .tabStarsDeselected, title: TabBarId.stars.id)
 			}
-		}
-		.if(!viewModel.isConnected) { _ in
-			ErrorScreen {
-				viewModel.observeNetworkStatus()
+			.onChange(of: scenePhase) { _, newPhase in
+				if newPhase == .active {
+					viewModel.observeNetworkStatus()
+				}
 			}
+			.if(!viewModel.isConnected) { _ in
+				ErrorScreen {
+					viewModel.observeNetworkStatus()
+				}
+			}
+			receiveBottomSheet
 		}
 	}
 }

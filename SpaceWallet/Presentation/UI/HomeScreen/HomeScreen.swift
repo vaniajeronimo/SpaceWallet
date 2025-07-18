@@ -19,18 +19,21 @@ public struct HomeScreen: View {
 		ZStack {
 			viewModel.balanceColor.gradient
 				.ignoresSafeArea(edges: .all)
+			content
+		}
+	}
 
-			VStack {
-				ScrollView(showsIndicators: false) {
-					VStack {
-						navBar
-						balance
-						actions
-					}
-					.padding(.horizontal, UI.Spacing.level06)
-
-					assets
+	private var content: some View {
+		VStack {
+			ScrollView(showsIndicators: false) {
+				VStack {
+					navBar
+					balance
+					actions
 				}
+				.padding(.horizontal, UI.Spacing.level06)
+
+				assets
 			}
 		}
 	}
@@ -120,7 +123,14 @@ public struct HomeScreen: View {
 	private var actions: some View {
 		HStack(spacing: 13.26) {
 			ForEach(viewModel.actions) { action in
-				ActionCard(model: action)
+				ActionCard(model: action, onAction: { id in
+					switch id {
+						case 1:
+							viewModel.onAction(.receive)
+						default:
+							break
+					}
+				})
 			}
 		}
 		.padding(.top, UI.Spacing.level07)

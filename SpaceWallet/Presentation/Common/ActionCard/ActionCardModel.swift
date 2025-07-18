@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActionCardModel: Identifiable {
-	let id = UUID()
+	let id: Int
 	let icon: Image
 	let title: String
 	let action: () -> Void

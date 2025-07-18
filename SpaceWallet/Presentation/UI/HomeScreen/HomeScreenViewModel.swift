@@ -66,10 +66,10 @@ extension HomeScreen {
 
 		private func setupActions() {
 			actions = [
-				.init(icon: .receive, title: "receive".localized, action: { self.onAction(.receive) }),
-				.init(icon: .send, title: "send".localized, action: { self.onAction(.send) }),
-				.init(icon: .swap, title: "swap".localized, action: { self.onAction(.swap) }),
-				.init(icon: .buy, title: "buy".localized, action: { self.onAction(.buy) })
+				.init(id: 1, icon: .receive, title: "receive".localized, action: { self.onAction(.receive) }),
+				.init(id: 2, icon: .send, title: "send".localized, action: { self.onAction(.send) }),
+				.init(id: 3, icon: .swap, title: "swap".localized, action: { self.onAction(.swap) }),
+				.init(id: 4, icon: .buy, title: "buy".localized, action: { self.onAction(.buy) })
 			]
 		}
 	}
