@@ -44,10 +44,11 @@ This project simulates the behavior of a modern cryptocurrency wallet with:
 ## 📸 Screenshots
 
 ### LoginScreen
-![Dashboard Screenshot](Assets/login_screenshot.png)
+![Login Screenshot](Screenshots/login_screenshot.png)
 
 ### HomeScreen
-![Dashboard Screenshot](Assets/homepage_screenshot.png)
+![Home Screenshot](Screenshots/homepage_screenshot.png)
+![Home Screenshot](Screenshots/homepage_screenshot_empty_assets)
 
 ---
 
