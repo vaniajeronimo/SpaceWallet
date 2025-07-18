@@ -157,7 +157,7 @@ public struct AssetCollectiblesContainer: View {
 				Image.no_collection
 					.resizable()
 					.scaledToFit()
-					.frame(maxHeight: 135)
+					.frame(maxWidth: 294, maxHeight: 135)
 
 				VStack(alignment: .center, spacing: UI.Spacing.level02) {
 					Image.folder
