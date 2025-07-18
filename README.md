@@ -25,7 +25,7 @@ This project simulates the behavior of a modern cryptocurrency wallet with:
 - SwiftData
 - SwiftLint
 - Factory
-- MVVM Architecture
+- MVVM-C Architecture
 - Mock Services / Mock Data
 - Custom UI Components
 
