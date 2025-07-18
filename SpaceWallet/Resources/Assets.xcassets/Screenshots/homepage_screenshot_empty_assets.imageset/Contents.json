@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "homepage_screenshot_empty_assets.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
