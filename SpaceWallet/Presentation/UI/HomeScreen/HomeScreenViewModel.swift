@@ -52,11 +52,11 @@ extension HomeScreen {
 		}
 
 		var nfts: [CollectibleModel] = [
-			.init(name: "Space Monkey", imageName: "space_monkey_nft", description: "A cool space monkey collectible"),
-			.init(name: "Orange Monkey", imageName: "orange_monkey_nft", description: "A rare orange monkey collectible"),
-			.init(name: "Banana Monkey", imageName: "banana_monkey_nft", description: "A unique banana monkey collectible"),
-			.init(name: "Light Spectrum", imageName: "color_spectrum_nft", description: "A special spectrum collectible"),
-			.init(name: "Dark Spectrum", imageName: "color_spectrum2_nft", description: "A special spectrum collectible")
+			.init(name: "space_monkey", imageName: "space_monkey_nft", description: "space_monkey_nft_description".localized),
+			.init(name: "orange_monkey", imageName: "orange_monkey_nft", description: "orange_monkey_nft_description".localized),
+			.init(name: "banana_monkey", imageName: "banana_monkey_nft", description: "banana_monkey_nft_description".localized),
+			.init(name: "light_sepctrum", imageName: "color_spectrum_nft", description: "light_spectrum_nft_description".localized),
+			.init(name: "dark_spectrum", imageName: "color_spectrum2_nft", description: "dark_spectrum_nft_description".localized)
 		]
 
 		init(onAction: @escaping (ActionType) -> Void) {

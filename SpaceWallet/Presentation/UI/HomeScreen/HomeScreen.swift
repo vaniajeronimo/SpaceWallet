@@ -9,9 +9,6 @@ import SwiftUI
 
 public struct HomeScreen: View {
 
-	@State private var isAssetsSelected: Bool = false
-	@State private var isCollectiblesSelected: Bool = false
-
 	private let viewModel: ViewModel
 
 	public init(onAction: @escaping (ActionType) -> Void) {
