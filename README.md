@@ -45,7 +45,7 @@ This project simulates the behavior of a modern cryptocurrency wallet with:
 
 ### LoginScreen
 
-<img src="Screenshots/login_screenshot" width="300" alt="Login Screenshot">
+<img src="Screenshots/login_screenshot.png" width="300" alt="Login Screenshot">
 
 ### HomeScreen
 
