@@ -44,11 +44,13 @@ This project simulates the behavior of a modern cryptocurrency wallet with:
 ## 📸 Screenshots
 
 ### LoginScreen
+
 ![Login Screenshot](Screenshots/login_screenshot.png)
 
 ### HomeScreen
+
 ![Home Screenshot](Screenshots/homepage_screenshot.png)
-![Home Screenshot](Screenshots/homepage_screenshot_empty_assets)
+![Home Screenshot](Screenshots/homepage_screenshot_empty_assets.png)
 
 ---
 
@@ -56,4 +58,4 @@ This project simulates the behavior of a modern cryptocurrency wallet with:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/space-wallet.git
+   git clone https://github.com/vaniajeronimo/space-wallet.git
