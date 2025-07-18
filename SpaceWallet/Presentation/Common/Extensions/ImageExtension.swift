@@ -32,6 +32,10 @@ public extension Image {
 	static let search = Image("search_icon", bundle: Bundle.main)
 	static let container_view = Image("container_view", bundle: Bundle.main)
 	static let coin_container = Image("coin_container", bundle: Bundle.main)
+	static let no_collection = Image("no_collection", bundle: Bundle.main)
+	static let folder = Image("folder_icon", bundle: Bundle.main)
+	static let empty_cart_retro = Image("empty_cart_retro", bundle: Bundle.main)
+	static let dots = Image("dots", bundle: Bundle.main)
 
 	// MARK: - TabBar Icons
 	static let tabHomeSelected = Image("home_selected", bundle: Bundle.main)

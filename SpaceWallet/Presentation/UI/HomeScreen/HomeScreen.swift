@@ -52,7 +52,7 @@ public struct HomeScreen: View {
 	private var profileSettings: some View {
 		Image.profile
 			.resizable()
-			.frame(width: 36, height: 36)
+			.frame(maxWidth: 36, maxHeight: 36)
 			.scaledToFit()
 			.contentShape(Circle())
 
@@ -69,7 +69,7 @@ public struct HomeScreen: View {
 				} label: {
 					Image.chevronDown
 						.resizable()
-						.frame(width: 8, height: 4.8)
+						.frame(maxWidth: 8, maxHeight: 4.8)
 						.scaledToFit()
 				}
 			}
@@ -83,7 +83,7 @@ public struct HomeScreen: View {
 			} label: {
 				Image.qrCode
 					.resizable()
-					.frame(width: 24, height: 24)
+					.frame(maxWidth: 24, maxHeight: 24)
 					.scaledToFit()
 			}
 			Button {
@@ -91,7 +91,7 @@ public struct HomeScreen: View {
 			} label: {
 				Image.search
 					.resizable()
-					.frame(width: 24, height: 24)
+					.frame(maxWidth: 24, maxHeight: 24)
 					.scaledToFit()
 			}
 		}

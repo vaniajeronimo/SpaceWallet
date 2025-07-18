@@ -66,3 +66,8 @@
 "view_wallet" = "Ver carteira";
 "wallet_card_title" = "Compra cripto";
 "wallet_card_subtitle" = "Compra a tua primeira criptomoeda com o teu cartão";
+"no_collection_title" = "Sem coleção";
+"no_collection_subtitle" = "Os teus colecionáveis aparecerão aqui";
+"activity_empty_screen_mainTitle" = "Actividade";
+"activity_empty_screen_title" = "Ainda sem atividade";
+"activity_empty_screen_subtitle" = "A tua atividade aparecerá aqui assim que começares a usar a app.";

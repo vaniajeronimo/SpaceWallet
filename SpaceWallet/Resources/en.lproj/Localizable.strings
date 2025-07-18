@@ -66,3 +66,8 @@
 "view_wallet" = "View wallet";
 "wallet_card_title" = "Buy crypto";
 "wallet_card_subtitle" = "Buy your first crypto with your card";
+"no_collection_title" = "No collection";
+"no_collection_subtitle" = "Your collectibles will show up here";
+"activity_empty_screen_mainTitle" = "Activity";
+"activity_empty_screen_title" = "No activity yet";
+"activity_empty_screen_subtitle" = "Your activity will appear here once\nyou start using the app.";

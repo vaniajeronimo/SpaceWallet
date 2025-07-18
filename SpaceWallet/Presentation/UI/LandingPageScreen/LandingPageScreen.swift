@@ -28,7 +28,7 @@ public struct LandingPageScreen: View {
 				.tabBarItem(selectedIcon: .tabWalletSelected, unselectedIcon: .tabWalletDeselected, title: TabBarId.wallet.id)
 			EmptyView()
 				.tabBarItem(selectedIcon: .tabCreditCardSelected, unselectedIcon: .tabCreditCardDeselected, title: TabBarId.credit.id)
-			EmptyView()
+			ActivityNavigation()
 				.tabBarItem(selectedIcon: .tabSearchSelected, unselectedIcon: .tabSearchDeselected, title: TabBarId.search.id)
 			EmptyView()
 				.tabBarItem(selectedIcon: .tabStarsSelected, unselectedIcon: .tabStarsDeselected, title: TabBarId.stars.id)
