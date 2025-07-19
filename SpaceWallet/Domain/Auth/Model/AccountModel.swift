@@ -13,5 +13,24 @@ struct AccountModel {
 	var email: String
 	var password: String?
 	var phoneNumber: String?
+	var accountName: String?
 	var wallet: WalletModel?
+
+	init(
+		id: UUID,
+		userName: String? = nil,
+		email: String,
+		password: String? = nil,
+		phoneNumber: String? = nil,
+		accountName: String? = "Account1",
+		wallet: WalletModel? = nil
+	) {
+		self.id = id
+		self.userName = userName
+		self.email = email
+		self.password = password
+		self.phoneNumber = phoneNumber
+		self.accountName = accountName
+		self.wallet = wallet
+	}
 }

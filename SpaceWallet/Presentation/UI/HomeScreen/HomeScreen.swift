@@ -50,27 +50,29 @@ public struct HomeScreen: View {
 
 	@ViewBuilder
 	private var profileSettings: some View {
-		Image.profile
-			.resizable()
-			.frame(maxWidth: 36, maxHeight: 36)
-			.scaledToFit()
-			.contentShape(Circle())
+		HStack(alignment: .center) {
+			Image.profile
+				.resizable()
+				.frame(maxWidth: 36, maxHeight: 36)
+				.scaledToFit()
+				.contentShape(Circle())
 
-		VStack(alignment: .leading) {
-			Text(viewModel.userName)
-				.font(.heading5SemiBold)
-				.foregroundStyle(.textSecondary)
-			HStack(alignment: .center, spacing: UI.Spacing.level02) {
-				Text("Account1")
+			VStack(alignment: .leading, spacing: UI.Spacing.level02) {
+				Text(viewModel.userName)
 					.font(.heading5SemiBold)
-					.foregroundStyle(.textPrimary)
-				Button {
-					viewModel.onAction(.settings)
-				} label: {
-					Image.chevronDown
-						.resizable()
-						.frame(maxWidth: 8, maxHeight: 4.8)
-						.scaledToFit()
+					.foregroundStyle(.textSecondary)
+				HStack(alignment: .center, spacing: UI.Spacing.level02) {
+					Text("Account1")
+						.font(.heading5SemiBold)
+						.foregroundStyle(.textPrimary)
+					Button {
+						viewModel.onAction(.settings)
+					} label: {
+						Image.chevronDown
+							.resizable()
+							.frame(maxWidth: 8, maxHeight: 4.8)
+							.scaledToFit()
+					}
 				}
 			}
 		}

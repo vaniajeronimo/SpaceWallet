@@ -13,5 +13,6 @@ struct AccountEntity: Codable {
 	var email: String
 	var password: String?
 	var phoneNumber: String?
+	var accountName: String?
 	var wallet: WalletEntity?
 }

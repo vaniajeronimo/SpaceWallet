@@ -15,6 +15,7 @@ class AccountSwiftDataEntity {
 	var email: String
 	var password: String?
 	var phoneNumber: String?
+	var accountName: String?
 	var wallet: WalletSwiftDataEntity?
 
 	init(
@@ -23,6 +24,7 @@ class AccountSwiftDataEntity {
 		email: String = "",
 		password: String? = nil,
 		phoneNumber: String? = nil,
+		accountName: String? = nil,
 		wallet: WalletSwiftDataEntity? = nil
 	) {
 		self.id = id
@@ -30,6 +32,7 @@ class AccountSwiftDataEntity {
 		self.email = email
 		self.password = password
 		self.phoneNumber = phoneNumber
+		self.accountName = accountName
 		self.wallet = wallet
 	}
 }

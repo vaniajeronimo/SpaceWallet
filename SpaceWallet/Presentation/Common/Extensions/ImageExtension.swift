@@ -36,6 +36,8 @@ public extension Image {
 	static let folder = Image("folder_icon", bundle: Bundle.main)
 	static let empty_cart_retro = Image("empty_cart_retro", bundle: Bundle.main)
 	static let dots = Image("dots", bundle: Bundle.main)
+	static let credit_card_outline = Image("ic_credit_card_outline", bundle: Bundle.main)
+	static let stars = Image("stars", bundle: Bundle.main)
 
 	// MARK: - TabBar Icons
 	static let tabHomeSelected = Image("home_selected", bundle: Bundle.main)
