@@ -76,3 +76,6 @@
 "banana_monkey_nft_description" = "Um macaco travesso alimentado pelo seu amor por bananas interestelares.";
 "light_spectrum_nft_description" = "Um colecionável radiante que representa todo o espectro da luz visível.";
 "dark_spectrum_nft_description" = "Um colecionável misterioso que incorpora as cores ocultas do universo.";
+"amount" = "Valor";
+"qrcode_bottom_sheet_title" = "Pronto para receber?";
+"qrcode_bottom_sheet_subtitle" = "Por favor, confirma o valor que irás receber.";

@@ -16,12 +16,13 @@ public struct CustomTextField: View {
 	private var prefixText: String = "+351"
 	private var helperText: String = " "
 	private var maskFormat: String = ""
-	private var uppercased = false
-	private var disallowSpaces = false
+	private var uppercased: Bool = false
+	private var disallowSpaces: Bool = false
 	private var isSecuredField: Bool = false
 	private var showClearButton: Bool = false
 	private var isCurrencyFied: Bool = false
 	private var isPhoneNumberField: Bool = false
+	private var isNumberField: Bool = false
 	private var onCommit: (() -> Void)?
 	private var onChange: ((String) -> Void)?
 	private var onClearAction: (() -> Void)?
@@ -136,6 +137,8 @@ public struct CustomTextField: View {
 			}
 			if isPhoneNumberField {
 				newText = newText.filter(\.isNumber)
+			} else if isNumberField {
+				newText = newText.formatDecimalInput
 			}
 			text = newText.mask(with: maskFormat)
 			onChange?(txt)
@@ -237,6 +240,12 @@ public extension CustomTextField {
 		var result = self
 		result.isPhoneNumberField = enabled
 		result.prefixText = prefix
+		return result
+	}
+
+	func isNumberField(_ value: Bool) -> Self {
+		var result = self
+		result.isNumberField = value
 		return result
 	}
 

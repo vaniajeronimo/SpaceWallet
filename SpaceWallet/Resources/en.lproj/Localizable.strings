@@ -76,4 +76,6 @@
 "banana_monkey_nft_description" = "A cheeky monkey powered by its love for interstellar bananas.";
 "light_spectrum_nft_description" = "A radiant collectible representing the full spectrum of visible light.";
 "dark_spectrum_nft_description" = "A mysterious collectible embodying the hidden colors of the universe.";
-
+"amount" = "Amount";
+"qrcode_bottom_sheet_title" = "Ready to receive?";
+"qrcode_bottom_sheet_subtitle" = "Please confirm the amount that you will receive.";

@@ -68,4 +68,24 @@ public extension String {
 	var removeWhiteSpaces: String {
 		return self.replacingOccurrences(of: "\\s", with: "", options: .regularExpression)
 	}
+
+	var formatDecimalInput: String {
+		let decimalSeparator = Locale.current.decimalSeparator ?? ","
+		var raw = self.replacingOccurrences(of: decimalSeparator == "," ? "." : ",", with: decimalSeparator)
+
+		let allowedCharacters = CharacterSet(charactersIn: "0123456789\(decimalSeparator)")
+
+		raw = raw.unicodeScalars
+			.filter { allowedCharacters.contains($0) }
+			.map { String($0) }
+			.joined()
+
+		let parts = raw.components(separatedBy: decimalSeparator)
+		if parts.count <= 2 {
+			return raw
+		}
+		let integerPart = parts[0]
+		let decimalPart = parts.dropFirst().joined()
+		return "\(integerPart)\(decimalSeparator)\(decimalPart)"
+	}
 }
