@@ -130,7 +130,7 @@ public struct CustomBottomSheet<Content: View>: View {
 		}
 		.padding(.bottom, geometry.safeAreaInsets.bottom)
 		.frame(
-			width: geometry.size.width - 32,
+			width: geometry.size.width - UI.Spacing.level08,
 			height: maxHeight,
 			alignment: .top
 		)
@@ -139,9 +139,9 @@ public struct CustomBottomSheet<Content: View>: View {
 				.fill(Color.textPrimary)
 				.depth(configuration.depth)
 		)
-		.padding(.horizontal, 16)
-		.padding(.bottom, bottomPadding + geometry.safeAreaInsets.bottom)
-		.offset(y: isShowing ? dragOffset : geometry.size.height)
+		.padding(.horizontal, UI.Spacing.level05)
+		.padding(.bottom, bottomPadding)
+		.offset(y: isShowing ? dragOffset : geometry.size.height - geometry.safeAreaInsets.bottom)
 		.animation(.easeInOut(duration: 0.35), value: isShowing)
 		.transition(.move(edge: .bottom))
 		.gesture(dragGesture)

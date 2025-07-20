@@ -9,18 +9,18 @@ import Foundation
 import SwiftUI
 
 private struct KeyboardAware: ViewModifier {
+
 	let offset: CGFloat
 	@ObservedObject private var keyboard = KeyboardInfo.shared
 
 	func body(content: Content) -> some View {
 		content
-			.padding(.bottom, max(keyboard.height - offset, 0))
-			.edgesIgnoringSafeArea(keyboard.height > 0 ? .bottom : [])
+			.padding(.bottom, keyboard.height > 0 ? keyboard.height - offset : 0)
 			.animation(.smooth(duration: 0.3), value: keyboard.height)
+			.edgesIgnoringSafeArea(keyboard.height > 0 ? .bottom : [])
 	}
 }
-
-private class KeyboardInfo: ObservableObject {
+public class KeyboardInfo: ObservableObject {
 
 	static let shared = KeyboardInfo()
 	@Published var height: CGFloat = 0
@@ -36,7 +36,7 @@ private class KeyboardInfo: ObservableObject {
 		guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
 
 		executeInMainThread {
-			withAnimation {
+			withAnimation(.smooth(duration: 0.3)) {
 				self.height = notification.name == UIApplication.keyboardWillHideNotification ? 0 : frame.height
 			}
 		}
