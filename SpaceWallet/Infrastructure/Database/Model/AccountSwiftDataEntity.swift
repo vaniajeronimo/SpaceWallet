@@ -15,7 +15,7 @@ class AccountSwiftDataEntity {
 	var email: String
 	var password: String?
 	var phoneNumber: String?
-	var accountName: String?
+	var accountName: String
 	var wallet: WalletSwiftDataEntity?
 	var balance: BalanceSwiftDataEntity?
 
@@ -25,7 +25,7 @@ class AccountSwiftDataEntity {
 		email: String = "",
 		password: String? = nil,
 		phoneNumber: String? = nil,
-		accountName: String? = nil,
+		accountName: String = "Account 1",
 		wallet: WalletSwiftDataEntity? = nil,
 		balance: BalanceSwiftDataEntity? = nil
 	) {

@@ -13,7 +13,7 @@ struct AccountModel {
 	var email: String
 	var password: String?
 	var phoneNumber: String?
-	var accountName: String?
+	var accountName: String
 	var wallet: WalletModel?
 	var balance: BalanceModel?
 
@@ -23,7 +23,7 @@ struct AccountModel {
 		email: String,
 		password: String? = nil,
 		phoneNumber: String? = nil,
-		accountName: String? = "Account1",
+		accountName: String = "Account 1",
 		wallet: WalletModel? = nil,
 		balance: BalanceModel? = nil
 	) {

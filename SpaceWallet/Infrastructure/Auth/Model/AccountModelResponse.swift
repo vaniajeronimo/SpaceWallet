@@ -13,7 +13,7 @@ struct AccountModelResponse {
 	var email: String
 	var password: String?
 	var phoneNumber: String?
-	var accountName: String?
+	var accountName: String
 	var wallet: WalletModelResponse?
 	var balance: BalanceModelResponse?
 }

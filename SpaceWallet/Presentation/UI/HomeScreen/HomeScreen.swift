@@ -5,6 +5,7 @@
 //  Created by Vania Jeronimo on 14/07/2025.
 //
 
+import SwiftData
 import SwiftUI
 
 public struct HomeScreen: View {
@@ -59,7 +60,7 @@ public struct HomeScreen: View {
 		HStack(alignment: .center) {
 			Image.profile
 				.resizable()
-				.frame(maxWidth: 36, maxHeight: 36)
+				.frame(maxWidth: 40, maxHeight: 40)
 				.scaledToFit()
 				.contentShape(Circle())
 
@@ -69,10 +70,10 @@ public struct HomeScreen: View {
 					.foregroundStyle(.textSecondary)
 
 				Button {
-					viewModel.onAction(.settings)
+					viewModel.onAction(.settings(with: modelContext))
 				} label: {
 					HStack(alignment: .center, spacing: UI.Spacing.level02) {
-						Text("Account1")
+						Text(viewModel.accountModel?.accountName ?? "Account 1")
 							.font(.heading5SemiBold)
 							.foregroundStyle(.textPrimary)
 						Image.chevronDown
@@ -158,7 +159,7 @@ public extension HomeScreen {
 		case send
 		case swap
 		case buy
-		case settings
+		case settings(with: ModelContext)
 		case qrCode
 		case search
 	}

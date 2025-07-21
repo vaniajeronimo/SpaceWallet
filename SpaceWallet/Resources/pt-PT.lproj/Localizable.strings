@@ -80,3 +80,17 @@
 "qrcode_bottom_sheet_title" = "Pronto para receber?";
 "qrcode_bottom_sheet_subtitle" = "Por favor, confirma o valor que irás receber.";
 "your_account_title" = "A tua Conta";
+"preferences_title" = "Preferências";
+"settings_title" = "Definições";
+"appearance_title" = "Aparência";
+"currency_title" = "Moeda";
+"notification_title" = "Notificações";
+"privacy_title" = "Privacidade";
+"face_id_title" = "Reconhecimento Facial";
+"recovery_phrase_title" = "Frase de Recuperação";
+"icloud_backup_title" = "Backup iCloud";
+"local_currency_title" = "Moeda Local";
+"euro" = "Euro";
+"pound" = "Libra";
+"usd" = "Dólar Americano";
+"japanese_yen" = "Yen Japonês";

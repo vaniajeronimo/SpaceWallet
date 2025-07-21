@@ -1,5 +1,5 @@
 //
-//  CountriesModel.swift
+//  CountrySelectableModel.swift
 //  SpaceWallet
 //
 //  Created by Vania Jeronimo on 10/07/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CountriesModel: Equatable {
+struct CountrySelectableModel: Equatable {
 
 	var countryName: String?
 	var prefix: String?

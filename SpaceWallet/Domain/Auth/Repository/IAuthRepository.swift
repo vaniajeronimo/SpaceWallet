@@ -14,4 +14,5 @@ protocol IAuthRepository {
 	func getAccountUseCase(email: String, context: ModelContext) -> AnyPublisher<AccountModel, Error>
 	func saveAccountUseCase(account: AccountEntity, context: ModelContext) -> AnyPublisher<Void, Error>
 	func updateBalanceUseCase(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) -> AnyPublisher<BalanceModel, Error>
+	func updateCurrency(email: String, newCurrency: CurrencySwiftDataEntity, context: ModelContext) -> AnyPublisher<CurrencyModel, Error>
 }

@@ -26,6 +26,7 @@ extension HomeScreen {
 		private var cancellables = Set<AnyCancellable>()
 
 		var currentBalance = BalanceModel()
+		var accountModel: AccountModel?
 
 		var formattedBalance: String {
 			let value = String(format: "%.2f", currentBalance.balance)
@@ -50,6 +51,7 @@ extension HomeScreen {
 				  let name = email.split(separator: "@").first else {
 				return ""
 			}
+			UserDefaults.userName = String(name)
 			return String(name)
 		}
 
@@ -80,7 +82,7 @@ extension HomeScreen {
 					}
 				} receiveValue: { [weak self] account in
 					guard let self, let balance = account.balance else { return }
-					print(account)
+					accountModel = account
 					currentBalance = balance
 				}
 				.store(in: &cancellables)

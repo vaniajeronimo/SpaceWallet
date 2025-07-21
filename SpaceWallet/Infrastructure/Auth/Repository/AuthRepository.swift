@@ -53,4 +53,15 @@ class AuthRepository: IAuthRepository {
 			}
 			.eraseToAnyPublisher()
 	}
+
+	func updateCurrency(email: String, newCurrency: CurrencySwiftDataEntity, context: ModelContext) -> AnyPublisher<CurrencyModel, Error> {
+		accountDatabaseProvider.updateCurrency(email: email, newCurrency: newCurrency, context: context)
+			.tryMap { entity in
+				guard let entity else {
+					throw NSError(domain: "CurrencyUpdateFailed", code: 404, userInfo: [NSLocalizedDescriptionKey: "Currency update failed."])
+				}
+				return entity.toModel()
+			}
+			.eraseToAnyPublisher()
+	}
 }

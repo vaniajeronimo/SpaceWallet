@@ -16,6 +16,7 @@ public struct SelectableBottomSheet<T: SelectableItemProtocol>: View {
 	private let hasSearchView: Bool
 	private let isMandatory: Bool
 	private let height: CGFloat?
+	private let bottomPadding: CGFloat
 
 	@Binding private var isShowing: Bool
 	@Binding private var selectedItem: T?
@@ -32,6 +33,7 @@ public struct SelectableBottomSheet<T: SelectableItemProtocol>: View {
 		height: CGFloat? = nil,
 		items: [T],
 		selectedItem: Binding<T?>,
+		bottomPadding: CGFloat = .zero,
 		onSelectedCallback: @escaping (T) -> Void = { _ in },
 		onDidFinishSearch: @escaping (String) -> Void = { _ in },
 		onClose: @escaping () -> Void = { },
@@ -43,11 +45,12 @@ public struct SelectableBottomSheet<T: SelectableItemProtocol>: View {
 		self.isMandatory = isMandatory
 		self.height = height
 		self._selectedItem = selectedItem
+		self.bottomPadding = bottomPadding
 		self.onSelectedCallback = onSelectedCallback
 		self.onDidFinishSearch = onDidFinishSearch
 		self.onClose = onClose
 		self._isShowing = isShowing
-		self.viewModel = .init(items: items, itemsFullList: items)
+		self.viewModel = .init(items: items)
 	}
 
 	public var body: some View {
@@ -68,20 +71,6 @@ public struct SelectableBottomSheet<T: SelectableItemProtocol>: View {
 
 	private var content: some View {
 		VStack {
-			/*
-			if hasSearchView {
-				Search(placeholder: "search".localized,
-					   searchString: $viewModel.searchString,
-					   onDidFinishSearch: { value in
-					onDidFinishSearch(value)
-				})
-				.style(Search.Style(size: .l))
-				.padding(.top, UI.Spacing.level07)
-				.onChange(of: viewModel.searchString) { _, searchString in
-					viewModel.observeQuery(with: searchString)
-				}
-			}
-			 */
 			ScrollView {
 				VStack(spacing: UI.Spacing.level04) {
 					ForEach(viewModel.items) { item in
@@ -96,6 +85,7 @@ public struct SelectableBottomSheet<T: SelectableItemProtocol>: View {
 				}
 				.padding(.vertical)
 			}
+			.padding(.top, UI.Spacing.level05)
 			cta
 		}
 		.frame(maxWidth: .infinity, alignment: .leading)
@@ -111,6 +101,6 @@ public struct SelectableBottomSheet<T: SelectableItemProtocol>: View {
 		}
 		.buttonStyle(PrimaryButton(.large, color: .b0, titleColor: .textPrimary))
 		.padding(.horizontal, UI.Spacing.level07)
-		.padding(.vertical, UI.Spacing.level07)
+		.padding(.bottom, bottomPadding)
 	}
 }

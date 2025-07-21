@@ -26,4 +26,11 @@ public class CurrencySwiftDataEntity {
 	init(currency: CurrencyType) {
 		self.rawValue = currency.rawValue
 	}
+
+	public convenience init?(symbol: String) {
+		guard let currencyType = CurrencyType(rawValue: symbol) else {
+			return nil
+		}
+		self.init(currency: currencyType)
+	}
 }

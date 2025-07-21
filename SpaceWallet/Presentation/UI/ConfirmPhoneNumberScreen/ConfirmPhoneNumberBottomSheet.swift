@@ -15,6 +15,7 @@ extension ConfirmPhoneNumberScreen {
 			height: 603,
 			items: viewModel.countries,
 			selectedItem: $viewModel.selectedCountry,
+			bottomPadding: UI.Spacing.level07,
 			onSelectedCallback: { selectedCountry in
 				viewModel.selectedCountry = selectedCountry
 				viewModel.isToShowBottomSheet = false

@@ -5,7 +5,7 @@
 //  Created by Vania Jeronimo on 14/07/2025.
 //
 
-import Foundation
+import SwiftData
 import SwiftUI
 
 struct HomeScreenNavigation: View, Navigation {
@@ -31,21 +31,19 @@ struct HomeScreenNavigation: View, Navigation {
 					onAction(.receive)
 				case .send:
 					break
-				case .settings:
-					navigation.showFullScreen(settings)
+				case .settings(let context):
+					navigation.showFullScreen(settings(with: context))
 				default:
 					break
 			}
 		}
 	}
 
-	private var settings: some View {
-		SettingsScreen { action in
+	private func settings(with context: ModelContext) -> some View {
+		SettingsScreen(context: context) { action in
 			switch action {
 				case .close:
 					navigation.popOrDismiss()
-				default:
-					break
 			}
 		}
 	}

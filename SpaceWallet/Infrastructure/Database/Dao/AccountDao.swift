@@ -71,6 +71,37 @@ class AccountDao {
 		.eraseToAnyPublisher()
 	}
 
+	func updateCurrency(email: String, newCurrency: CurrencySwiftDataEntity, context: ModelContext) -> AnyPublisher<CurrencySwiftDataEntity?, Error> {
+		return Future { promise in
+			do {
+				let descriptor = FetchDescriptor<AccountSwiftDataEntity>(
+					predicate: #Predicate { $0.email == email }
+				)
+				let results = try context.fetch(descriptor)
+
+				guard let account = results.first else {
+					promise(.failure(NSError(domain: "UpdateFailure", code: 404, userInfo: [NSLocalizedDescriptionKey: "Account not found."])))
+					return
+				}
+
+				let balance = account.balance ?? {
+					let newBalance = BalanceSwiftDataEntity(.init(balance: 0.00, currency: .usd))
+					account.balance = newBalance
+					return newBalance
+				}()
+
+				balance.currency = newCurrency
+				try context.save()
+
+				promise(.success(balance.currency))
+			} catch {
+				promise(.failure(error))
+			}
+		}
+		.receive(on: DispatchQueue.main)
+		.eraseToAnyPublisher()
+	}
+
 	// MARK: - DELETE by ID
 	func delete(email: String, context: ModelContext) -> AnyPublisher<Void, Error> {
 		return Future { promise in

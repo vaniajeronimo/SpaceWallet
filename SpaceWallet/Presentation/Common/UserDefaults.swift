@@ -14,6 +14,7 @@ public extension UserDefaults {
 		case isFirstLaunch = "isFirstLaunch"
 		case userEmail = "userEmail"
 		case userPassword = "userPassword"
+		case userName = "userName"
 		case userPhoneNumber = "userPhoneNumber"
 	}
 
@@ -60,6 +61,15 @@ public extension UserDefaults {
 		}
 		set {
 			UserDefaults.standard.set(newValue, forKey: Key.userPassword.rawValue)
+		}
+	}
+
+	class var userName: String? {
+		get {
+			return UserDefaults.standard.object(forKey: Key.userName.rawValue) as? String
+		}
+		set {
+			UserDefaults.standard.set(newValue, forKey: Key.userName.rawValue)
 		}
 	}
 

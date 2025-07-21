@@ -20,6 +20,7 @@ public extension Image {
 	static let close_icon = Image("close", bundle: Bundle.main)
 	static let chevronDown = Image("chevron_down", bundle: Bundle.main)
 	static let chevronLeft = Image("chevron_left", bundle: Bundle.main)
+	static let chevron_right = Image("chevron_right", bundle: Bundle.main)
 	static let checkmark = Image("check", bundle: Bundle.main)
 	static let close_dark = Image("close_dark", bundle: Bundle.main)
 	static let info = Image("info", bundle: Bundle.main)
@@ -61,6 +62,9 @@ public extension Image {
 	static let usa = Image("united_states", bundle: Bundle.main)
 	static let spain = Image("spain", bundle: Bundle.main)
 	static let portugal = Image("portugal", bundle: Bundle.main)
+	static let europe = Image("european_union", bundle: Bundle.main)
+	static let japan = Image("japan", bundle: Bundle.main)
+	static let uk = Image("united_kingdom", bundle: Bundle.main)
 
 	// MARK: - Wallet
 	static let wallet_violet_stroke = Image("wallet_violet_stroke", bundle: Bundle.main)
@@ -87,6 +91,12 @@ public extension Image {
 	static let spectrum_2 = Image("color_spectrum2_nft", bundle: Bundle.main)
 
 	// MARK: - Settings
-	static let profile = Image("profile_pic", bundle: Bundle.main)
-	static let profile_large = Image("profile_large", bundle: Bundle.main)
+	static let profile = Image("ic_profile", bundle: Bundle.main)
+	static let appearance = Image("ic_appearance", bundle: Bundle.main)
+	static let currency = Image("ic_currency", bundle: Bundle.main)
+	static let notification = Image("ic_notification", bundle: Bundle.main)
+	static let privacy = Image("ic_privacy", bundle: Bundle.main)
+	static let face_id_settings = Image("ic_face_id", bundle: Bundle.main)
+	static let recovery_phrase = Image("ic_recovery_phrase", bundle: Bundle.main)
+	static let icloud_backup = Image("ic_icloud_backup", bundle: Bundle.main)
 }

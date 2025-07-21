@@ -21,6 +21,10 @@ extension Container {
 		self { UpdateBalanceUseCase() }
 	}
 
+	var updateCurencyUseCase: Factory<UpdateCurrencyUseCase> {
+		self { UpdateCurrencyUseCase() }
+	}
+
 	var getAccountUseCase: Factory<GetAccountUseCase> {
 		self { GetAccountUseCase() }
 	}

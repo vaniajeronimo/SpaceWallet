@@ -53,6 +53,7 @@ extension AccountEntity {
 		self.email = model.email
 		self.password = model.password
 		self.phoneNumber = model.phoneNumber
+		self.accountName = model.accountName
 		self.wallet = model.wallet.map { WalletEntity($0) }
 		self.balance = model.balance.map { BalanceEntity($0) }
 	}
