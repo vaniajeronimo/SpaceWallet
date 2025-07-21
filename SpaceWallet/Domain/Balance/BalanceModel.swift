@@ -25,10 +25,10 @@ public struct BalanceModel {
 	}
 
 	public init(
-		balance: Double,
-		currency: CurrencyModel,
-		margin: Double? = nil,
-		profit: Double? = nil
+		balance: Double = 0.0,
+		currency: CurrencyModel = .usd,
+		margin: Double? = 0.0,
+		profit: Double? = 0.0
 	) {
 		self.balance = balance
 		self.currency = currency

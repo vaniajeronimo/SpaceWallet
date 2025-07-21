@@ -19,10 +19,17 @@ extension QRCodeBottomSheet {
 		@Injected(\.updateBalanceUseCase)
 		private var updateBalanceUseCase
 
+		@ObservationIgnored
+		@Binding var isShowing: Bool
+
 		var amount: String = ""
 
 		private var modelContext: ModelContext?
 		private var cancellables = Set<AnyCancellable>()
+
+		init(isShowing: Binding<Bool>) {
+			self._isShowing = isShowing
+		}
 
 		func updateBalance() {
 			guard let modelContext,
@@ -45,8 +52,10 @@ extension QRCodeBottomSheet {
 						case .finished:
 							break
 					}
-				} receiveValue: { newBalance  in
+				} receiveValue: { [weak self] newBalance  in
+					guard let self else { return }
 					print(newBalance)
+					isShowing = false
 				}
 				.store(in: &cancellables)
 		}

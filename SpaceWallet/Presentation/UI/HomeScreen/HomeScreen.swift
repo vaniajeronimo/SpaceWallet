@@ -9,6 +9,9 @@ import SwiftUI
 
 public struct HomeScreen: View {
 
+	@Environment(\.modelContext)
+	private var modelContext
+
 	private let viewModel: ViewModel
 
 	public init(onAction: @escaping (ActionType) -> Void) {
@@ -20,6 +23,9 @@ public struct HomeScreen: View {
 			viewModel.balanceColor.gradient
 				.ignoresSafeArea(edges: .all)
 			content
+		}
+		.onAppear {
+			viewModel.setContext(modelContext)
 		}
 	}
 

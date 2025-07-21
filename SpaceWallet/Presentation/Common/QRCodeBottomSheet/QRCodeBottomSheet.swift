@@ -12,8 +12,13 @@ struct QRCodeBottomSheet: View {
 	@Environment(\.modelContext)
 	private var modelContext
 
-	@Bindable private var viewModel = ViewModel()
+	@Bindable private var viewModel: ViewModel
 	@Binding var isShowing: Bool
+
+	init(isShowing: Binding<Bool>) {
+		self._isShowing = isShowing
+		self.viewModel = .init(isShowing: isShowing)
+	}
 
 	var body: some View {
 		CustomBottomSheet(
@@ -24,7 +29,7 @@ struct QRCodeBottomSheet: View {
 		)
 		.mainTitle("receive".localized)
 		.bottomPadding(UI.Spacing.level07)
-		.isShowing($isShowing)
+		.isShowing($viewModel.isShowing)
 		.dismissKeyboard()
 		.keyboardAware(offset: 60)
 	}

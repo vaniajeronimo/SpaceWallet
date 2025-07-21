@@ -90,25 +90,18 @@ public extension String {
 	}
 
 	var parsedAmount: Double? {
-		let locales = [
-			Locale(identifier: "pt_PT"),
-			Locale(identifier: "en_US")
-		]
+		let formatter = NumberFormatter()
+		formatter.numberStyle = .decimal
 
-		for locale in locales {
-			let formatter = NumberFormatter()
-			formatter.numberStyle = .decimal
-			formatter.locale = locale
-
-			if let number = formatter.number(from: self) {
-				return number.doubleValue
-			}
+		if contains(",") && contains(".") {
+			formatter.locale = Locale(identifier: "pt_PT")
+		} else if contains(",") {
+			formatter.locale = Locale(identifier: "en_US")
+		} else if contains(".") {
+			formatter.locale = Locale(identifier: "pt_PT")
+		} else {
+			return Double(self)
 		}
-
-		let sanitized = self
-			.replacingOccurrences(of: ",", with: "")
-			.replacingOccurrences(of: ".", with: "")
-
-		return Double(sanitized)
+		return formatter.number(from: self)?.doubleValue
 	}
 }

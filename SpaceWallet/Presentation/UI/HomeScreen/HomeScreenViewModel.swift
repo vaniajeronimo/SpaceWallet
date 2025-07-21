@@ -6,6 +6,8 @@
 //
 
 import Combine
+import Factory
+import SwiftData
 import SwiftUI
 
 extension HomeScreen {
@@ -13,17 +15,17 @@ extension HomeScreen {
 	@MainActor
 	final class ViewModel {
 
+		@ObservationIgnored
+		@Injected(\.getAccountUseCase)
+		private var getAccountUseCase
+
 		let onAction: (ActionType) -> Void
 		var actions: [ActionCardModel] = []
 
-		var currentBalance: BalanceModel {
-			.init(
-				balance: 0.00,
-				currency: .usd,
-				margin: 0.00,
-				profit: 0.00
-			)
-		}
+		private var modelContext: ModelContext?
+		private var cancellables = Set<AnyCancellable>()
+
+		var currentBalance = BalanceModel()
 
 		var formattedBalance: String {
 			let value = String(format: "%.2f", currentBalance.balance)
@@ -62,6 +64,31 @@ extension HomeScreen {
 		init(onAction: @escaping (ActionType) -> Void) {
 			self.onAction = onAction
 			setupActions()
+		}
+
+		func getAccount() {
+			guard let context = modelContext, let email = UserDefaults.userEmail else { return }
+
+			getAccountUseCase.execute(email: email, context: context)
+				.receive(on: DispatchQueue.main)
+				.sink { completion in
+					switch completion {
+						case .failure(let error):
+							Debug.error(error)
+						case .finished:
+							break
+					}
+				} receiveValue: { [weak self] account in
+					guard let self, let balance = account.balance else { return }
+					print(account)
+					currentBalance = balance
+				}
+				.store(in: &cancellables)
+		}
+
+		func setContext(_ context: ModelContext) {
+			self.modelContext = context
+			self.getAccount()
 		}
 
 		private func setupActions() {
