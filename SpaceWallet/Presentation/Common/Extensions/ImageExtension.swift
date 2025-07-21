@@ -67,15 +67,15 @@ public extension Image {
 	static let uk = Image("united_kingdom", bundle: Bundle.main)
 
 	// MARK: - Wallet
-	static let wallet_violet_stroke = Image("wallet_violet_stroke", bundle: Bundle.main)
-	static let wallet_green_stroke = Image("wallet_green_stroke", bundle: Bundle.main)
-	static let wallet_green_hover = Image("wallet_green_hover", bundle: Bundle.main)
-	static let wallet_orange_hover = Image("wallet_orange_hover", bundle: Bundle.main)
-	static let wallet_yellow_hover = Image("wallet_yellow_hover", bundle: Bundle.main)
-	static let wallet_violet_hover = Image("wallet_violet_hover", bundle: Bundle.main)
-	static let wallet_pink_hover = Image("wallet_pink_hover", bundle: Bundle.main)
-	static let wallet_blue_hover = Image("wallet_blue_hover", bundle: Bundle.main)
-	static let wallet_cyan_hover = Image("wallet_cyan_hover", bundle: Bundle.main)
+	static let blue_wallet_hover = Image("blue_wallet_hover", bundle: Bundle.main)
+	static let cyan_wallet_hover = Image("cyan_wallet_hover", bundle: Bundle.main)
+	static let violet_wallet_hover = Image("violet_wallet_hover", bundle: Bundle.main)
+	static let pink_wallet_hover = Image("pink_wallet_hover", bundle: Bundle.main)
+	static let orange_wallet_hover = Image("orange_wallet_hover", bundle: Bundle.main)
+	static let yellow_wallet_hover = Image("yellow_wallet_hover", bundle: Bundle.main)
+	static let green_wallet_hover = Image("green_wallet_hover", bundle: Bundle.main)
+	static let green_wallet_stroke = Image("green_wallet_stroke", bundle: Bundle.main)
+	static let violet_wallet_stroke = Image("violet_wallet_stroke", bundle: Bundle.main)
 
 	// MARK: - Actions
 	static let receive = Image("receive", bundle: Bundle.main)
