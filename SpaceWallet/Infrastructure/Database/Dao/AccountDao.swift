@@ -44,6 +44,29 @@ class AccountDao {
 		.eraseToAnyPublisher()
 	}
 
+	func updateBalance(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) -> AnyPublisher<BalanceSwiftDataEntity?, Error> {
+		return Future { promise in
+			do {
+				let descriptor = FetchDescriptor<AccountSwiftDataEntity>(
+					predicate: #Predicate { $0.email == email }
+				)
+				let results = try context.fetch(descriptor)
+
+				if let account = results.first {
+					account.balance = newBalance
+					try context.save()
+					promise(.success(newBalance))
+				} else {
+					promise(.failure(NSError(domain: "Account not found", code: 404)))
+				}
+			} catch {
+				promise(.failure(error))
+			}
+		}
+		.receive(on: DispatchQueue.main)
+		.eraseToAnyPublisher()
+	}
+
 	// MARK: - DELETE by ID
 	func delete(email: String, context: ModelContext) -> AnyPublisher<Void, Error> {
 		return Future { promise in

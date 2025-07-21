@@ -12,6 +12,7 @@ protocol IAccountDatabaseProvider {
 
 	func get(email: String, context: ModelContext) -> AnyPublisher<AccountSwiftDataEntity?, Error>
 	func insertOrUpdate(entity: AccountSwiftDataEntity, context: ModelContext) -> AnyPublisher<Void, Error>
+	func updateBalance(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) -> AnyPublisher<BalanceSwiftDataEntity?, Error>
 	func delete(email: String, context: ModelContext) -> AnyPublisher<Void, Error>
 	func deleteAll(context: ModelContext) -> AnyPublisher<Void, Error>
 }

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct QRCodeBottomSheet: View {
 
+	@Environment(\.modelContext)
+	private var modelContext
+
 	@Bindable private var viewModel = ViewModel()
 	@Binding var isShowing: Bool
 
@@ -39,6 +42,9 @@ struct QRCodeBottomSheet: View {
 			.padding(.top, UI.Spacing.level07)
 		}
 		.padding(.horizontal, UI.Spacing.level07)
+		.onAppear {
+			viewModel.setContext(modelContext)
+		}
 	}
 
 	private var infoText: some View {
@@ -73,15 +79,12 @@ struct QRCodeBottomSheet: View {
 			.isNumberField(true)
 			.keyboardType(.decimalPad)
 			.submitLabel(.done)
-			.onSubmit {
-				print("Amount submitted: \(viewModel.amount)")
-			}
 		}
 	}
 
 	private var cta: some View {
 		Button {
-			print("Receive button tapped with amount \(viewModel.amount)")
+			viewModel.updateBalance()
 		} label: {
 			Text("done".localized)
 		}

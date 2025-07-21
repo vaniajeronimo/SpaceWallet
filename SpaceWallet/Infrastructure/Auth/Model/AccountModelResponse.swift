@@ -15,4 +15,5 @@ struct AccountModelResponse {
 	var phoneNumber: String?
 	var accountName: String?
 	var wallet: WalletModelResponse?
+	var balance: BalanceModelResponse?
 }

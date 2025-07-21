@@ -15,4 +15,5 @@ struct AccountEntity: Codable {
 	var phoneNumber: String?
 	var accountName: String?
 	var wallet: WalletEntity?
+	var balance: BalanceEntity?
 }

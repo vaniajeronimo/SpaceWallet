@@ -23,6 +23,10 @@ class AccountDatabaseProvider: IAccountDatabaseProvider {
 		accountDao.insertOrUpdate(entity, context: context)
 	}
 
+	func updateBalance(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) -> AnyPublisher<BalanceSwiftDataEntity?, Error> {
+		accountDao.updateBalance(email: email, newBalance: newBalance, context: context)
+	}
+
 	func delete(email: String, context: ModelContext) -> AnyPublisher<Void, Error> {
 		accountDao.delete(email: email, context: context)
 	}

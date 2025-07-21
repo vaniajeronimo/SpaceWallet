@@ -42,4 +42,15 @@ class AuthRepository: IAuthRepository {
 		let swiftDataEntity = AccountSwiftDataEntity(account)
 		return accountDatabaseProvider.insertOrUpdate(entity: swiftDataEntity, context: context)
 	}
+
+	func updateBalanceUseCase(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) -> AnyPublisher<BalanceModel, Error> {
+		accountDatabaseProvider.updateBalance(email: email, newBalance: newBalance, context: context)
+			.tryMap { entity in
+				guard let entity else {
+					throw NSError(domain: "BalanceUpdateFailed", code: 404, userInfo: [NSLocalizedDescriptionKey: "Balance update failed."])
+				}
+				return entity.toModel()
+			}
+			.eraseToAnyPublisher()
+	}
 }

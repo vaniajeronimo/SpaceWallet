@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public enum BalanceStatusModel {
+public enum BalanceStatusModel: String, Codable {
 	case profit
 	case breakEven
 	case loss

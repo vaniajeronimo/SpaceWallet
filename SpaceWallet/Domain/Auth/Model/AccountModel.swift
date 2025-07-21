@@ -15,6 +15,7 @@ struct AccountModel {
 	var phoneNumber: String?
 	var accountName: String?
 	var wallet: WalletModel?
+	var balance: BalanceModel?
 
 	init(
 		id: UUID,
@@ -23,7 +24,8 @@ struct AccountModel {
 		password: String? = nil,
 		phoneNumber: String? = nil,
 		accountName: String? = "Account1",
-		wallet: WalletModel? = nil
+		wallet: WalletModel? = nil,
+		balance: BalanceModel? = nil
 	) {
 		self.id = id
 		self.userName = userName
@@ -32,5 +34,6 @@ struct AccountModel {
 		self.phoneNumber = phoneNumber
 		self.accountName = accountName
 		self.wallet = wallet
+		self.balance = balance
 	}
 }

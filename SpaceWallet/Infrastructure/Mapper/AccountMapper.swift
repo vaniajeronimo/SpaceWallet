@@ -17,6 +17,7 @@ extension AccountModel {
 		self.phoneNumber = model.phoneNumber
 		self.accountName = model.accountName
 		self.wallet = model.wallet.map { WalletModel($0) }
+		self.balance = model.balance.map { BalanceModel($0) }
 	}
 
 	init(_ model: AccountEntity) {
@@ -27,6 +28,7 @@ extension AccountModel {
 		self.phoneNumber = model.phoneNumber
 		self.accountName = model.accountName
 		self.wallet = model.wallet.map { WalletModel($0) }
+		self.balance = model.balance.map { BalanceModel($0) }
 	}
 
 	func toEntity() -> AccountEntity {
@@ -37,7 +39,8 @@ extension AccountModel {
 			password: password,
 			phoneNumber: phoneNumber,
 			accountName: accountName,
-			wallet: wallet.map { WalletEntity($0) }
+			wallet: wallet.map { WalletEntity($0) },
+			balance: balance.map { BalanceEntity($0) }
 		)
 	}
 }
@@ -51,6 +54,7 @@ extension AccountEntity {
 		self.password = model.password
 		self.phoneNumber = model.phoneNumber
 		self.wallet = model.wallet.map { WalletEntity($0) }
+		self.balance = model.balance.map { BalanceEntity($0) }
 	}
 
 	init(_ model: AccountSwiftDataEntity) {
@@ -61,6 +65,7 @@ extension AccountEntity {
 		self.phoneNumber = model.phoneNumber
 		self.accountName = model.accountName
 		self.wallet = model.wallet.map { WalletEntity($0) }
+		self.balance = model.balance.map { BalanceEntity($0) }
 	}
 }
 
@@ -75,6 +80,7 @@ extension AccountSwiftDataEntity {
 		self.phoneNumber = model.phoneNumber
 		self.accountName = model.accountName
 		self.wallet = model.wallet.map { WalletSwiftDataEntity($0) }
+		self.balance = model.balance.map { BalanceSwiftDataEntity($0) }
 	}
 
 	func toModel() -> AccountModel {
@@ -85,7 +91,8 @@ extension AccountSwiftDataEntity {
 			password: password,
 			phoneNumber: phoneNumber,
 			accountName: accountName,
-			wallet: wallet.map { $0.toModel() }
+			wallet: wallet.map { $0.toModel() },
+			balance: balance.map { $0.toModel() }
 		)
 	}
 }

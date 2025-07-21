@@ -24,7 +24,12 @@ public struct BalanceModel {
 		return BalanceStatusModel.from(value: balance)
 	}
 
-	public init(balance: Double, currency: CurrencyModel, margin: Double? = nil, profit: Double? = nil) {
+	public init(
+		balance: Double,
+		currency: CurrencyModel,
+		margin: Double? = nil,
+		profit: Double? = nil
+	) {
 		self.balance = balance
 		self.currency = currency
 		self.margin = margin

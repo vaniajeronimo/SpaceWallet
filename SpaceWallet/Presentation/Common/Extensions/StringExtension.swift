@@ -88,4 +88,27 @@ public extension String {
 		let decimalPart = parts.dropFirst().joined()
 		return "\(integerPart)\(decimalSeparator)\(decimalPart)"
 	}
+
+	var parsedAmount: Double? {
+		let locales = [
+			Locale(identifier: "pt_PT"),
+			Locale(identifier: "en_US")
+		]
+
+		for locale in locales {
+			let formatter = NumberFormatter()
+			formatter.numberStyle = .decimal
+			formatter.locale = locale
+
+			if let number = formatter.number(from: self) {
+				return number.doubleValue
+			}
+		}
+
+		let sanitized = self
+			.replacingOccurrences(of: ",", with: "")
+			.replacingOccurrences(of: ".", with: "")
+
+		return Double(sanitized)
+	}
 }
