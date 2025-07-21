@@ -79,3 +79,4 @@
 "amount" = "Amount";
 "qrcode_bottom_sheet_title" = "Ready to receive?";
 "qrcode_bottom_sheet_subtitle" = "Please confirm the amount that you will receive.";
+"your_account_title" = "Your Account";

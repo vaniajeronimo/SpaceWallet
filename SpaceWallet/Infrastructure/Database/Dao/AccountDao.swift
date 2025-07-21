@@ -53,11 +53,15 @@ class AccountDao {
 				let results = try context.fetch(descriptor)
 
 				if let account = results.first {
-					account.balance = newBalance
+					if let existingBalance = account.balance {
+						existingBalance.balance += newBalance.balance
+					} else {
+						account.balance = newBalance
+					}
 					try context.save()
-					promise(.success(newBalance))
+					promise(.success(account.balance))
 				} else {
-					promise(.failure(NSError(domain: "Account not found", code: 404)))
+					promise(.failure(NSError(domain: "UpdateFailure", code: 404)))
 				}
 			} catch {
 				promise(.failure(error))

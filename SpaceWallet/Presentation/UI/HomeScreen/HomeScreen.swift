@@ -67,13 +67,14 @@ public struct HomeScreen: View {
 				Text(viewModel.userName)
 					.font(.heading5SemiBold)
 					.foregroundStyle(.textSecondary)
-				HStack(alignment: .center, spacing: UI.Spacing.level02) {
-					Text("Account1")
-						.font(.heading5SemiBold)
-						.foregroundStyle(.textPrimary)
-					Button {
-						viewModel.onAction(.settings)
-					} label: {
+
+				Button {
+					viewModel.onAction(.settings)
+				} label: {
+					HStack(alignment: .center, spacing: UI.Spacing.level02) {
+						Text("Account1")
+							.font(.heading5SemiBold)
+							.foregroundStyle(.textPrimary)
 						Image.chevronDown
 							.resizable()
 							.frame(maxWidth: 8, maxHeight: 4.8)

@@ -27,7 +27,6 @@ public extension Image {
 	static let secure_shield = Image("secure_shield", bundle: Bundle.main)
 	static let hourglass = Image("time_hourglass", bundle: Bundle.main)
 	static let wallet_icon = Image("wallet_icon", bundle: Bundle.main)
-	static let profile = Image("profile_pic", bundle: Bundle.main)
 	static let qrCode = Image("qrCode_icon", bundle: Bundle.main)
 	static let search = Image("search_icon", bundle: Bundle.main)
 	static let container_view = Image("container_view", bundle: Bundle.main)
@@ -37,6 +36,7 @@ public extension Image {
 	static let empty_cart_retro = Image("empty_cart_retro", bundle: Bundle.main)
 	static let dots = Image("dots", bundle: Bundle.main)
 	static let credit_card_outline = Image("ic_credit_card_outline", bundle: Bundle.main)
+	static let close_outline = Image("close_outline", bundle: Bundle.main)
 	static let stars = Image("stars", bundle: Bundle.main)
 
 	// MARK: - TabBar Icons
@@ -85,4 +85,8 @@ public extension Image {
 	static let banana_monkey = Image("banana_monkey_nft", bundle: Bundle.main)
 	static let spectrum_1 = Image("color_spectrum_nft", bundle: Bundle.main)
 	static let spectrum_2 = Image("color_spectrum2_nft", bundle: Bundle.main)
+
+	// MARK: - Settings
+	static let profile = Image("profile_pic", bundle: Bundle.main)
+	static let profile_large = Image("profile_large", bundle: Bundle.main)
 }

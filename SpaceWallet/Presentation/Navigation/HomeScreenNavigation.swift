@@ -31,6 +31,19 @@ struct HomeScreenNavigation: View, Navigation {
 					onAction(.receive)
 				case .send:
 					break
+				case .settings:
+					navigation.showFullScreen(settings)
+				default:
+					break
+			}
+		}
+	}
+
+	private var settings: some View {
+		SettingsScreen { action in
+			switch action {
+				case .close:
+					navigation.popOrDismiss()
 				default:
 					break
 			}
