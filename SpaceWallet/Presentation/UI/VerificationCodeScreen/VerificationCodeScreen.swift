@@ -26,17 +26,17 @@ public struct VerificationCodeScreen: View {
 
 	public var body: some View {
 		Group {
-			VStack {
-				navBar
-				verification
+					VStack {
+						navBar
+						verification
 
-				// TODO: Improve this
-				Color.clear
-					.frame(height: 60)
-			}
-			.setCardView()
-			.padding(.horizontal, UI.Spacing.level07)
-		}
+						// TODO: Improve this
+						Color.clear
+							.frame(height: 60)
+					}
+					.setCardView()
+					.padding(.horizontal, UI.Spacing.level07)
+				}
 		.dismissKeyboard()
 		.keyboardAware()
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -87,13 +87,13 @@ public struct VerificationCodeScreen: View {
 
 	@ViewBuilder
 	private var verification: some View {
-		VStack(alignment: .center, spacing: 24) {
+		VStack(alignment: .center, spacing: UI.Spacing.level07) {
 			Image.onboarding_dialog
 				.resizable()
 				.scaledToFit()
 				.frame(width: 64, height: 64)
 
-			VStack(alignment: .center, spacing: 16) {
+			VStack(alignment: .center, spacing: UI.Spacing.level05) {
 				Text(viewModel.attributedTextString)
 					.multilineTextAlignment(.center)
 

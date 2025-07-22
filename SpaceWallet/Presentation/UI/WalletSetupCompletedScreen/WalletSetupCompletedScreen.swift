@@ -41,7 +41,7 @@ public struct WalletSetupCompletedScreen: View {
 			Text("wallet_ready_title".localized)
 			Text("wallet_ready_subtitle".localized)
 
-			Spacer(minLength: 40)
+			Spacer(minLength: UI.Spacing.level04)
 
 			viewModel.customizedWallet
 				.resizable()
@@ -55,7 +55,7 @@ public struct WalletSetupCompletedScreen: View {
 	}
 
 	private var walletCard: some View {
-		HStack(alignment: .top, spacing: 12) {
+		HStack(alignment: .top, spacing: UI.Spacing.level04) {
 			Image.wallet_icon
 				.resizable()
 				.scaledToFit()

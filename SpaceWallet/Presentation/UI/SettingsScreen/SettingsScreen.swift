@@ -11,7 +11,8 @@ import SwiftUI
 struct SettingsScreen: View {
 
 	@State private var isToShowAlert: Bool = false
-	@State var isToShowBottomSheet: Bool = false
+	@State var isToShowCurrencyBottomSheet: Bool = false
+	@State var isToShowNotificationsBottomSheet: Bool = false
 
 	@Bindable var viewModel = ViewModel()
 
@@ -36,6 +37,7 @@ struct SettingsScreen: View {
 			.padding(.horizontal, UI.Spacing.level07)
 
 			currencyBottomSheet
+			notificationsBottomSheet
 		}
 		.alert("generic_alert_title".localized, isPresented: $isToShowAlert) {
 			Button("ok".localized, role: .cancel) {
@@ -116,10 +118,10 @@ struct SettingsScreen: View {
 				isToShowAlert = true
 			})
 			createRow(icon: .currency, title: "currency_title".localized, action: {
-				isToShowBottomSheet = true
+				isToShowCurrencyBottomSheet = true
 			})
 			createRow(icon: .notification, title: "notification_title".localized, action: {
-				isToShowAlert = true
+				isToShowNotificationsBottomSheet = true
 			})
 			createRow(icon: .privacy, title: "privacy_title".localized, action: {
 				isToShowAlert = true

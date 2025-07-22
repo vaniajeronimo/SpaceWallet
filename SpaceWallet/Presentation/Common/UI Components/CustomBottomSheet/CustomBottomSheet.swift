@@ -167,7 +167,6 @@ public struct CustomBottomSheet<Content: View>: View {
 						.frame(width: 24, height: 24)
 				}
 			}
-			.frame(height: 26)
 			.padding(.top, UI.Spacing.level07)
 		}
 		.padding(.horizontal, UI.Spacing.level07)
