@@ -16,19 +16,17 @@ public struct SplashScreen: View {
 	}
 
 	public var body: some View {
-		ZStack {
-			VStack {
-				Spacer()
-				HStack(alignment: .top) {
-					Image.star
-						.frame(width: 20, height: 20)
-						.scaledToFill()
-					Image.planet
-						.frame(width: 100, height: 100)
-						.scaledToFit()
-				}
-				Spacer()
+		VStack {
+			Spacer()
+			HStack(alignment: .top) {
+				Image.star
+					.frame(width: 20, height: 20)
+					.scaledToFill()
+				Image.planet
+					.frame(width: 100, height: 100)
+					.scaledToFit()
 			}
+			Spacer()
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.background(

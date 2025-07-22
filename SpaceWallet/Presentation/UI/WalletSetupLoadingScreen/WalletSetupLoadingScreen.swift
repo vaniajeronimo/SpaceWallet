@@ -24,7 +24,6 @@ public struct WalletSetupLoadingScreen: View {
 				content
 			}
 		}
-		.padding(.horizontal, UI.Spacing.level07)
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.background(
 			LinearGradient.violetPrimary
@@ -55,5 +54,6 @@ public struct WalletSetupLoadingScreen: View {
 			}
 			.multilineTextAlignment(.center)
 		}
+		.padding(.horizontal, UI.Spacing.level07)
 	}
 }

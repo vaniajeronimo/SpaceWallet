@@ -20,8 +20,8 @@ public struct WalletSetupCompletedScreen: View {
 	}
 
 	public var body: some View {
-		VStack(spacing: UI.Spacing.level05) {
-			VStack {
+		Group {
+			VStack(spacing: UI.Spacing.level05) {
 				ScrollView(.vertical, showsIndicators: false) {
 					content
 				}

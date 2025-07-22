@@ -25,7 +25,7 @@ public struct VerificationCodeScreen: View {
 	}
 
 	public var body: some View {
-		ZStack {
+		Group {
 			VStack {
 				navBar
 				verification
@@ -34,11 +34,11 @@ public struct VerificationCodeScreen: View {
 				Color.clear
 					.frame(height: 60)
 			}
+			.setCardView()
+			.padding(.horizontal, UI.Spacing.level07)
 		}
-		.setCardView()
 		.dismissKeyboard()
 		.keyboardAware()
-		.padding(.horizontal, UI.Spacing.level07)
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.background(
 			LinearGradient.violetSecondary
