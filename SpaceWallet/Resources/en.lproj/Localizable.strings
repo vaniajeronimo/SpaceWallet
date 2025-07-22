@@ -94,3 +94,5 @@
 "pound" = "Pound";
 "usd" = "USD";
 "japanese_yen" = "Japanese Yen";
+"notifications_permission_title" = "Get instant update";
+"notifications_permission_subtitle" = "Enable notifications about completed transfers, swap & announcements";

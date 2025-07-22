@@ -57,6 +57,7 @@ public extension Image {
 	static let onboarding_locker = Image("locker", bundle: Bundle.main)
 	static let onboarding_mobile = Image("mobile", bundle: Bundle.main)
 	static let onboarding_arrow = Image("arrow", bundle: Bundle.main)
+	static let onboarding_notifications = Image("alert_bell", bundle: Bundle.main)
 
 	// MARK: - Flags
 	static let usa = Image("united_states", bundle: Bundle.main)
