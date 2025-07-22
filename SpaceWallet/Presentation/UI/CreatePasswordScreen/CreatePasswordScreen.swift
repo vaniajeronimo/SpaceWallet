@@ -21,17 +21,20 @@ public struct CreatePasswordScreen: View {
 
 	public var body: some View {
 		ZStack {
-			LinearGradient.violetSecondary
-
 			VStack {
 				title
 				createPassword
 			}
 			.setCardView()
-			.keyboardAware(offset: 190)
 			.padding(.horizontal, UI.Spacing.level07)
 		}
-		.ignoresSafeArea(edges: .all)
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.background(
+			LinearGradient
+				.violetPrimary
+				.ignoresSafeArea(.all)
+		)
+		.keyboardAware()
 		.dismissKeyboard()
 	}
 

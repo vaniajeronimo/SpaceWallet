@@ -20,11 +20,8 @@ public struct WalletSetupCompletedScreen: View {
 	}
 
 	public var body: some View {
-		ZStack {
-			LinearGradient.violetPrimary
-				.ignoresSafeArea(edges: .all)
-
-			VStack(spacing: 16) {
+		VStack(spacing: UI.Spacing.level05) {
+			VStack {
 				ScrollView(.vertical, showsIndicators: false) {
 					content
 				}
@@ -33,6 +30,10 @@ public struct WalletSetupCompletedScreen: View {
 			}
 			.padding(.horizontal, UI.Spacing.level07)
 		}
+		.background(
+			LinearGradient.violetPrimary
+				.ignoresSafeArea(.all)
+		)
 	}
 
 	private var content: some View {

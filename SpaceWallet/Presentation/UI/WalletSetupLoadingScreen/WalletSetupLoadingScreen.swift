@@ -19,15 +19,17 @@ public struct WalletSetupLoadingScreen: View {
 	}
 
 	public var body: some View {
-		ZStack {
-			LinearGradient.violetPrimary
-				.ignoresSafeArea(edges: .all)
-
-			ScrollView {
+		VStack {
+			ScrollView(showsIndicators: false) {
 				content
 			}
-			.padding(.horizontal, UI.Spacing.level07)
 		}
+		.padding(.horizontal, UI.Spacing.level07)
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.background(
+			LinearGradient.violetPrimary
+				.ignoresSafeArea(.all)
+		)
 		.onAppear {
 			viewModel.setContext(modelContext)
 		}

@@ -33,9 +33,7 @@ public struct ErrorScreen: View {
 	}
 
 	public var body: some View {
-		ZStack {
-			gradient
-
+		Group {
 			VStack {
 				Spacer()
 
@@ -69,7 +67,10 @@ public struct ErrorScreen: View {
 			}
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
-		.edgesIgnoringSafeArea(.top)
+		.background(
+			gradient
+				.ignoresSafeArea(.all)
+		)
 	}
 
 	public func buttonSizeMode(mode: ButtonSizeMode) -> Self {

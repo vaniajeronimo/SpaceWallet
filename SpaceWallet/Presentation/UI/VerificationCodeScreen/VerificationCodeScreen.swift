@@ -26,8 +26,6 @@ public struct VerificationCodeScreen: View {
 
 	public var body: some View {
 		ZStack {
-			LinearGradient.violetSecondary
-
 			VStack {
 				navBar
 				verification
@@ -36,18 +34,22 @@ public struct VerificationCodeScreen: View {
 				Color.clear
 					.frame(height: 60)
 			}
-			.setCardView()
-			.keyboardAware()
-			.padding(.horizontal, UI.Spacing.level07)
 		}
-		.ignoresSafeArea(edges: .all)
+		.setCardView()
+		.dismissKeyboard()
+		.keyboardAware()
+		.padding(.horizontal, UI.Spacing.level07)
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.background(
+			LinearGradient.violetSecondary
+				.ignoresSafeArea(.all)
+		)
 		.onAppear {
 			viewModel.startTimer()
 		}
 		.onDisappear {
 			viewModel.timer?.invalidate()
 		}
-		.dismissKeyboard()
 	}
 
 	private var navBar: some View {

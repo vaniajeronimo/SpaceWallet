@@ -17,8 +17,6 @@ public struct SplashScreen: View {
 
 	public var body: some View {
 		ZStack {
-			LinearGradient.violetPrimary
-
 			VStack {
 				Spacer()
 				HStack(alignment: .top) {
@@ -32,7 +30,11 @@ public struct SplashScreen: View {
 				Spacer()
 			}
 		}
-		.ignoresSafeArea(edges: .all)
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.background(
+			LinearGradient.violetPrimary
+				.ignoresSafeArea(.all)
+		)
 	}
 }
 

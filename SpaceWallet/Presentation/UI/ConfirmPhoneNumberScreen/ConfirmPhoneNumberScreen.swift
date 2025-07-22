@@ -21,19 +21,21 @@ public struct ConfirmPhoneNumberScreen: View {
 
 	public var body: some View {
 		ZStack {
-			LinearGradient.violetSecondary
-
 			VStack {
 				title
 				confirmPhoneNumber
 			}
 			.setCardView()
-			.keyboardAware(offset: 190)
+			.keyboardAware()
 			.padding(.horizontal, UI.Spacing.level07)
 
 			countriesBottomSheet
 		}
-		.ignoresSafeArea(edges: .all)
+		.background(
+			LinearGradient
+				.violetSecondary
+				.ignoresSafeArea(.all)
+		)
 		.dismissKeyboard()
 	}
 

@@ -18,9 +18,6 @@ public struct WalletSetupScreen: View {
 
 	public var body: some View {
 		ZStack {
-			LinearGradient.violetPrimary
-				.ignoresSafeArea(edges: .all)
-
 			VStack(spacing: UI.Spacing.level05) {
 				navBar
 				ScrollView {
@@ -30,6 +27,11 @@ public struct WalletSetupScreen: View {
 			}
 			.padding(.horizontal, UI.Spacing.level07)
 		}
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.background(
+			LinearGradient.violetPrimary
+				.ignoresSafeArea(.all)
+		)
 	}
 
 	private var navBar: some View {
@@ -59,7 +61,7 @@ public struct WalletSetupScreen: View {
 
 	private var content: some View {
 		VStack(spacing: UI.Spacing.level03) {
-			Text("wallet_customization_title" .localized)
+			Text("wallet_customization_title".localized)
 				.font(.heading1Bold)
 				.foregroundStyle(.textPrimary)
 			Text("wallet_customization_subtitle".localized)
@@ -123,6 +125,7 @@ public struct WalletSetupScreen: View {
 			Text("next".localized)
 		}
 		.buttonStyle(PrimaryButton(.large))
+		.padding(.top, UI.Spacing.level05)
 		.padding(.bottom, UI.Spacing.level06)
 		.disabled(viewModel.selectedColor == nil)
 	}

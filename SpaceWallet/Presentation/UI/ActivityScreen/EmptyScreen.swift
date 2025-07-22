@@ -33,12 +33,8 @@ public struct EmptyScreen: View {
 	}
 
 	public var body: some View {
-		ZStack {
-			if let gradient {
-				gradient
-					.ignoresSafeArea()
-			}
-			VStack(spacing: .zero) {
+		VStack(spacing: .zero) {
+			VStack {
 				navBar
 				ScrollView {
 					VStack {
@@ -46,8 +42,10 @@ public struct EmptyScreen: View {
 					}
 				}
 			}
-			.padding(.horizontal, UI.Spacing.level06)
 		}
+		.padding(.horizontal, UI.Spacing.level06)
+		.background(gradient)
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
 	}
 
 	private var navBar: some View {

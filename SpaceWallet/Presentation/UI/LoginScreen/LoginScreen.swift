@@ -21,28 +21,28 @@ public struct LoginScreen: View {
 	}
 
 	public var body: some View {
-		ZStack {
-			LinearGradient.violetTertiary
-				.ignoresSafeArea()
-
-			ScrollView(showsIndicators: false) {
-				VStack(alignment: .center, spacing: UI.Spacing.level06) {
-					currentIllustration
-					content
-				}
-				.padding(.horizontal, UI.Spacing.level07)
+		ScrollView(showsIndicators: false) {
+			VStack(alignment: .center, spacing: UI.Spacing.level06) {
+				currentIllustration
+				content
 			}
+			.keyboardAware()
+			.padding(.horizontal, UI.Spacing.level07)
 		}
 		.dismissKeyboard {
 			viewModel.validateEmail()
+		}
+		.background(
+			LinearGradient.violetTertiary
+				.ignoresSafeArea(.all)
+		)
+		.onAppear {
+			viewModel.setContext(modelContext)
 		}
 		.alert("generic_alert_title".localized, isPresented: $isToShowAlert) {
 			Button("ok".localized, role: .cancel) {
 				isToShowAlert = false
 			}
-		}
-		.onAppear {
-			viewModel.setContext(modelContext)
 		}
 	}
 

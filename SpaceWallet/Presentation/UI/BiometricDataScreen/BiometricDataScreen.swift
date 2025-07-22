@@ -20,10 +20,7 @@ public struct BiometricDataScreen: View {
 	}
 
 	public var body: some View {
-		ZStack {
-			LinearGradient.violetPrimary
-				.ignoresSafeArea(edges: .all)
-
+		VStack {
 			VStack(spacing: UI.Spacing.level05) {
 				navBar
 				ScrollView {
@@ -34,6 +31,12 @@ public struct BiometricDataScreen: View {
 			}
 			.padding(.horizontal, UI.Spacing.level07)
 		}
+		.background(
+			LinearGradient
+				.violetPrimary
+				.ignoresSafeArea(.all)
+		)
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.alert("generic_alert_title".localized, isPresented: $viewModel.isToShowAlert) {
 			Button("ok".localized, role: .cancel) {
 				viewModel.isToShowAlert = false

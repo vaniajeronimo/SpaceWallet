@@ -20,14 +20,17 @@ public struct HomeScreen: View {
 	}
 
 	public var body: some View {
-		ZStack {
-			viewModel.balanceColor.gradient
-				.ignoresSafeArea(edges: .all)
+		VStack {
 			content
 		}
 		.onAppear {
 			viewModel.setContext(modelContext)
 		}
+		.background(
+			viewModel.balanceColor.gradient
+				.ignoresSafeArea(.all)
+		)
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
 	}
 
 	private var content: some View {

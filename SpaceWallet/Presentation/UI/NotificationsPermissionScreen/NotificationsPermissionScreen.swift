@@ -21,7 +21,7 @@ public struct NotificationsPermissionScreen: View {
 			cta
 		}
 		.padding(.horizontal, UI.Spacing.level07)
-		.background(.textPrimary)
+		.background(LinearGradient.violetPrimary)
 	}
 
 	private var content: some View {
@@ -37,12 +37,12 @@ public struct NotificationsPermissionScreen: View {
 				VStack(spacing: UI.Spacing.level04) {
 					Text("notifications_permission_title".localized)
 						.font(.heading2Bold)
-						.foregroundColor(.b0)
+						.foregroundColor(.textPrimary)
 
 					Text("notifications_permission_subtitle".localized)
 						.font(.body)
 						.fontWeight(.medium)
-						.foregroundColor(.textTertiary)
+						.foregroundColor(.textSecondary)
 				}
 				.multilineTextAlignment(.center)
 			}
@@ -58,7 +58,7 @@ public struct NotificationsPermissionScreen: View {
 		} label: {
 			Text("enable".localized)
 		}
-		.buttonStyle(PrimaryButton(.large, color: .b0, titleColor: .textPrimary))
+		.buttonStyle(PrimaryButton(.large))
 		.padding(.bottom, UI.Spacing.level06)
 	}
 }
