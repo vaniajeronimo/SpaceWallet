@@ -12,6 +12,7 @@ public extension UserDefaults {
 
 	enum Key: String {
 		case isFirstLaunch = "isFirstLaunch"
+		case isFirstNotificationPermissionRequest = "isFirstNotificationPermissionRequest"
 		case userEmail = "userEmail"
 		case userPassword = "userPassword"
 		case userName = "userName"
@@ -24,6 +25,7 @@ public extension UserDefaults {
 
 	func registerDefaults() {
 		register(value: true, forKey: .isFirstLaunch)
+		register(value: true, forKey: .isFirstNotificationPermissionRequest)
 	}
 
 	func clearDefaults(forKeys keys: [String]) {
@@ -42,6 +44,19 @@ public extension UserDefaults {
 		set {
 			UserDefaults.standard.set(
 				newValue, forKey: Key.isFirstLaunch.rawValue
+			)
+		}
+	}
+
+	class var isFirstNotificationPermissionRequest: Bool {
+		get {
+			return UserDefaults.standard.bool(
+				forKey: Key.isFirstNotificationPermissionRequest.rawValue
+			)
+		}
+		set {
+			UserDefaults.standard.set(
+				newValue, forKey: Key.isFirstNotificationPermissionRequest.rawValue
 			)
 		}
 	}

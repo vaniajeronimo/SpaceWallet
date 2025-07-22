@@ -24,6 +24,8 @@ struct RootNavigation: View, Navigation {
 	private var splash: some View {
 		SplashScreen(onCompletion: { route in
 			switch route {
+				case .notificationsPermission:
+					navigation.rootView(notifications)
 				case .login:
 					navigation.rootView(login)
 				case .internetConnectionError:
@@ -37,6 +39,28 @@ struct RootNavigation: View, Navigation {
 	@ViewBuilder
 	private var login: some View {
 		LoginScreenNavigation()
+	}
+
+	@ViewBuilder
+	private var notifications: some View {
+		NotificationsPermissionScreen {
+			askForPermissions()
+		}
+	}
+
+	private func askForPermissions() {
+		if UserDefaults.isFirstNotificationPermissionRequest {
+			NotificationsManager.shared.registerLocalNotifications { _ in
+				UserDefaults.isFirstNotificationPermissionRequest = false
+				executeInMainThread {
+					navigation.rootView(login)
+				}
+			}
+		} else {
+			executeInMainThread {
+				DeviceSettingsHelper.openDeviceSettings()
+			}
+		}
 	}
 
 	@ViewBuilder

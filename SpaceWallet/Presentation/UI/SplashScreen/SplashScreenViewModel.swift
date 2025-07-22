@@ -15,6 +15,7 @@ extension SplashScreen {
 
 		private var networkManager = NetworkManager()
 
+		private var wasNotificationRequested: Bool = false
 		private var cancellables = Set<AnyCancellable>()
 		private var onCompletion: (SplashScreenRoute) -> Void
 
@@ -34,17 +35,29 @@ extension SplashScreen {
 		private func observeNetworkStatus() {
 			networkManager.$isConnected
 				.receive(on: DispatchQueue.main)
-				.sink { [weak self] connected in
+				.sink { [weak self] isConnected in
 					guard let self else { return }
-					isConnected = connected
 
-					if !isConnected {
+					self.isConnected = isConnected
+
+					guard isConnected else {
 						onCompletion(.internetConnectionError)
-					} else {
-						onCompletion(.login)
+						return
 					}
+
+					executeInMainThread({
+						self.shouldRequestNotificationPermission() ? self.onCompletion(.notificationsPermission) : self.onCompletion(.login)
+					}, after: 1.5)
 				}
 				.store(in: &cancellables)
+		}
+
+		func shouldRequestNotificationPermission() -> Bool {
+			if !wasNotificationRequested {
+				wasNotificationRequested = true
+				return UserDefaults.isFirstNotificationPermissionRequest
+			}
+			return false
 		}
 	}
 }

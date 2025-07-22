@@ -39,6 +39,7 @@ public struct SplashScreen: View {
 extension SplashScreen {
 
 	public enum SplashScreenRoute {
+		case notificationsPermission
 		case login
 		case internetConnectionError
 		case genericError
