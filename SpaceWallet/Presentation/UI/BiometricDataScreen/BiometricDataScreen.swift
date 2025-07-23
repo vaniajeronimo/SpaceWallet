@@ -22,7 +22,8 @@ public struct BiometricDataScreen: View {
 	public var body: some View {
 		VStack {
 			VStack(spacing: UI.Spacing.level05) {
-				navBar
+				Spacer(minLength: 14.86)
+
 				ScrollView {
 					content
 					biometricCard
@@ -40,30 +41,6 @@ public struct BiometricDataScreen: View {
 		.alert("generic_alert_title".localized, isPresented: $viewModel.isToShowAlert) {
 			Button("ok".localized, role: .cancel) {
 				viewModel.isToShowAlert = false
-			}
-		}
-	}
-
-	private var navBar: some View {
-		HStack(alignment: .center) {
-			Button {
-				onAction(.back)
-			} label: {
-				Image.close_dark
-					.resizable()
-					.scaledToFit()
-					.frame(width: 24, height: 24)
-			}
-
-			Spacer()
-
-			Button {
-				print("question mark tapped")
-			} label: {
-				Image.info
-					.resizable()
-					.scaledToFit()
-					.frame(width: 24, height: 24)
 			}
 		}
 	}

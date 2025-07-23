@@ -48,7 +48,9 @@ struct LoginScreenNavigation: View, Navigation {
 
 	@ViewBuilder
 	private var onboarding: some View {
-		OnboardingNavigation()
+		OnboardingNavigation {
+			navigation.rootView(login)
+		}
 	}
 
 	@ViewBuilder

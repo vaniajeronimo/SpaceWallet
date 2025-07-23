@@ -11,7 +11,10 @@ struct OnboardingNavigation: View, Navigation {
 
 	internal var navigation = NavigationController()
 
-	init() {
+	private let onDismiss: () -> Void
+
+	init(onDismiss: @escaping () -> Void) {
+		self.onDismiss = onDismiss
 		navigation.rootView(createPassword)
 	}
 
@@ -22,35 +25,33 @@ struct OnboardingNavigation: View, Navigation {
 
 	@ViewBuilder
 	private var createPassword: some View {
-		CreatePasswordScreen {
-			navigation.push(confirmPhoneNumber)
+			CreatePasswordScreen {
+				navigation.push(confirmPhoneNumber)
+			}
 		}
-	}
 
 	@ViewBuilder
 	private var confirmPhoneNumber: some View {
-		ConfirmPhoneNumberScreen {
-			navigation.push(verificationCode)
+			ConfirmPhoneNumberScreen {
+				navigation.push(verificationCode)
+			}
 		}
-	}
 
 	@ViewBuilder
 	private var verificationCode: some View {
-		VStack {
-			VerificationCodeScreen(isOnboardingFlow: true) { action in
-				switch action {
-					case .onContinue:
-						navigation.push(biometricData)
-					default:
-						break
-				}
+		VerificationCodeScreen(isOnboardingFlow: true) { action in
+			switch action {
+				case .onContinue:
+					navigation.push(biometricData)
+				default:
+					break
 			}
 		}
 	}
 
 	@ViewBuilder
 	private var biometricData: some View {
-		VStack {
+		NavigationBar {
 			BiometricDataScreen { action in
 				switch action {
 					case .next:
@@ -60,18 +61,26 @@ struct OnboardingNavigation: View, Navigation {
 				}
 			}
 		}
+		.navigationLeftButton(.init(.custom(icon: .close_dark, action: { onDismiss() })))
+		.navigationSecondaryRightButton(.init(.custom(icon: .info, action: { print("info tapped") })))
+		.overlapNavigationBar()
 	}
 
 	@ViewBuilder
 	private var walletSetup: some View {
-		WalletSetupScreen { action in
-			switch action {
-				case .next(let wallet):
-					navigation.push(loadingWallet(with: wallet))
-				case .back:
-					navigation.popOrDismiss()
+		NavigationBar {
+			WalletSetupScreen { action in
+				switch action {
+					case .next(let wallet):
+						navigation.push(loadingWallet(with: wallet))
+					case .back:
+						navigation.popOrDismiss()
+				}
 			}
 		}
+		.navigationLeftButton(.init(.custom(icon: .close_dark, action: { navigation.popOrDismiss() })))
+		.navigationSecondaryRightButton(.init(.custom(icon: .info, action: { print("info tapped") })))
+		.overlapNavigationBar()
 	}
 
 	@ViewBuilder

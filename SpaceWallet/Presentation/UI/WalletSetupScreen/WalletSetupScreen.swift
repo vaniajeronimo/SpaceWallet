@@ -19,7 +19,8 @@ public struct WalletSetupScreen: View {
 	public var body: some View {
 		ZStack {
 			VStack(spacing: UI.Spacing.level05) {
-				navBar
+				Spacer(minLength: 34.86)
+
 				ScrollView {
 					content
 				}
@@ -32,31 +33,6 @@ public struct WalletSetupScreen: View {
 			LinearGradient.violetPrimary
 				.ignoresSafeArea(.all)
 		)
-	}
-
-	private var navBar: some View {
-		HStack(alignment: .center) {
-			Button {
-				onAction(.back)
-			} label: {
-				Image.close_dark
-					.resizable()
-					.scaledToFit()
-					.frame(width: 24, height: 24)
-			}
-
-			Spacer()
-
-			Button {
-				print("question mark tapped")
-			} label: {
-				Image.info
-					.resizable()
-					.scaledToFit()
-					.frame(width: 24, height: 24)
-			}
-		}
-		.padding(.bottom, 34)
 	}
 
 	private var content: some View {

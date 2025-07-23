@@ -33,44 +33,18 @@ public struct EmptyScreen: View {
 	}
 
 	public var body: some View {
-		VStack(spacing: .zero) {
+		NavigationBar {
 			VStack {
-				navBar
-				ScrollView {
-					VStack {
-						content
-					}
+				ScrollView(showsIndicators: false) {
+					content
 				}
 			}
+			.padding(.horizontal, UI.Spacing.level06)
+			.background(gradient)
+			.frame(maxWidth: .infinity, maxHeight: .infinity)
 		}
-		.padding(.horizontal, UI.Spacing.level06)
-		.background(gradient)
-		.frame(maxWidth: .infinity, maxHeight: .infinity)
-	}
-
-	private var navBar: some View {
-		HStack(alignment: .center) {
-			Spacer()
-
-			Text(screenTitle)
-				.font(.heading3Bold)
-				.foregroundStyle(.textPrimary)
-
-			Spacer()
-
-			Button {
-				onAction()
-			} label: {
-				Image.dots
-					.resizable()
-					.scaledToFit()
-					.frame(width: 20, height: 20)
-					.padding(18)
-					.background(Circle().fill(Color.fillTertiary))
-			}
-		}
-		.frame(height: 40)
-		.padding(.top, UI.Spacing.level05)
+		.navigationTitle(screenTitle)
+		.navigationSecondaryRightButton(.init(.custom(icon: .dots, hasBackground: true, action: { onAction() })))
 	}
 
 	private var content: some View {

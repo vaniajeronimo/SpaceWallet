@@ -25,14 +25,12 @@ struct VerificationCodeNavigation: View, Navigation {
 
 	@ViewBuilder
 	private var verificationCode: some View {
-		VStack {
-			VerificationCodeScreen { action in
-				switch action {
-					case .onBack:
-						onDismiss()
-					case .onContinue:
-						navigation.rootView(landingPage)
-				}
+		VerificationCodeScreen { action in
+			switch action {
+				case .onBack:
+					onDismiss()
+				case .onContinue:
+					navigation.rootView(landingPage)
 			}
 		}
 	}

@@ -25,61 +25,34 @@ struct SettingsScreen: View {
 	}
 
 	var body: some View {
-		ZStack {
-			VStack {
-				navBar
-				profileCard
-				preferences
-				settings
-				Spacer()
-			}
-			.padding(.top, UI.Spacing.level05)
-			.padding(.horizontal, UI.Spacing.level07)
+		NavigationBar {
+			ScrollView(showsIndicators: false) {
+				Spacer(minLength: UI.Spacing.level07)
 
+				VStack {
+					profileCard
+					preferences
+					settings
+					Spacer()
+				}
+				.padding(.horizontal, UI.Spacing.level07)
+			}
 			currencyBottomSheet
 			notificationsBottomSheet
+		}
+		.navigationTitle("your_account_title".localized)
+		.navigationSecondaryRightButton(.init(.close(action: {
+			viewModel.updateCurrency()
+			onAction(.close)
+		})))
+		.onAppear {
+			viewModel.setContext(context)
 		}
 		.alert("generic_alert_title".localized, isPresented: $isToShowAlert) {
 			Button("ok".localized, role: .cancel) {
 				isToShowAlert = false
 			}
 		}
-		.onAppear {
-			viewModel.setContext(context)
-		}
-	}
-
-	private var navBar: some View {
-		HStack(alignment: .center) {
-			Spacer()
-
-			Text("your_account_title".localized)
-				.font(.heading2Bold)
-
-			Spacer()
-
-			closeButton
-		}
-	}
-
-	private var closeButton: some View {
-		Button {
-			viewModel.updateCurrency()
-			onAction(.close)
-		} label: {
-			ZStack {
-				Circle()
-					.fill(.fillTertiary)
-
-				Image.close_outline
-					.resizable()
-					.scaledToFit()
-					.frame(width: 24, height: 24)
-					.foregroundColor(.textPrimary)
-			}
-			.frame(width: 40, height: 40)
-		}
-		.contentShape(Circle())
 	}
 
 	private var profileCard: some View {
@@ -169,7 +142,8 @@ struct SettingsScreen: View {
 					.frame(width: 20, height: 20)
 			}
 		}
-		.frame(maxWidth: .infinity, maxHeight: 48)
+		.frame(maxWidth: .infinity)
+		.frame(height: 48)
 	}
 }
 
