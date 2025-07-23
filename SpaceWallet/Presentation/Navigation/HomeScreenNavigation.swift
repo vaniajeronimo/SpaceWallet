@@ -23,7 +23,6 @@ struct HomeScreenNavigation: View, Navigation {
 			.ignoresSafeArea()
 	}
 
-	@ViewBuilder
 	private var home: some View {
 		HomeScreen { action in
 			switch action {

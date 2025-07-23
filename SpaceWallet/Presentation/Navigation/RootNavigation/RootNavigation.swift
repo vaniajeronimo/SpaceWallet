@@ -20,7 +20,6 @@ struct RootNavigation: View, Navigation {
 			.ignoresSafeArea()
 	}
 
-	@ViewBuilder
 	private var splash: some View {
 		SplashScreen(onCompletion: { route in
 			switch route {
@@ -36,12 +35,10 @@ struct RootNavigation: View, Navigation {
 		})
 	}
 
-	@ViewBuilder
 	private var login: some View {
 		LoginScreenNavigation()
 	}
 
-	@ViewBuilder
 	private var notifications: some View {
 		NotificationsPermissionScreen {
 			askForPermissions()
@@ -63,7 +60,6 @@ struct RootNavigation: View, Navigation {
 		}
 	}
 
-	@ViewBuilder
 	private var noInternetConnectionError: some View {
 		ErrorScreen(
 			title: "no_internet_connection_error_title".localized,
@@ -75,7 +71,6 @@ struct RootNavigation: View, Navigation {
 		)
 	}
 
-	@ViewBuilder
 	private var genericError: some View {
 		ErrorScreen(
 			buttonTitle: "restart_app".localized,

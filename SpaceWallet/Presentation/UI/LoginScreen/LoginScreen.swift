@@ -46,7 +46,6 @@ public struct LoginScreen: View {
 		}
 	}
 
-	@ViewBuilder
 	private var currentIllustration: some View {
 		Image(viewModel.illustrationIndex.image)
 			.resizable()

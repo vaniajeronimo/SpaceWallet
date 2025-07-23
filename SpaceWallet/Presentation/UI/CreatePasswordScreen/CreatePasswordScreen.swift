@@ -43,7 +43,6 @@ public struct CreatePasswordScreen: View {
 			.font(.heading2Bold)
 	}
 
-	@ViewBuilder
 	private var createPassword: some View {
 		VStack(alignment: .center, spacing: UI.Spacing.level07) {
 			Image.onboarding_locker

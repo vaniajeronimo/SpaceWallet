@@ -33,37 +33,35 @@ public struct ErrorScreen: View {
 	}
 
 	public var body: some View {
-		Group {
-			VStack {
-				Spacer()
+		VStack {
+			Spacer()
 
-				Image.errorImg
+			Image.errorImg
 
-				VStack(alignment: .center, spacing: UI.Spacing.level04) {
-					if let title {
-						Text(title)
-							.foregroundStyle(.textPrimary)
-							.font(.heading1Bold)
-							.multilineTextAlignment(.center)
-					}
-					if let subtitle {
-						Text(subtitle)
-							.foregroundStyle(.grayPrimary)
-							.font(.heading4)
-							.multilineTextAlignment(.center)
-					}
+			VStack(alignment: .center, spacing: UI.Spacing.level04) {
+				if let title {
+					Text(title)
+						.foregroundStyle(.textPrimary)
+						.font(.heading1Bold)
+						.multilineTextAlignment(.center)
 				}
-
-				Spacer()
-
-				if let onAction {
-					Button(buttonTitle) {
-						onAction()
-					}
-					.buttonStyle(PrimaryButton(.large))
-					.padding(.horizontal, UI.Spacing.level07)
-					.frame(height: 100)
+				if let subtitle {
+					Text(subtitle)
+						.foregroundStyle(.grayPrimary)
+						.font(.heading4)
+						.multilineTextAlignment(.center)
 				}
+			}
+
+			Spacer()
+
+			if let onAction {
+				Button(buttonTitle) {
+					onAction()
+				}
+				.buttonStyle(PrimaryButton(.large))
+				.padding(.horizontal, UI.Spacing.level07)
+				.frame(height: 100)
 			}
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)

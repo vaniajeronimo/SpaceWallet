@@ -20,7 +20,6 @@ struct LoginScreenNavigation: View, Navigation {
 			.ignoresSafeArea()
 	}
 
-	@ViewBuilder
 	private var login: some View {
 		LoginScreen { action in
 			switch action {
@@ -34,7 +33,6 @@ struct LoginScreenNavigation: View, Navigation {
 		}
 	}
 
-	@ViewBuilder
 	private var verificationCode: some View {
 		VerificationCodeScreen { action in
 			switch action {
@@ -46,14 +44,12 @@ struct LoginScreenNavigation: View, Navigation {
 		}
 	}
 
-	@ViewBuilder
 	private var onboarding: some View {
 		OnboardingNavigation {
 			navigation.rootView(login)
 		}
 	}
 
-	@ViewBuilder
 	private var landingPage: some View {
 		LandingPageScreen()
 	}

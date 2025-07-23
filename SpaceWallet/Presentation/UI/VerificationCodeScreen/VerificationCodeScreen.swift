@@ -26,17 +26,17 @@ public struct VerificationCodeScreen: View {
 
 	public var body: some View {
 		Group {
-					VStack {
-						navBar
-						verification
+			VStack {
+				navBar
+				verification
 
-						// TODO: Improve this
-						Color.clear
-							.frame(height: 60)
-					}
-					.setCardView()
-					.padding(.horizontal, UI.Spacing.level07)
-				}
+				// TODO: Improve this
+				Color.clear
+					.frame(height: 60)
+			}
+			.setCardView()
+			.padding(.horizontal, UI.Spacing.level07)
+		}
 		.dismissKeyboard()
 		.keyboardAware()
 		.frame(maxWidth: .infinity, maxHeight: .infinity)

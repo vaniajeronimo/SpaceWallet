@@ -74,17 +74,15 @@ struct QRCodeBottomSheet: View {
 	}
 
 	private var textField: some View {
-		VStack(alignment: .center, spacing: UI.Spacing.level07) {
-			CustomTextField(
-				title: "amount".localized,
-				text: $viewModel.amount
-			)
-			.state(.default)
-			.showClearButton(true)
-			.isNumberField(true)
-			.keyboardType(.decimalPad)
-			.submitLabel(.done)
-		}
+		CustomTextField(
+			title: "amount".localized,
+			text: $viewModel.amount
+		)
+		.state(.default)
+		.showClearButton(true)
+		.isNumberField(true)
+		.keyboardType(.decimalPad)
+		.submitLabel(.done)
 	}
 
 	private var cta: some View {

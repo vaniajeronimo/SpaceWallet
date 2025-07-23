@@ -20,7 +20,6 @@ struct ActivityNavigation: View, Navigation {
 			.ignoresSafeArea()
 	}
 
-	@ViewBuilder
 	private var emptyScreen: some View {
 		EmptyScreen(
 			screenTitle: "activity_empty_screen_mainTitle".localized,

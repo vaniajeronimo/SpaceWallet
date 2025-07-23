@@ -34,17 +34,15 @@ public struct HomeScreen: View {
 	}
 
 	private var content: some View {
-		VStack {
-			ScrollView(showsIndicators: false) {
-				VStack {
-					navBar
-					balance
-					actions
-				}
-				.padding(.horizontal, UI.Spacing.level06)
-
-				assets
+		ScrollView(showsIndicators: false) {
+			VStack {
+				navBar
+				balance
+				actions
 			}
+			.padding(.horizontal, UI.Spacing.level06)
+
+			assets
 		}
 	}
 
@@ -58,7 +56,6 @@ public struct HomeScreen: View {
 		.padding(.horizontal, UI.Spacing.level06)
 	}
 
-	@ViewBuilder
 	private var profileSettings: some View {
 		HStack(alignment: .center) {
 			Image.profile

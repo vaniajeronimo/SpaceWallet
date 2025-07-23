@@ -23,21 +23,18 @@ struct OnboardingNavigation: View, Navigation {
 			.ignoresSafeArea()
 	}
 
-	@ViewBuilder
 	private var createPassword: some View {
 			CreatePasswordScreen {
 				navigation.push(confirmPhoneNumber)
 			}
 		}
 
-	@ViewBuilder
 	private var confirmPhoneNumber: some View {
 			ConfirmPhoneNumberScreen {
 				navigation.push(verificationCode)
 			}
 		}
 
-	@ViewBuilder
 	private var verificationCode: some View {
 		VerificationCodeScreen(isOnboardingFlow: true) { action in
 			switch action {
@@ -49,7 +46,6 @@ struct OnboardingNavigation: View, Navigation {
 		}
 	}
 
-	@ViewBuilder
 	private var biometricData: some View {
 		NavigationBar {
 			BiometricDataScreen { action in
@@ -66,7 +62,6 @@ struct OnboardingNavigation: View, Navigation {
 		.overlapNavigationBar()
 	}
 
-	@ViewBuilder
 	private var walletSetup: some View {
 		NavigationBar {
 			WalletSetupScreen { action in
@@ -83,26 +78,22 @@ struct OnboardingNavigation: View, Navigation {
 		.overlapNavigationBar()
 	}
 
-	@ViewBuilder
 	private func loadingWallet(with wallet: WalletModel) -> some View {
 		WalletSetupLoadingScreen(wallet: wallet) {
 			navigation.push(walletSetupCompleted(with: wallet))
 		}
 	}
 
-	@ViewBuilder
 	private func walletSetupCompleted(with wallet: WalletModel) -> some View {
 		WalletSetupCompletedScreen(wallet: wallet) {
 			navigation.push(landingPage)
 		}
 	}
 
-	@ViewBuilder
 	private var landingPage: some View {
 		LandingPageScreen()
 	}
 
-	@ViewBuilder
 	private var login: some View {
 		LoginScreenNavigation()
 	}
