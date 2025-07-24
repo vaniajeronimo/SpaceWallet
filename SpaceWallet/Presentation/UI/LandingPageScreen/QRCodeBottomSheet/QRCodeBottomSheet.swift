@@ -22,7 +22,7 @@ struct QRCodeBottomSheet: View {
 
 	var body: some View {
 		CustomBottomSheet(
-			height: 630,
+			height: 640,
 			content: {
 				contentView
 			}
