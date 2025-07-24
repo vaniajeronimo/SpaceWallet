@@ -101,3 +101,8 @@
 "language_title" = "Idioma";
 "portuguese" = "Português";
 "english" = "Inglês";
+"wallet_settings_title" = "Definições da Carteira";
+"cash_balance" = "Saldo";
+"account_and_rounting" = "Conta e Roteamento";
+"cash_out_title" = "Retirar dinheiro";
+"add_cash_title" = "Adicionar dinheiro";

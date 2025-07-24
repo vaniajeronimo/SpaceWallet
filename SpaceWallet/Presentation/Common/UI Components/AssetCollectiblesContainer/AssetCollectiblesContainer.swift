@@ -138,7 +138,7 @@ public struct AssetCollectiblesContainer: View {
 					} label: {
 						Text("buy".localized)
 					}
-					.buttonStyle(PrimaryButton(.small))
+					.buttonStyle(PrimaryButton(.medium))
 					.padding(.top, UI.Spacing.level06)
 				}
 				.multilineTextAlignment(.center)

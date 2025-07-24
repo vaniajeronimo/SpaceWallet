@@ -33,13 +33,13 @@ public struct LandingPageScreen: View {
 				})
 				.tabBarItem(selectedIcon: .tabHomeSelected, unselectedIcon: .tabHomeDeselected, title: TabBarId.home.id)
 				EmptyView()
-					.tabBarItem(selectedIcon: .tabWalletSelected, unselectedIcon: .tabWalletDeselected, title: TabBarId.wallet.id)
-				EmptyView()
-					.tabBarItem(selectedIcon: .tabCreditCardSelected, unselectedIcon: .tabCreditCardDeselected, title: TabBarId.credit.id)
+					.tabBarItem(selectedIcon: .tabQrCodeSelected, unselectedIcon: .tabQrCodeDeselected, title: TabBarId.qrCode.id)
+				WalletSettingsNavigation()
+					.tabBarItem(selectedIcon: .tabWalletSettingsSelected, unselectedIcon: .tabWalletSettingsDeselected, title: TabBarId.wallet.id)
 				ActivityNavigation()
-					.tabBarItem(selectedIcon: .tabSearchSelected, unselectedIcon: .tabSearchDeselected, title: TabBarId.search.id)
+					.tabBarItem(selectedIcon: .tabActivitySelected, unselectedIcon: .tabActivityDeselected, title: TabBarId.activity.id)
 				EmptyView()
-					.tabBarItem(selectedIcon: .tabStarsSelected, unselectedIcon: .tabStarsDeselected, title: TabBarId.stars.id)
+					.tabBarItem(selectedIcon: .tabDiscoverySelected, unselectedIcon: .tabDiscoveryDeselected, title: TabBarId.discovery.id)
 			}
 			.onChange(of: scenePhase) { _, newPhase in
 				if newPhase == .active {
@@ -62,18 +62,18 @@ public extension LandingPageScreen {
 
 	enum TabBarId: String {
 		case home
+		case qrCode
 		case wallet
-		case credit
-		case search
-		case stars
+		case activity
+		case discovery
 
 		public var id: String {
 			switch self {
-				case .home: return "Home"
-				case .wallet: return "Wallet"
-				case .credit: return "Credit"
-				case .search: return "Search"
-				case .stars: return "Stars"
+				case .home: return "home"
+				case .qrCode: return "qrCode"
+				case .wallet: return "wallet"
+				case .activity: return "activity"
+				case .discovery: return "discovery"
 			}
 		}
 	}

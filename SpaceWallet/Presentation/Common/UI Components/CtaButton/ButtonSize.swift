@@ -27,23 +27,23 @@ public enum ButtonSize {
 
 	var padding: CGFloat {
 		switch self {
-			case .medium, .large: return 16
-			case .small: return 13.5
+			case .large: return 16
+			case .small, .medium: return 13.5
 		}
 	}
 
 	var width: CGFloat {
 		switch self {
-			case .medium: return 303
+			case .medium: return 260
 			case .large: return .infinity
-			case .small: return 237
+			case .small: return .infinity
 		}
 	}
 
 	var height: CGFloat {
 		switch self {
-			case .medium, .large: return 53
-			case .small: return 48
+			case .large: return 53
+			case .small, .medium: return 48
 		}
 	}
 }

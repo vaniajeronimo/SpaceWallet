@@ -20,6 +20,7 @@ public extension Image {
 	static let close_icon = Image("close", bundle: Bundle.main)
 	static let chevronDown = Image("chevron_down", bundle: Bundle.main)
 	static let chevronLeft = Image("chevron_left", bundle: Bundle.main)
+	static let chevron_white = Image("ic_chevron_white", bundle: Bundle.main)
 	static let chevron_right = Image("chevron_right", bundle: Bundle.main)
 	static let checkmark = Image("check", bundle: Bundle.main)
 	static let close_dark = Image("close_dark", bundle: Bundle.main)
@@ -39,18 +40,20 @@ public extension Image {
 	static let credit_card_outline = Image("ic_credit_card_outline", bundle: Bundle.main)
 	static let close_outline = Image("close_outline", bundle: Bundle.main)
 	static let stars = Image("stars", bundle: Bundle.main)
+	static let pattern = Image("pattern", bundle: Bundle.main)
+	static let ic_chevron_outline = Image("ic_chevron_outline", bundle: Bundle.main)
 
 	// MARK: - TabBar Icons
 	static let tabHomeSelected = Image("home_selected", bundle: Bundle.main)
 	static let tabHomeDeselected = Image("home_deselected", bundle: Bundle.main)
-	static let tabWalletSelected = Image("wallet_selected", bundle: Bundle.main)
-	static let tabWalletDeselected = Image("wallet_deselected", bundle: Bundle.main)
-	static let tabCreditCardSelected = Image("credit_card_selected", bundle: Bundle.main)
-	static let tabCreditCardDeselected = Image("credit_card_deselected", bundle: Bundle.main)
-	static let tabSearchSelected = Image("search_selected", bundle: Bundle.main)
-	static let tabSearchDeselected = Image("search_deselected", bundle: Bundle.main)
-	static let tabStarsSelected = Image("stars_selected", bundle: Bundle.main)
-	static let tabStarsDeselected = Image("stars_deselected", bundle: Bundle.main)
+	static let tabQrCodeSelected = Image("qrCode_selected", bundle: Bundle.main)
+	static let tabQrCodeDeselected = Image("qrCode_deselected", bundle: Bundle.main)
+	static let tabWalletSettingsSelected = Image("wallet_settings_selected", bundle: Bundle.main)
+	static let tabWalletSettingsDeselected = Image("wallet_settings_deselected", bundle: Bundle.main)
+	static let tabActivitySelected = Image("activity_selected", bundle: Bundle.main)
+	static let tabActivityDeselected = Image("activity_deselected", bundle: Bundle.main)
+	static let tabDiscoverySelected = Image("discovery_selected", bundle: Bundle.main)
+	static let tabDiscoveryDeselected = Image("discovery_deselected", bundle: Bundle.main)
 
 	// MARK: - Onboarding
 	static let onboarding_dialog = Image("dialog", bundle: Bundle.main)
@@ -77,6 +80,12 @@ public extension Image {
 	static let green_wallet_hover = Image("green_wallet_hover", bundle: Bundle.main)
 	static let green_wallet_stroke = Image("green_wallet_stroke", bundle: Bundle.main)
 	static let violet_wallet_stroke = Image("violet_wallet_stroke", bundle: Bundle.main)
+
+	// MARK: - Wallet Settings
+	static let savings = Image("savings", bundle: Bundle.main)
+	static let buy_bitcoin = Image("buy_bitcoin", bundle: Bundle.main)
+	static let research = Image("research", bundle: Bundle.main)
+	static let auto_invest = Image("auto_invest", bundle: Bundle.main)
 
 	// MARK: - Actions
 	static let receive = Image("receive", bundle: Bundle.main)
