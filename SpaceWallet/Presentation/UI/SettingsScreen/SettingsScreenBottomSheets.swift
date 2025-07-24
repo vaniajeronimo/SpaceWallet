@@ -17,6 +17,7 @@ extension SettingsScreen {
 			selectedItem: $viewModel.selectedCurrency,
 			onSelectedCallback: { selectedCurrency in
 				viewModel.selectedCurrency = selectedCurrency
+				viewModel.updateCurrency()
 				isToShowCurrencyBottomSheet = false
 			},
 			onClose: {
@@ -45,7 +46,7 @@ extension SettingsScreen {
 				Image.onboarding_notifications
 					.resizable()
 					.scaledToFit()
-					.frame(width: 200, height: 200)
+					.frame(maxWidth: 200, maxHeight: 200)
 					.padding(.top, -UI.Spacing.level07)
 
 				VStack(spacing: UI.Spacing.level04) {
@@ -60,6 +61,7 @@ extension SettingsScreen {
 						.multilineTextAlignment(.center)
 				}
 				.frame(maxWidth: .infinity)
+				.multilineTextAlignment(.center)
 
 				Button {
 					DeviceSettingsHelper.openDeviceSettings()
@@ -71,5 +73,22 @@ extension SettingsScreen {
 			}
 			.padding(.horizontal, UI.Spacing.level07)
 		}
+	}
+
+	var languageBottomSheet: some View {
+		SelectableBottomSheet(
+			title: "language_title".localized,
+			height: 403,
+			items: viewModel.languageList,
+			selectedItem: $viewModel.selectedLanguage,
+			onSelectedCallback: { language in
+				viewModel.selectedLanguage = language
+				viewModel.updateLanguage()
+				isToShowLanguageBottomSheet = false
+			},
+			onClose: {
+				isToShowLanguageBottomSheet = false
+			}, isShowing: $isToShowLanguageBottomSheet
+		)
 	}
 }

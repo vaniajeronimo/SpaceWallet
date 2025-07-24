@@ -14,11 +14,11 @@ public extension String {
 	}
 
 	var localized: String {
-		NSLocalizedString(self, bundle: Bundle.main, comment: "")
+		NSLocalizedString(self, bundle: LanguageManager.shared.bundle, comment: "")
 	}
 
 	func localized(with arguments: CVarArg...) -> String {
-		let localizedString = NSLocalizedString(self, bundle: Bundle.main, comment: "")
+		let localizedString = NSLocalizedString(self, bundle: LanguageManager.shared.bundle, comment: "")
 		return String(format: localizedString, arguments: arguments)
 	}
 

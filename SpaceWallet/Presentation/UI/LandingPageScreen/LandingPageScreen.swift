@@ -9,6 +9,7 @@ import SwiftUI
 
 public struct LandingPageScreen: View {
 
+	@StateObject private var languageManager = LanguageManager.shared
 	@Environment(\.scenePhase) private var scenePhase
 
 	@State private var tabSelection: TabBarItem
@@ -52,6 +53,8 @@ public struct LandingPageScreen: View {
 			}
 			receiveBottomSheet
 		}
+		.environmentObject(languageManager)
+		.id(languageManager.currentLanguage)
 	}
 }
 

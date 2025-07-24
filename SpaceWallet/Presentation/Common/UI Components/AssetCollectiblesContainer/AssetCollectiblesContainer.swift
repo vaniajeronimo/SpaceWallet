@@ -50,7 +50,7 @@ public struct AssetCollectiblesContainer: View {
 			Button {
 				selectedTab = .assets
 			} label: {
-				Text("Asset")
+				Text("assets".localized)
 					.font(.heading4)
 					.fontWeight(.medium)
 					.foregroundStyle(selectedTab == .assets ? .textPrimary : .textTertiary)
@@ -59,7 +59,7 @@ public struct AssetCollectiblesContainer: View {
 			Button {
 				selectedTab = .collectibles
 			} label: {
-				Text("Collectibles")
+				Text("collectibles".localized)
 					.font(.heading4)
 					.fontWeight(.medium)
 					.foregroundStyle(selectedTab == .collectibles ? .textPrimary : .textTertiary)
@@ -141,6 +141,7 @@ public struct AssetCollectiblesContainer: View {
 					.buttonStyle(PrimaryButton(.small))
 					.padding(.top, UI.Spacing.level06)
 				}
+				.multilineTextAlignment(.center)
 				.background(
 					Color.white.opacity(0.60)
 						.blur(radius: 20)
@@ -176,6 +177,7 @@ public struct AssetCollectiblesContainer: View {
 						.fontWeight(.medium)
 						.foregroundStyle(.textSecondary)
 				}
+				.multilineTextAlignment(.center)
 				.background(
 					Color.white.opacity(0.60)
 						.blur(radius: 20)

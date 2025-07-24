@@ -9,23 +9,22 @@ import SwiftData
 import SwiftUI
 
 struct SettingsScreen: View {
-
+	
 	@State private var isToShowAlert: Bool = false
 	@State var isToShowCurrencyBottomSheet: Bool = false
+	@State var isToShowLanguageBottomSheet: Bool = false
 	@State var isToShowNotificationsBottomSheet: Bool = false
 
 	@Bindable var viewModel = ViewModel()
 
 	private var context: ModelContext
-	private let onAction: (ActionType) -> Void
 
-	init(context: ModelContext, onAction: @escaping (ActionType) -> Void) {
+	init(context: ModelContext) {
 		self.context = context
-		self.onAction = onAction
 	}
 
 	var body: some View {
-		NavigationBar {
+		ZStack {
 			ScrollView(showsIndicators: false) {
 				Spacer(minLength: UI.Spacing.level07)
 
@@ -38,13 +37,9 @@ struct SettingsScreen: View {
 				.padding(.horizontal, UI.Spacing.level07)
 			}
 			currencyBottomSheet
+			languageBottomSheet
 			notificationsBottomSheet
 		}
-		.navigationTitle("your_account_title".localized)
-		.navigationSecondaryRightButton(.init(.close(action: {
-			viewModel.updateCurrency()
-			onAction(.close)
-		})))
 		.onAppear {
 			viewModel.setContext(context)
 		}
@@ -110,6 +105,9 @@ struct SettingsScreen: View {
 				.foregroundColor(.textTertiary)
 				.padding(.bottom, UI.Spacing.level04)
 
+			createRow(icon: .language, title: "language_title".localized, action: {
+				isToShowLanguageBottomSheet = true
+			})
 			createRow(icon: .face_id_settings, title: "face_id_title".localized, action: {
 				isToShowAlert = true
 			})
@@ -127,7 +125,7 @@ struct SettingsScreen: View {
 		Button {
 			action()
 		} label: {
-			HStack(alignment: .center, spacing: 12) {
+			HStack(alignment: .center, spacing: UI.Spacing.level04) {
 				icon
 					.frame(width: 20, height: 20)
 
@@ -144,12 +142,5 @@ struct SettingsScreen: View {
 		}
 		.frame(maxWidth: .infinity)
 		.frame(height: 48)
-	}
-}
-
-extension SettingsScreen {
-
-	enum ActionType {
-		case close
 	}
 }

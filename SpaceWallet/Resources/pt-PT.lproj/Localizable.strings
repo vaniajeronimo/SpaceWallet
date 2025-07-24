@@ -21,7 +21,7 @@
 "buy" = "Comprar";
 "buy_crypto_with_card" = "Compra a tua primeira criptomoeda com o teu cartão";
 "buy_crypto" = "Comprar Cripto";
-"asset" = "Ativos";
+"assets" = "Ativos";
 "collectibles" = "Colecionáveis";
 "your_collectibles" = "Os teus colecionáveis aparecerão aqui";
 "or_sign_in_with" = "Ou entra com";
@@ -32,7 +32,7 @@
 "generic_error_title" = "Ocorreu um erro";
 "generic_error_message" = "Por favor, tenta novamente.";
 "invalid_email" = "Email inválido";
-"verification_code_title" = "Código de Verificação";
+"verification_code_title" = "Código de verificação";
 "verification_code_subtitle" = "Introduz o código de 6 digítos que foi enviado para %@";
 "verification_code_counter" = "Podes obter um novo código dentro de %ds";
 "generic_alert_title" = "Funcionalidade não disponível";
@@ -79,7 +79,7 @@
 "amount" = "Valor";
 "qrcode_bottom_sheet_title" = "Pronto para receber?";
 "qrcode_bottom_sheet_subtitle" = "Por favor, confirma o valor que irás receber.";
-"your_account_title" = "A tua Conta";
+"your_account_title" = "A tua conta";
 "preferences_title" = "Preferências";
 "settings_title" = "Definições";
 "appearance_title" = "Aparência";
@@ -88,13 +88,16 @@
 "privacy_title" = "Privacidade";
 "face_id_title" = "Reconhecimento Facial";
 "recovery_phrase_title" = "Frase de Recuperação";
-"icloud_backup_title" = "Backup iCloud";
+"icloud_backup_title" = "Cópia iCloud";
 "local_currency_title" = "Moeda Local";
 "euro" = "Euro";
 "pound" = "Libra";
 "usd" = "Dólar Americano";
 "japanese_yen" = "Yen Japonês";
-"notifications_permission_title" = "Obtém atualizações instantâneas";
-"notifications_permission_subtitle" = "Ativa as notificações para receberes atualizações sobre a tua carteira e transações.";
+"notifications_permission_title" = "Ativa as notificações";
+"notifications_permission_subtitle" = "Ativa as notificações para receberes atualizações sobre a tua carteira";
 "enable" = "Ativar";
 "manage_notifications" = "Gerir Notificações";
+"language_title" = "Idioma";
+"portuguese" = "Português";
+"english" = "Inglês";

@@ -97,6 +97,7 @@ public extension Image {
 	static let currency = Image("ic_currency", bundle: Bundle.main)
 	static let notification = Image("ic_notification", bundle: Bundle.main)
 	static let privacy = Image("ic_privacy", bundle: Bundle.main)
+	static let language = Image("ic_language_outline", bundle: Bundle.main)
 	static let face_id_settings = Image("ic_face_id", bundle: Bundle.main)
 	static let recovery_phrase = Image("ic_recovery_phrase", bundle: Bundle.main)
 	static let icloud_backup = Image("ic_icloud_backup", bundle: Bundle.main)
