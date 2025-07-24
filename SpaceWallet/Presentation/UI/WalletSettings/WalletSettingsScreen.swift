@@ -9,18 +9,19 @@ import SwiftUI
 
 public struct WalletSettingsScreen: View {
 
-	private var viewModel = ViewModel()
+	private var viewModel: ViewModel
 	private let onAction: (ActionType) -> Void
 
 	private let columns: [GridItem] = [
-		GridItem(.flexible(), spacing: 16),
-		GridItem(.flexible(), spacing: 16)
+		GridItem(.flexible(), spacing: UI.Spacing.level05),
+		GridItem(.flexible(), spacing: UI.Spacing.level05)
 	]
 
 	public init(
 		onAction: @escaping (ActionType) -> Void
 	) {
 		self.onAction = onAction
+		self.viewModel = .init(onAction: onAction)
 	}
 
 	public var body: some View {
@@ -68,11 +69,10 @@ public struct WalletSettingsScreen: View {
 				Text("$86.54")
 					.font(.displayBold)
 					.foregroundStyle(.b0)
-					.padding(.bottom, 24)
+					.padding(.bottom, UI.Spacing.level07)
 
-				HStack(alignment: .center, spacing: 16) {
+				HStack(alignment: .center, spacing: UI.Spacing.level05) {
 					Button {
-						print("Add cash tapped")
 						onAction(.addCash)
 					} label: {
 						Text("add_cash_title".localized)
@@ -80,7 +80,6 @@ public struct WalletSettingsScreen: View {
 					.buttonStyle(PrimaryButton(.small, color: .b0, titleColor: .textPrimary))
 
 					Button {
-						print("Cash out tapped")
 						onAction(.cashOut)
 					} label: {
 						Text("cash_out_title".localized)
@@ -89,30 +88,37 @@ public struct WalletSettingsScreen: View {
 				}
 				.frame(maxWidth: .infinity, alignment: .center)
 			}
-			.padding(16)
+			.padding(UI.Spacing.level05)
 		}
 		.frame(maxWidth: .infinity, maxHeight: 250)
 		.background(Color.textPrimary)
-		.clipShape(RoundedRectangle(cornerRadius: 16))
+		.clipShape(RoundedRectangle(cornerRadius: UI.Corner.l))
 	}
 
 	private var cardCollection: some View {
-		LazyVGrid(columns: columns, spacing: 16) {
+		LazyVGrid(columns: columns, spacing: UI.Spacing.level05) {
 			ForEach(viewModel.cardsData, id: \.id) { card in
 				createCardView(
 					mainTitle: card.mainTitle,
 					image: card.image,
 					title: card.title,
-					subtitle: card.subtitle
+					subtitle: card.subtitle,
+					onAction: card.action
 				)
 			}
 		}
-		.padding(.top, 24)
+		.padding(.top, UI.Spacing.level07)
 	}
 
-	private func createCardView(mainTitle: String, image: Image, title: String, subtitle: String) -> some View {
+	private func createCardView(
+		mainTitle: String,
+		image: Image,
+		title: String,
+		subtitle: String,
+		onAction: (() -> Void)? = nil)
+	-> some View {
 		HStack {
-			VStack(alignment: .leading, spacing: 16) {
+			VStack(alignment: .leading, spacing: UI.Spacing.level05) {
 				HStack {
 					Text(mainTitle)
 						.font(.body)
@@ -142,11 +148,14 @@ public struct WalletSettingsScreen: View {
 						.foregroundStyle(.textPrimary)
 				}
 			}
+			.onTapGesture {
+				onAction?()
+			}
 		}
-		.padding(16)
+		.padding(UI.Spacing.level05)
 		.frame(maxWidth: .infinity, maxHeight: 200)
 		.background(Color.fillQuaternary)
-		.clipShape(RoundedRectangle(cornerRadius: 16))
+		.clipShape(RoundedRectangle(cornerRadius: UI.Corner.l))
 	}
 }
 
@@ -156,5 +165,9 @@ public extension WalletSettingsScreen {
 		case addCash
 		case cashOut
 		case accountAndRouting
+		case savings
+		case buyBitcoin
+		case research
+		case autoInvest
 	}
 }

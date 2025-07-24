@@ -13,4 +13,5 @@ struct WalletSettingsModel: Identifiable {
 	let image: Image
 	let title: String
 	let subtitle: String
+	let action: () -> Void
 }
