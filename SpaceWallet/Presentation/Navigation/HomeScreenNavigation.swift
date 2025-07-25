@@ -39,13 +39,12 @@ struct HomeScreenNavigation: View, Navigation {
 	}
 
 	private func settings(with context: ModelContext) -> some View {
-		NavigationBar {
-			SettingsScreen(context: context)
-		}
-		.navigationTitle("your_account_title".localized)
-		.navigationSecondaryRightButton(.init(.close(action: {
-			navigation.popOrDismiss()
-		})))
+		SettingsScreen(
+			context: context,
+			onClose: {
+				navigation.popOrDismiss()
+			}
+		)
 	}
 }
 

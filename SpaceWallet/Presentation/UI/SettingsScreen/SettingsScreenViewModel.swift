@@ -80,6 +80,7 @@ extension SettingsScreen {
 			guard let selectedLanguage else { return }
 			LanguageManager.shared.currentLanguage = selectedLanguage.code
 			self.selectedLanguage = languageList.first { $0.code == selectedLanguage.code }
+			UserDefaults.standard.set(selectedLanguage.code, forKey: "SelectedLanguage")
 		}
 	}
 }

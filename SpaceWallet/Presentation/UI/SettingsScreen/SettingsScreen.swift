@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct SettingsScreen: View {
-	
+
 	@State private var isToShowAlert: Bool = false
 	@State var isToShowCurrencyBottomSheet: Bool = false
 	@State var isToShowLanguageBottomSheet: Bool = false
@@ -18,36 +18,44 @@ struct SettingsScreen: View {
 	@Bindable var viewModel = ViewModel()
 
 	private var context: ModelContext
+	private let onClose: () -> Void
 
-	init(context: ModelContext) {
+	init(context: ModelContext, onClose: @escaping () -> Void) {
 		self.context = context
+		self.onClose = onClose
 	}
 
 	var body: some View {
-		ZStack {
-			ScrollView(showsIndicators: false) {
-				Spacer(minLength: UI.Spacing.level07)
+		NavigationBar {
+			ZStack {
+				ScrollView(showsIndicators: false) {
+					Spacer(minLength: UI.Spacing.level07)
 
-				VStack {
-					profileCard
-					preferences
-					settings
-					Spacer()
+					VStack {
+						profileCard
+						preferences
+						settings
+						Spacer()
+					}
+					.padding(.horizontal, UI.Spacing.level07)
 				}
-				.padding(.horizontal, UI.Spacing.level07)
+				currencyBottomSheet
+				languageBottomSheet
+				notificationsBottomSheet
 			}
-			currencyBottomSheet
-			languageBottomSheet
-			notificationsBottomSheet
-		}
-		.onAppear {
-			viewModel.setContext(context)
-		}
-		.alert("generic_alert_title".localized, isPresented: $isToShowAlert) {
-			Button("ok".localized, role: .cancel) {
-				isToShowAlert = false
+			.onAppear {
+				viewModel.setContext(context)
+			}
+			.alert("generic_alert_title".localized, isPresented: $isToShowAlert) {
+				Button("ok".localized, role: .cancel) {
+					isToShowAlert = false
+				}
 			}
 		}
+		.navigationTitle("your_account_title".localized)
+		.navigationSecondaryRightButton(.init(.close(action: {
+			onClose()
+		})))
 	}
 
 	private var profileCard: some View {
