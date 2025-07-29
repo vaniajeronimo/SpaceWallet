@@ -76,6 +76,11 @@
 "banana_monkey_nft_description" = "A cheeky monkey powered by its love for interstellar bananas.";
 "light_spectrum_nft_description" = "A radiant collectible representing the full spectrum of visible light.";
 "dark_spectrum_nft_description" = "A mysterious collectible embodying the hidden colors of the universe.";
+"purple_monkey_nft_description" = "A meteor struck monkey with a cosmic purple hue.";
+"dark_monkey_nft_description" = "A dark fury monkey on a quest to find the light.";
+"gray_monkey_nft_description" = "A gray monkey with a calm and wise demeanor.";
+"dark_purple_monkey_nft_description" = "A dark swag monkey with a mysterious aura.";
+"white_monkey_nft_description" = "A white monkey that shines like a star in the night sky.";
 "amount" = "Amount";
 "qrcode_bottom_sheet_title" = "Ready to receive?";
 "qrcode_bottom_sheet_subtitle" = "Please confirm the amount that you will receive.";

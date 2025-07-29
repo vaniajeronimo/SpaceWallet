@@ -76,6 +76,11 @@
 "banana_monkey_nft_description" = "Um macaco travesso alimentado pelo seu amor por bananas interestelares.";
 "light_spectrum_nft_description" = "Um colecionável radiante que representa todo o espectro da luz visível.";
 "dark_spectrum_nft_description" = "Um colecionável misterioso que incorpora as cores ocultas do universo.";
+"purple_monkey_nft_description" = "Um macaco atingido por um meteoro com um tom cósmico roxo.";
+"dark_monkey_nft_description" = "Um macaco escuro com um olhar intrigante e profundo.";
+"gray_monkey_nft_description" = "Um macaco cinzento com uma postura calma e sábia.";
+"dark_purple_monkey_nft_description" = "Um macaco com estilo com uma aura misteriosa";
+"white_monkey_nft_description" = "Um macaco branco que brilha como uma estrela no céu noturno.";
 "amount" = "Valor";
 "qrcode_bottom_sheet_title" = "Pronto para receber?";
 "qrcode_bottom_sheet_subtitle" = "Por favor, confirma o valor que irás receber.";
