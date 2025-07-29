@@ -77,7 +77,6 @@ public struct AssetCollectiblesContainer: View {
 	private var collectibles: some View {
 		VStack(spacing: .zero) {
 			if let collectibles = nfts, collectibles.isNotEmpty {
-
 				collectibles.first?.image
 					.resizable()
 					.scaledToFit()

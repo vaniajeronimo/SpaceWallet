@@ -100,6 +100,12 @@ public extension Image {
 	static let banana_monkey = Image("banana_monkey_nft", bundle: Bundle.main)
 	static let spectrum_1 = Image("color_spectrum_nft", bundle: Bundle.main)
 	static let spectrum_2 = Image("color_spectrum2_nft", bundle: Bundle.main)
+	static let violet_monkey_space_nft = Image("violet_monkey_space_nft", bundle: Bundle.main)
+	static let dark_monkey_nft = Image("dark_monkey_nft", bundle: Bundle.main)
+	static let gray_monkey_nft = Image("gray_monkey_nft", bundle: Bundle.main)
+	static let white_monkey_nft = Image("white_monkey_nft", bundle: Bundle.main)
+	static let dark_purple_monkey_nft = Image("dark_purple_monkey_nft", bundle: Bundle.main)
+	static let purple_monkey_nft = Image("purple_monkey_nft", bundle: Bundle.main)
 
 	// MARK: - Settings
 	static let profile = Image("ic_profile", bundle: Bundle.main)
