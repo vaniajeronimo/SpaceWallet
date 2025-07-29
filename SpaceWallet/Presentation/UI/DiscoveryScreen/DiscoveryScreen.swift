@@ -31,7 +31,7 @@ struct DiscoveryScreen: View {
 		ScrollView {
 			switch screenState {
 				case .nfts:
-					nftsView
+					NFTGalleryView(nfts: viewModel.nfts)
 				case .tokens:
 					EmptyView()
 				case .sites:
