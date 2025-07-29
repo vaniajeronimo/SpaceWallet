@@ -38,7 +38,7 @@ public struct LandingPageScreen: View {
 					.tabBarItem(selectedIcon: .tabWalletSettingsSelected, unselectedIcon: .tabWalletSettingsDeselected, title: TabBarId.wallet.id)
 				ActivityNavigation()
 					.tabBarItem(selectedIcon: .tabActivitySelected, unselectedIcon: .tabActivityDeselected, title: TabBarId.activity.id)
-				EmptyView()
+				DiscoveryNavigation()
 					.tabBarItem(selectedIcon: .tabDiscoverySelected, unselectedIcon: .tabDiscoveryDeselected, title: TabBarId.discovery.id)
 			}
 			.onChange(of: scenePhase) { _, newPhase in

@@ -42,6 +42,7 @@ public extension Image {
 	static let stars = Image("stars", bundle: Bundle.main)
 	static let pattern = Image("pattern", bundle: Bundle.main)
 	static let ic_chevron_outline = Image("ic_chevron_outline", bundle: Bundle.main)
+	static let ic_search = Image("ic_search", bundle: Bundle.main)
 
 	// MARK: - TabBar Icons
 	static let tabHomeSelected = Image("home_selected", bundle: Bundle.main)
