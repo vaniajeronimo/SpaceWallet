@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-public struct CollectibleModel: Hashable {
+public struct CollectibleModel: Hashable, Identifiable {
+	public var id: Int
 	public var name: String
 	public var imageName: String
 	public var description: String

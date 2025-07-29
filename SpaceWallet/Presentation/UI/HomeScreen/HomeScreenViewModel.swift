@@ -56,11 +56,11 @@ extension HomeScreen {
 		}
 
 		var nfts: [CollectibleModel] = [
-			.init(name: "space_monkey", imageName: "space_monkey_nft", description: "space_monkey_nft_description".localized),
-			.init(name: "orange_monkey", imageName: "orange_monkey_nft", description: "orange_monkey_nft_description".localized),
-			.init(name: "banana_monkey", imageName: "banana_monkey_nft", description: "banana_monkey_nft_description".localized),
-			.init(name: "light_sepctrum", imageName: "color_spectrum_nft", description: "light_spectrum_nft_description".localized),
-			.init(name: "dark_spectrum", imageName: "color_spectrum2_nft", description: "dark_spectrum_nft_description".localized)
+			.init(id: 1, name: "space_monkey", imageName: "space_monkey_nft", description: "space_monkey_nft_description".localized),
+			.init(id: 2, name: "orange_monkey", imageName: "orange_monkey_nft", description: "orange_monkey_nft_description".localized),
+			.init(id: 3, name: "banana_monkey", imageName: "banana_monkey_nft", description: "banana_monkey_nft_description".localized),
+			.init(id: 4, name: "light_sepctrum", imageName: "color_spectrum_nft", description: "light_spectrum_nft_description".localized),
+			.init(id: 5, name: "dark_spectrum", imageName: "color_spectrum2_nft", description: "dark_spectrum_nft_description".localized)
 		]
 
 		init(onAction: @escaping (ActionType) -> Void) {
