@@ -119,8 +119,9 @@
 "market_research" = "Pesquisa de Mercado";
 "auto_invest" = "Investimento";
 "set_it_and_grow" = "Define e cresce";
-"discovery_title" = "Descobre";
+"discovery_title" = "Explorar";
 "discovery_search_bar_placeholder" = "Sites, token, URL";
 "discovery_tokens" = "Tokens";
 "discovery_sites" = "Sites";
 "discovery_learn" = "Learn";
+"discovery_nfts" = "NFTs";

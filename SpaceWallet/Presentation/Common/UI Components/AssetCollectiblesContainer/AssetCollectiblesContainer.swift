@@ -75,36 +75,7 @@ public struct AssetCollectiblesContainer: View {
 	}
 
 	private var collectibles: some View {
-		VStack(spacing: .zero) {
-			if let collectibles = nfts, collectibles.isNotEmpty {
-				collectibles.first?.image
-					.resizable()
-					.scaledToFit()
-					.frame(maxHeight: 364)
-					.padding(.bottom, UI.Spacing.level03)
-
-				let remaining = Array(collectibles.dropFirst())
-
-				HStack {
-					LazyVGrid(
-						columns: [
-							GridItem(.flexible(), spacing: UI.Spacing.level03),
-							GridItem(.flexible(), spacing: UI.Spacing.level03)
-						],
-						spacing: UI.Spacing.level03
-					) {
-						ForEach(remaining, id: \.name) { item in
-							item.image
-								.resizable()
-								.scaledToFit()
-								.frame(maxWidth: 163.5, maxHeight: 168)
-						}
-					}
-				}
-				.padding(.horizontal, UI.Spacing.level06)
-			}
-		}
-		.padding(.bottom, UI.Spacing.level06)
+		NFTGalleryView(nfts: nfts ?? [])
 	}
 
 	private var assetsEmptyView: some View {
