@@ -91,10 +91,6 @@ struct DiscoveryScreen: View {
 				)
 		}
 	}
-
-	private var nftsView: some View {
-		NFTGalleryView(nfts: viewModel.nfts)
-	}
 }
 
 extension DiscoveryScreen {
