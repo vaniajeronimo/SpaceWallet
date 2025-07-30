@@ -10,6 +10,7 @@ import SwiftUI
 public struct NFTGalleryView: View {
 
 	let nfts: [CollectibleModel]
+	var horizontalPadding: CGFloat = UI.Spacing.level07
 
 	public var body: some View {
 		VStack(spacing: .zero) {
@@ -42,7 +43,17 @@ public struct NFTGalleryView: View {
 				}
 			}
 		}
-		.padding(.horizontal, UI.Spacing.level07)
+		.padding(.horizontal, horizontalPadding)
 		.padding(.bottom, UI.Spacing.level06)
+	}
+}
+
+// MARK: - Modifiers
+public extension NFTGalleryView {
+
+	func horizontalPadding(_ value: CGFloat) -> Self {
+		var clone = self
+		clone.horizontalPadding = value
+		return clone
 	}
 }

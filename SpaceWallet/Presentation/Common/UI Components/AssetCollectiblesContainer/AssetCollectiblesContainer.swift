@@ -76,6 +76,7 @@ public struct AssetCollectiblesContainer: View {
 
 	private var collectibles: some View {
 		NFTGalleryView(nfts: nfts ?? [])
+			.horizontalPadding(UI.Spacing.level06)
 	}
 
 	private var assetsEmptyView: some View {
