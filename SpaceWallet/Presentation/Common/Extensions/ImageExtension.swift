@@ -107,6 +107,11 @@ public extension Image {
 	static let dark_purple_monkey_nft = Image("dark_purple_monkey_nft", bundle: Bundle.main)
 	static let purple_monkey_nft = Image("purple_monkey_nft", bundle: Bundle.main)
 
+	// MARK: - Tokens
+	static let ic_eth_token = Image("ic_eth_token", bundle: Bundle.main)
+	static let ic_sol_token = Image("ic_sol_token", bundle: Bundle.main)
+	static let ic_usdc_token = Image("ic_usdc_token", bundle: Bundle.main)
+
 	// MARK: - Settings
 	static let profile = Image("ic_profile", bundle: Bundle.main)
 	static let appearance = Image("ic_appearance", bundle: Bundle.main)

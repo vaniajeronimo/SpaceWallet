@@ -33,7 +33,7 @@ struct DiscoveryScreen: View {
 				case .nfts:
 					NFTGalleryView(nfts: viewModel.nfts)
 				case .tokens:
-					EmptyView()
+					trendingTokens
 				case .sites:
 					EmptyView()
 				case .learn:
@@ -90,6 +90,23 @@ struct DiscoveryScreen: View {
 						.fill(isSelected ? .textPrimary : Color.strokeSecondary)
 				)
 		}
+	}
+
+	private var trendingTokens: some View {
+		VStack(alignment: .leading, spacing: UI.Spacing.level04) {
+			ForEach(viewModel.tokens, id: \.self) { token in
+				TokenCardView(
+					icon: token.icon,
+					title: token.tokenName,
+					subtitle: token.amount?.formattedAmount() ?? "",
+					symbol: token.tokenSymbol,
+					value: token.value?.asCurrency(symbol: "$") ?? "",
+					profit: token.profit?.formattedPercentageWithSign() ?? "",
+					color: .greenDefault
+				)
+			}
+		}
+		.padding(.horizontal, UI.Spacing.level06)
 	}
 }
 
