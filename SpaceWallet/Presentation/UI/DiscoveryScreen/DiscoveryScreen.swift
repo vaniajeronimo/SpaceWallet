@@ -93,20 +93,45 @@ struct DiscoveryScreen: View {
 	}
 
 	private var trendingTokens: some View {
-		VStack(alignment: .leading, spacing: UI.Spacing.level04) {
-			ForEach(viewModel.tokens, id: \.self) { token in
-				TokenCardView(
-					icon: token.icon,
-					title: token.tokenName,
-					subtitle: token.amount?.formattedAmount() ?? "",
-					symbol: token.tokenSymbol,
-					value: token.value?.asCurrency(symbol: "$") ?? "",
-					profit: token.profit?.formattedPercentageWithSign() ?? "",
-					color: .greenDefault
-				)
+		Section(header: sectionHeader(title: "trending_tokens_title".localized, subtitle: "see_more".localized)) {
+			VStack(alignment: .leading, spacing: UI.Spacing.level04) {
+				ForEach(viewModel.tokens, id: \.self) { token in
+					TokenCardView(
+						icon: token.icon,
+						title: token.tokenName,
+						subtitle: token.amount?.formattedAmount() ?? "",
+						symbol: token.tokenSymbol,
+						value: token.value?.asCurrency(symbol: "$") ?? "",
+						profit: token.profit?.formattedPercentageWithSign() ?? "",
+						color: .greenDefault
+					)
+				}
+			}
+			.padding(.horizontal, UI.Spacing.level06)
+		}
+	}
+
+	private func sectionHeader(title: String, subtitle: String? = nil) -> some View {
+		HStack(alignment: .firstTextBaseline) {
+			Text(title)
+				.font(.heading3Bold)
+				.foregroundColor(Color.textPrimary)
+
+			Spacer()
+
+			if let subtitle {
+				Text(subtitle)
+					.font(.heading4)
+					.fontWeight(.medium)
+					.foregroundColor(Color.violetDefault)
+					.onTapGesture {
+						print("subtitle tapped")
+					}
 			}
 		}
 		.padding(.horizontal, UI.Spacing.level06)
+		.padding(.top, UI.Spacing.level07)
+		.padding(.bottom, UI.Spacing.level04)
 	}
 }
 
