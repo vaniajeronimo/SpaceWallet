@@ -1,4 +1,4 @@
-# 🚀 Space Wallet
+# 🚀 Space Wallet - (🛠️  WIP)
 
 **Space Wallet** is a crypto wallet app developed as a test project, focusing on design, user experience, and simulation of real-world features — entirely built on the **front-end**.
 
