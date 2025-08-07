@@ -13,6 +13,13 @@ extension Container {
 		self { CheckFirstLaunchUseCase() }
 	}
 
+	var setSessionUseCase: Factory<SetSessionUseCase> {
+		self { SetSessionUseCase() }
+	}
+}
+
+extension Container {
+
 	var saveAccountUseCase: Factory<SaveAccountUseCase> {
 		self { SaveAccountUseCase() }
 	}

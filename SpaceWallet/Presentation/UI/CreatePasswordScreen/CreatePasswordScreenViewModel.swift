@@ -5,12 +5,20 @@
 //  Created by Vania Jeronimo on 09/07/2025.
 //
 
+import Combine
+import Factory
 import SwiftUI
 
 extension CreatePasswordScreen {
 	@Observable
 	@MainActor
 	final class ViewModel {
+
+		@ObservationIgnored
+		@Injected(\.setSessionUseCase)
+		private var setSessionUseCase
+
+		private var cancellables = Set<AnyCancellable>()
 
 		var password: String = ""
 		var firstStepper: StepperColor = .notSet
@@ -76,8 +84,21 @@ extension CreatePasswordScreen {
 			updateSteppers(for: .notSet)
 		}
 
-		func savePassword() {
-			UserDefaults.userPassword = password
+		func setSession() {
+			guard let email = UserDefaults.userEmail else {
+				Debug.log("User email not set")
+				return
+			}
+			setSessionUseCase.execute(session: .init(email: email, password: password))
+				.sink { completion in
+					switch completion {
+						case .failure(let error):
+							Debug.error(error)
+						case .finished:
+							break
+					}
+				} receiveValue: { }
+				.store(in: &cancellables)
 		}
 
 		private func passwordContainsNumberOrSymbol(_ password: String) -> Bool {

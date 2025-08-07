@@ -11,7 +11,7 @@ import SwiftData
 
 final class SaveAccountUseCase {
 
-	@Injected(\.authRepository)
+	@Injected(\.accountRepository)
 	private var repository
 
 	func execute(account: AccountModel, context: ModelContext) -> AnyPublisher<Void, Error> {

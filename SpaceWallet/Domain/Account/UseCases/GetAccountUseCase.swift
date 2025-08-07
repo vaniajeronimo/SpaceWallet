@@ -11,7 +11,7 @@ import SwiftData
 
 final class GetAccountUseCase {
 
-	@Injected(\.authRepository)
+	@Injected(\.accountRepository)
 	private var repository
 
 	func execute(email: String, context: ModelContext) -> AnyPublisher<AccountModel, Error> {

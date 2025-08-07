@@ -11,7 +11,7 @@ import SwiftData
 
 final class UpdateCurrencyUseCase {
 
-	@Injected(\.authRepository)
+	@Injected(\.accountRepository)
 	private var repository
 
 	func execute(email: String, newCurrency: CurrencySwiftDataEntity, context: ModelContext) -> AnyPublisher<CurrencyModel, Error> {

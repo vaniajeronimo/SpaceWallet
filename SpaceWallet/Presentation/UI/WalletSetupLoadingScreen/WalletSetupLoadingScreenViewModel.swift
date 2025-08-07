@@ -37,7 +37,6 @@ extension WalletSetupLoadingScreen {
 			let account = AccountModel(
 				id: .init(),
 				email: userEmail,
-				password: UserDefaults.userPassword,
 				phoneNumber: UserDefaults.userPhoneNumber,
 				wallet: wallet
 			)
