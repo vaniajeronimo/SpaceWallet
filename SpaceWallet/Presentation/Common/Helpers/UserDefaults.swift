@@ -14,7 +14,6 @@ public extension UserDefaults {
 		case isFirstLaunch = "isFirstLaunch"
 		case isFirstNotificationPermissionRequest = "isFirstNotificationPermissionRequest"
 		case userEmail = "userEmail"
-		case userPassword = "userPassword"
 		case userName = "userName"
 		case userPhoneNumber = "userPhoneNumber"
 	}
@@ -67,15 +66,6 @@ public extension UserDefaults {
 		}
 		set {
 			UserDefaults.standard.set(newValue, forKey: Key.userEmail.rawValue)
-		}
-	}
-
-	class var userPassword: String? {
-		get {
-			return UserDefaults.standard.object(forKey: Key.userPassword.rawValue) as? String
-		}
-		set {
-			UserDefaults.standard.set(newValue, forKey: Key.userPassword.rawValue)
 		}
 	}
 

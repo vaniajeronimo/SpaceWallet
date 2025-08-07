@@ -1,8 +1,8 @@
 //
-//  AuthRepository.swift
+//  AccountRepository.swift
 //  SpaceWallet
 //
-//  Created by Vania Jeronimo on 03/07/2025.
+//  Created by Vania Jeronimo on 07/08/2025.
 //
 
 import Combine
@@ -10,22 +10,10 @@ import Factory
 import SwiftData
 import SwiftUI
 
-class AuthRepository: IAuthRepository {
+class AccountRepository: IAccountRepository {
 
 	@Injected(\.accountDatabaseProvider)
 	private var accountDatabaseProvider
-
-	func checkFirstLaunchUseCase() -> AnyPublisher<Bool, Error> {
-		return Future<Bool, Error> { promise in
-
-			if UserDefaults.isFirstLaunch {
-				return promise(.success(true))
-			}
-			return promise(.success(false))
-		}
-		.receive(on: DispatchQueue.main)
-		.eraseToAnyPublisher()
-	}
 
 	func getAccountUseCase(email: String, context: ModelContext) -> AnyPublisher<AccountModel, Error> {
 		accountDatabaseProvider.get(email: email, context: context)

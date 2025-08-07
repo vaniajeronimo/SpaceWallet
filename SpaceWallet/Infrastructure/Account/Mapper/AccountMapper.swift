@@ -13,7 +13,6 @@ extension AccountModel {
 		self.id = model.id
 		self.userName = model.userName
 		self.email = model.email
- 		self.password = model.password
 		self.phoneNumber = model.phoneNumber
 		self.accountName = model.accountName
 		self.wallet = model.wallet.map { WalletModel($0) }
@@ -24,7 +23,6 @@ extension AccountModel {
 		self.id = model.id
 		self.userName = model.userName
 		self.email = model.email
-		self.password = model.password
 		self.phoneNumber = model.phoneNumber
 		self.accountName = model.accountName
 		self.wallet = model.wallet.map { WalletModel($0) }
@@ -36,7 +34,6 @@ extension AccountModel {
 			id: id,
 			userName: userName,
 			email: email,
-			password: password,
 			phoneNumber: phoneNumber,
 			accountName: accountName,
 			wallet: wallet.map { WalletEntity($0) },
@@ -51,7 +48,6 @@ extension AccountEntity {
 		self.id = model.id
 		self.userName = model.userName
 		self.email = model.email
-		self.password = model.password
 		self.phoneNumber = model.phoneNumber
 		self.accountName = model.accountName
 		self.wallet = model.wallet.map { WalletEntity($0) }
@@ -62,7 +58,6 @@ extension AccountEntity {
 		self.id = model.id
 		self.userName = model.userName
 		self.email = model.email
-		self.password = model.password
 		self.phoneNumber = model.phoneNumber
 		self.accountName = model.accountName
 		self.wallet = model.wallet.map { WalletEntity($0) }
@@ -77,7 +72,6 @@ extension AccountSwiftDataEntity {
 		self.id = model.id
 		self.userName = model.userName
 		self.email = model.email
-		self.password = model.password
 		self.phoneNumber = model.phoneNumber
 		self.accountName = model.accountName
 		self.wallet = model.wallet.map { WalletSwiftDataEntity($0) }
@@ -89,7 +83,6 @@ extension AccountSwiftDataEntity {
 			id: id,
 			userName: userName,
 			email: email,
-			password: password,
 			phoneNumber: phoneNumber,
 			accountName: accountName,
 			wallet: wallet.map { $0.toModel() },

@@ -11,7 +11,7 @@ import SwiftData
 
 final class UpdateBalanceUseCase {
 
-	@Injected(\.authRepository)
+	@Injected(\.accountRepository)
 	private var repository
 
 	func updateBalance(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) -> AnyPublisher<BalanceModel, Error> {

@@ -7,15 +7,23 @@
 
 import Factory
 
-// MARK: - Auth
+// MARK: - Authentication
 extension Container {
 
-	var authRepository: Factory<IAuthRepository> {
-		self { AuthRepository() }
+	var authenticationRepository: Factory<IAuthenticationRepository> {
+		self { AuthenticationRepository() }
+	}
+
+	var authenticationDatabaseProvider: Factory<IAuthenticationDatabaseProvider> {
+		self { AuthenticationDatabaseProvider() }
 	}
 }
 
 extension Container {
+
+	var accountRepository: Factory<IAccountRepository> {
+		self { AccountRepository() }
+	}
 
 	var accountDao: Factory<AccountDao> {
 		self { AccountDao() }

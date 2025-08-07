@@ -10,7 +10,7 @@ import Factory
 
 final class CheckFirstLaunchUseCase {
 
-	@Injected(\.authRepository)
+	@Injected(\.authenticationRepository)
 	private var repository
 
 	func execute() -> AnyPublisher<Bool, Error> {

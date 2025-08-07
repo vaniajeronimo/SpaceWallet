@@ -13,7 +13,6 @@ class AccountSwiftDataEntity {
 	var id: UUID
 	var userName: String?
 	var email: String
-	var password: String?
 	var phoneNumber: String?
 	var accountName: String
 	var wallet: WalletSwiftDataEntity?
@@ -23,7 +22,6 @@ class AccountSwiftDataEntity {
 		id: UUID = UUID(),
 		userName: String? = nil,
 		email: String = "",
-		password: String? = nil,
 		phoneNumber: String? = nil,
 		accountName: String = "Account 1",
 		wallet: WalletSwiftDataEntity? = nil,
@@ -32,7 +30,6 @@ class AccountSwiftDataEntity {
 		self.id = id
 		self.userName = userName
 		self.email = email
-		self.password = password
 		self.phoneNumber = phoneNumber
 		self.accountName = accountName
 		self.wallet = wallet

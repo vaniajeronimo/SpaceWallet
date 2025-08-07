@@ -12,11 +12,8 @@ public struct CreatePasswordScreen: View {
 	@Bindable private var viewModel: ViewModel
 	@FocusState private var hasFocus: Bool
 
-	private let onAction: () -> Void
-
 	public init(onAction: @escaping () -> Void) {
-		self.onAction = onAction
-		self.viewModel = .init()
+		self.viewModel = .init(onAction: onAction)
 	}
 
 	public var body: some View {
@@ -34,6 +31,15 @@ public struct CreatePasswordScreen: View {
 				.violetPrimary
 				.ignoresSafeArea(.all)
 		)
+		.alert(isPresented: $viewModel.isToShowAlert) {
+			Alert(
+				title: Text("generic_error_title".localized),
+				message: Text("generic_error_message".localized),
+				dismissButton: .default(Text("ok".localized), action: {
+					viewModel.isToShowAlert = false
+				})
+			)
+		}
 		.keyboardAware()
 		.dismissKeyboard()
 	}
@@ -98,8 +104,7 @@ public struct CreatePasswordScreen: View {
 
 	private var cta: some View {
 		Button {
-			viewModel.savePassword()
-			onAction()
+			viewModel.setSession()
 		} label: {
 			Text("create_password_title".localized)
 		}
