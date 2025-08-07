@@ -9,7 +9,7 @@ import Foundation
 
 public enum Debug {
 
-	public static func error(_ error: Error, _ message: String = "", file: String = #fileID, line: Int = #line) {
+	static func error(_ error: Error, _ message: String = "", file: String = #fileID, line: Int = #line) {
 		debugPrint("❌ - \(message)",
 				   "file: \(file)",
 				   "line: \(line)",
@@ -17,7 +17,7 @@ public enum Debug {
 				   separator: "\n")
 	}
 
-	public static func log(_ message: String, file: String = #fileID, line: Int = #line) {
+	static func log(_ message: String, file: String = #fileID, line: Int = #line) {
 		debugPrint("ℹ️ - \(message)",
 				   "file: \(file)",
 				   "line: \(line)",
