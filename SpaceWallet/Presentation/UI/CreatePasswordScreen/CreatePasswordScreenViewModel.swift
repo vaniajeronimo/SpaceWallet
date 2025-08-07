@@ -20,6 +20,7 @@ extension CreatePasswordScreen {
 
 		private var cancellables = Set<AnyCancellable>()
 
+		var isToShowAlert: Bool = false
 		var password: String = ""
 		var firstStepper: StepperColor = .notSet
 		var secondStepper: StepperColor = .notSet
@@ -31,7 +32,11 @@ extension CreatePasswordScreen {
 			passwordStrength.description
 		}
 
-		init() { }
+		private let onAction: () -> Void
+
+		init(onAction: @escaping () -> Void) {
+			self.onAction = onAction
+		}
 
 		func validatePassword() {
 			guard password.isNotEmpty else {
@@ -90,12 +95,14 @@ extension CreatePasswordScreen {
 				return
 			}
 			setSessionUseCase.execute(session: .init(email: email, password: password))
-				.sink { completion in
+				.sink { [weak self] completion in
+					guard let self else { return }
 					switch completion {
 						case .failure(let error):
 							Debug.error(error)
+							isToShowAlert = true
 						case .finished:
-							break
+							onAction()
 					}
 				} receiveValue: { }
 				.store(in: &cancellables)
