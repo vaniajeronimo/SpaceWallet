@@ -18,7 +18,7 @@ struct DiscoveryScreen: View {
 		VStack(spacing: UI.Spacing.level07) {
 			VStack(alignment: .leading, spacing: UI.Spacing.level04) {
 				Search(
-					placeholder: "discovery_search_bar_placeholder".localized,
+					placeholder: "search_bar_placeholder".localized,
 					searchString: $viewModel.searchString
 				)
 				.style(.init(size: .m, state: .withStroke))

@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct AssetCollectiblesContainer: View {
 
-	@State private var selectedTab: Tab = .assets
+	@State private var selectedTab: TabButton.SelectedTab = .assets
 
 	private var nfts: [CollectibleModel]?
 	private var hasNoAssets: Bool
@@ -46,28 +46,12 @@ public struct AssetCollectiblesContainer: View {
 	}
 
 	private var tabButtons: some View {
-		HStack(spacing: UI.Spacing.level07) {
-			Button {
-				selectedTab = .assets
-			} label: {
-				Text("assets".localized)
-					.font(.heading4)
-					.fontWeight(.medium)
-					.foregroundStyle(selectedTab == .assets ? .textPrimary : .textTertiary)
+		TabButton(
+			selectedTab: $selectedTab,
+			onAction: { tab in
+				selectedTab = tab
 			}
-
-			Button {
-				selectedTab = .collectibles
-			} label: {
-				Text("collectibles".localized)
-					.font(.heading4)
-					.fontWeight(.medium)
-					.foregroundStyle(selectedTab == .collectibles ? .textPrimary : .textTertiary)
-			}
-		}
-		.padding(.top, 5)
-		.padding(.horizontal, UI.Spacing.level06)
-		.frame(maxWidth: .infinity, alignment: .leading)
+		)
 	}
 
 	private var assets: some View {
@@ -161,11 +145,6 @@ public struct AssetCollectiblesContainer: View {
 }
 
 extension AssetCollectiblesContainer {
-
-	private enum Tab {
-		case assets
-		case collectibles
-	}
 
 	private enum ScreenState {
 		case assetsEmpty
