@@ -9,35 +9,37 @@ import SwiftUI
 
 struct DiscoveryScreen: View {
 
-	@State private var selectedTab: Tab = .nfts
-
-	private var viewModel: ViewModel = ViewModel()
+	@Bindable private var viewModel = ViewModel()
+	@FocusState private var searchIsFocused: Bool
 
 	init() { }
 
 	var body: some View {
 		VStack(spacing: UI.Spacing.level07) {
 			VStack(alignment: .leading, spacing: UI.Spacing.level04) {
-				Search(placeholder: "discovery_search_bar_placeholder".localized)
-					.style(.init(size: .m, state: .withStroke))
+				Search(
+					placeholder: "discovery_search_bar_placeholder".localized,
+					searchString: $viewModel.searchString
+				)
+				.style(.init(size: .m, state: .withStroke))
+				.focused($searchIsFocused)
 				filterButtons
 			}
 			content
 		}
 		.padding(.top, UI.Spacing.level07)
+		.onTapGesture {
+			searchIsFocused = false
+		}
 	}
 
 	private var content: some View {
 		ScrollView {
-			switch screenState {
+			switch viewModel.screenState {
 				case .nfts:
 					NFTGalleryView(nfts: viewModel.nfts)
 				case .tokens:
 					trendingTokens
-				case .sites:
-					EmptyView()
-				case .learn:
-					EmptyView()
 			}
 		}
 	}
@@ -46,30 +48,16 @@ struct DiscoveryScreen: View {
 		HStack(alignment: .center, spacing: UI.Spacing.level04) {
 			createFilterButton(
 				title: "discovery_nfts".localized,
-				isSelected: selectedTab == .nfts,
+				isSelected: viewModel.selectedTab == .nfts,
 				action: {
-					selectedTab = .nfts
+					viewModel.selectedTab = .nfts
 				}
 			)
 			createFilterButton(
 				title: "discovery_tokens".localized,
-				isSelected: selectedTab == .tokens,
+				isSelected: viewModel.selectedTab == .tokens,
 				action: {
-					selectedTab = .tokens
-				}
-			)
-			createFilterButton(
-				title: "discovery_sites".localized,
-				isSelected: selectedTab == .sites,
-				action: {
-					selectedTab = .sites
-				}
-			)
-			createFilterButton(
-				title: "discovery_learn".localized,
-				isSelected: selectedTab == .learn,
-				action: {
-					selectedTab = .learn
+					viewModel.selectedTab = .tokens
 				}
 			)
 		}
@@ -132,35 +120,5 @@ struct DiscoveryScreen: View {
 		.padding(.horizontal, UI.Spacing.level06)
 		.padding(.top, UI.Spacing.level07)
 		.padding(.bottom, UI.Spacing.level04)
-	}
-}
-
-extension DiscoveryScreen {
-
-	enum Tab {
-		case nfts
-		case tokens
-		case sites
-		case learn
-	}
-
-	private enum ScreenState {
-		case nfts
-		case tokens
-		case sites
-		case learn
-	}
-
-	private var screenState: ScreenState {
-		switch selectedTab {
-			case .nfts:
-				return .nfts
-			case .tokens:
-				return .tokens
-			case .sites:
-				return .sites
-			case .learn:
-				return .learn
-		}
 	}
 }
