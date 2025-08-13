@@ -137,6 +137,8 @@ public struct HomeScreen: View {
 					switch id {
 						case 1:
 							viewModel.onAction(.receive)
+						case 2:
+							viewModel.onAction(.send)
 						default:
 							break
 					}

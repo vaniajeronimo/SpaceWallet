@@ -29,7 +29,7 @@ struct HomeScreenNavigation: View, Navigation {
 				case .receive:
 					onAction(.receive)
 				case .send:
-					break
+					navigation.showFullScreen(send)
 				case .settings(let context):
 					navigation.showFullScreen(settings(with: context))
 				default:
@@ -45,6 +45,19 @@ struct HomeScreenNavigation: View, Navigation {
 				navigation.popOrDismiss()
 			}
 		)
+	}
+
+	private var send: some View {
+		NavigationBar {
+			SendScreen()
+		}
+		.navigationTitle("send".localized)
+		.navigationLeftButton(.init(.close(action: {
+			navigation.popOrDismiss()
+		})))
+		.navigationPrimaryRightButton(.init(.custom(icon: .dots, hasBackground: true, action: {
+			print("options action")
+		})), isToShow: true)
 	}
 }
 
