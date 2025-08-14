@@ -127,3 +127,8 @@
 "discovery_nfts" = "NFTs";
 "trending_tokens_title" = "Tokens em alta";
 "see_more" = "Ver mais";
+"show_more" = "Mostrar mais";
+"sendTo" = "Enviar %@";
+"recents" = "Recentes";
+"suggested" = "Sugeridos";
+"enter_amount_title" = "Confirmar Valor";

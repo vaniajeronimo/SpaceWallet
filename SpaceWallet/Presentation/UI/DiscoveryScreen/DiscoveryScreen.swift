@@ -84,15 +84,7 @@ struct DiscoveryScreen: View {
 		Section(header: sectionHeader(title: "trending_tokens_title".localized, subtitle: "see_more".localized)) {
 			VStack(alignment: .leading, spacing: UI.Spacing.level04) {
 				ForEach(viewModel.tokens, id: \.self) { token in
-					TokenCardView(
-						icon: token.icon,
-						title: token.tokenName,
-						subtitle: token.amount?.formattedAmount() ?? "",
-						symbol: token.tokenSymbol,
-						value: token.value?.asCurrency(symbol: "$") ?? "",
-						profit: token.profit?.formattedPercentageWithSign() ?? "",
-						color: .greenDefault
-					)
+					TokenCardView(model: token)
 				}
 			}
 			.padding(.horizontal, UI.Spacing.level06)

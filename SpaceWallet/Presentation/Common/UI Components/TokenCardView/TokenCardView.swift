@@ -8,44 +8,30 @@
 import SwiftUI
 
 public struct TokenCardView: View {
-	let icon: String
-	let title: String
-	let subtitle: String
-	let symbol: String
-	let value: String
-	let profit: String
-	let color: Color
+
+	private var model: TokenModel
+	private var onTap: (() -> Void)?
 
 	public init(
-		icon: String,
-		title: String,
-		subtitle: String,
-		symbol: String,
-		value: String,
-		profit: String,
-		color: Color
+		model: TokenModel,
+		onTap: (() -> Void)? = nil
 	) {
-		self.icon = icon
-		self.title = title
-		self.subtitle = subtitle
-		self.symbol = symbol
-		self.value = value
-		self.profit = profit
-		self.color = color
+		self.model = model
+		self.onTap = onTap
 	}
 
 	public var body: some View {
 		HStack(alignment: .center, spacing: UI.Spacing.level04) {
-			Image(icon)
+			Image(model.icon)
 				.resizable()
 				.scaledToFit()
 				.frame(maxWidth: 40, maxHeight: 40)
 
 			VStack(alignment: .leading, spacing: UI.Spacing.level02) {
-				Text(title)
+				Text(model.tokenName)
 					.font(.heading4SemiBold)
 					.foregroundStyle(.textPrimary)
-				Text("\(subtitle) \(symbol)")
+				Text("\(model.amount?.formattedAmount() ?? "") \(model.tokenSymbol)")
 					.font(.body)
 					.fontWeight(.medium)
 					.foregroundStyle(.graySecondary)
@@ -54,13 +40,15 @@ public struct TokenCardView: View {
 			Spacer()
 
 			VStack(alignment: .trailing, spacing: UI.Spacing.level02) {
-				Text(value)
+				Text(model.value?.asCurrency(symbol: "$") ?? "")
 					.font(.heading4SemiBold)
 					.foregroundStyle(.textPrimary)
-				Text(profit)
-					.font(.body)
-					.fontWeight(.medium)
-					.foregroundStyle(color)
+				if let profit = model.profit {
+					Text("\(profit)")
+						.font(.body)
+						.fontWeight(.medium)
+						.foregroundStyle(.greenActive)
+				}
 			}
 		}
 		.padding(UI.Spacing.level05)
@@ -68,5 +56,8 @@ public struct TokenCardView: View {
 			RoundedRectangle(cornerRadius: UI.Corner.l)
 				.fill(Color.fillQuaternary)
 		)
+		.onTapGesture {
+			onTap?()
+		}
 	}
 }

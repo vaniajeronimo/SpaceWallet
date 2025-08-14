@@ -112,6 +112,15 @@ public extension Image {
 	static let ic_sol_token = Image("ic_sol_token", bundle: Bundle.main)
 	static let ic_usdc_token = Image("ic_usdc_token", bundle: Bundle.main)
 
+	// MARK: - Avatars
+	static let avatar1 = Image("avatar_1", bundle: Bundle.main)
+	static let avatar2 = Image("avatar_2", bundle: Bundle.main)
+	static let avatar3 = Image("avatar_3", bundle: Bundle.main)
+	static let avatar4 = Image("avatar_4", bundle: Bundle.main)
+	static let avatar5 = Image("avatar_5", bundle: Bundle.main)
+	static let avatar6 = Image("avatar_6", bundle: Bundle.main)
+	static let avatar7 = Image("avatar_7", bundle: Bundle.main)
+
 	// MARK: - Settings
 	static let profile = Image("ic_profile", bundle: Bundle.main)
 	static let appearance = Image("ic_appearance", bundle: Bundle.main)
