@@ -18,10 +18,7 @@ public struct BalanceModel {
 		if let profit {
 			return BalanceStatusModel.from(value: profit)
 		}
-		if let margin {
-			return BalanceStatusModel.from(value: margin)
-		}
-		return BalanceStatusModel.from(value: balance)
+		return .breakEven
 	}
 
 	public init(
