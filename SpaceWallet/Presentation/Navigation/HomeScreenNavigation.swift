@@ -29,7 +29,7 @@ struct HomeScreenNavigation: View, Navigation {
 				case .receive:
 					onAction(.receive)
 				case .send:
-					navigation.showFullScreen(send)
+					navigation.push(send)
 				case .settings(let context):
 					navigation.showFullScreen(settings(with: context))
 				default:
@@ -49,10 +49,45 @@ struct HomeScreenNavigation: View, Navigation {
 
 	private var send: some View {
 		NavigationBar {
-			SendScreen()
+			SendScreen(onAction: { action in
+				switch action {
+					case .sendToken(let token):
+						navigation.push(sendTo(with: token))
+					default:
+						break
+				}
+			})
 		}
 		.navigationTitle("send".localized)
-		.navigationLeftButton(.init(.close(action: {
+		.navigationLeftButton(.init(.back(action: {
+			navigation.popOrDismiss()
+		})))
+		.navigationPrimaryRightButton(.init(.custom(icon: .dots, hasBackground: true, action: {
+			print("options action")
+		})), isToShow: true)
+	}
+
+	private func sendTo(with token: TokenModel) -> some View {
+		NavigationBar {
+			SendToScreen { avatar in
+				navigation.push(sendAmount(with: token, for: avatar))
+			}
+		}
+		.navigationTitle("sendTo".localized(with: token.tokenSymbol))
+		.navigationLeftButton(.init(.back(action: {
+			navigation.popOrDismiss()
+		})))
+		.navigationPrimaryRightButton(.init(.custom(icon: .dots, hasBackground: true, action: {
+			print("options action")
+		})), isToShow: true)
+	}
+
+	private func sendAmount(with token: TokenModel, for avatar: AvatarModel) -> some View {
+		NavigationBar {
+			EmptyView()
+		}
+		.navigationTitle("enter_amount_title".localized)
+		.navigationLeftButton(.init(.back(action: {
 			navigation.popOrDismiss()
 		})))
 		.navigationPrimaryRightButton(.init(.custom(icon: .dots, hasBackground: true, action: {

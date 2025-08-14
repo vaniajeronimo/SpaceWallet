@@ -15,4 +15,22 @@ public struct TokenModel: Identifiable, Hashable {
 	let amount: Double?
 	let value: Double?
 	let profit: Double?
+
+	init(
+		id: Int,
+		icon: String,
+		tokenName: String,
+		tokenSymbol: String,
+		amount: Double? = nil,
+		value: Double? = nil,
+		profit: Double? = nil
+	) {
+		self.id = id
+		self.icon = icon
+		self.tokenName = tokenName
+		self.tokenSymbol = tokenSymbol
+		self.amount = amount
+		self.value = value
+		self.profit = profit
+	}
 }

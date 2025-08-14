@@ -12,9 +12,14 @@ struct SendScreen: View {
 	@Bindable private var viewModel = ViewModel()
 	@FocusState private var searchIsFocused: Bool
 
+	@State private var showAlert: Bool = false
 	@State private var selectedTab: TabButton.SelectedTab = .assets
 
-	init() { }
+	private let onAction: (ActionType) -> Void
+
+	init(onAction: @escaping (ActionType) -> Void) {
+		self.onAction = onAction
+	}
 
 	var body: some View {
 		VStack(spacing: UI.Spacing.level07) {
@@ -27,7 +32,6 @@ struct SendScreen: View {
 
 			tabButtons
 			contentForSelectedTab
-
 			Spacer()
 		}
 		.padding(.top, UI.Spacing.level07)
@@ -42,34 +46,37 @@ struct SendScreen: View {
 		)
 	}
 
+	@ViewBuilder
 	private var contentForSelectedTab: some View {
-		switch selectedTab {
-			case .assets:
-				EmptyView()
-			case .collectibles:
-				EmptyView()
+		ScrollView {
+			switch selectedTab {
+				case .assets:
+					assetsList
+				case .collectibles:
+					EmptyView()
+			}
 		}
+	}
+
+	private var assetsList: some View {
+		VStack(alignment: .leading, spacing: UI.Spacing.level04) {
+			ForEach(viewModel.assets, id: \.self) { asset in
+				TokenCardView(
+					model: asset,
+					onTap: {
+						onAction(.sendToken(asset))
+					}
+				)
+			}
+		}
+		.padding(.horizontal, UI.Spacing.level06)
 	}
 }
 
 extension SendScreen {
 
-	enum Tab {
-		case assets
-		case collectibles
-	}
-
-	private enum ScreenState {
-		case assetsView
-		case collectiblesView
-	}
-
-	private var screenState: ScreenState {
-		switch selectedTab {
-			case .assets:
-				return .assetsView
-			case .collectibles:
-				return .collectiblesView
-		}
+	enum ActionType {
+		case sendToken(TokenModel)
+		case sendCollectible(CollectibleModel)
 	}
 }
