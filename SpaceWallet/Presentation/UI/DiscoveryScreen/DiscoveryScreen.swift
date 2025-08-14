@@ -16,7 +16,7 @@ struct DiscoveryScreen: View {
 	init() { }
 
 	var body: some View {
-		VStack(spacing: UI.Spacing.level07) {
+		VStack {
 			VStack(alignment: .leading, spacing: UI.Spacing.level04) {
 				Search(
 					placeholder: "search_bar_placeholder".localized,
@@ -63,6 +63,7 @@ struct DiscoveryScreen: View {
 			)
 		}
 		.padding(.horizontal, UI.Spacing.level06)
+		.padding(.bottom, UI.Spacing.level07)
 	}
 
 	private func createFilterButton(title: String, isSelected: Bool = false, action: @escaping () -> Void) -> some View {
@@ -108,7 +109,7 @@ struct DiscoveryScreen: View {
 	}
 
 	private func sectionHeader(title: String, subtitle: String? = nil) -> some View {
-		HStack(alignment: .firstTextBaseline) {
+		HStack(alignment: .center) {
 			Text(title)
 				.font(.heading3Bold)
 				.foregroundColor(Color.textPrimary)
@@ -126,7 +127,5 @@ struct DiscoveryScreen: View {
 			}
 		}
 		.padding(.horizontal, UI.Spacing.level06)
-		.padding(.top, UI.Spacing.level07)
-		.padding(.bottom, UI.Spacing.level04)
 	}
 }
