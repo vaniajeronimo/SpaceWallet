@@ -11,6 +11,7 @@ struct DiscoveryScreen: View {
 
 	@Bindable private var viewModel = ViewModel()
 	@FocusState private var searchIsFocused: Bool
+	@State private var showAll: Bool = false
 
 	init() { }
 
@@ -37,7 +38,7 @@ struct DiscoveryScreen: View {
 		ScrollView {
 			switch viewModel.screenState {
 				case .nfts:
-					NFTGalleryView(nfts: viewModel.nfts)
+					nfts
 				case .tokens:
 					trendingTokens
 			}
@@ -80,15 +81,30 @@ struct DiscoveryScreen: View {
 		}
 	}
 
+	private var nfts: some View {
+		VStack {
+			NFTGalleryView(nfts: viewModel.nfts)
+			Spacer(minLength: UI.Spacing.level15)
+		}
+	}
+
 	private var trendingTokens: some View {
 		Section(header: sectionHeader(title: "trending_tokens_title".localized, subtitle: "see_more".localized)) {
 			VStack(alignment: .leading, spacing: UI.Spacing.level04) {
-				ForEach(viewModel.tokens, id: \.self) { token in
+				ForEach(displayedTokens, id: \.self) { token in
 					TokenCardView(model: token)
 				}
+				Spacer(minLength: UI.Spacing.level15)
 			}
 			.padding(.horizontal, UI.Spacing.level06)
 		}
+	}
+
+	private var displayedTokens: [TokenModel] {
+		if showAll {
+			return viewModel.tokens
+		}
+		return Array(viewModel.tokens.prefix(4))
 	}
 
 	private func sectionHeader(title: String, subtitle: String? = nil) -> some View {
@@ -103,9 +119,9 @@ struct DiscoveryScreen: View {
 				Text(subtitle)
 					.font(.heading4)
 					.fontWeight(.medium)
-					.foregroundColor(Color.violetDefault)
+					.foregroundColor(showAll ? Color.violetDefault : Color.graySecondary)
 					.onTapGesture {
-						print("subtitle tapped")
+						showAll.toggle()
 					}
 			}
 		}

@@ -68,7 +68,8 @@ struct SendToScreen: View {
 
 			if let subtitle {
 				Text(subtitle)
-					.font(.heading4SemiBold)
+					.font(.heading4)
+					.fontWeight(.medium)
 					.foregroundColor(showMore ? Color.violetDefault : Color.graySecondary)
 					.onTapGesture {
 						showMore.toggle()
