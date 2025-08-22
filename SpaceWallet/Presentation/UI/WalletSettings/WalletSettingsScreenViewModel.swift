@@ -37,7 +37,9 @@ extension WalletSettingsScreen {
 					image: .buy_bitcoin,
 					title: "$50.00",
 					subtitle: "crypto_countdown".localized,
-					action: { self.onAction(.buyBitcoin) }
+					action: {
+						self.onAction(.buyBitcoin)
+					}
 				),
 				WalletSettingsModel(
 					id: 3,
@@ -45,7 +47,9 @@ extension WalletSettingsScreen {
 					image: .research,
 					title: "$12.25",
 					subtitle: "market_research".localized,
-					action: { self.onAction(.research) }
+					action: {
+						self.onAction(.research)
+					}
 				),
 				WalletSettingsModel(
 					id: 4,
@@ -53,7 +57,9 @@ extension WalletSettingsScreen {
 					image: .auto_invest,
 					title: "$32.15",
 					subtitle: "set_it_and_grow".localized,
-					action: { self.onAction(.autoInvest) }
+					action: {
+						self.onAction(.autoInvest)
+					}
 				)
 			]
 		}
