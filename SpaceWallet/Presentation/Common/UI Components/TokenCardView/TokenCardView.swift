@@ -44,7 +44,7 @@ public struct TokenCardView: View {
 					.font(.heading4SemiBold)
 					.foregroundStyle(.textPrimary)
 				if let profit = model.profit {
-					Text("\(profit)")
+					Text("\(profit.formattedPercentageWithSign())")
 						.font(.body)
 						.fontWeight(.medium)
 						.foregroundStyle(.greenActive)
