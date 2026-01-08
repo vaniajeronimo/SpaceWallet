@@ -10,29 +10,29 @@ import Factory
 extension Container {
 
 	var checkFirstLaunchUseCase: Factory<CheckFirstLaunchUseCase> {
-		self { CheckFirstLaunchUseCase() }
+		self { @NetworkActor in CheckFirstLaunchUseCase() }
 	}
 
 	var setSessionUseCase: Factory<SetSessionUseCase> {
-		self { SetSessionUseCase() }
+		self { @NetworkActor in SetSessionUseCase() }
 	}
 }
 
 extension Container {
 
 	var saveAccountUseCase: Factory<SaveAccountUseCase> {
-		self { SaveAccountUseCase() }
+        self { @MainActor in SaveAccountUseCase() }
 	}
 
 	var updateBalanceUseCase: Factory<UpdateBalanceUseCase> {
-		self { UpdateBalanceUseCase() }
+		self { @MainActor in UpdateBalanceUseCase() }
 	}
 
 	var updateCurencyUseCase: Factory<UpdateCurrencyUseCase> {
-		self { UpdateCurrencyUseCase() }
+		self { @MainActor in UpdateCurrencyUseCase() }
 	}
 
 	var getAccountUseCase: Factory<GetAccountUseCase> {
-		self { GetAccountUseCase() }
+		self { @MainActor in GetAccountUseCase() }
 	}
 }

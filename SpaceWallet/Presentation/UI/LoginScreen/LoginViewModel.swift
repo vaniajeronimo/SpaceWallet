@@ -5,7 +5,6 @@
 //  Created by Vania Jeronimo on 04/07/2025.
 //
 
-import Combine
 import Factory
 import SwiftData
 import SwiftUI
@@ -50,7 +49,6 @@ extension LoginScreen {
 		var onAction: (ActionType) -> Void
 
 		private var modelContext: ModelContext?
-		private var cancellables = Set<AnyCancellable>()
 
 		init(onAction: @escaping (ActionType) -> Void) {
 			self.onAction = onAction
@@ -72,41 +70,39 @@ extension LoginScreen {
 		func validateEmail(isToCheckEmail: Bool = false) {
 			isValidEmail = isEmailValid()
 
-			if isValidEmail && isToCheckEmail {
-				UserDefaults.userEmail = email
-				checkIfAccountExists()
-			}
+            if isValidEmail && isToCheckEmail {
+                UserDefaults.userEmail = email
+                Task { @MainActor in
+                    await checkIfAccountExists()
+                }
+            }
 		}
 
-		private func checkIfAccountExists() {
-			guard let modelContext else { return }
+        private func checkIfAccountExists() async {
+            guard let context = modelContext else { return }
 
-			let firstLaunchPublisher = checkFirstLaunchUseCase.execute()
-				.replaceError(with: false)
-			let accountPublisher = getAccountUseCase.execute(email: email, context: modelContext)
-				.map { _ in true }
-				.catch { _ in Just(false) }
+            let firstLaunchResult: Bool
 
-			Publishers.Zip(firstLaunchPublisher, accountPublisher)
-				.receive(on: DispatchQueue.main)
-				.sink { completion in
-					switch completion {
-						case .failure(let error):
-							Debug.error(error)
-						case .finished:
-							break
-					}
-				} receiveValue: { [weak self] isFirstLaunch, accountExists in
-					guard let self else { return }
+            do {
+                firstLaunchResult = try await checkFirstLaunchUseCase.execute()
+            } catch {
+                firstLaunchResult = false
+            }
 
-					if isFirstLaunch && !accountExists {
-						onAction(.onboarding)
-					} else {
-						onAction(.verificationCode)
-					}
-				}
-				.store(in: &cancellables)
-		}
+            var accountExistsResult: Bool
+            do {
+                _ = try await getAccountUseCase.execute(email: email, context: context)
+                accountExistsResult = true
+            } catch {
+                accountExistsResult = false
+            }
+
+            if firstLaunchResult && !accountExistsResult {
+                onAction(.onboarding)
+            } else {
+                onAction(.verificationCode)
+            }
+        }
 
 		private func isEmailValid() -> Bool {
 			if email.isEmpty {

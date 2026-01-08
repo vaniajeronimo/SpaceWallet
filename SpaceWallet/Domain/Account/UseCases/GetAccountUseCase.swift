@@ -5,16 +5,16 @@
 //  Created by Vania Jeronimo on 14/07/2025.
 //
 
-import Combine
 import Factory
 import SwiftData
 
+@MainActor
 final class GetAccountUseCase {
 
-	@Injected(\.accountRepository)
+	@LazyInjected(\.accountRepository)
 	private var repository
 
-	func execute(email: String, context: ModelContext) -> AnyPublisher<AccountModel, Error> {
-		return repository.getAccountUseCase(email: email, context: context)
+	func execute(email: String, context: ModelContext) async throws -> AccountModel? {
+        try await repository.getAccountUseCase(email: email, context: context)
 	}
 }

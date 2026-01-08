@@ -8,9 +8,10 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 class LanguageManager: ObservableObject {
 
-	static let shared = LanguageManager()
+    static let shared = LanguageManager()
 
 	@Published var currentLanguage: String {
 		didSet {

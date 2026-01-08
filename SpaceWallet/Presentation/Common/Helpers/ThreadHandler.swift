@@ -7,9 +7,10 @@
 
 import Foundation
 
-public typealias MethodHandler = () -> Void
+public typealias MethodHandler = @Sendable () -> Void
 
 /** Perform actions in main thread  */
+@MainActor
 public func executeInMainThread(_ execution: @escaping MethodHandler, after: Double = 0.0) {
 	DispatchQueue.main.asyncAfter(deadline: .now() + after) {
 		execution()

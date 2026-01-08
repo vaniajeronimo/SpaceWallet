@@ -39,11 +39,14 @@ public struct LoginScreen: View {
 		.onAppear {
 			viewModel.setContext(modelContext)
 		}
-		.alert("generic_alert_title".localized, isPresented: $isToShowAlert) {
-			Button("ok".localized, role: .cancel) {
-				isToShowAlert = false
-			}
-		}
+        .alert(isPresented: $isToShowAlert) {
+            Alert(
+                title: Text("generic_alert_title".localized),
+                dismissButton: .default(Text("ok".localized)) {
+                    isToShowAlert = false
+                }
+            )
+        }
 	}
 
 	private var currentIllustration: some View {

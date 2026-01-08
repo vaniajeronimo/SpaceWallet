@@ -7,6 +7,7 @@
 
 import Foundation
 
+@NetworkActor
 public final class KeychainHelper {
 
 	public static let shared = KeychainHelper()

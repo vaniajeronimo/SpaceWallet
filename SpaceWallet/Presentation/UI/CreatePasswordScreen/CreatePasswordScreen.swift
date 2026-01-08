@@ -104,7 +104,7 @@ public struct CreatePasswordScreen: View {
 
 	private var cta: some View {
 		Button {
-			viewModel.setSession()
+            Task { await viewModel.setSession() }
 		} label: {
 			Text("create_password_title".localized)
 		}

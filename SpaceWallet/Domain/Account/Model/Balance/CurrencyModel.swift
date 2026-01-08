@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public enum CurrencyModel: String, Codable {
+public enum CurrencyModel: String, Codable, Sendable {
 
 	case eur = "€"
 	case usd = "$"

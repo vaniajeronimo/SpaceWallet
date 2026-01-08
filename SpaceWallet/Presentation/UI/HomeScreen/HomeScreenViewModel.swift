@@ -5,7 +5,6 @@
 //  Created by Vania Jeronimo on 14/07/2025.
 //
 
-import Combine
 import Factory
 import SwiftData
 import SwiftUI
@@ -23,7 +22,6 @@ extension HomeScreen {
 		var actions: [ActionCardModel] = []
 
 		private var modelContext: ModelContext?
-		private var cancellables = Set<AnyCancellable>()
 
 		var currentBalance = BalanceModel()
 		var accountModel: AccountModel?
@@ -68,29 +66,29 @@ extension HomeScreen {
 			setupActions()
 		}
 
-		func getAccount() {
-			guard let context = modelContext, let email = UserDefaults.userEmail else { return }
+        @MainActor
+        func getAccount() async {
+            guard let context = modelContext,
+                  let email = UserDefaults.userEmail else { return }
 
-			getAccountUseCase.execute(email: email, context: context)
-				.receive(on: DispatchQueue.main)
-				.sink { completion in
-					switch completion {
-						case .failure(let error):
-							Debug.error(error)
-						case .finished:
-							break
-					}
-				} receiveValue: { [weak self] account in
-					guard let self, let balance = account.balance else { return }
-					accountModel = account
-					currentBalance = balance
-				}
-				.store(in: &cancellables)
-		}
+            do {
+                if let account = try await getAccountUseCase.execute(email: email, context: context),
+                   let balance = account.balance {
+
+                    accountModel = account
+                    currentBalance = balance
+                }
+            } catch {
+                Debug.error(error)
+            }
+        }
 
 		func setContext(_ context: ModelContext) {
 			self.modelContext = context
-			self.getAccount()
+
+            Task { [weak self] in
+                await self?.getAccount()
+            }
 		}
 
 		private func setupActions() {

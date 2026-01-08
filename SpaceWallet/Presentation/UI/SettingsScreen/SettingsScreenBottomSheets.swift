@@ -17,7 +17,7 @@ extension SettingsScreen {
 			selectedItem: $viewModel.selectedCurrency,
 			onSelectedCallback: { selectedCurrency in
 				viewModel.selectedCurrency = selectedCurrency
-				viewModel.updateCurrency()
+                Task { await viewModel.updateCurrency() }
 				isToShowCurrencyBottomSheet = false
 			},
 			onClose: {

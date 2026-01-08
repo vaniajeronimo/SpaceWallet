@@ -5,7 +5,6 @@
 //  Created by Vania Jeronimo on 05/07/2025.
 //
 
-import Combine
 import SwiftUI
 
 extension LandingPageScreen {
@@ -14,25 +13,18 @@ extension LandingPageScreen {
 	final class ViewModel {
 
 		private let networkManager = NetworkManager()
-
 		var isConnected: Bool = true
 
-		private var cancellables = Set<AnyCancellable>()
-
 		init() {
-			observeNetworkStatus()
+            Task { @MainActor in
+                await observeNetworkStatus()
+            }
 		}
 
-		func observeNetworkStatus() {
-			executeInBackgroundThread({
-				self.networkManager.$isConnected
-					.receive(on: DispatchQueue.main)
-					.sink { [weak self] connected in
-						guard let self else { return }
-						isConnected = connected
-					}
-					.store(in: &self.cancellables)
-			}, after: 0.5)
-		}
+        func observeNetworkStatus() async {
+            for await connected in networkManager.isConnectedStream {
+                self.isConnected = connected
+            }
+        }
 	}
 }

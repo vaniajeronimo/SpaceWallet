@@ -20,9 +20,11 @@ private struct KeyboardAware: ViewModifier {
 			.edgesIgnoringSafeArea(keyboard.height > 0 ? .bottom : [])
 	}
 }
+
+@MainActor
 public class KeyboardInfo: ObservableObject {
 
-	static let shared = KeyboardInfo()
+    static let shared = KeyboardInfo()
 	@Published var height: CGFloat = 0
 
 	private init() {
@@ -34,10 +36,11 @@ public class KeyboardInfo: ObservableObject {
 
 	@objc private func keyboardChanged(notification: Notification) {
 		guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        let newHeight: CGFloat = notification.name == UIApplication.keyboardWillHideNotification ? 0 : frame.height
 
-		executeInMainThread {
+        Task { @MainActor in
 			withAnimation(.smooth(duration: 0.3)) {
-				self.height = notification.name == UIApplication.keyboardWillHideNotification ? 0 : frame.height
+                self.height = newHeight
 			}
 		}
 	}

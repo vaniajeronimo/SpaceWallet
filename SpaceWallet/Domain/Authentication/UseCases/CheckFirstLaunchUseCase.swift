@@ -5,15 +5,15 @@
 //  Created by Vania Jeronimo on 09/07/2025.
 //
 
-import Combine
 import Factory
 
+@NetworkActor
 final class CheckFirstLaunchUseCase {
 
-	@Injected(\.authenticationRepository)
+	@LazyInjected(\.authenticationRepository)
 	private var repository
 
-	func execute() -> AnyPublisher<Bool, Error> {
-		return repository.checkFirstLaunchUseCase()
+    func execute() async throws -> Bool {
+        try await repository.checkFirstLaunchUseCase()
 	}
 }

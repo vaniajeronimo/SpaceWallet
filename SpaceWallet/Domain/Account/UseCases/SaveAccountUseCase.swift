@@ -5,16 +5,16 @@
 //  Created by Vania Jeronimo on 14/07/2025.
 //
 
-import Combine
 import Factory
 import SwiftData
 
+@MainActor
 final class SaveAccountUseCase {
 
-	@Injected(\.accountRepository)
+	@LazyInjected(\.accountRepository)
 	private var repository
 
-	func execute(account: AccountModel, context: ModelContext) -> AnyPublisher<Void, Error> {
-		return repository.saveAccountUseCase(account: account.toEntity(), context: context)
+	func execute(account: AccountModel, context: ModelContext) async throws {
+        try await repository.saveAccountUseCase(account: account.toEntity(), context: context)
 	}
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 public extension String {
 
 	var isNotEmpty: Bool {
@@ -17,7 +18,7 @@ public extension String {
 		NSLocalizedString(self, bundle: LanguageManager.shared.bundle, comment: "")
 	}
 
-	func localized(with arguments: CVarArg...) -> String {
+    func localized(with arguments: CVarArg...) -> String {
 		let localizedString = NSLocalizedString(self, bundle: LanguageManager.shared.bundle, comment: "")
 		return String(format: localizedString, arguments: arguments)
 	}

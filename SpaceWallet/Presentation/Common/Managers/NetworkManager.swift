@@ -5,7 +5,7 @@
 //  Created by Vania Jeronimo on 05/07/2025.
 //
 
-import Foundation
+import Combine
 import Network
 
 public enum NetworkStatus: String {
@@ -13,9 +13,11 @@ public enum NetworkStatus: String {
 	case disconnected
 }
 
+@MainActor
 public class NetworkManager: ObservableObject {
 
 	var monitor: NWPathMonitor?
+    private let queue = DispatchQueue(label: "NetworkStatus_Monitor")
 
 	@Published public var status: NetworkStatus = .disconnected
 	@Published private var pathStatus = NWPath.Status.requiresConnection
@@ -27,36 +29,40 @@ public class NetworkManager: ObservableObject {
 		startMonitoring()
 	}
 
-	deinit {
-		stopMonitoring()
-	}
+    deinit {
+        Task { @MainActor [weak self] in
+            self?.stopMonitoring()
+        }
+    }
 
-	public func startMonitoring() {
-		guard !isMonitoring else { return }
+    public func startMonitoring() {
+        guard !isMonitoring else { return }
 
-		monitor = NWPathMonitor()
-		let queue = DispatchQueue(label: "NetworkStatus_Monitor")
-		monitor?.start(queue: queue)
+        monitor = NWPathMonitor()
 
-		monitor?.pathUpdateHandler = { [weak self] path in
-			guard let self else { return }
+        monitor?.pathUpdateHandler = { [weak self] path in
+            guard let self else { return }
 
-			executeInMainThread {
-				let newStatus = path.status
-				if self.pathStatus != newStatus {
-					self.pathStatus = newStatus
-					self.status = (newStatus == .satisfied) ? .connected : .disconnected
-					self.isConnected = (self.status == .connected)
-				}
-			}
-		}
-		isMonitoring = true
-	}
+            Task { @MainActor in
+                let newStatus = (path.status == .satisfied) ? NetworkStatus.connected : NetworkStatus.disconnected
+                if self.status != newStatus {
+                    self.status = newStatus
+                    self.isConnected = (newStatus == .connected)
+                }
+            }
+        }
+        monitor?.start(queue: queue)
+        isMonitoring = true
+    }
 
-	public func stopMonitoring() {
-		guard isMonitoring, let monitor else { return }
-		monitor.cancel()
-		self.monitor = nil
-		isMonitoring = false
-	}
+    public func stopMonitoring() {
+        guard isMonitoring, let monitor else { return }
+        monitor.cancel()
+        self.monitor = nil
+        isMonitoring = false
+    }
+
+    public var isConnectedStream: AsyncPublisher<Published<Bool>.Publisher> {
+        $isConnected.values
+    }
 }

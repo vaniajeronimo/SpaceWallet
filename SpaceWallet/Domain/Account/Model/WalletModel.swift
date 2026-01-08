@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct WalletModel {
+public struct WalletModel: Sendable {
 	var id: Int
 	var name: String
 	var color: String

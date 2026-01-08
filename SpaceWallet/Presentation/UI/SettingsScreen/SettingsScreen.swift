@@ -18,9 +18,9 @@ struct SettingsScreen: View {
 	@Bindable var viewModel = ViewModel()
 
 	private var context: ModelContext
-	private let onClose: () -> Void
+	private let onClose: @Sendable () -> Void
 
-	init(context: ModelContext, onClose: @escaping () -> Void) {
+	init(context: ModelContext, onClose: @escaping @Sendable () -> Void) {
 		self.context = context
 		self.onClose = onClose
 	}
@@ -46,11 +46,14 @@ struct SettingsScreen: View {
 			.onAppear {
 				viewModel.setContext(context)
 			}
-			.alert("generic_alert_title".localized, isPresented: $isToShowAlert) {
-				Button("ok".localized, role: .cancel) {
-					isToShowAlert = false
-				}
-			}
+            .alert(isPresented: $isToShowAlert) {
+                Alert(
+                    title: Text("generic_alert_title".localized),
+                    dismissButton: .default(Text("ok".localized)) {
+                        isToShowAlert = false
+                    }
+                )
+            }
 		}
 		.navigationTitle("your_account_title".localized)
 		.navigationSecondaryRightButton(.init(.close(action: {

@@ -5,7 +5,6 @@
 //  Created by Vania Jeronimo on 09/07/2025.
 //
 
-import Combine
 import Factory
 import SwiftUI
 
@@ -17,8 +16,6 @@ extension CreatePasswordScreen {
 		@ObservationIgnored
 		@Injected(\.setSessionUseCase)
 		private var setSessionUseCase
-
-		private var cancellables = Set<AnyCancellable>()
 
 		var isToShowAlert: Bool = false
 		var password: String = ""
@@ -89,24 +86,22 @@ extension CreatePasswordScreen {
 			updateSteppers(for: .notSet)
 		}
 
-		func setSession() {
-			guard let email = UserDefaults.userEmail else {
-				Debug.log("User email not set")
-				return
-			}
-			setSessionUseCase.execute(session: .init(email: email, password: password))
-				.sink { [weak self] completion in
-					guard let self else { return }
-					switch completion {
-						case .failure(let error):
-							Debug.error(error)
-							isToShowAlert = true
-						case .finished:
-							onAction()
-					}
-				} receiveValue: { }
-				.store(in: &cancellables)
-		}
+        func setSession() async {
+            guard let email = UserDefaults.userEmail else {
+                Debug.log("User email not set")
+                return
+            }
+
+            let session = AuthenticationModel(email: email, password: password)
+
+            do {
+                try await setSessionUseCase.execute(session: session)
+                onAction()
+            } catch {
+                Debug.error(error)
+                isToShowAlert = true
+            }
+        }
 
 		private func passwordContainsNumberOrSymbol(_ password: String) -> Bool {
 			let regex = try? NSRegularExpression(pattern: RegexHelper.password)
@@ -117,7 +112,7 @@ extension CreatePasswordScreen {
 }
 
 public extension CreatePasswordScreen {
-
+    @MainActor
 	enum StepperColor: String {
 		case notSet
 		case weak

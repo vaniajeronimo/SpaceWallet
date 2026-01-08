@@ -5,15 +5,15 @@
 //  Created by Vania Jeronimo on 14/07/2025.
 //
 
-import Combine
 import SwiftData
 
+@MainActor
 protocol IAccountDatabaseProvider {
 
-	func get(email: String, context: ModelContext) -> AnyPublisher<AccountSwiftDataEntity?, Error>
-	func insertOrUpdate(entity: AccountSwiftDataEntity, context: ModelContext) -> AnyPublisher<Void, Error>
-	func updateBalance(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) -> AnyPublisher<BalanceSwiftDataEntity?, Error>
-	func updateCurrency(email: String, newCurrency: CurrencySwiftDataEntity, context: ModelContext) -> AnyPublisher<CurrencySwiftDataEntity?, Error>
-	func delete(email: String, context: ModelContext) -> AnyPublisher<Void, Error>
-	func deleteAll(context: ModelContext) -> AnyPublisher<Void, Error>
+	func get(email: String, context: ModelContext) async throws -> AccountSwiftDataEntity?
+	func insertOrUpdate(entity: AccountSwiftDataEntity, context: ModelContext) async throws
+	func updateBalance(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) async throws -> BalanceSwiftDataEntity?
+	func updateCurrency(email: String, newCurrency: CurrencySwiftDataEntity, context: ModelContext) async throws -> CurrencySwiftDataEntity?
+	func delete(email: String, context: ModelContext) async throws
+	func deleteAll(context: ModelContext) async throws
 }

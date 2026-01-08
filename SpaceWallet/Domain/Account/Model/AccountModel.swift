@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AccountModel {
+struct AccountModel: Sendable {
 	var id: UUID
 	var userName: String?
 	var email: String

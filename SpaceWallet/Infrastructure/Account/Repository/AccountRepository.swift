@@ -5,51 +5,49 @@
 //  Created by Vania Jeronimo on 07/08/2025.
 //
 
-import Combine
 import Factory
 import SwiftData
 import SwiftUI
 
-class AccountRepository: IAccountRepository {
+@MainActor
+final class AccountRepository: IAccountRepository {
 
-	@Injected(\.accountDatabaseProvider)
+	@LazyInjected(\.accountDatabaseProvider)
 	private var accountDatabaseProvider
 
-	func getAccountUseCase(email: String, context: ModelContext) -> AnyPublisher<AccountModel, Error> {
-		accountDatabaseProvider.get(email: email, context: context)
-			.tryMap { entity in
-				guard let entity else {
-					throw NSError(domain: "AccountNotFound", code: 404, userInfo: [NSLocalizedDescriptionKey: "Account not found."])
-				}
-				return entity.toModel()
-			}
-			.eraseToAnyPublisher()
+    func getAccountUseCase(email: String, context: ModelContext) async throws -> AccountModel? {
+        do {
+            guard let entity = try await accountDatabaseProvider.get(email: email, context: context) else { return nil }
+            return entity.toModel()
+        } catch {
+            throw NSError(domain: "GetAccountFailed", code: 404, userInfo: [NSLocalizedDescriptionKey: "Get account failed."])
+        }
 	}
 
-	func saveAccountUseCase(account: AccountEntity, context: ModelContext) -> AnyPublisher<Void, Error> {
-		let swiftDataEntity = AccountSwiftDataEntity(account)
-		return accountDatabaseProvider.insertOrUpdate(entity: swiftDataEntity, context: context)
+    func saveAccountUseCase(account: AccountEntity, context: ModelContext) async throws {
+        let swiftDataEntity = AccountSwiftDataEntity(account)
+
+        try await accountDatabaseProvider.insertOrUpdate(
+            entity: swiftDataEntity,
+            context: context
+        )
+    }
+
+	func updateBalanceUseCase(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) async throws -> BalanceModel? {
+        do {
+            guard let entity = try await accountDatabaseProvider.updateBalance(email: email, newBalance: newBalance, context: context) else { return nil }
+            return entity.toModel()
+        } catch {
+            throw NSError(domain: "BalanceUpdateFailed", code: 404, userInfo: [NSLocalizedDescriptionKey: "Balance update failed."])
+        }
 	}
 
-	func updateBalanceUseCase(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) -> AnyPublisher<BalanceModel, Error> {
-		accountDatabaseProvider.updateBalance(email: email, newBalance: newBalance, context: context)
-			.tryMap { entity in
-				guard let entity else {
-					throw NSError(domain: "BalanceUpdateFailed", code: 404, userInfo: [NSLocalizedDescriptionKey: "Balance update failed."])
-				}
-				return entity.toModel()
-			}
-			.eraseToAnyPublisher()
-	}
-
-	func updateCurrency(email: String, newCurrency: CurrencySwiftDataEntity, context: ModelContext) -> AnyPublisher<CurrencyModel, Error> {
-		accountDatabaseProvider.updateCurrency(email: email, newCurrency: newCurrency, context: context)
-			.tryMap { entity in
-				guard let entity else {
-					throw NSError(domain: "CurrencyUpdateFailed", code: 404, userInfo: [NSLocalizedDescriptionKey: "Currency update failed."])
-				}
-				return entity.toModel()
-			}
-			.eraseToAnyPublisher()
+    func updateCurrency(email: String, newCurrency: CurrencySwiftDataEntity, context: ModelContext) async throws -> CurrencyModel? {
+        do {
+            guard let entity = try await accountDatabaseProvider.updateCurrency(email: email, newCurrency: newCurrency, context: context) else { return nil }
+            return entity.toModel()
+        } catch {
+            throw NSError(domain: "CurrencyUpdateFailed", code: 404, userInfo: [NSLocalizedDescriptionKey: "Currency update failed."])
+        }
 	}
 }

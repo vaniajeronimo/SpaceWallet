@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 extension Double {
 
 	var asCurrency: String {

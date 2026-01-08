@@ -87,7 +87,7 @@ struct QRCodeBottomSheet: View {
 
 	private var cta: some View {
 		Button {
-			viewModel.updateBalance()
+            Task { await viewModel.updateBalance() }
 		} label: {
 			Text("done".localized)
 		}

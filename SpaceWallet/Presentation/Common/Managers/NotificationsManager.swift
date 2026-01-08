@@ -5,13 +5,13 @@
 //  Created by Vania Jeronimo on 22/07/2025.
 //
 
-import Combine
 import UIKit
 import UserNotifications
 
+@MainActor
 public struct NotificationsManager {
 
-	public static let shared = Self()
+    public static let shared = Self()
 	private let center = UNUserNotificationCenter.current()
 
 	private init() {}
@@ -41,7 +41,7 @@ public struct NotificationsManager {
 		}
 	}
 
-	public func requestAuthorization(completionHandler: @escaping (_ success: Bool) -> Void) {
+    public func requestAuthorization(completionHandler: @escaping @Sendable (_ success: Bool) -> Void) {
 		/** Request user authorization for local notifications */
 		center.requestAuthorization(options: [.alert, .sound, .badge]) { success, error in
 			if let error {
@@ -50,18 +50,20 @@ public struct NotificationsManager {
 			completionHandler(success)
 		}
 
-		executeInMainThread {
-			UIApplication.shared.registerForRemoteNotifications()
-		}
+        Task { @MainActor in
+            UIApplication.shared.registerForRemoteNotifications()
+        }
 	}
 
-	public func registerLocalNotifications(completionHandler: @escaping (Bool) -> Void) {
+	public func registerLocalNotifications(completionHandler: @escaping @Sendable (Bool) -> Void) {
 		center.getNotificationSettings { notificationSettings in
 			switch notificationSettings.authorizationStatus {
 				case .notDetermined:
-					requestAuthorization(completionHandler: { success in
-						completionHandler(success)
-					})
+                    Task { @MainActor in
+                        requestAuthorization(completionHandler: { success in
+                            completionHandler(success)
+                        })
+                    }
 				case .authorized:
 					completionHandler(true)
 				case .denied, .provisional, .ephemeral:

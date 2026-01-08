@@ -49,12 +49,12 @@ struct RootNavigation: View, Navigation {
 		if UserDefaults.isFirstNotificationPermissionRequest {
 			NotificationsManager.shared.registerLocalNotifications { _ in
 				UserDefaults.isFirstNotificationPermissionRequest = false
-				executeInMainThread {
+				Task { @MainActor in
 					navigation.rootView(login)
 				}
 			}
 		} else {
-			executeInMainThread {
+            Task { @MainActor in
 				DeviceSettingsHelper.openDeviceSettings()
 			}
 		}

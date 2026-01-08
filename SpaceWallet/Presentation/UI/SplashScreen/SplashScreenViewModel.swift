@@ -5,7 +5,6 @@
 //  Created by Vania Jeronimo on 03/07/2025.
 //
 
-import Combine
 import SwiftUI
 
 extension SplashScreen {
@@ -14,43 +13,38 @@ extension SplashScreen {
 	final class ViewModel {
 
 		private var networkManager = NetworkManager()
-
 		private var wasNotificationRequested: Bool = false
-		private var cancellables = Set<AnyCancellable>()
 		private var onCompletion: (SplashScreenRoute) -> Void
 
 		var isConnected = false
 
 		init(onCompletion: @escaping (SplashScreenRoute) -> Void) {
 			self.onCompletion = onCompletion
-			self.checkSession()
+            Task { await checkSession() }
 		}
 
-		func checkSession() {
-			executeInMainThread({
-				self.observeNetworkStatus()
-			}, after: 1.5)
-		}
+        func checkSession() async {
+            await observeNetworkStatus()
+        }
 
-		private func observeNetworkStatus() {
-			networkManager.$isConnected
-				.receive(on: DispatchQueue.main)
-				.sink { [weak self] isConnected in
-					guard let self else { return }
+        @MainActor
+        private func observeNetworkStatus() async {
+            for await isConnected in networkManager.isConnectedStream {
+                self.isConnected = isConnected
 
-					self.isConnected = isConnected
+                if !isConnected {
+                    onCompletion(.internetConnectionError)
+                    return
+                }
 
-					guard isConnected else {
-						onCompletion(.internetConnectionError)
-						return
-					}
-
-					executeInMainThread({
-						self.shouldRequestNotificationPermission() ? self.onCompletion(.notificationsPermission) : self.onCompletion(.login)
-					}, after: 1.5)
-				}
-				.store(in: &cancellables)
-		}
+                if shouldRequestNotificationPermission() {
+                    onCompletion(.notificationsPermission)
+                } else {
+                    onCompletion(.login)
+                }
+                break
+            }
+        }
 
 		func shouldRequestNotificationPermission() -> Bool {
 			if !wasNotificationRequested {

@@ -5,12 +5,12 @@
 //  Created by Vania Jeronimo on 07/08/2025.
 //
 
-import Combine
 import Foundation
 
+@NetworkActor
 protocol IAuthenticationDatabaseProvider {
 
-	func getSession() -> AuthenticationKeychainEntity?
-	func setSession(authenticationKeychainEntity: AuthenticationKeychainEntity)
-	func deleteSession()
+	func getSession() async throws -> AuthenticationKeychainEntity?
+	func setSession(authenticationKeychainEntity: AuthenticationKeychainEntity) async throws
+	func deleteSession() async throws
 }

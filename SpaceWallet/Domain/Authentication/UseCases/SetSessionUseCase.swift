@@ -5,15 +5,15 @@
 //  Created by Vania Jeronimo on 07/08/2025.
 //
 
-import Combine
 import Factory
 
+@NetworkActor
 final class SetSessionUseCase {
 
-	@Injected(\.authenticationRepository)
+	@LazyInjected(\.authenticationRepository)
 	private var repository
 
-	func execute(session: AuthenticationModel) -> AnyPublisher<Void, Error> {
-		return repository.setSession(session: session)
+	func execute(session: AuthenticationModel) async throws {
+        try await repository.setSession(session: session)
 	}
 }

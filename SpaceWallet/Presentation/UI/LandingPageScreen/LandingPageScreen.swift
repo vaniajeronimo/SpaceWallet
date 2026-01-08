@@ -43,12 +43,12 @@ public struct LandingPageScreen: View {
 			}
 			.onChange(of: scenePhase) { _, newPhase in
 				if newPhase == .active {
-					viewModel.observeNetworkStatus()
+                    Task { await viewModel.observeNetworkStatus() }
 				}
 			}
 			.if(!viewModel.isConnected) { _ in
 				ErrorScreen {
-					viewModel.observeNetworkStatus()
+                    Task { await viewModel.observeNetworkStatus() }
 				}
 			}
 			receiveBottomSheet

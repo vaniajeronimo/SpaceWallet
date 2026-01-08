@@ -11,7 +11,7 @@ import Factory
 extension Container {
 
 	var authenticationRepository: Factory<IAuthenticationRepository> {
-		self { AuthenticationRepository() }
+		self { @NetworkActor in AuthenticationRepository() }
 	}
 
 	var authenticationDatabaseProvider: Factory<IAuthenticationDatabaseProvider> {
@@ -19,10 +19,11 @@ extension Container {
 	}
 }
 
+// MARK: - Account
 extension Container {
 
 	var accountRepository: Factory<IAccountRepository> {
-		self { AccountRepository() }
+		self { @MainActor in AccountRepository() }
 	}
 
 	var accountDao: Factory<AccountDao> {

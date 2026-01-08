@@ -5,9 +5,9 @@
 //  Created by Vania Jeronimo on 07/08/2025.
 //
 
-import Combine
 import SwiftData
 
+@NetworkActor
 class AuthenticationDatabaseProvider: IAuthenticationDatabaseProvider {
 
 	private let tag = "authenticationSession"

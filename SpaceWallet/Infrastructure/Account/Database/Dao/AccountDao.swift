@@ -5,139 +5,93 @@
 //  Created by Vania Jeronimo on 14/07/2025.
 //
 
-import Combine
 import Foundation
 import SwiftData
 
-class AccountDao {
+@MainActor
+final class AccountDao {
 
 	// MARK: - GET Account
-	func get(email: String, context: ModelContext) -> AnyPublisher<AccountSwiftDataEntity?, Error> {
-		Deferred {
-			Future { promise in
-				do {
-					let descriptor = FetchDescriptor<AccountSwiftDataEntity>(
-						predicate: #Predicate { $0.email == email }
-					)
-					let results = try context.fetch(descriptor)
-					promise(.success(results.first))
-				} catch {
-					promise(.failure(error))
-				}
-			}
-		}
-		.eraseToAnyPublisher()
-	}
+    func get(email: String, context: ModelContext) async throws -> AccountSwiftDataEntity? {
+        let descriptor = FetchDescriptor<AccountSwiftDataEntity>(
+            predicate: #Predicate { $0.email == email }
+        )
+        return try context.fetch(descriptor).first
+    }
 
-	// MARK: - INSERT or UPDATE
-	func insertOrUpdate(_ entity: AccountSwiftDataEntity, context: ModelContext) -> AnyPublisher<Void, Error> {
-		return Future { promise in
-			do {
-				context.insert(entity)
-				try context.save()
-				promise(.success(()))
-			} catch {
-				promise(.failure(error))
-			}
-		}
-		.receive(on: DispatchQueue.main)
-		.eraseToAnyPublisher()
-	}
+    // MARK: - INSERT OR UPDATE
+    func insertOrUpdate(_ entity: AccountSwiftDataEntity, context: ModelContext) async throws {
+        context.insert(entity)
+        try context.save()
+    }
 
-	func updateBalance(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) -> AnyPublisher<BalanceSwiftDataEntity?, Error> {
-		return Future { promise in
-			do {
-				let descriptor = FetchDescriptor<AccountSwiftDataEntity>(
-					predicate: #Predicate { $0.email == email }
-				)
-				let results = try context.fetch(descriptor)
+    // MARK: - UPDATE BALANCE
+    func updateBalance(
+        email: String,
+        newBalance: BalanceSwiftDataEntity,
+        context: ModelContext
+    ) async throws -> BalanceSwiftDataEntity? {
 
-				if let account = results.first {
-					if let existingBalance = account.balance {
-						existingBalance.balance += newBalance.balance
-					} else {
-						account.balance = newBalance
-					}
-					try context.save()
-					promise(.success(account.balance))
-				} else {
-					promise(.failure(NSError(domain: "UpdateFailure", code: 404)))
-				}
-			} catch {
-				promise(.failure(error))
-			}
-		}
-		.receive(on: DispatchQueue.main)
-		.eraseToAnyPublisher()
-	}
+        let descriptor = FetchDescriptor<AccountSwiftDataEntity>(
+            predicate: #Predicate { $0.email == email }
+        )
+        guard let account = try context.fetch(descriptor).first else {
+            throw AccountError.notFound
+        }
 
-	func updateCurrency(email: String, newCurrency: CurrencySwiftDataEntity, context: ModelContext) -> AnyPublisher<CurrencySwiftDataEntity?, Error> {
-		return Future { promise in
-			do {
-				let descriptor = FetchDescriptor<AccountSwiftDataEntity>(
-					predicate: #Predicate { $0.email == email }
-				)
-				let results = try context.fetch(descriptor)
+        if let existingBalance = account.balance {
+            existingBalance.balance += newBalance.balance
+        } else {
+            account.balance = newBalance
+        }
 
-				guard let account = results.first else {
-					promise(.failure(NSError(domain: "UpdateFailure", code: 404, userInfo: [NSLocalizedDescriptionKey: "Account not found."])))
-					return
-				}
+        try context.save()
+        return account.balance
+    }
 
-				let balance = account.balance ?? {
-					let newBalance = BalanceSwiftDataEntity(.init(balance: 0.00, currency: .usd))
-					account.balance = newBalance
-					return newBalance
-				}()
+    // MARK: - UPDATE CURRENCY
+    func updateCurrency(
+        email: String,
+        newCurrency: CurrencySwiftDataEntity,
+        context: ModelContext
+    ) async throws -> CurrencySwiftDataEntity? {
 
-				balance.currency = newCurrency
-				try context.save()
+        let descriptor = FetchDescriptor<AccountSwiftDataEntity>(
+            predicate: #Predicate { $0.email == email }
+        )
+        guard let account = try context.fetch(descriptor).first else {
+            throw AccountError.notFound
+        }
 
-				promise(.success(balance.currency))
-			} catch {
-				promise(.failure(error))
-			}
-		}
-		.receive(on: DispatchQueue.main)
-		.eraseToAnyPublisher()
-	}
+        // Garante que existe balance
+        let balance = account.balance ?? {
+            let newBalance = BalanceSwiftDataEntity(.init(balance: 0.0, currency: .usd))
+            account.balance = newBalance
+            return newBalance
+        }()
 
-	// MARK: - DELETE by ID
-	func delete(email: String, context: ModelContext) -> AnyPublisher<Void, Error> {
-		return Future { promise in
-			do {
-				let descriptor = FetchDescriptor<AccountSwiftDataEntity>(
-					predicate: #Predicate { $0.email == email }
-				)
-				let results = try context.fetch(descriptor)
-				if let entity = results.first {
-					context.delete(entity)
-					try context.save()
-				}
-				promise(.success(()))
-			} catch {
-				promise(.failure(error))
-			}
-		}
-		.receive(on: DispatchQueue.main)
-		.eraseToAnyPublisher()
-	}
+        balance.currency = newCurrency
+        try context.save()
+        return balance.currency
+    }
 
-	// MARK: - DELETE All
-	func deleteAll(context: ModelContext) -> AnyPublisher<Void, Error> {
-		return Future { promise in
-			do {
-				let allAccounts = try context.fetch(FetchDescriptor<AccountSwiftDataEntity>())
-				for account in allAccounts {
-					context.delete(account)
-				}
-				try context.save()
-				promise(.success(()))
-			} catch {
-				promise(.failure(error))
-			}
-		}
-		.receive(on: DispatchQueue.main)
-		.eraseToAnyPublisher()
-	}
+    // MARK: - DELETE BY EMAIL
+    func delete(email: String, context: ModelContext) async throws {
+        let descriptor = FetchDescriptor<AccountSwiftDataEntity>(
+            predicate: #Predicate { $0.email == email }
+        )
+        if let entity = try context.fetch(descriptor).first {
+            context.delete(entity)
+            try context.save()
+        }
+    }
+
+    // MARK: - DELETE ALL
+    func deleteAll(context: ModelContext) async throws {
+        let allAccounts = try context.fetch(FetchDescriptor<AccountSwiftDataEntity>())
+        for account in allAccounts {
+            context.delete(account)
+        }
+        try context.save()
+    }
 }

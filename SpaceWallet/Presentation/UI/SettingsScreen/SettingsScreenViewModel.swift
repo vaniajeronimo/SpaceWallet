@@ -5,7 +5,6 @@
 //  Created by Vania Jeronimo on 21/07/2025.
 //
 
-import Combine
 import Factory
 import SwiftData
 import SwiftUI
@@ -20,7 +19,6 @@ extension SettingsScreen {
 		private var updateCurencyUseCase
 
 		private var modelContext: ModelContext?
-		private var cancellables = Set<AnyCancellable>()
 
 		var selectedCurrency: CurrencySelectableModel.Currency?
 		var selectedLanguage: LanguageSelectableModel.Language?
@@ -49,32 +47,30 @@ extension SettingsScreen {
 			}
 		}
 
-		func setContext(_ context: ModelContext) {
-			self.modelContext = context
-			self.updateCurrency()
-		}
+        func setContext(_ context: ModelContext) {
+            self.modelContext = context
+            Task { await updateCurrency() }
+        }
 
-		func updateCurrency() {
-			guard let modelContext,
-				  let email = UserDefaults.userEmail,
-				  let currencySymbol = selectedCurrency?.currency,
-				  let newCurrency = CurrencySwiftDataEntity(symbol: currencySymbol) else {
-				return
-			}
-			updateCurencyUseCase.execute(email: email, newCurrency: newCurrency, context: modelContext)
-				.receive(on: DispatchQueue.main)
-				.sink { completion in
-					switch completion {
-						case .failure(let error):
-							Debug.error(error)
-						case .finished:
-							break
-					}
-				} receiveValue: { currency in
-					print(currency)
-				}
-				.store(in: &cancellables)
-		}
+        @MainActor
+        func updateCurrency() async {
+            guard let context = modelContext,
+                  let email = UserDefaults.userEmail,
+                  let currencySymbol = selectedCurrency?.currency,
+                  let newCurrency = CurrencySwiftDataEntity(symbol: currencySymbol)
+            else { return }
+
+            do {
+                let updatedCurrency = try await updateCurencyUseCase.execute(
+                    email: email,
+                    newCurrency: newCurrency,
+                    context: context
+                )
+                print(updatedCurrency)
+            } catch {
+                Debug.error(error)
+            }
+        }
 
 		func updateLanguage() {
 			guard let selectedLanguage else { return }

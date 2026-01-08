@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct BalanceModel {
+public struct BalanceModel: Sendable {
 
 	public var balance: Double
 	public var currency: CurrencyModel

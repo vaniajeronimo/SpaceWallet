@@ -38,11 +38,14 @@ public struct BiometricDataScreen: View {
 				.ignoresSafeArea(.all)
 		)
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
-		.alert("generic_alert_title".localized, isPresented: $viewModel.isToShowAlert) {
-			Button("ok".localized, role: .cancel) {
-				viewModel.isToShowAlert = false
-			}
-		}
+        .alert(isPresented: $viewModel.isToShowAlert) {
+            Alert(
+                title: Text("generic_alert_title".localized),
+                dismissButton: .default(Text("ok".localized)) {
+                    viewModel.isToShowAlert = false
+                }
+            )
+        }
 	}
 
 	private var content: some View {
