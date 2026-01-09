@@ -15,7 +15,7 @@ struct SettingsScreen: View {
 	@State var isToShowLanguageBottomSheet: Bool = false
 	@State var isToShowNotificationsBottomSheet: Bool = false
 
-	@Bindable var viewModel = ViewModel()
+	@State var viewModel = ViewModel()
 
 	private var context: ModelContext
 	private let onClose: @Sendable () -> Void

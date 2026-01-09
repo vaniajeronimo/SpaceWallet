@@ -24,6 +24,7 @@ extension SplashScreen {
 		}
 
         func checkSession() async {
+            try? await Task.sleep(nanoseconds: 1_500_000_000)
             await observeNetworkStatus()
         }
 

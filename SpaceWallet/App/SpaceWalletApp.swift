@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 @main
-struct SpaceWalletApp: SwiftUI.App {
+struct SpaceWalletApp: App {
 
 	@UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
