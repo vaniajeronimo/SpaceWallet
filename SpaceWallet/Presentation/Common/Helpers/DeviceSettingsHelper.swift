@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+@MainActor
 public struct DeviceSettingsHelper {
 	public static func openDeviceSettings() {
 		if let url = URL(string: UIApplication.openSettingsURLString) {

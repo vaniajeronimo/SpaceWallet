@@ -14,7 +14,7 @@ final class UpdateCurrencyUseCase {
 	@LazyInjected(\.accountRepository)
 	private var repository
 
-	func execute(email: String, newCurrency: CurrencySwiftDataEntity, context: ModelContext) async throws -> CurrencyModel? {
+	func execute(email: String, newCurrency: String, context: ModelContext) async throws -> CurrencyModel? {
 		return try await repository.updateCurrency(email: email, newCurrency: newCurrency, context: context)
 	}
 }

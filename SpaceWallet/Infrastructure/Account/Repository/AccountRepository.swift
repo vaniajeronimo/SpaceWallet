@@ -42,7 +42,7 @@ final class AccountRepository: IAccountRepository {
         }
 	}
 
-    func updateCurrency(email: String, newCurrency: CurrencySwiftDataEntity, context: ModelContext) async throws -> CurrencyModel? {
+    func updateCurrency(email: String, newCurrency: String, context: ModelContext) async throws -> CurrencyModel? {
         do {
             guard let entity = try await accountDatabaseProvider.updateCurrency(email: email, newCurrency: newCurrency, context: context) else { return nil }
             return entity.toModel()

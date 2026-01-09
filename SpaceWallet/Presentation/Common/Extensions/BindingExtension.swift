@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 public extension Binding {
 
 	static func variable(_ value: Value) -> Binding<Value> {

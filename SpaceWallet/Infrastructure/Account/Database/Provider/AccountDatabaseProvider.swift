@@ -27,7 +27,7 @@ final class AccountDatabaseProvider: IAccountDatabaseProvider {
         try await accountDao.updateBalance(email: email, newBalance: newBalance, context: context)
 	}
 
-	func updateCurrency(email: String, newCurrency: CurrencySwiftDataEntity, context: ModelContext) async throws -> CurrencySwiftDataEntity? {
+	func updateCurrency(email: String, newCurrency: String, context: ModelContext) async throws -> CurrencySwiftDataEntity? {
         try await accountDao.updateCurrency(email: email, newCurrency: newCurrency, context: context)
 	}
 

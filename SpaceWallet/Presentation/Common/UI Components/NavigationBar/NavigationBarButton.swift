@@ -103,9 +103,9 @@ public extension NavigationBarButton {
 
 	enum BarButtonItem: Equatable {
 
-        case back(action: @Sendable () -> Void)
-        case close(action: @Sendable () -> Void)
-        case custom(icon: Image?, hasBackground: Bool = false, action: @Sendable () -> Void)
+        case back(action: () -> Void)
+        case close(action: () -> Void)
+        case custom(icon: Image?, hasBackground: Bool = false, action: () -> Void)
         case customText(text: String, action: @Sendable () -> Void)
 		case customView(content: () -> any View)
 

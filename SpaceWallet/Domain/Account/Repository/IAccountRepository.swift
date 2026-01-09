@@ -13,5 +13,5 @@ protocol IAccountRepository {
 	func getAccountUseCase(email: String, context: ModelContext) async throws -> AccountModel?
 	func saveAccountUseCase(account: AccountEntity, context: ModelContext) async throws
 	func updateBalanceUseCase(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) async throws -> BalanceModel?
-	func updateCurrency(email: String, newCurrency: CurrencySwiftDataEntity, context: ModelContext) async throws -> CurrencyModel?
+	func updateCurrency(email: String, newCurrency: String, context: ModelContext) async throws -> CurrencyModel?
 }

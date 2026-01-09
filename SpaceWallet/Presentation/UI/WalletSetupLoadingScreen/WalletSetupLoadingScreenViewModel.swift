@@ -41,8 +41,7 @@ extension WalletSetupLoadingScreen {
             )
 
             do {
-                let savedAccount = try await saveAccountUseCase.execute(account: account, context: context)
-                print("Account model saved successfully. \(savedAccount)")
+                try await saveAccountUseCase.execute(account: account, context: context)
                 onAction()
             } catch {
                 Debug.error(error)

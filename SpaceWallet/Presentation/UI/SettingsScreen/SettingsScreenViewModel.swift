@@ -52,21 +52,21 @@ extension SettingsScreen {
             Task { await updateCurrency() }
         }
 
-        @MainActor
         func updateCurrency() async {
             guard let context = modelContext,
                   let email = UserDefaults.userEmail,
-                  let currencySymbol = selectedCurrency?.currency,
-                  let newCurrency = CurrencySwiftDataEntity(symbol: currencySymbol)
+                  let currency = selectedCurrency?.currency
             else { return }
 
             do {
-                let updatedCurrency = try await updateCurencyUseCase.execute(
+                let newCurrency = try await updateCurencyUseCase.execute(
                     email: email,
-                    newCurrency: newCurrency,
+                    newCurrency: currency,
                     context: context
                 )
-                print(updatedCurrency)
+                if let newCurrency {
+                    Debug.log("Successfully updated currency to \(newCurrency.symbol)")
+                }
             } catch {
                 Debug.error(error)
             }

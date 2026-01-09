@@ -18,9 +18,9 @@ struct SettingsScreen: View {
 	@State var viewModel = ViewModel()
 
 	private var context: ModelContext
-	private let onClose: @Sendable () -> Void
+	private let onClose: () -> Void
 
-	init(context: ModelContext, onClose: @escaping @Sendable () -> Void) {
+	init(context: ModelContext, onClose: @escaping () -> Void) {
 		self.context = context
 		self.onClose = onClose
 	}

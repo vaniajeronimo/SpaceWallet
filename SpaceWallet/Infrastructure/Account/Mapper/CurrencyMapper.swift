@@ -81,7 +81,7 @@ extension CurrencyEntity {
 extension CurrencySwiftDataEntity {
 
 	convenience init(_ model: CurrencyModel) {
-		let currencyType = CurrencyType(rawValue: model.symbol) ?? .eur
+		let currencyType = CurrencyEntity(rawValue: model.symbol) ?? .eur
 		self.init(currency: currencyType)
 	}
 

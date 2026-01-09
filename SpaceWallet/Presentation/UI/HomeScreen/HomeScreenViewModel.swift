@@ -74,7 +74,6 @@ extension HomeScreen {
             do {
                 if let account = try await getAccountUseCase.execute(email: email, context: context),
                    let balance = account.balance {
-
                     accountModel = account
                     currentBalance = balance
                 }

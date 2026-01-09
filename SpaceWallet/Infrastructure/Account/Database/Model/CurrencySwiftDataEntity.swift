@@ -7,28 +7,21 @@
 
 import SwiftData
 
-public enum CurrencyType: String, Codable {
-	case eur = "€"
-	case usd = "$"
-	case gbp = "£"
-	case jpy = "¥"
-}
-
 @Model
 public class CurrencySwiftDataEntity {
 	var rawValue: String
 
-	var currency: CurrencyType {
-		get { CurrencyType(rawValue: rawValue) ?? .eur }
+	var currency: CurrencyEntity {
+		get { CurrencyEntity(rawValue: rawValue) ?? .eur }
 		set { rawValue = newValue.rawValue }
 	}
 
-	init(currency: CurrencyType) {
+	init(currency: CurrencyEntity) {
 		self.rawValue = currency.rawValue
 	}
 
 	public convenience init?(symbol: String) {
-		guard let currencyType = CurrencyType(rawValue: symbol) else {
+		guard let currencyType = CurrencyEntity(rawValue: symbol) else {
 			return nil
 		}
 		self.init(currency: currencyType)

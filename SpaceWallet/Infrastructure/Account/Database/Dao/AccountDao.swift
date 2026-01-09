@@ -52,25 +52,23 @@ final class AccountDao {
     // MARK: - UPDATE CURRENCY
     func updateCurrency(
         email: String,
-        newCurrency: CurrencySwiftDataEntity,
+        newCurrency: String,
         context: ModelContext
     ) async throws -> CurrencySwiftDataEntity? {
+        let account = try await get(email: email, context: context) ?? {
+            let newAccount = AccountSwiftDataEntity(email: email)
+            context.insert(newAccount)
+            try context.save()
+            return newAccount
+        }()
 
-        let descriptor = FetchDescriptor<AccountSwiftDataEntity>(
-            predicate: #Predicate { $0.email == email }
-        )
-        guard let account = try context.fetch(descriptor).first else {
-            throw AccountError.notFound
-        }
-
-        // Garante que existe balance
         let balance = account.balance ?? {
             let newBalance = BalanceSwiftDataEntity(.init(balance: 0.0, currency: .usd))
             account.balance = newBalance
             return newBalance
         }()
 
-        balance.currency = newCurrency
+        balance.currency.rawValue = newCurrency
         try context.save()
         return balance.currency
     }
