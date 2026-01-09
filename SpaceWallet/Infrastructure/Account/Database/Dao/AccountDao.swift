@@ -28,23 +28,25 @@ final class AccountDao {
     // MARK: - UPDATE BALANCE
     func updateBalance(
         email: String,
-        newBalance: BalanceSwiftDataEntity,
+        newBalance: Double,
         context: ModelContext
     ) async throws -> BalanceSwiftDataEntity? {
-
-        let descriptor = FetchDescriptor<AccountSwiftDataEntity>(
-            predicate: #Predicate { $0.email == email }
-        )
-        guard let account = try context.fetch(descriptor).first else {
-            throw AccountError.notFound
-        }
+        let account = try await get(email: email, context: context) ?? {
+            let newAccount = AccountSwiftDataEntity(email: email)
+            context.insert(newAccount)
+            try context.save()
+            return newAccount
+        }()
 
         if let existingBalance = account.balance {
-            existingBalance.balance += newBalance.balance
+            existingBalance.balance += newBalance
         } else {
+            let newBalance = BalanceSwiftDataEntity(
+                balance: newBalance,
+                currency: CurrencySwiftDataEntity(currency: .usd)
+            )
             account.balance = newBalance
         }
-
         try context.save()
         return account.balance
     }

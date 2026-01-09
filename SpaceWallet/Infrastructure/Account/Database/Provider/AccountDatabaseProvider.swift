@@ -23,7 +23,7 @@ final class AccountDatabaseProvider: IAccountDatabaseProvider {
         try await accountDao.insertOrUpdate(entity, context: context)
 	}
 
-	func updateBalance(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) async throws -> BalanceSwiftDataEntity? {
+	func updateBalance(email: String, newBalance: Double, context: ModelContext) async throws -> BalanceSwiftDataEntity? {
         try await accountDao.updateBalance(email: email, newBalance: newBalance, context: context)
 	}
 

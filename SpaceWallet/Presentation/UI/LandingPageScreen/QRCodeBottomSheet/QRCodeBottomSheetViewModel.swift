@@ -36,15 +36,10 @@ extension QRCodeBottomSheet {
                 return
             }
 
-            let newBalance = BalanceSwiftDataEntity(
-                balance: balance,
-                currency: .init(currency: .usd)
-            )
-
             do {
                 let updatedBalance = try await updateBalanceUseCase.updateBalance(
                     email: email,
-                    newBalance: newBalance,
+                    newBalance: balance,
                     context: context
                 )
                 print(updatedBalance ?? "No balance returned")

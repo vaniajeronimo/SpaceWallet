@@ -14,7 +14,7 @@ final class UpdateBalanceUseCase {
 	@LazyInjected(\.accountRepository)
 	private var repository
 
-	func updateBalance(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) async throws -> BalanceModel? {
+    func updateBalance(email: String, newBalance: Double, context: ModelContext) async throws -> BalanceModel? {
 		return try await repository.updateBalanceUseCase(email: email, newBalance: newBalance, context: context)
 	}
 }

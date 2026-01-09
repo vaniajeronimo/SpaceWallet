@@ -33,7 +33,7 @@ final class AccountRepository: IAccountRepository {
         )
     }
 
-	func updateBalanceUseCase(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) async throws -> BalanceModel? {
+	func updateBalanceUseCase(email: String, newBalance: Double, context: ModelContext) async throws -> BalanceModel? {
         do {
             guard let entity = try await accountDatabaseProvider.updateBalance(email: email, newBalance: newBalance, context: context) else { return nil }
             return entity.toModel()

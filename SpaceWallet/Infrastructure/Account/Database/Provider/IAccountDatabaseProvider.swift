@@ -12,7 +12,7 @@ protocol IAccountDatabaseProvider {
 
 	func get(email: String, context: ModelContext) async throws -> AccountSwiftDataEntity?
 	func insertOrUpdate(entity: AccountSwiftDataEntity, context: ModelContext) async throws
-	func updateBalance(email: String, newBalance: BalanceSwiftDataEntity, context: ModelContext) async throws -> BalanceSwiftDataEntity?
+	func updateBalance(email: String, newBalance: Double, context: ModelContext) async throws -> BalanceSwiftDataEntity?
 	func updateCurrency(email: String, newCurrency: String, context: ModelContext) async throws -> CurrencySwiftDataEntity?
 	func delete(email: String, context: ModelContext) async throws
 	func deleteAll(context: ModelContext) async throws
