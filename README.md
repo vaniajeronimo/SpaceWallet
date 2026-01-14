@@ -20,6 +20,7 @@ This project simulates the behavior of a modern cryptocurrency wallet with:
 ## 🛠️ Technologies Used
 
 - SwiftUI (iOS)
+- AsyncAwait
 - Combine
 - Firebase
 - SwiftData
